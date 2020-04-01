@@ -16,7 +16,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("SAGRADA");
 		Scene scene = new Scene(new Pane());
-		scene.setFill(Color.AQUA);
+		scene.setFill(Color.AQUAMARINE);
 		stage.setScene(scene);
 		stage.setFullScreen(true);
 		stage.show();
