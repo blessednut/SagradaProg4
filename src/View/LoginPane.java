@@ -26,7 +26,7 @@ public class LoginPane extends BorderPane {
 		this.setMinSize(300, 300);
 		this.setPrefSize(300, 300);
 		this.setMaxSize(300, 300);
-		this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, null, null)));
 		CreateLoginPane();
 
 	}
