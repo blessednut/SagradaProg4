@@ -4,30 +4,17 @@ import DataBase.DBCon;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class GameController extends Application{
+public class GameController {
 	private MySceneController myscene;
-	private DBCon con = new DBCon();
-	
+	private DBCon con;
+
 	public GameController() {
-		con.InsertRegister("Jeroen", "Hendrikus");
+		con = new DBCon();
 		
 	}
-	@Override
-	public void start(Stage stage) throws Exception {
-		myscene = new MySceneController();
-		stage.setTitle("Sagrada 2020");
-		stage.setScene(myscene.getMyscene());
-		stage.show();
-		
-		
-	}
-	
-	public void startProg() {
-		launch();
-	}
+
 	public MySceneController getMyscene() {
 		return myscene;
 	}
-	
 
 }

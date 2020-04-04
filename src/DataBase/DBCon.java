@@ -14,27 +14,20 @@ public class DBCon {
 	private ResultSet rs;
 
 	public DBCon() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			con = DriverManager.getConnection("jdbc:mysql://localhost/sagradatestdb?user=root&password=#Hummel12345");
-
-		} catch (Exception e) {
-			System.out.println("Error: " + e);
-		}
-
 	}
 
-	public void getUsername() {
+	public ResultSet getUsername() {
 		try {
+			createConnection();
 			String query = "select * from account";
 			rs = st.executeQuery(query);
+			System.out.println("ik");
 			while (rs.next()) {
 				String username = rs.getString("Username");
 				String password = rs.getString("Password");
 
-				System.out.println("username = " + username);
-				System.out.println("password = " + password);
+				System.out.print("username = " + username);
+				System.out.println(" + password = " + password);
 
 			}
 			con.close();
@@ -42,13 +35,14 @@ public class DBCon {
 		} catch (Exception ex) {
 			System.out.println("Error: " + ex);
 		}
-
+		return rs;
 	}
 
 	public void InsertRegister(String username, String password) {
-		int id = 8;
+		int id = 9;
 
 		try {
+			createConnection();
 			String query = "insert into account(UserID,Username,Password) values(" + id + ",?,? )";
 
 			ps = con.prepareStatement(query);
@@ -61,5 +55,21 @@ public class DBCon {
 			System.out.println("Error: " + ex);
 		}
 	}
+
+	private void createConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/sagradatestdb?user=root&password=#Hummel12345");
+			st = con.createStatement();
+
+		} catch (Exception e) {
+			System.out.println("Error: " + e);
+		}
+	}
+
+	public ResultSet getRs() {
+		return rs;
+	}
+	
 
 }
