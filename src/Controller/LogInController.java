@@ -1,25 +1,36 @@
 package Controller;
 
-import java.sql.SQLException;
-
-import DataBase.DBCon;
 import View.LoginPane;
+import javafx.stage.Stage;
+import model.LoginModel;
 
 public class LogInController {
 
-	private DBCon dbcon = new DBCon();
 	private LoginPane login;
+	private LoginModel loginModel;
 
 	public LogInController() {
 		login = new LoginPane();
-		login.getLogin().setOnAction(e -> {
-			dbcon.getUsername();
-			System.out.println("kut");
-		});
+		loginModel = new LoginModel();
+
+		login.getLogin().setOnAction(e -> SetInlogInfo());
 	}
 
 	public LoginPane getLogin() {
 		return login;
 	}
+	
+	public void SetInlogInfo() {
+		String username = login.getUsername().getText();
+		String password = login.getPassword().getText();
+		
+		loginModel.setUsername(username);
+		
+		if(loginModel.getDbcon().getPassword(username).equals(password)) {
+			Stage stage = new Stage();
+			stage.show();
+		}
+	}
+
 
 }

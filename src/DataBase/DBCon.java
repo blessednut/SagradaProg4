@@ -16,46 +16,6 @@ public class DBCon {
 	public DBCon() {
 	}
 
-	public ResultSet getUsername() {
-		try {
-			createConnection();
-			String query = "select * from account";
-			rs = st.executeQuery(query);
-			System.out.println("ik");
-			while (rs.next()) {
-				String username = rs.getString("Username");
-				String password = rs.getString("Password");
-
-				System.out.print("username = " + username);
-				System.out.println(" + password = " + password);
-
-			}
-			con.close();
-
-		} catch (Exception ex) {
-			System.out.println("Error: " + ex);
-		}
-		return rs;
-	}
-
-	public void InsertRegister(String username, String password) {
-		int id = 9;
-
-		try {
-			createConnection();
-			String query = "insert into account(UserID,Username,Password) values(" + id + ",?,? )";
-
-			ps = con.prepareStatement(query);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ps.execute();
-			con.close();
-
-		} catch (Exception ex) {
-			System.out.println("Error: " + ex);
-		}
-	}
-
 	private void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -67,9 +27,24 @@ public class DBCon {
 		}
 	}
 
+	public String getPassword(String username) {
+		String result = null;
+		createConnection();
+		try {
+			String query = "select Password from account where username = '" + username + "';";
+			rs = st.executeQuery(query);
+			while(rs.next()) {
+				result = rs.getString("Password");
+				con.close();
+			}
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return result;
+	}
+
 	public ResultSet getRs() {
 		return rs;
 	}
-	
 
 }
