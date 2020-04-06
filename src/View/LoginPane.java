@@ -28,6 +28,7 @@ public class LoginPane extends BorderPane {
 		this.setMaxSize(300, 300);
 		this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 		CreateLoginPane();
+		login.setOnAction(e -> System.out.println("kut"));
 
 	}
 
