@@ -19,18 +19,25 @@ public class LogInController {
 	public LoginPane getLogin() {
 		return login;
 	}
-	
+
 	public void SetInlogInfo() {
 		String username = login.getUsername().getText();
 		String password = login.getPassword().getText();
-		
-		loginModel.setUsername(username);
-		
-		if(loginModel.getDbcon().getPassword(username).equals(password)) {
-			Stage stage = new Stage();
-			stage.show();
-		}
-	}
 
+		loginModel.setUsername(username);
+
+		try {
+			if (loginModel.getDbcon().getPassword(username).equals(password)) {
+				Stage stage = new Stage();
+				stage.show();
+			} else {
+				login.errorPassword();
+			}
+		} catch (Exception ex) {
+			login.errorUsername();
+
+		}
+
+	}
 
 }

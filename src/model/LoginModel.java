@@ -2,9 +2,11 @@ package model;
 
 import java.util.HashMap;
 
+import Controller.LogInController;
 import DataBase.DBCon;
 
 public class LoginModel {
+	private LogInController c_login;
 	
 	private DBCon dbcon;
 	private String username;
@@ -46,6 +48,12 @@ public class LoginModel {
 	public DBCon getDbcon() {
 		return dbcon;
 	}
+
+
+	public LogInController getC_login() {
+		return c_login;
+	}
+	
 	
 	
 

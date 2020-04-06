@@ -2,9 +2,11 @@ package DataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
+
+import model.LoginModel;
 
 public class DBCon {
 
@@ -35,6 +37,7 @@ public class DBCon {
 			rs = st.executeQuery(query);
 			while(rs.next()) {
 				result = rs.getString("Password");
+				
 			}
 		} catch (Exception ex) {
 			System.out.println(ex);
