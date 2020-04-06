@@ -15,7 +15,6 @@ public class Main extends Application {
 		MySceneController myscene = new MySceneController();
 		GameController gameCon = new GameController();
 		stage.setTitle("Sagrada 2020");
-		stage.setFullScreen(true);
 		stage.setScene(myscene.getMyscene());
 		stage.show();
 
