@@ -3,9 +3,10 @@ package View;
 import Controller.MySceneController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class MyScene extends Scene{
-	
+public class MyScene extends Scene {
+
 	private MySceneController con;
 	private HomePane hp = new HomePane();
 
@@ -14,13 +15,11 @@ public class MyScene extends Scene{
 		this.con = con;
 
 		setInlogPane();
-		
+
 	}
-	
+
 	public void setInlogPane() {
 		this.setRoot(hp);
 	}
-	
-	
 
 }
