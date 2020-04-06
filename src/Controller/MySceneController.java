@@ -1,5 +1,6 @@
 package Controller;
 
+
 import View.MyScene;
 
 public class MySceneController {
@@ -8,6 +9,7 @@ public class MySceneController {
 	private GameController game;
 	private LogInController loginCon = new LogInController();
 	
+	
 	public MySceneController() {
 		myscene = new MyScene(this);
 	}
@@ -15,6 +17,8 @@ public class MySceneController {
 	public MyScene getMyscene() {
 		return myscene;
 	}
+	
+
 
 	public LogInController getLoginCon() {
 		return loginCon;

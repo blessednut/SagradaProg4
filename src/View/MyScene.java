@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 public class MyScene extends Scene{
 	
 	private MySceneController con;
+	private HomePane hp = new HomePane();
 
 	public MyScene(MySceneController con) {
 		super(new Pane());
@@ -17,7 +18,7 @@ public class MyScene extends Scene{
 	}
 	
 	public void setInlogPane() {
-		this.setRoot(con.getLoginCon().getLogin());
+		this.setRoot(hp);
 	}
 	
 	
