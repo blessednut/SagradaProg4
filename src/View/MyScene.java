@@ -1,13 +1,10 @@
-package view;
+package View;
 
 import Controller.MySceneController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class MyScene extends Scene {
-
-public class MyScene extends Scene{
 	
 	private MySceneController c_myScene;
 
