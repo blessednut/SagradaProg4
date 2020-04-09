@@ -21,7 +21,7 @@ public class DBCon {
 	private void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/sagradatestdb?user=root&password=#Hummel12345");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/sagrada?user=root&password=#Hummel12345");
 			st = con.createStatement();
 
 		} catch (Exception e) {
