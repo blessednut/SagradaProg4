@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ public class MySceneController {
 	
 	private ArrayList v_list = new ArrayList();
 	
+	
 	public MySceneController() {
 		v_scene = new MyScene(this);
 		c_menubar = new MenuBarController();
@@ -21,6 +22,8 @@ public class MySceneController {
 	public MyScene getMyscene() {
 		return v_scene;
 	}
+	
+
 
 	public LogInController getLoginCon() {
 		return c_login;
