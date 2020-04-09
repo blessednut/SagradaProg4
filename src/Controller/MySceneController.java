@@ -5,6 +5,7 @@ import View.MyScene;
 public class MySceneController {
 	
 	private MyScene myscene;
+	private GameController game;
 	private LogInController loginCon = new LogInController();
 	
 	public MySceneController() {

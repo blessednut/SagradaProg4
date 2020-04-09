@@ -4,13 +4,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class LoginPane extends BorderPane {
 	
+	private Color red = Color.RED;
 	// layout items
 	private VBox layout;
 	// textfield items
@@ -28,6 +33,7 @@ public class LoginPane extends BorderPane {
 		this.setMaxSize(300, 300);
 		this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 		CreateLoginPane();
+		login.setOnAction(e -> System.out.println("kut"));
 
 	}
 
@@ -73,6 +79,14 @@ public class LoginPane extends BorderPane {
 
 		this.getChildren().add(layout);
 
+	}
+	
+	public void errorUsername() {
+		username.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
+	}
+	
+	public void errorPassword() {
+		password.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
 	}
 
 	public TextField getUsername() {
