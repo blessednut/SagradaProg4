@@ -11,16 +11,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 
 public class HomePane extends BorderPane {
-	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
+	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
+	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
 
 	public HomePane() {
 		this.setBackground(new Background(new BackgroundImage(new Image("Resources/sagradaTitel.jpg"),
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 				new BackgroundSize(0, 0, false, false, false, true))));
-		this.setMinSize(3000, 1700);
-		this.setPrefSize(3000, 1700);
-		this.setMaxSize(3000, 1700);
+		this.setMinSize(screenX, screenY);
+		this.setPrefSize(screenX, screenY);
+		this.setMaxSize(screenX, screenY);
 	}
 
 }
