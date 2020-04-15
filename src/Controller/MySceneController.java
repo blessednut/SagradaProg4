@@ -2,8 +2,6 @@ package Controller;
 
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 import View.HomePane;
 import View.MyScene;
 

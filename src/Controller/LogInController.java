@@ -4,8 +4,6 @@ import View.LoginPane;
 import javafx.stage.Stage;
 import model.LoginModel;
 
-
-
 public class LogInController {
 
 	private LoginPane v_login;
@@ -17,8 +15,6 @@ public class LogInController {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-
-
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 	}
@@ -36,8 +32,7 @@ public class LogInController {
 		try {
 
 			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				Stage stage = new Stage();
-				stage.show();
+				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
 
 			} else {
 				v_login.errorPassword();
