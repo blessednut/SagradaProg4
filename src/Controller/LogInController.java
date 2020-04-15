@@ -26,6 +26,9 @@ public class LogInController {
 		this.c_myscene = c_myscene;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -49,9 +52,14 @@ public class LogInController {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			if (loginModel.getDbcon().getPassword(username).equals(password)) {
 				Stage stage = new Stage();
 				stage.show();
+=======
+			if (m_login.getDbcon().getPassword(username).equals(password)) {
+				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
+>>>>>>> Stashed changes
 =======
 			if (m_login.getDbcon().getPassword(username).equals(password)) {
 				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
