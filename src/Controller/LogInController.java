@@ -10,12 +10,14 @@ public class LogInController {
 
 	private LoginPane v_login;
 	private LoginModel m_login;
+
 	private MySceneController c_myscene;
 
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
+
 
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());

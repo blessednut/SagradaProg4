@@ -3,23 +3,27 @@ package View;
 import Controller.MySceneController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class MyScene extends Scene {
+	
+	private MySceneController c_myScene;
 
-	private MySceneController con;
-	private HomePane hp = new HomePane();
 
-	public MyScene(MySceneController con) {
+	public MyScene(MySceneController c_myScene) {
 		super(new Pane());
-		this.con = con;
+		this.c_myScene = c_myScene;
 
 		setInlogPane();
 
 	}
-
-	public void setInlogPane() {
-		this.setRoot(hp);
+	
+	private void setInlogPane() {
+		this.setRoot(c_myScene.getLoginCon().getLogin());
 	}
+	
+	public void switchPane(Pane pane) {
+		this.setRoot(pane);
+	}
+	
 
 }

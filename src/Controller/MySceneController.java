@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import View.MyScene;
 
 public class MySceneController {
 	
+
 
 	private MyScene v_scene;
 	private GameController c_game;
@@ -21,7 +23,9 @@ public class MySceneController {
 	public MySceneController() {
 		v_scene = new MyScene(this);
 
+
 		v_home = new HomePane();
+
 	}
 
 	public MyScene getMyscene() {
@@ -34,6 +38,7 @@ public class MySceneController {
 		return c_login;
 	}
 	
+
 
 	public void addToViewList() {
 		// add panes to v_list to make switching panes easier.
