@@ -8,14 +8,6 @@ import model.LoginModel;
 
 public class LogInController {
 
-<<<<<<< Updated upstream
-	private LoginPane login;
-	private LoginModel loginModel;
-
-	public LogInController() {
-		login = new LoginPane();
-		loginModel = new LoginModel();
-=======
 	private LoginPane v_login;
 	private LoginModel m_login;
 	private MySceneController c_myscene;
@@ -24,67 +16,32 @@ public class LogInController {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
-		login.getLogin().setOnAction(e -> SetInlogInfo());
+
+		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 	}
 
 	public LoginPane getLogin() {
-		return login;
+		return v_login;
 	}
 
 	public void SetInlogInfo() {
-		String username = login.getUsername().getText();
-		String password = login.getPassword().getText();
+		String username = v_login.getUsername().getText();
+		String password = v_login.getPassword().getText();
 
-		loginModel.setUsername(username);
+		m_login.setUsername(username);
 
 		try {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-			if (loginModel.getDbcon().getPassword(username).equals(password)) {
+
+			if (m_login.getDbcon().getPassword(username).equals(password)) {
 				Stage stage = new Stage();
 				stage.show();
-=======
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
->>>>>>> Stashed changes
-=======
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
->>>>>>> Stashed changes
-=======
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
->>>>>>> Stashed changes
-=======
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
->>>>>>> Stashed changes
-=======
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
->>>>>>> Stashed changes
+
 			} else {
-				login.errorPassword();
+				v_login.errorPassword();
 			}
 		} catch (Exception ex) {
-			login.errorUsername();
+			v_login.errorUsername();
 
 		}
 
