@@ -19,6 +19,10 @@ public class Main extends Application {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+//		stage.setAlwaysOnTop(true);
+>>>>>>> Stashed changes
 =======
 //		stage.setAlwaysOnTop(true);
 >>>>>>> Stashed changes
