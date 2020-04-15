@@ -29,6 +29,9 @@ public class MySceneController {
 		c_menubar = new MenuBarController();
 		v_home = new HomePane();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -55,6 +58,9 @@ public class MySceneController {
 	}
 	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
