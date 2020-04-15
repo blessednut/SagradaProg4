@@ -15,6 +15,10 @@ public class Main extends Application {
 		MySceneController myscene = new MySceneController();
 		GameController gameCon = new GameController();
 		stage.setTitle("Sagrada 2020");
+<<<<<<< Updated upstream
+=======
+//		stage.setAlwaysOnTop(true);
+>>>>>>> Stashed changes
 		stage.setScene(myscene.getMyscene());
 		stage.show();
 
