@@ -45,55 +45,55 @@ public class HomePane extends BorderPane {
 
 	public void makeHomePane() {
 		VBox layout = new VBox();
-		layout.setMinSize(150, screenY);
+		layout.setMinSize(200, screenY);
 		Font buttonFont = new Font("Algerian", 24);
-		buttonOne.setFitWidth(150);
+		buttonOne.setFitWidth(200);
 		buttonOne.setFitHeight(screenY/5);
 		
-		buttonTwo.setFitWidth(150);
+		buttonTwo.setFitWidth(200);
 		buttonTwo.setFitHeight(screenY/5);
 		
 		buttonThree.setFitWidth(200);
 		buttonThree.setFitHeight(screenY/5);
 		
-		buttonFour.setFitWidth(150);
+		buttonFour.setFitWidth(200);
 		buttonFour.setFitHeight(screenY/5);
 		
 		
 
 		home = new Button("Home", buttonOne);
-		home.setMinSize(150, (screenY/5));
-		home.setPrefSize(150, (screenY/5));
-		home.setMaxSize(150, (screenY/5));
+		home.setMinSize(200, (screenY/5));
+		home.setPrefSize(200, (screenY/5));
+		home.setMaxSize(200, (screenY/5));
 		home.setPadding(buttonIns);
 		home.setFont(buttonFont);
 		home.setContentDisplay(ContentDisplay.CENTER);
 		
 		games = new Button("Games", buttonTwo);
-		games.setMinSize(150, (screenY/5));
-		games.setPrefSize(150, (screenY/5));
-		games.setMaxSize(150, (screenY/5));
+		games.setMinSize(200, (screenY/5));
+		games.setPrefSize(200, (screenY/5));
+		games.setMaxSize(200, (screenY/5));
 		games.setFont(buttonFont);
 		games.setContentDisplay(ContentDisplay.CENTER);
 		
 		vrienden = new Button("Vrienden", buttonThree);
-		vrienden.setMinSize(150, (screenY/5));
-		vrienden.setPrefSize(150, (screenY/5));
-		vrienden.setMaxSize(150, (screenY/5));
+		vrienden.setMinSize(200, (screenY/5));
+		vrienden.setPrefSize(200, (screenY/5));
+		vrienden.setMaxSize(200, (screenY/5));
 		vrienden.setFont(buttonFont);
 		vrienden.setContentDisplay(ContentDisplay.CENTER);
 		
 		statistick = new Button("stats",buttonFour);
-		statistick.setMinSize(150, (screenY/5));
-		statistick.setPrefSize(150, (screenY/5));
-		statistick.setMaxSize(150, (screenY/5));
+		statistick.setMinSize(200, (screenY/5));
+		statistick.setPrefSize(200, (screenY/5));
+		statistick.setMaxSize(200, (screenY/5));
 		statistick.setFont(buttonFont);
 		statistick.setContentDisplay(ContentDisplay.CENTER);
 		
 		credits = new Button("credits");
-		credits.setMinSize(150, (screenY/5));
-		credits.setPrefSize(150, (screenY/5));
-		credits.setMaxSize(150, (screenY/5));
+		credits.setMinSize(200, (screenY/5));
+		credits.setPrefSize(200, (screenY/5));
+		credits.setMaxSize(200, (screenY/5));
 		credits.setFont(buttonFont);
 		credits.setContentDisplay(ContentDisplay.CENTER);
 		
