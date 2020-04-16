@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import model.LoginModel;
-
 public class DBCon {
 
 	private Connection con;
@@ -21,7 +19,7 @@ public class DBCon {
 	private void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=jbaverma&password=Ab12345");
+			con = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=bverheij4&password=Ab12345");
 			st = con.createStatement();
 
 		} catch (Exception e) {
@@ -37,7 +35,7 @@ public class DBCon {
 			rs = st.executeQuery(query);
 			while(rs.next()) {
 				result = rs.getString("Password");
-				
+
 			}
 		} catch (Exception ex) {
 			System.out.println(ex);

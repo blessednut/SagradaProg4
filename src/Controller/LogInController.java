@@ -11,9 +11,14 @@ public class LogInController {
 	private LoginPane v_login;
 	private LoginModel m_login;
 
-	public LogInController() {
+	private MySceneController c_myscene;
+
+	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
+		this.c_myscene = c_myscene;
+
+
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 	}
@@ -29,9 +34,11 @@ public class LogInController {
 		m_login.setUsername(username);
 
 		try {
+
 			if (m_login.getDbcon().getPassword(username).equals(password)) {
 				Stage stage = new Stage();
 				stage.show();
+
 			} else {
 				v_login.errorPassword();
 			}
