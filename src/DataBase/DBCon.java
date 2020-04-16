@@ -35,7 +35,7 @@ public class DBCon {
 			rs = st.executeQuery(query);
 			while(rs.next()) {
 				result = rs.getString("Password");
-				
+
 			}
 		} catch (Exception ex) {
 			System.out.println(ex);
