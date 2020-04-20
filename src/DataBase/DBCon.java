@@ -58,6 +58,11 @@ public class DBCon {
 			ps.setString(1, Username);
 			ps.setString(2, Password);
 			ps.execute();
+			Alert succes= new Alert(AlertType.INFORMATION, "Uw nieuwe account is aangemaakt.",ButtonType.OK);
+			succes.showAndWait();
+			if(succes.getResult() == ButtonType.OK) {
+				succes.close();
+			}
 		} catch (Exception ex) {
 			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\nKies aub een ander.", ButtonType.YES,ButtonType.NO);
 			exception.showAndWait();
