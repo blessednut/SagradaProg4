@@ -102,4 +102,26 @@ public class HomePane extends BorderPane {
 
 	}
 
+	public Button getHome() {
+		return home;
+	}
+
+	public Button getGames() {
+		return games;
+	}
+
+	public Button getVrienden() {
+		return vrienden;
+	}
+
+	public Button getStatistick() {
+		return statistick;
+	}
+
+	public Button getCredits() {
+		return credits;
+	}
+	
+	
+
 }
