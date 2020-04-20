@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+
 public class DBCon {
 
 	private Connection con;
@@ -19,7 +24,8 @@ public class DBCon {
 	private void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=bverheij4&password=Ab12345");
+			con = DriverManager
+					.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=bverheij4&password=Ab12345");
 			st = con.createStatement();
 
 		} catch (Exception e) {
@@ -33,7 +39,7 @@ public class DBCon {
 		try {
 			String query = "select Password from account where username = '" + username + "';";
 			rs = st.executeQuery(query);
-			while(rs.next()) {
+			while (rs.next()) {
 				result = rs.getString("Password");
 
 			}
@@ -41,6 +47,26 @@ public class DBCon {
 			System.out.println(ex);
 		}
 		return result;
+	}
+
+	public void registerLogin(String Username, String Password) {
+		createConnection();
+
+		try {
+			String query = "insert into Account values(?,?)";
+			ps = con.prepareStatement(query);
+			ps.setString(1, Username);
+			ps.setString(2, Password);
+			ps.execute();
+		} catch (Exception ex) {
+			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\nKies aub een ander.", ButtonType.YES,ButtonType.NO);
+			exception.showAndWait();
+			if(exception.getResult() == ButtonType.YES) {
+				exception.close();
+			} else {
+				Platform.exit();
+			}
+		}
 	}
 
 	public ResultSet getRs() {
