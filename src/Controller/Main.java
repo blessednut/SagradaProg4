@@ -1,5 +1,6 @@
 package Controller;
 
+import View.InvitePane;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +12,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
 		MySceneController myscene = new MySceneController();
 		GameController gameCon = new GameController();
 		stage.setTitle("Sagrada 2020");

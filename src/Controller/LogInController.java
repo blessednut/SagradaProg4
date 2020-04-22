@@ -1,5 +1,6 @@
 package Controller;
 
+import View.GamePane;
 import View.LoginPane;
 import model.LoginModel;
 
@@ -14,6 +15,7 @@ public class LogInController {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
+		GamePane game = new GamePane();
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),v_login.getPassword().getText()));

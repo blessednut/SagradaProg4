@@ -1,6 +1,5 @@
 package Controller;
 
-import View.HomePane;
 import View.MyScene;
 
 public class MySceneController {
@@ -11,13 +10,10 @@ public class MySceneController {
 	private GameController c_game;
 	private LogInController c_login = new LogInController(this);
 
-	private HomePane v_home;
 	
 	public MySceneController() {
 		v_scene = new MyScene(this);
 
-
-		v_home = new HomePane();
 
 	}
 
@@ -37,8 +33,5 @@ public class MySceneController {
 		// add panes to v_list to make switching panes easier.
 	}
 
-	public HomePane getV_home() {
-		return v_home;
-	}
 
 }

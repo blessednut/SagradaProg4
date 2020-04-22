@@ -63,8 +63,8 @@ public class DBCon {
 			if(succes.getResult() == ButtonType.OK) {
 				succes.close();
 			}
-		} catch (Exception ex) {
-			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\nKies aub een ander.", ButtonType.YES,ButtonType.NO);
+		} catch (Exception ex) {			
+			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\\nKies een andere gebruiksnaam alstublieft.", ButtonType.YES,ButtonType.NO);
 			exception.showAndWait();
 			if(exception.getResult() == ButtonType.YES) {
 				exception.close();
