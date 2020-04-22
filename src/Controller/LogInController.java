@@ -16,6 +16,7 @@ public class LogInController {
 		this.c_myscene = c_myscene;
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
+		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),v_login.getPassword().getText()));
 	}
 
 	public LoginPane getLogin() {
