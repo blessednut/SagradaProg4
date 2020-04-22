@@ -34,7 +34,7 @@ public class LogInController {
 		try {
 
 			if (m_login.getDbcon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_myscene.getV_home());
+				c_myscene.getMyscene().switchPane(c_myscene.getC_home().getV_home());
 
 			} else {
 				v_login.errorPassword();

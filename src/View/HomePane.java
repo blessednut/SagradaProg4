@@ -1,17 +1,23 @@
 package View;
 
+import Controller.HomeController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
@@ -19,20 +25,25 @@ public class HomePane extends BorderPane {
 	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
 	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
 	
-	private final ImageView buttonOne = new ImageView(new Image("Resources/button-image.png"));
-	private final ImageView buttonTwo = new ImageView(new Image("Resources/button2.png"));
+	private final ImageView buttonOne = new ImageView(new Image("Resources/button3.png"));
+	private final ImageView buttonTwo = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonThree = new ImageView(new Image("Resources/button3.png"));
-	private final ImageView buttonFour = new ImageView(new Image("Resources/button4.png"));
-
+	private final ImageView buttonFour = new ImageView(new Image("Resources/button3.png"));
+	private final ImageView buttonFive = new ImageView(new Image("Resources/button3.png"));
+	
 	private Insets buttonIns = new Insets(30, 0, 30, 0);
 	
 	private Button home;
 	private Button games;
-	private Button vrienden;
+	private Button invite;
 	private Button statistick;
 	private Button credits;
+	
+	private HBox reservedSpace = new HBox();
+	private HomeController homeController;
 
-	public HomePane() {
+	public HomePane(HomeController homeController) {
+		this.homeController = homeController;
 		this.setBackground(new Background(new BackgroundImage(new Image("Resources/sagradaTitel.jpg"),
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 				new BackgroundSize(0, 0, false, false, false, true))));
@@ -40,9 +51,19 @@ public class HomePane extends BorderPane {
 		this.setPrefSize(screenX, screenY);
 		this.setMaxSize(screenX, screenY);
 		makeHomePane();
-
+		
+		
 	}
 
+	public void makeReservedSpace(HBox filler) {
+		System.out.println("test");
+		setReservedSpace(filler);
+		reservedSpace.setMinSize((screenX-200), screenY);
+		reservedSpace.setMaxSize((screenX-200), screenY);
+		reservedSpace.setPrefSize((screenX-200), screenY);
+		this.setRight(reservedSpace);
+	}
+	
 	public void makeHomePane() {
 		VBox layout = new VBox();
 		layout.setMinSize(200, screenY);
@@ -59,8 +80,9 @@ public class HomePane extends BorderPane {
 		buttonFour.setFitWidth(200);
 		buttonFour.setFitHeight(screenY/5);
 		
+		buttonFive.setFitWidth(200);
+		buttonFive.setFitHeight(screenY/5);
 		
-
 		home = new Button("Home", buttonOne);
 		home.setMinSize(200, (screenY/5));
 		home.setPrefSize(200, (screenY/5));
@@ -76,12 +98,13 @@ public class HomePane extends BorderPane {
 		games.setFont(buttonFont);
 		games.setContentDisplay(ContentDisplay.CENTER);
 		
-		vrienden = new Button("Vrienden", buttonThree);
-		vrienden.setMinSize(200, (screenY/5));
-		vrienden.setPrefSize(200, (screenY/5));
-		vrienden.setMaxSize(200, (screenY/5));
-		vrienden.setFont(buttonFont);
-		vrienden.setContentDisplay(ContentDisplay.CENTER);
+		invite = new Button("uitnodigen", buttonThree);
+		invite.setMinSize(200, (screenY/5));
+		invite.setPrefSize(200, (screenY/5));
+		invite.setMaxSize(200, (screenY/5));
+		invite.setFont(buttonFont);
+		invite.setContentDisplay(ContentDisplay.CENTER);
+				
 		
 		statistick = new Button("stats",buttonFour);
 		statistick.setMinSize(200, (screenY/5));
@@ -90,16 +113,21 @@ public class HomePane extends BorderPane {
 		statistick.setFont(buttonFont);
 		statistick.setContentDisplay(ContentDisplay.CENTER);
 		
-		credits = new Button("credits");
+		
+		credits = new Button("credits", buttonFive);
 		credits.setMinSize(200, (screenY/5));
 		credits.setPrefSize(200, (screenY/5));
 		credits.setMaxSize(200, (screenY/5));
 		credits.setFont(buttonFont);
 		credits.setContentDisplay(ContentDisplay.CENTER);
 		
-		layout.getChildren().addAll(home, games, vrienden, statistick, credits);
-		this.getChildren().add(layout);
+		layout.getChildren().addAll(home, games, invite, statistick, credits);
+		this.getChildren().addAll(layout);
 
+	}
+	
+	public void setReservedSpace(HBox reservedSpace) {
+		this.reservedSpace = reservedSpace;
 	}
 
 	public Button getHome() {
@@ -111,7 +139,7 @@ public class HomePane extends BorderPane {
 	}
 
 	public Button getVrienden() {
-		return vrienden;
+		return invite;
 	}
 
 	public Button getStatistick() {
@@ -121,6 +149,7 @@ public class HomePane extends BorderPane {
 	public Button getCredits() {
 		return credits;
 	}
+	
 	
 	
 
