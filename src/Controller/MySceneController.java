@@ -5,40 +5,30 @@ import View.MyScene;
 
 public class MySceneController {
 	
-
-
 	private MyScene v_scene;
 	private GameController c_game;
 	private LogInController c_login = new LogInController(this);
-
-	private HomePane v_home;
+	private HomeController c_home;
 	
 	public MySceneController() {
 		v_scene = new MyScene(this);
-
-
-		v_home = new HomePane();
-
+		c_home = new HomeController(this);
 	}
 
 	public MyScene getMyscene() {
 		return v_scene;
 	}
 	
-
-
 	public LogInController getLoginCon() {
 		return c_login;
 	}
 	
-
+	public HomeController getC_home() {
+		return c_home;
+	}
 
 	public void addToViewList() {
 		// add panes to v_list to make switching panes easier.
-	}
-
-	public HomePane getV_home() {
-		return v_home;
 	}
 
 }

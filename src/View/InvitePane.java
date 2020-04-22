@@ -9,9 +9,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
-public class InvitePane extends Pane{
+public class InvitePane extends HBox{
 	
-	private HBox hbox;
+	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
+	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
+	
 	private VBox vbox;
 	private VBox vbox2;
 	
@@ -28,13 +30,14 @@ public class InvitePane extends Pane{
 	
 	
 	public InvitePane() {
+		this.setMinSize((screenX-200), screenY);
+		this.setMaxSize((screenX-200), screenY); 
+		this.setPrefSize((screenX-200), screenY);
 		createPane();
 		showInvite("piet");
 	}
 	
 	private void createPane() {
-		
-		
 		titel1 = new Text("vrienden uitnodigen");
 		
 		name = new TextField();
@@ -59,8 +62,7 @@ public class InvitePane extends Pane{
 		
 		vbox = new VBox(titel1, name, search, inviteButton);
 		vbox2 = new VBox(titel2);
-		hbox = new HBox(vbox, vbox2);
-		this.getChildren().add(hbox);
+		this.getChildren().addAll(vbox, vbox2);
 	}
 	
 	public void showInvite(String username) {

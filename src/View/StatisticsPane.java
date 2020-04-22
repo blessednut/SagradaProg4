@@ -6,10 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 
-public class StatisticsPane extends Pane{
+public class StatisticsPane extends HBox{
 
-	private HBox hbox;
+	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
+	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
+	
 	private VBox vbox;
 	private VBox vbox2;
 	
@@ -20,6 +23,9 @@ public class StatisticsPane extends Pane{
 	private Button zoek;
 	
 	public StatisticsPane() {
+		this.setMinSize((screenX-200), screenY);
+		this.setMaxSize((screenX-200), screenY); 
+		this.setPrefSize((screenX-200), screenY);
 		createPane();
 	}
 	
@@ -40,11 +46,9 @@ public class StatisticsPane extends Pane{
 		zoek.setPrefSize(300, 100);
 		zoek.setMaxSize(300, 100);
 		
-		
 		vbox = new VBox(titel1);
 		vbox2 = new VBox(titel2, naam, zoek);
-		hbox = new HBox(vbox, vbox2);
-		this.getChildren().add(hbox);
+		this.getChildren().addAll(vbox, vbox2);
 	}
 	
 	public void showPane() {
