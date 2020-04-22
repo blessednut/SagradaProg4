@@ -30,9 +30,9 @@ public class InvitePane extends HBox{
 	
 	
 	public InvitePane() {
-		this.setMinSize((screenX-200), screenY);
-		this.setMaxSize((screenX-200), screenY); 
-		this.setPrefSize((screenX-200), screenY);
+		this.setMinSize((screenX/8*7), screenY);
+		this.setMaxSize((screenX/8*7), screenY); 
+		this.setPrefSize((screenX/8*7), screenY);
 		createPane();
 		showInvite("piet");
 	}

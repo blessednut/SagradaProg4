@@ -36,7 +36,7 @@ public class HomePane extends BorderPane {
 	private Button home;
 	private Button games;
 	private Button invite;
-	private Button statistick;
+	private Button statistics;
 	private Button credits;
 	
 	private HBox reservedSpace = new HBox();
@@ -58,9 +58,9 @@ public class HomePane extends BorderPane {
 	public void makeReservedSpace(HBox filler) {
 		System.out.println("test");
 		setReservedSpace(filler);
-		reservedSpace.setMinSize((screenX-200), screenY);
-		reservedSpace.setMaxSize((screenX-200), screenY);
-		reservedSpace.setPrefSize((screenX-200), screenY);
+		reservedSpace.setMinSize((screenX/8*7), screenY);
+		reservedSpace.setMaxSize((screenX/8*7), screenY);
+		reservedSpace.setPrefSize((screenX/8*7), screenY);
 		this.setRight(reservedSpace);
 	}
 	
@@ -68,60 +68,64 @@ public class HomePane extends BorderPane {
 		VBox layout = new VBox();
 		layout.setMinSize(200, screenY);
 		Font buttonFont = new Font("Algerian", 24);
-		buttonOne.setFitWidth(200);
+		buttonOne.setFitWidth((screenX/8));
 		buttonOne.setFitHeight(screenY/5);
 		
-		buttonTwo.setFitWidth(200);
+		buttonTwo.setFitWidth((screenX/8));
 		buttonTwo.setFitHeight(screenY/5);
 		
-		buttonThree.setFitWidth(200);
+		buttonThree.setFitWidth((screenX/8));
 		buttonThree.setFitHeight(screenY/5);
 		
-		buttonFour.setFitWidth(200);
+		buttonFour.setFitWidth((screenX/8));
 		buttonFour.setFitHeight(screenY/5);
 		
-		buttonFive.setFitWidth(200);
+		buttonFive.setFitWidth((screenX/8));
 		buttonFive.setFitHeight(screenY/5);
 		
 		home = new Button("Home", buttonOne);
-		home.setMinSize(200, (screenY/5));
-		home.setPrefSize(200, (screenY/5));
-		home.setMaxSize(200, (screenY/5));
+		home.setMinSize((screenX/8), (screenY/5));
+		home.setPrefSize((screenX/8), (screenY/5));
+		home.setMaxSize((screenX/8), (screenY/5));
 		home.setPadding(buttonIns);
 		home.setFont(buttonFont);
 		home.setContentDisplay(ContentDisplay.CENTER);
+		home.setStyle("-fx-background-color: null");
+		
 		
 		games = new Button("Games", buttonTwo);
-		games.setMinSize(200, (screenY/5));
-		games.setPrefSize(200, (screenY/5));
-		games.setMaxSize(200, (screenY/5));
+		games.setMinSize((screenX/8), (screenY/5));
+		games.setPrefSize((screenX/8), (screenY/5));
+		games.setMaxSize((screenX/8), (screenY/5));
 		games.setFont(buttonFont);
 		games.setContentDisplay(ContentDisplay.CENTER);
+		games.setStyle("-fx-background-color: null");
 		
 		invite = new Button("uitnodigen", buttonThree);
-		invite.setMinSize(200, (screenY/5));
-		invite.setPrefSize(200, (screenY/5));
-		invite.setMaxSize(200, (screenY/5));
+		invite.setMinSize((screenX/8), (screenY/5));
+		invite.setPrefSize((screenX/8), (screenY/5));
+		invite.setMaxSize((screenX/8), (screenY/5));
 		invite.setFont(buttonFont);
 		invite.setContentDisplay(ContentDisplay.CENTER);
-				
+		invite.setStyle("-fx-background-color: null");		
 		
-		statistick = new Button("stats",buttonFour);
-		statistick.setMinSize(200, (screenY/5));
-		statistick.setPrefSize(200, (screenY/5));
-		statistick.setMaxSize(200, (screenY/5));
-		statistick.setFont(buttonFont);
-		statistick.setContentDisplay(ContentDisplay.CENTER);
-		
+		statistics = new Button("statistieken", buttonFour);
+		statistics.setMinSize((screenX/8), (screenY/5));
+		statistics.setPrefSize((screenX/8), (screenY/5));
+		statistics.setMaxSize((screenX/8), (screenY/5));
+		statistics.setFont(buttonFont);
+		statistics.setContentDisplay(ContentDisplay.CENTER);
+		statistics.setStyle("-fx-background-color: null");
 		
 		credits = new Button("credits", buttonFive);
-		credits.setMinSize(200, (screenY/5));
-		credits.setPrefSize(200, (screenY/5));
-		credits.setMaxSize(200, (screenY/5));
+		credits.setMinSize((screenX/8), (screenY/5));
+		credits.setPrefSize((screenX/8), (screenY/5));
+		credits.setMaxSize((screenX/8), (screenY/5));
 		credits.setFont(buttonFont);
 		credits.setContentDisplay(ContentDisplay.CENTER);
+		credits.setStyle("-fx-background-color: null");
 		
-		layout.getChildren().addAll(home, games, invite, statistick, credits);
+		layout.getChildren().addAll(home, games, invite, statistics, credits);
 		this.getChildren().addAll(layout);
 
 	}
@@ -143,7 +147,7 @@ public class HomePane extends BorderPane {
 	}
 
 	public Button getStatistick() {
-		return statistick;
+		return statistics;
 	}
 
 	public Button getCredits() {
