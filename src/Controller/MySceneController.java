@@ -1,7 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
-
 import View.HomePane;
 import View.MyScene;
 
@@ -14,9 +12,6 @@ public class MySceneController {
 	private LogInController c_login = new LogInController(this);
 
 	private HomePane v_home;
-	
-	private ArrayList v_list = new ArrayList();
-	
 	
 	public MySceneController() {
 		v_scene = new MyScene(this);

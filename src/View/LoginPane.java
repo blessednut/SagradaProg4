@@ -1,6 +1,5 @@
 package View;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
@@ -32,7 +31,7 @@ public class LoginPane extends BorderPane {
 	private double screenBoundsY = Screen.getPrimary().getBounds().getHeight();
 
 	public LoginPane() {
-System.out.println(screenBoundsY + screenBoundsX);
+		System.out.println(screenBoundsY + screenBoundsX);
 		this.setMinSize(screenBoundsX, screenBoundsY);
 		this.setPrefSize(screenBoundsX, screenBoundsY);
 		this.setMaxSize(screenBoundsX, screenBoundsY);
@@ -108,6 +107,12 @@ System.out.println(screenBoundsY + screenBoundsX);
 	public Button getLogin() {
 		return login;
 	}
+
+	public Button getRegister() {
+		return register;
+	}
+	
+	
 	
 	
 
