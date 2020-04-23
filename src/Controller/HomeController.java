@@ -1,21 +1,23 @@
 package Controller;
 
 import View.CreditsPane;
+import View.GamePane;
 import View.HomePane;
 import View.InvitePane;
 import View.StatisticsPane;
-import javafx.stage.Screen;
 
 public class HomeController {
 
 	private HomePane v_home;
 	private InvitePane v_invite;
 	private CreditsPane v_credits;
+	private GamePane v_game;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 
 	public HomeController(MySceneController myScene) {
 		this.myScene = myScene;
+		v_game = new GamePane();
 		v_home = new HomePane(this);
 		v_invite = new InvitePane();
 		v_credits = new CreditsPane();
@@ -23,8 +25,13 @@ public class HomeController {
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
+		v_home.getGames().setOnAction(e -> openGamePane());
 	}
 
+	public void openGamePane() {
+		myScene.getMyscene().switchPane(v_game);
+	}
+	
 	public void openInvitePane() {
 		v_home.makeReservedSpace(v_invite);
 	}
