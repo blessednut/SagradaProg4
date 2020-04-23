@@ -1,5 +1,6 @@
 package Controller;
 
+import View.CreditsPane;
 import View.HomePane;
 import View.InvitePane;
 import View.StatisticsPane;
@@ -9,6 +10,7 @@ public class HomeController {
 
 	private HomePane v_home;
 	private InvitePane v_invite;
+	private CreditsPane v_credits;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 
@@ -16,9 +18,11 @@ public class HomeController {
 		this.myScene = myScene;
 		v_home = new HomePane(this);
 		v_invite = new InvitePane();
+		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
+		v_home.getCredits().setOnAction(e -> openCreditsPane());
 	}
 
 	public void openInvitePane() {
@@ -27,6 +31,10 @@ public class HomeController {
 
 	public void openStatisticsPane() {
 		v_home.makeReservedSpace(v_statistics);
+	}
+	
+	public void openCreditsPane() {
+		v_home.makeReservedSpace(v_credits);
 	}
 
 	public HomePane getV_home() {
