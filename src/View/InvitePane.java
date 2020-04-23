@@ -38,9 +38,9 @@ public class InvitePane extends HBox {
 	private ImageView labelNameBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 
 	public InvitePane() {
-		this.setMinSize((screenX - 200), screenY);
-		this.setMaxSize((screenX - 200), screenY);
-		this.setPrefSize((screenX - 200), screenY);
+		this.setMinSize((screenX/8*7), screenY);
+		this.setMaxSize((screenX/8*7), screenY); 
+		this.setPrefSize((screenX/8*7), screenY);
 		createPane();
 		showInvite("piet");
 	}
