@@ -25,7 +25,7 @@ public class HomePane extends BorderPane {
 	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
 	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
 	
-	private final ImageView buttonOne = new ImageView(new Image("Resources/button7.png"));
+	private final ImageView buttonOne = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonTwo = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonThree = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonFour = new ImageView(new Image("Resources/button3.png"));

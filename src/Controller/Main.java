@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static void main(String[] args) {
-		launch(args);
+		launch();
 	}
 
 	@Override
@@ -22,7 +22,9 @@ public class Main extends Application {
 //		stage.setAlwaysOnTop(true);
 		stage.setScene(myscene.getMyscene());
 		stage.show();
+
 		myscene.getMyscene().addEventHandler(KeyEvent.KEY_PRESSED, new MyKeyHandler());
+
 	}
 
 	private class MyKeyHandler implements EventHandler<KeyEvent> {
