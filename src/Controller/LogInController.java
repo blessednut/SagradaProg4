@@ -2,6 +2,10 @@ package Controller;
 
 import View.GamePane;
 import View.LoginPane;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import model.LoginModel;
 
 public class LogInController {
@@ -18,7 +22,19 @@ public class LogInController {
 		GamePane game = new GamePane();
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
-		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),v_login.getPassword().getText()));
+		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
+				v_login.getPassword().getText()));
+		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
+	}
+
+	private class MyEnterHandler implements EventHandler<KeyEvent> {
+		@Override
+		public void handle(KeyEvent event) {
+			if (event.getCode() == KeyCode.ENTER) {
+				SetInlogInfo();
+			}
+		}
+
 	}
 
 	public LoginPane getLogin() {
