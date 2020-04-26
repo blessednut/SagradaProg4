@@ -11,7 +11,6 @@ public class GameController {
 
 	public GameController() {
 		con = new DBCon();
-		
 	}
 
 	public MySceneController getMyscene() {
