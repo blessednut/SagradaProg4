@@ -8,28 +8,28 @@ import javafx.scene.paint.Color;
 
 public class FieldView extends Pane {
 	private Color color;
-	private int value;
+	private Integer value;
 	private DiceView dice;
-
+	
 	public FieldView() {
 		this.color = null;
-		this.value = -1;
+		this.value = null;
 	}
 
 	public FieldView(DiceView dice) {
 		this.color = null;
-		this.value = -1;
+		this.value = null;
 		this.dice = dice;
 	}
 
 	public FieldView(Color color) {
 		this.color = color;
-		this.value = -1;
+		this.value = null;
 	}
 
 	public FieldView(Color color, DiceView dice) {
 		this.color = color;
-		this.value = -1;
+		this.value = null;
 		this.dice = dice;
 	}
 
@@ -50,7 +50,7 @@ public class FieldView extends Pane {
 		this.setOnMouseExited(event -> fieldUnhover());
 
 		if (dice == null) {
-			if (color == null && value == -1) {
+			if (color == null && value == null) {
 				this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 			} else if (color == null) {
 				this.getChildren().add(new DicePattern(value, width, height));
@@ -64,7 +64,6 @@ public class FieldView extends Pane {
 			if (this.color != null) {
 				this.setBackground(new Background(new BackgroundFill(color, null, null)));
 			}
-
 			this.getChildren().add(dice);
 		}
 	}
