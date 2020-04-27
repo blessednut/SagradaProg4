@@ -23,6 +23,8 @@ public class GamePane extends BorderPane{
 	private static final int DICESIZE = 200;
 	private static final int PUBOBJCARDSIZE = 150;
 	
+	private Button endTurn;
+	
 	public GamePane() {
 		this.setMinSize(900, 900);
 		this.setPrefSize(900, 900);
@@ -72,7 +74,7 @@ public class GamePane extends BorderPane{
 
 		
 		
-		Button endTurn = new Button("Einde beurt");
+		endTurn = new Button("Einde beurt");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -117,5 +119,11 @@ public class GamePane extends BorderPane{
 		
 		this.getChildren().addAll(eigenRaamPatroon, speler2RaamPatroon, speler3RaamPatroon, speler4RaamPatroon, chatbox, privObjCard, scoreBoard, toolCards, dice, pubObjCards);
 	}
+
+	public Button getEndTurn() {
+		return endTurn;
+	}
+	
+	
 }
 

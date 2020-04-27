@@ -17,7 +17,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		MySceneController myscene = new MySceneController();
-		GameController gameCon = new GameController();
 		stage.setTitle("Sagrada 2020");
 //		stage.initStyle(StageStyle.UNDECORATED);
 //		stage.setAlwaysOnTop(true);

@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import model.GameModel;
 
 public class DBCon {
 
@@ -17,11 +18,14 @@ public class DBCon {
 	private Statement st;
 	private PreparedStatement ps;
 	private ResultSet rs;
+	
+	private GameModel m_game;
 
 	public DBCon() {
+		this.m_game = new GameModel(this);
 	}
 
-	private void createConnection() {
+	public void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager
@@ -41,7 +45,7 @@ public class DBCon {
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				result = rs.getString("Password");
-
+				System.out.println(result);
 			}
 		} catch (Exception ex) {
 			System.out.println(ex);
@@ -62,8 +66,9 @@ public class DBCon {
 			succes.showAndWait();
 			if(succes.getResult() == ButtonType.OK) {
 				succes.close();
+				con.close();
 			}
-		} catch (Exception ex) {			
+		} catch (Exception ex) {	
 			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\\nKies een andere gebruiksnaam alstublieft.", ButtonType.YES,ButtonType.NO);
 			exception.showAndWait();
 			if(exception.getResult() == ButtonType.YES) {
@@ -77,5 +82,48 @@ public class DBCon {
 	public ResultSet getRs() {
 		return rs;
 	}
+
+	public GameModel getM_game() {
+		return m_game;
+	}
+
+	public Connection getCon() {
+		return con;
+	}
+
+	public Statement getSt() {
+		return st;
+	}
+
+	public PreparedStatement getPs() {
+		return ps;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
+	public void setSt(Statement st) {
+		this.st = st;
+	}
+
+	public void setPs(PreparedStatement ps) {
+		this.ps = ps;
+	}
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
+	public void setM_game(GameModel m_game) {
+		this.m_game = m_game;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

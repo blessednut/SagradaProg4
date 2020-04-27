@@ -1,21 +1,24 @@
 package Controller;
 
 import DataBase.DBCon;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import View.GamePane;
 
 public class GameController {
 	
 	private MySceneController myscene;
+	private GamePane v_game;
 	private DBCon con;
 
-	public GameController() {
+	public GameController(MySceneController myscene) {
+		this.v_game = new GamePane();
+		this.myscene = myscene;
 		con = new DBCon();
+		v_game.getEndTurn().setOnAction(e -> con.getM_game().getTokenAmount());
 		
 	}
-
-	public MySceneController getMyscene() {
-		return myscene;
+	
+	public void setGamePane() {
+		myscene.getMyscene().switchPane(v_game);
 	}
 
 }
