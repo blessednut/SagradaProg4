@@ -1,11 +1,16 @@
 package View;
 
+import Controller.GameController;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -22,6 +27,17 @@ public class GamePane extends BorderPane{
 	private static final int HEIGHTSCOREBOARD = 100;
 	private static final int DICESIZE = 200;
 	private static final int PUBOBJCARDSIZE = 150;
+	private GameController gameController;
+	private WindowPatternView2 ownWindow;
+	
+	public GamePane(GameController gameController) {
+		this.gameController = gameController;
+		this.setMinSize(900, 900);
+		this.setPrefSize(900, 900);
+		this.setMaxSize(900, 900);
+		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
+		createGamePane();
+	}
 	
 	public GamePane() {
 		this.setMinSize(900, 900);
@@ -32,15 +48,25 @@ public class GamePane extends BorderPane{
 	}
 	
 	public void createGamePane() {
+		this.getChildren().clear();
 		Rectangle2D psb = Screen.getPrimary().getVisualBounds();
 		//PlaceHolder Eigen RaamPatroon
 		
-		Rectangle eigenRaamPatroon = new Rectangle();
-		eigenRaamPatroon.setY(psb.getMaxY() - (HEIGHTODDPLAYER*0.5));
-		eigenRaamPatroon.setX(psb.getMaxX()*0.5 - (WIDTHODDPLAYER*0.5));
-		eigenRaamPatroon.setWidth(WIDTHODDPLAYER);
-		eigenRaamPatroon.setHeight(HEIGHTODDPLAYER);
-		 
+		Pane window = new Pane();
+		if (ownWindow == null) {
+			Rectangle eigenRaamPatroon = new Rectangle();
+			eigenRaamPatroon.setY(psb.getMaxY() - (HEIGHTODDPLAYER*0.5));
+			eigenRaamPatroon.setX(psb.getMaxX()*0.5 - (WIDTHODDPLAYER*0.5));
+			eigenRaamPatroon.setWidth(WIDTHODDPLAYER);
+			eigenRaamPatroon.setHeight(HEIGHTODDPLAYER);
+			window.getChildren().add(eigenRaamPatroon);
+		} else {
+			window.setLayoutX(psb.getMaxX()*0.50 -500);
+			window.setLayoutY(psb.getMaxY() -300);
+			//window.relocate(psb.getMaxX()*0.50 -500, psb.getMaxY() -300);
+			//window.getLocalToSceneTransform();
+			window.getChildren().add(ownWindow);
+		}
 		
 		//PlaceHolder RaamPatroon van speler 2
 		Rectangle speler2RaamPatroon = new Rectangle();
@@ -114,8 +140,30 @@ public class GamePane extends BorderPane{
 		pubObjCards.setHeight(PUBOBJCARDSIZE);
 		pubObjCards.setFill(Color.CRIMSON);
 		
+		this.getChildren().addAll(window, speler2RaamPatroon, speler3RaamPatroon, speler4RaamPatroon, chatbox, privObjCard, scoreBoard, toolCards, dice, pubObjCards);
+	}
+	
+	public void createChoicePane(WindowPatternView2 card1, WindowPatternView2 card2, WindowPatternView2 card3, WindowPatternView2 card4) {
+		this.getChildren().clear();
 		
-		this.getChildren().addAll(eigenRaamPatroon, speler2RaamPatroon, speler3RaamPatroon, speler4RaamPatroon, chatbox, privObjCard, scoreBoard, toolCards, dice, pubObjCards);
+		card1.setOnMouseClicked(e -> chooseCardEvent(card1));
+		card2.setOnMouseClicked(e -> chooseCardEvent(card2));
+		card3.setOnMouseClicked(e -> chooseCardEvent(card3));
+		card4.setOnMouseClicked(e -> chooseCardEvent(card4));
+		//card1.addonclickevent(do functie onclick);
+		HBox box = new HBox(card1, card2, card3, card4);
+		box.setPadding(new Insets(0, 30, 0, 30));
+		this.getChildren().add(box);
+	}
+	
+	private void chooseCardEvent (WindowPatternView2 chosenCard)
+	{
+		gameController.setChosenCard(chosenCard);
+		System.out.println("KLIK");
+	};
+	
+	public void setOwnWindow (WindowPatternView2 window) {
+		this.ownWindow = window;
 	}
 }
 
