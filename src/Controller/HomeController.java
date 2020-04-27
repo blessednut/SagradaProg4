@@ -1,5 +1,6 @@
 package Controller;
 
+import DataBase.DBCon;
 import View.CreditsPane;
 import View.GamePane;
 import View.HomePane;
@@ -29,9 +30,13 @@ public class HomeController {
 	}
 
 	public void openGamePane() {
-		myScene.getMyscene().switchPane(v_game);
+		// Wanneer een lijst van spellen getoont kan worden moet de gameController
+		// aangemaakt worden wanneer er een spel is gekozen.
+		
+		// myScene.getMyscene().switchPane(v_game);
+		GameController gameController = new GameController(myScene);
 	}
-	
+
 	public void openInvitePane() {
 		v_home.makeReservedSpace(v_invite);
 	}
@@ -39,7 +44,7 @@ public class HomeController {
 	public void openStatisticsPane() {
 		v_home.makeReservedSpace(v_statistics);
 	}
-	
+
 	public void openCreditsPane() {
 		v_home.makeReservedSpace(v_credits);
 	}

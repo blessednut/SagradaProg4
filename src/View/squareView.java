@@ -49,15 +49,15 @@ public class squareView extends Pane {
 		}
 		
 		switch (color) {
-		case "blauw":
+		case "blue":
 			return Color.DODGERBLUE;
-		case "geel":
+		case "yellow":
 			return Color.YELLOW;
-		case "groen":
+		case "green":
 			return Color.LAWNGREEN;
-		case "paars":
+		case "purple":
 			return Color.MEDIUMPURPLE;
-		case "rood":
+		case "red":
 			return Color.RED;
 		default:
 			return Color.WHITE;

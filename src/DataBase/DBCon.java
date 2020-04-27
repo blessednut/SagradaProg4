@@ -24,7 +24,7 @@ public class DBCon {
 	public DBCon() {
 	}
 
-	private void createConnection() {
+	public void createConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager
