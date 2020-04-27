@@ -68,7 +68,7 @@ public class DBCon {
 			}
 		} catch (Exception ex) {
 			Alert exception = new Alert(AlertType.ERROR,
-					"De gebruikersnaam die je wilt gebruiken bestaat al.\\nKies een andere gebruiksnaam alstublieft.",
+					"De gebruikersnaam die je wilt gebruiken bestaat al.\nKies een andere gebruiksnaam alstublieft.",
 					ButtonType.YES, ButtonType.NO);
 			exception.showAndWait();
 			if (exception.getResult() == ButtonType.YES) {
@@ -120,4 +120,34 @@ public class DBCon {
 		}
 		return null;
 	}
+
+	public Statement getSt() {
+		return st;
+	}
+
+	public void setSt(Statement st) {
+		this.st = st;
+	}
+
+	public PreparedStatement getPs() {
+		return ps;
+	}
+
+	public void setPs(PreparedStatement ps) {
+		this.ps = ps;
+	}
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+	
+	
 }

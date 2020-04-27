@@ -151,6 +151,10 @@ public class GamePane extends BorderPane{
 		card3.setOnMouseClicked(e -> chooseCardEvent(card3));
 		card4.setOnMouseClicked(e -> chooseCardEvent(card4));
 		//card1.addonclickevent(do functie onclick);
+		card1.setPadding(new Insets(10, 10, 10, 10));
+		card2.setPadding(new Insets(10, 10, 10, 10));
+		card3.setPadding(new Insets(10, 10, 10, 10));
+		card4.setPadding(new Insets(10, 10, 10, 10));
 		HBox box = new HBox(card1, card2, card3, card4);
 		box.setPadding(new Insets(0, 30, 0, 30));
 		this.getChildren().add(box);
@@ -158,7 +162,7 @@ public class GamePane extends BorderPane{
 	
 	private void chooseCardEvent (WindowPatternView2 chosenCard)
 	{
-		gameController.setChosenCard(chosenCard);
+		gameController.getC_patternCard().setChosenCard(chosenCard);
 		System.out.println("KLIK");
 	};
 	

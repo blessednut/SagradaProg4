@@ -1,6 +1,5 @@
 package Controller;
 
-import DataBase.DBCon;
 import View.CreditsPane;
 import View.GamePane;
 import View.HomePane;
@@ -30,11 +29,7 @@ public class HomeController {
 	}
 
 	public void openGamePane() {
-		// Wanneer een lijst van spellen getoont kan worden moet de gameController
-		// aangemaakt worden wanneer er een spel is gekozen.
-		
-		// myScene.getMyscene().switchPane(v_game);
-		GameController gameController = new GameController(myScene);
+		GameController c_game = new GameController(myScene);
 	}
 
 	public void openInvitePane() {
