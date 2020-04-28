@@ -28,7 +28,7 @@ public class GamePane extends BorderPane {
 	private static final int DICESIZE = 200;
 	private static final int PUBOBJCARDSIZE = 150;
 	private GameController gameController;
-	private WindowPatternView2 ownWindow;
+	private WindowPatternView ownWindow;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -138,8 +138,8 @@ public class GamePane extends BorderPane {
 				privObjCard, scoreBoard, toolCards, dice, pubObjCards);
 	}
 
-	public void createChoicePane(WindowPatternView2 card1, WindowPatternView2 card2, WindowPatternView2 card3,
-			WindowPatternView2 card4) {
+	public void createChoicePane(WindowPatternView card1, WindowPatternView card2, WindowPatternView card3,
+			WindowPatternView card4) {
 		this.getChildren().clear();
 
 		card1.setOnMouseClicked(e -> chooseCardEvent(card1));
@@ -156,11 +156,11 @@ public class GamePane extends BorderPane {
 		this.getChildren().add(box);
 	}
 
-	private void chooseCardEvent(WindowPatternView2 chosenCard) {
+	private void chooseCardEvent(WindowPatternView chosenCard) {
 		gameController.getC_patternCard().setChosenCard(chosenCard);
 	};
 
-	public void setOwnWindow(WindowPatternView2 window) {
+	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
 	}
 }

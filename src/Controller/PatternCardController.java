@@ -1,7 +1,7 @@
 package Controller;
 
 import DataBase.DBCon;
-import View.WindowPatternView2;
+import View.WindowPatternView;
 import View.squareView;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
@@ -33,17 +33,17 @@ public class PatternCardController {
 		return fieldView;
 	}
 
-	private WindowPatternView2 makeRandomCard(int cardId) {
+	private WindowPatternView makeRandomCard(int cardId) {
 		PatternCardModel card = con.getPatternCard(cardId);
 		PatternCardFieldModel[][] field = con.getField(cardId);
-		return new WindowPatternView2(450, 300, card.nameProperty(), card.tokenAmount(), makeSquareView(field));
+		return new WindowPatternView(450, 300, card.nameProperty(), card.tokenAmount(), makeSquareView(field));
 	}
 
 	public int getRandomIntBetweenRange(int min, int max) {
 		return (int) ((Math.random() * ((max - min) + 1)) + min);
 	}
 
-	public void setChosenCard(WindowPatternView2 chosenCard) {
+	public void setChosenCard(WindowPatternView chosenCard) {
 		this.c_game.getGamePane().setOwnWindow(chosenCard);
 		this.c_game.getGamePane().createGamePane();
 	}
