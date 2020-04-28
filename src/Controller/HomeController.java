@@ -11,13 +11,16 @@ public class HomeController {
 	private HomePane v_home;
 	private InvitePane v_invite;
 	private CreditsPane v_credits;
-	private GamePane v_game;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
+	private GameController c_game;
+	private LogInController c_login;
 
-	public HomeController(MySceneController myScene) {
+	
+	
+	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
-		v_game = new GamePane();
+		this.c_login = c_login;
 		v_home = new HomePane(this);
 		v_invite = new InvitePane();
 		v_credits = new CreditsPane();
@@ -29,7 +32,7 @@ public class HomeController {
 	}
 
 	public void openGamePane() {
-		GameController c_game = new GameController(myScene);
+		c_game = new GameController(myScene, c_login);
 	}
 
 	public void openInvitePane() {

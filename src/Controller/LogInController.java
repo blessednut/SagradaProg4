@@ -1,9 +1,7 @@
 package Controller;
 
-import View.GamePane;
 import View.LoginPane;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.LoginModel;
@@ -12,14 +10,12 @@ public class LogInController {
 
 	private LoginPane v_login;
 	private LoginModel m_login;
-
 	private MySceneController c_myscene;
 
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-		GamePane game = new GamePane();
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
@@ -41,7 +37,7 @@ public class LogInController {
 		return v_login;
 	}
 
-	public void SetInlogInfo() {
+	public String SetInlogInfo() {
 		String username = v_login.getUsername().getText();
 		String password = v_login.getPassword().getText();
 
@@ -59,6 +55,7 @@ public class LogInController {
 			v_login.errorUsername();
 
 		}
+		return username;
 
 	}
 
