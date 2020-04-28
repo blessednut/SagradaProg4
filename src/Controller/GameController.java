@@ -2,10 +2,7 @@ package Controller;
 
 import DataBase.DBCon;
 import View.GamePane;
-import View.WindowPatternView2;
-import View.squareView;
-import model.PatternCardFieldModel;
-import model.PatternCardModel;
+import model.GameModel;
 
 public class GameController {
 	private MySceneController myScene;
@@ -13,11 +10,14 @@ public class GameController {
 //	private WindowPatternView2 chosenCard;
 	private PatternCardController c_patternCard;
 	private DBCon con;
+	private GameModel m_game;
 
 	//Krijg dbCon mee met de constructor
 	public GameController(MySceneController myScene) {
 		this.myScene = myScene;
 		this.gamePane = new GamePane(this);
+		this.m_game = new GameModel();
+		m_game.creatGameRoom();
 		myScene.getMyscene().switchPane(gamePane);
 		con = new DBCon();
 		c_patternCard = new PatternCardController(this);
