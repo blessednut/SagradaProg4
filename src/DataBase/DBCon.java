@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.paint.Color;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
@@ -105,7 +104,8 @@ public class DBCon {
 
 		try {
 			PatternCardFieldModel[][] field = new PatternCardFieldModel[5][4];
-			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard + "';";
+			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard
+					+ "';";
 			rs = st.executeQuery(query);
 
 			while (rs.next()) {
@@ -148,6 +148,4 @@ public class DBCon {
 	public void setCon(Connection con) {
 		this.con = con;
 	}
-	
-	
 }

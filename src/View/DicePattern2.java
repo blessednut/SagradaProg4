@@ -1,8 +1,5 @@
 package View;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -76,11 +73,6 @@ public class DicePattern2 extends GridPane {
 			getStackPaneFromGrid(this, 2, 2).getChildren().add(makeDot(RADIUS));
 			break;
 		default:
-//					for (int x = 0; x < 3; x++) {
-//						for (int y = 0; y < 3; y++) {
-//							getStackPaneFromGrid(this, x, y).getChildren().add(makeDot(3));
-//						}
-//					}
 			break;
 		}
 	}

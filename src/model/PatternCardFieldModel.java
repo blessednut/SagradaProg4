@@ -41,7 +41,6 @@ public class PatternCardFieldModel {
 		return this.color;
 	}
 	
-
 	public final StringProperty colorProperty () {
 		return new SimpleStringProperty(this, "color", color);
 	}

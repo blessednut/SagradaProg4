@@ -10,17 +10,17 @@ public class GameModel {
 	public GameModel() {
 		this.con = new DBCon();
 	}
-	
+
 	public void creatGameRoom() {
 		int x = 0;
 		con.createConnection();
 		try {
 			String query = "select MAX(idgame) as idgame from game;";
 			con.setRs(con.getSt().executeQuery(query));
-			while(con.getRs().next()) {
+			while (con.getRs().next()) {
 				GameId = con.getRs().getInt("idgame");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		GameId++;
@@ -30,7 +30,7 @@ public class GameModel {
 			con.setPs(con.getCon().prepareStatement(query));
 			con.getPs().setInt(1, GameId);
 			con.getPs().execute();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
@@ -38,7 +38,4 @@ public class GameModel {
 	public int getGameId() {
 		return GameId;
 	}
-	
-	
-
 }
