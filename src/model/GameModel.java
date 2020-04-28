@@ -38,4 +38,8 @@ public class GameModel {
 	public int getGameId() {
 		return GameId;
 	}
+	
+	
+	
+
 }

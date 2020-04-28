@@ -1,6 +1,5 @@
 package Controller;
 
-import DataBase.DBCon;
 import View.GamePane;
 import model.GameModel;
 
@@ -9,9 +8,13 @@ public class GameController {
 	private GamePane gamePane;
 	private PatternCardController c_patternCard;
 	private GameModel m_game;
+	private LogInController c_login;
+	private PlayerController c_player;
 
-	public GameController(MySceneController myScene) {
+	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
+		this.c_login = c_login;
+		this.c_player = new PlayerController(this);
 		this.gamePane = new GamePane(this);
 		this.m_game = new GameModel();
 		m_game.creatGameRoom();
@@ -30,4 +33,17 @@ public class GameController {
 	public PatternCardController getC_patternCard() {
 		return c_patternCard;
 	}
+
+	public LogInController getC_login() {
+		return c_login;
+	}
+
+	public GameModel getM_game() {
+		return m_game;
+	}
+	
+	
+	
+	
+
 }
