@@ -34,29 +34,8 @@ public class squareView extends Pane {
 	}
 
 	private Background getBackground(StringProperty colorProperty) {
-		BackgroundFill fill = new BackgroundFill(colorConverter(colorProperty.getValue()), null, null);
+		ColorConverter converter = new ColorConverter();
+		BackgroundFill fill = new BackgroundFill(converter.colorConverter(colorProperty.getValue()), null, null);
 		return new Background(fill);
-	}
-
-	//Verplaatsen naar een eigen klasse en laten overerven
-	private Color colorConverter(String color) {
-		if (color == null) {
-			return Color.WHITE;
-		}
-		
-		switch (color) {
-		case "blue":
-			return Color.DODGERBLUE;
-		case "yellow":
-			return Color.YELLOW;
-		case "green":
-			return Color.LAWNGREEN;
-		case "purple":
-			return Color.MEDIUMPURPLE;
-		case "red":
-			return Color.RED;
-		default:
-			return Color.WHITE;
-		}
 	}
 }
