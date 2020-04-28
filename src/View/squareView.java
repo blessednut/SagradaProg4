@@ -1,13 +1,9 @@
 package View;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -29,7 +25,7 @@ public class squareView extends Pane {
 		this.setMinSize(width, height);
 		
 		if (dice == null) {
-			this.getChildren().add(new DicePattern2(value, width, height));
+			this.getChildren().add(new DicePattern(value, width, height));
 		} else {
 			this.getChildren().add(dice);
 			dice.drawDice(width, height);
@@ -38,29 +34,8 @@ public class squareView extends Pane {
 	}
 
 	private Background getBackground(StringProperty colorProperty) {
-		BackgroundFill fill = new BackgroundFill(colorConverter(colorProperty.getValue()), null, null);
+		ColorConverter converter = new ColorConverter();
+		BackgroundFill fill = new BackgroundFill(converter.colorConverter(colorProperty.getValue()), null, null);
 		return new Background(fill);
-	}
-
-	//Verplaatsen naar een eigen klasse en laten overerven
-	private Color colorConverter(String color) {
-		if (color == null) {
-			return Color.WHITE;
-		}
-		
-		switch (color) {
-		case "blue":
-			return Color.DODGERBLUE;
-		case "yellow":
-			return Color.YELLOW;
-		case "green":
-			return Color.LAWNGREEN;
-		case "purple":
-			return Color.MEDIUMPURPLE;
-		case "red":
-			return Color.RED;
-		default:
-			return Color.WHITE;
-		}
 	}
 }

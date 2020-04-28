@@ -1,15 +1,16 @@
 package model;
 
+import DataBase.DBCon;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.paint.Color;
 
 public class PatternCardFieldModel {
 	private final int idPatternCard;
 	private final int x, y, value;
 	private final String color;
+	private DBCon con;
 	
 	public PatternCardFieldModel (int idPatternCard, int x, int y, String color, int value) {
 		this.idPatternCard = idPatternCard;
@@ -17,6 +18,7 @@ public class PatternCardFieldModel {
 		this.y = y;
 		this.color = color;
 		this.value = value;
+		con = new DBCon();
 	}
 	
 	public int getIdPatternCard () {
@@ -39,12 +41,6 @@ public class PatternCardFieldModel {
 		return this.color;
 	}
 	
-//	public final IntegerProperty IdProperty () {
-//		return new SimpleIntegerProperty(this, "idPatternCard", idPatternCard);
-//	}
-//	
-//	public final IntegerProperty
-	
 	public final StringProperty colorProperty () {
 		return new SimpleStringProperty(this, "color", color);
 	}
@@ -52,4 +48,6 @@ public class PatternCardFieldModel {
 	public final IntegerProperty valueProperty () {
 		return new SimpleIntegerProperty(this, "value", value);
 	}
+	
+
 }

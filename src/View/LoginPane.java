@@ -15,18 +15,18 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 
 public class LoginPane extends BorderPane {
-	
+
 	private Color red = Color.RED;
 	// layout items
 	private VBox layout;
 	// textfield items
 	private TextField username;
 	private TextField password;
-	//Button items
+	// Button items
 	private HBox buttonBox;
 	private Button login;
 	private Button register;
-	
+
 	private double screenBoundsX = Screen.getPrimary().getBounds().getWidth();
 	private double screenBoundsY = Screen.getPrimary().getBounds().getHeight();
 
@@ -53,6 +53,7 @@ public class LoginPane extends BorderPane {
 		buttonBox.setMinSize(300, 100);
 		buttonBox.setPrefSize(300, 100);
 		buttonBox.setMaxSize(300, 100);
+
 		// textfield items
 		username = new TextField();
 		username.setText("Username");
@@ -68,7 +69,7 @@ public class LoginPane extends BorderPane {
 		password.setMaxSize(300, 100);
 		password.setOnMouseClicked(e -> password.clear());
 
-		//button items
+		// button items
 		login = new Button("Log in");
 		login.setMinSize(150, 100);
 		login.setPrefSize(150, 100);
@@ -78,20 +79,16 @@ public class LoginPane extends BorderPane {
 		register.setMinSize(150, 100);
 		register.setPrefSize(150, 100);
 		register.setMaxSize(150, 100);
-				
-		//buttons toevoegen aan layout
+
+		// buttons toevoegen aan layout
 		buttonBox.getChildren().addAll(login, register);
-		
-		layout.getChildren().addAll(username,password,buttonBox);
-
-//		this.getChildren().add(layout);
-
+		layout.getChildren().addAll(username, password, buttonBox);
 	}
-	
+
 	public void errorUsername() {
 		username.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
 	}
-	
+
 	public void errorPassword() {
 		password.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
 	}
@@ -111,9 +108,5 @@ public class LoginPane extends BorderPane {
 	public Button getRegister() {
 		return register;
 	}
-	
-	
-	
-	
 
 }

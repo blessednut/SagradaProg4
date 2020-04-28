@@ -7,20 +7,20 @@ import DataBase.DBCon;
 
 public class LoginModel {
 	private LogInController c_login;
-	
+
 	private DBCon dbcon;
 	private String username;
 	private String password;
 
-	//HashMap<username,password>
+	// HashMap<username,password>
 	private HashMap<String, String> loginUser;
 
 	public LoginModel() {
 		dbcon = new DBCon();
 	}
-	
+
 	public void fillHashMap() {
-		loginUser = new HashMap<String,String>();
+		loginUser = new HashMap<String, String>();
 	}
 
 	public void setUsername(String username) {
@@ -43,12 +43,7 @@ public class LoginModel {
 		return dbcon;
 	}
 
-
 	public LogInController getC_login() {
 		return c_login;
 	}
-	
-	
-	
-
 }

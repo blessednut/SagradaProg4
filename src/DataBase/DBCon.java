@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.paint.Color;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
@@ -68,7 +67,7 @@ public class DBCon {
 			}
 		} catch (Exception ex) {
 			Alert exception = new Alert(AlertType.ERROR,
-					"De gebruikersnaam die je wilt gebruiken bestaat al.\\nKies een andere gebruiksnaam alstublieft.",
+					"De gebruikersnaam die je wilt gebruiken bestaat al.\nKies een andere gebruiksnaam alstublieft.",
 					ButtonType.YES, ButtonType.NO);
 			exception.showAndWait();
 			if (exception.getResult() == ButtonType.YES) {
@@ -105,7 +104,8 @@ public class DBCon {
 
 		try {
 			PatternCardFieldModel[][] field = new PatternCardFieldModel[5][4];
-			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard + "';";
+			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard
+					+ "';";
 			rs = st.executeQuery(query);
 
 			while (rs.next()) {
@@ -119,5 +119,33 @@ public class DBCon {
 			System.out.println(e);
 		}
 		return null;
+	}
+
+	public Statement getSt() {
+		return st;
+	}
+
+	public void setSt(Statement st) {
+		this.st = st;
+	}
+
+	public PreparedStatement getPs() {
+		return ps;
+	}
+
+	public void setPs(PreparedStatement ps) {
+		this.ps = ps;
+	}
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
 	}
 }

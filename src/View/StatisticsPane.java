@@ -38,15 +38,14 @@ public class StatisticsPane extends HBox{
 		naam.setOnMouseClicked(e -> naam.clear());
 	}
 	
-	private void createPane() {
-		
+	private void createPane() {	
 		labelBackground.setFitWidth(150);
 		labelBackground.setFitHeight(100);
 		titel1 = new Label("ranglijst", labelBackground);
 		titel1.setFont(new Font("Arial", 20));
 		titel1.setStyle("-fx-font-weight: bold");
 		titel1.setContentDisplay(ContentDisplay.CENTER);
-//		
+	
 		rangText = new TextArea();
 		rangText.setMinSize(150, 70);
 		rangText.setPrefSize(150, 70);
