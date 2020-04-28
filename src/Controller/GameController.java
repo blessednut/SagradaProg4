@@ -20,7 +20,6 @@ public class GameController {
 		m_game.creatGameRoom();
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
-
 	}
 
 	public GamePane getGamePane() {
