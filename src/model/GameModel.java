@@ -11,6 +11,7 @@ public class GameModel {
 		this.con = new DBCon();
 	}
 
+	// haalt max(idgame) op uit de db en verhoogd deze met 1 en insert deze vervolgens.
 	public void creatGameRoom() {
 		int x = 0;
 		con.createConnection();
@@ -20,6 +21,7 @@ public class GameModel {
 			while (con.getRs().next()) {
 				GameId = con.getRs().getInt("idgame");
 			}
+		con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -30,9 +32,11 @@ public class GameModel {
 			con.setPs(con.getCon().prepareStatement(query));
 			con.getPs().setInt(1, GameId);
 			con.getPs().execute();
+			con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
 	}
 
 	public int getGameId() {

@@ -39,12 +39,13 @@ public class DBCon {
 		String result = null;
 		createConnection();
 		try {
-			String query = "select Password from account where username = '" + username + "';";
+			String query = "select password from account where username = '" + username + "';";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				result = rs.getString("Password");
+				result = rs.getString("password");
 
 			}
+			con.close();
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
@@ -65,7 +66,8 @@ public class DBCon {
 			if (succes.getResult() == ButtonType.OK) {
 				succes.close();
 			}
-		} catch (Exception ex) {
+			con.close();
+			} catch (Exception ex) {
 			Alert exception = new Alert(AlertType.ERROR,
 					"De gebruikersnaam die je wilt gebruiken bestaat al.\nKies een andere gebruiksnaam alstublieft.",
 					ButtonType.YES, ButtonType.NO);
@@ -93,6 +95,7 @@ public class DBCon {
 				return new PatternCardModel(rs.getInt("idpatterncard"), rs.getString("name"), rs.getInt("difficulty"),
 						rs.getBoolean("standard"));
 			}
+			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -113,9 +116,9 @@ public class DBCon {
 				int y = rs.getInt("position_y");
 				field[x - 1][y - 1] = new PatternCardFieldModel(rs.getInt("idpatterncard"), x, y, rs.getString("color"),
 						rs.getInt("value"));
-			}
+			}con.close();
 			return field;
-		} catch (Exception e) {
+			} catch (Exception e) {
 			System.out.println(e);
 		}
 		return null;
