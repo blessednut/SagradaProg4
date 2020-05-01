@@ -9,7 +9,8 @@ import View.StatisticsPane;
 public class HomeController {
 
 	private HomePane v_home;
-	private InvitePane v_invite;
+	private InviteController c_Invite;
+//	private InvitePane v_invite;
 	private CreditsPane v_credits;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
@@ -21,8 +22,9 @@ public class HomeController {
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
+		c_game = new GameController(myScene, c_login);
 		v_home = new HomePane(this);
-		v_invite = new InvitePane();
+		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
@@ -36,7 +38,7 @@ public class HomeController {
 	}
 
 	public void openInvitePane() {
-		v_home.makeReservedSpace(v_invite);
+		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
 	}
 
 	public void openStatisticsPane() {
@@ -51,12 +53,13 @@ public class HomeController {
 		return v_home;
 	}
 
-	public InvitePane getV_invite() {
-		return v_invite;
-	}
-
 	public StatisticsPane getV_statistics() {
 		return v_statistics;
 	}
+
+	public LogInController getC_login() {
+		return c_login;
+	}
+	
 
 }

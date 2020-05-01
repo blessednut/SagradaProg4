@@ -11,6 +11,7 @@ public class LogInController {
 	private LoginPane v_login;
 	private LoginModel m_login;
 	private MySceneController c_myscene;
+	private String username;
 
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
@@ -38,7 +39,7 @@ public class LogInController {
 	}
 
 	public String SetInlogInfo() {
-		String username = v_login.getUsername().getText();
+		username = v_login.getUsername().getText();
 		String password = v_login.getPassword().getText();
 
 		m_login.setUsername(username);
@@ -58,5 +59,11 @@ public class LogInController {
 		return username;
 
 	}
+
+	public String getUsername() {
+		return username;
+	}
+	
+	
 
 }

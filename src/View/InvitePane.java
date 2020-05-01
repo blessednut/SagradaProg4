@@ -31,7 +31,7 @@ public class InvitePane extends HBox {
 //	private Text titel2;
 	private Text name2;
 	private Button accept;
-	private Button ignore;
+	private Button refuse;
 	private HBox hbox2;
 
 	private ImageView labelBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
@@ -69,6 +69,7 @@ public class InvitePane extends HBox {
 
 		inviteButton = new Button();
 		inviteButton.setText("uitnodigen");
+		inviteButton.setVisible(false);
 		inviteButton.setMinSize(15, 30);
 		inviteButton.setPrefSize(150, 30);
 		inviteButton.setMaxSize(150, 30);
@@ -102,18 +103,40 @@ public class InvitePane extends HBox {
 		accept.setPrefSize(150, 30);
 		accept.setMaxSize(150, 30);
 
-		ignore = new Button();
-		ignore.setText("negeer");
-		ignore.setMinSize(150, 30);
-		ignore.setPrefSize(150, 30);
-		ignore.setMaxSize(150, 30);
+		refuse = new Button();
+		refuse.setText("afwijzen");
+		refuse.setMinSize(150, 30);
+		refuse.setPrefSize(150, 30);
+		refuse.setMaxSize(150, 30);
 
-		hbox2.getChildren().addAll(accept, ignore);
+		hbox2.getChildren().addAll(accept, refuse);
 		vbox2.getChildren().addAll(titel2, Username, hbox2);
 	}
+	
+	
 
-	public void showPane() {
+	public TextField getName() {
+		return name;
+	}
 
+	public Button getSearch() {
+		return search;
+	}
+
+	public TextArea getUsername() {
+		return Username;
+	}
+
+	public Button getInviteButton() {
+		return inviteButton;
+	}
+
+	public Button getAccept() {
+		return accept;
+	}
+
+	public Button getRefuse() {
+		return refuse;
 	}
 
 }

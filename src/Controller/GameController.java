@@ -17,7 +17,10 @@ public class GameController {
 		this.c_player = new PlayerController(this);
 		this.gamePane = new GamePane(this);
 		this.m_game = new GameModel();
-		m_game.creatGameRoom();
+
+	}
+	public void createGamePane() {
+//		m_game.creatGameRoom();
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
 	}
