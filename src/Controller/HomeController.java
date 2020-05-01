@@ -1,10 +1,9 @@
 package Controller;
 
 import View.CreditsPane;
-import View.GamePane;
 import View.HomePane;
-import View.InvitePane;
 import View.StatisticsPane;
+import model.HomeThreadModel;
 
 public class HomeController {
 
@@ -16,6 +15,8 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
+	private HomeThreadModel m_home;
+
 
 	
 	

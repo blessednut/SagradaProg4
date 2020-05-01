@@ -12,13 +12,15 @@ public class LogInController {
 	private LoginModel m_login;
 	private MySceneController c_myscene;
 	private String username;
+	private HomeThreadController c_hometc;
 
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-
-		v_login.getLogin().setOnAction(e -> SetInlogInfo());
+		this.c_hometc = new HomeThreadController(this);
+		
+		v_login.getLogin().setOnAction(e -> {SetInlogInfo(); Thread th = new Thread(c_hometc); th.start(); try{th.sleep(1000L);}catch(Exception fout) {System.out.println(fout);}});
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
 				v_login.getPassword().getText()));
 		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());

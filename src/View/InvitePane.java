@@ -139,4 +139,9 @@ public class InvitePane extends HBox {
 		return refuse;
 	}
 
+	public void setUsername(TextArea username) {
+		Username = username;
+	}
+	
+
 }
