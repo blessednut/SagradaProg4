@@ -1,49 +1,52 @@
 package Controller;
 
 import View.CreditsPane;
-import View.GamePane;
 import View.HomePane;
-import View.InvitePane;
 import View.StatisticsPane;
 
 public class HomeController {
 
 	private HomePane v_home;
-	private InvitePane v_invite;
+	private InviteController c_Invite;
+//	private InvitePane v_invite;
 	private CreditsPane v_credits;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 	private GameController c_game;
-<<<<<<< Updated upstream
-=======
+<<<<<<< HEAD
 	private LogInController c_login;
-	private HomeThreadModel m_home;
 	private HomeThreadController c_hometc;
->>>>>>> Stashed changes
+=======
+>>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
-	public HomeController(MySceneController myScene) {
+	
+	
+	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
-		c_game = new GameController(myScene);
+		this.c_login = c_login;
+//		c_game = new GameController(myScene, c_login);
 		v_home = new HomePane(this);
-		v_invite = new InvitePane();
+		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
-		this.c_hometc = new HomeThreadController(c_login, c_Invite);
-		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
 		v_home.getGames().setOnAction(e -> c_game.setGamePane());
 	}
-	
+
+	public void openGamePane() {
+//		c_game = new GameController(myScene, c_login);
+	}
+
 	public void openInvitePane() {
-		v_home.makeReservedSpace(v_invite);
+		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
 	}
 
 	public void openStatisticsPane() {
 		v_home.makeReservedSpace(v_statistics);
 	}
-	
+
 	public void openCreditsPane() {
 		v_home.makeReservedSpace(v_credits);
 	}
@@ -52,20 +55,17 @@ public class HomeController {
 		return v_home;
 	}
 
-	public InvitePane getV_invite() {
-		return v_invite;
-	}
-
 	public StatisticsPane getV_statistics() {
 		return v_statistics;
 	}
-<<<<<<< Updated upstream
-=======
+<<<<<<< HEAD
+
 	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
->>>>>>> Stashed changes
+=======
+>>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
 }
