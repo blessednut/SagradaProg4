@@ -11,29 +11,21 @@ public class LogInController {
 	private LoginPane v_login;
 	private LoginModel m_login;
 	private MySceneController c_myscene;
-<<<<<<< HEAD
 
 	private String username;
 	private HomeThreadController c_hometc;
 
 //	private String username;
 
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-<<<<<<< HEAD
-=======
-		GamePane game = new GamePane();
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
 				v_login.getPassword().getText()));
-<<<<<<< HEAD
 
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
@@ -44,8 +36,6 @@ public class LogInController {
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
 				v_login.getPassword().getText()));
 
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
 	}
 
