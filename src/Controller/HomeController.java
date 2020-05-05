@@ -16,8 +16,6 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-
-
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
