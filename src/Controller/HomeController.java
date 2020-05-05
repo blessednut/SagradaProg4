@@ -14,11 +14,8 @@ public class HomeController {
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 	private GameController c_game;
-<<<<<<< HEAD
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
 	
 	
@@ -30,6 +27,8 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
@@ -60,12 +59,9 @@ public class HomeController {
 		return v_statistics;
 	}
 
-<<<<<<< HEAD
 	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 }

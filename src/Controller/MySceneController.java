@@ -10,13 +10,9 @@ public class MySceneController {
 
 	public MySceneController() {
 		v_scene = new MyScene(this);
-<<<<<<< HEAD
 		c_home = new HomeController(this, c_login);
 		System.out.println("hoi");
 
-=======
-		c_home = new HomeController(this);
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 	}
 
 	public MyScene getMyscene() {
