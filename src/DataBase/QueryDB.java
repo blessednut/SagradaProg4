@@ -23,6 +23,145 @@ public class QueryDB {
 		this.ps = DBCon.getInstance().getPs();
 	}
 	
+	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {
+		boolean invited = false;
+		try {
+			String query = "select '" + username + "' from player where idgame = " + idgame + " and playstatus = '"
+					+ playstatus + "' ;";
+			rs = (st.executeQuery(query));
+			if (rs.next()) {
+				invited = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return invited;
+	}
+	
+	public String checkInDatabase(String username) {
+		String result = null;
+		//con.createConnection();
+		try {
+			String query = "select username from account where username = '" + username + "' ;";
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				result = rs.getString("username");
+			}
+			//con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
+	
+	public int maxPlayerId() {
+		int playerId = 0;
+		//con.createConnection();
+		try {
+			String query = "select MAX(idplayer) as idplayer from player";
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				playerId = rs.getInt("idplayer");
+			}
+			playerId++;
+			//con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return playerId;
+	}
+	
+	public void challengeeSelf(int playerID, String username, int gameID, String playerStatus, String playercolor) {
+		//con.createConnection();
+		try {
+			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
+					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
+					+ "');";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+
+		//	con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void challengeeOther(int playerID, String username, int gameID, String playerStatus, String playercolor) {
+//		con.createConnection();
+		try {
+			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
+					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
+					+ "');";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+//			con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public String getColor(String color) {
+		//con.createConnection();
+		String result = "";
+		try {
+			String query = "select color from color where color = '" + color + "';";
+			rs = (st.executeQuery(query));
+			while (rs.next()) {
+				result = rs.getString("color");
+			}
+			//con.getCon().close();
+		} catch (Exception e) {
+			System.out.println("e");
+		}
+		return result;
+	}
+	
+	public String getPlayerStatus(String playerstatus) {
+		String result = "";
+		//con.createConnection();
+		try {
+			String query = "SELECT playstatus from playstatus where playstatus = '" + playerstatus + "';";
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				result = rs.getString("playstatus");
+			}
+			//con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
+	
+	public int createGameRoom() {
+		int x = 0;
+		int GameId = 0;;
+		//con.createConnection();
+		try {
+			String query = "select MAX(idgame) as idgame from game;";
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				GameId = rs.getInt("idgame");
+			}
+		//con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		GameId++;
+		
+		//con.createConnection();
+		try {
+			String query = "insert into game values(?,null,now());";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.setInt(1, GameId);
+			ps.execute();
+		//	con.getCon().close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return GameId;
+	}
+	
 	public PatternCardFieldModel[][] getField(int idPatternCard) {
 		//createConnection();
 		try {

@@ -22,9 +22,9 @@ public class InviteController {
 	}
 	
 	public void inVitePlayer() {
-		c_game.getM_game().creatGameRoom();
+		c_game.getM_game().createGameRoom();
 		m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(), c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
-		System.out.println("hallo");
+//		System.out.println("hallo");
 		m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName().getText(), c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
 		c_game.createGamePane();
 	}

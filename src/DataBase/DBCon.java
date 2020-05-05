@@ -19,18 +19,18 @@ public class DBCon {
 	protected Statement st;
 	protected PreparedStatement ps;
 	protected ResultSet rs;
-	
+
 	private static DBCon single_instance;
-	
-	public DBCon () {
+
+	private DBCon() {
 		createConnection();
 	}
-	
+
 	public static DBCon getInstance() {
 		if (single_instance == null) {
 			single_instance = new DBCon();
 		}
-		
+
 		return single_instance;
 	}
 
@@ -45,7 +45,7 @@ public class DBCon {
 			System.out.println("Error: " + e);
 		}
 	}
-	
+
 	public void closeConnection() {
 		try {
 			con.close();
