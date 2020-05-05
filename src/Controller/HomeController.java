@@ -16,7 +16,9 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 
-	
+	private HomeThreadController c_hometc;
+
+
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -26,7 +28,7 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
-		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);	
 		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
