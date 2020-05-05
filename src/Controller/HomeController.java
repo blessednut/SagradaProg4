@@ -15,7 +15,6 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
-	private HomeThreadModel m_home;
 	private HomeThreadController c_hometc;
 
 	
@@ -65,5 +64,4 @@ public class HomeController {
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
-
 }
