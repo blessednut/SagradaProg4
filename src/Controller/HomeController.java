@@ -1,9 +1,9 @@
 package Controller;
 
 import View.CreditsPane;
+import View.GamePane;
 import View.HomePane;
 import View.StatisticsPane;
-import model.HomeThreadModel;
 
 public class HomeController {
 
@@ -38,7 +38,7 @@ public class HomeController {
 	public void openGamePane() {
 		c_game = new GameController(myScene, c_login);
 	}
-
+	
 	public void openInvitePane() {
 		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
 	}
@@ -46,7 +46,7 @@ public class HomeController {
 	public void openStatisticsPane() {
 		v_home.makeReservedSpace(v_statistics);
 	}
-
+	
 	public void openCreditsPane() {
 		v_home.makeReservedSpace(v_credits);
 	}
@@ -62,7 +62,8 @@ public class HomeController {
 	public LogInController getC_login() {
 		return c_login;
 	}
-	private void threadMethod() throws NullPointerException{
+
+	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
