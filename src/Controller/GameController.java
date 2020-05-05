@@ -10,6 +10,7 @@ public class GameController {
 	private GameModel m_game;
 	private LogInController c_login;
 	private PlayerController c_player;
+	private DraftpoolController draftController;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -23,6 +24,9 @@ public class GameController {
 //		m_game.creatGameRoom();
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
+		
+		draftController = new DraftpoolController(4);
+		
 	}
 
 	public GamePane getGamePane() {

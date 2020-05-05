@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import model.DiceModel;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
@@ -21,6 +22,8 @@ public class DBCon {
 	private ResultSet rs;
 
 	public DBCon() {
+		//createConnection
+		//https://www.geeksforgeeks.org/singleton-class-java/
 	}
 
 	public void createConnection() {
@@ -29,7 +32,6 @@ public class DBCon {
 			con = DriverManager
 					.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=bboomen&password=Ab12345");
 			st = con.createStatement();
-
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 		}
@@ -122,6 +124,48 @@ public class DBCon {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	public DiceModel[] importDie() {
+		createConnection();
+
+		try {
+			DiceModel[] die = new DiceModel[getDieAmount()];
+			
+			String query = "SELECT *\r\n" + 
+					"FROM die;";
+			rs = st.executeQuery(query);
+
+			int i = 0;
+			while (rs.next()) {
+				die[i] = new DiceModel(rs.getInt("number"), rs.getString("color"));
+				i++;
+			}
+			return die;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	private int getDieAmount() {
+		createConnection();
+
+		try {
+			int value = 0;
+			String query = "SELECT COUNT(*) \r\n" + 
+					"FROM die";
+			rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				value = rs.getInt(1);
+			}
+			
+			return value;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
 	}
 
 	public Statement getSt() {
