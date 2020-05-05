@@ -15,7 +15,6 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
-
 	private HomeThreadController c_hometc;
 
 
