@@ -15,8 +15,11 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
+=======
+>>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 =======
 >>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
@@ -61,11 +64,14 @@ public class HomeController {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
+=======
+>>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 =======
 >>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 }
