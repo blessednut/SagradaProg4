@@ -1,9 +1,9 @@
 package Controller;
 
 import View.CreditsPane;
+import View.GamePane;
 import View.HomePane;
 import View.StatisticsPane;
-import model.HomeThreadModel;
 
 public class HomeController {
 
@@ -16,8 +16,6 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-
-	
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -27,18 +25,18 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
-		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);	
 		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
-		v_home.getGames().setOnAction(e -> c_game.setGamePane());
+		v_home.getGames().setOnAction(e -> openGamePane());
 	}
 
 	public void openGamePane() {
 		c_game = new GameController(myScene, c_login);
 	}
-
+	
 	public void openInvitePane() {
 		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
 	}
@@ -46,7 +44,7 @@ public class HomeController {
 	public void openStatisticsPane() {
 		v_home.makeReservedSpace(v_statistics);
 	}
-
+	
 	public void openCreditsPane() {
 		v_home.makeReservedSpace(v_credits);
 	}
@@ -59,9 +57,14 @@ public class HomeController {
 		return v_statistics;
 	}
 
+	public LogInController getC_login() {
+		return c_login;
+	}
+
 	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
+
 }
