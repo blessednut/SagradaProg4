@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import model.GameModel;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
