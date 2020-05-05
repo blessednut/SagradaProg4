@@ -11,7 +11,12 @@ public class MySceneController {
 	
 	public MySceneController() {
 		v_scene = new MyScene(this);
+<<<<<<< Updated upstream
 		c_home = new HomeController(this);
+=======
+		c_home = new HomeController(this, c_login);
+
+>>>>>>> Stashed changes
 	}
 
 	public MyScene getMyscene() {

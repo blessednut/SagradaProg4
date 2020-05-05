@@ -31,7 +31,6 @@ public class LoginPane extends BorderPane {
 	private double screenBoundsY = Screen.getPrimary().getBounds().getHeight();
 
 	public LoginPane() {
-		System.out.println(screenBoundsY + screenBoundsX);
 		this.setMinSize(screenBoundsX, screenBoundsY);
 		this.setPrefSize(screenBoundsX, screenBoundsY);
 		this.setMaxSize(screenBoundsX, screenBoundsY);

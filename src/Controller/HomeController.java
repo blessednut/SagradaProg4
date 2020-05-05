@@ -14,6 +14,12 @@ public class HomeController {
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 	private GameController c_game;
+<<<<<<< Updated upstream
+=======
+	private LogInController c_login;
+	private HomeThreadModel m_home;
+	private HomeThreadController c_hometc;
+>>>>>>> Stashed changes
 
 	public HomeController(MySceneController myScene) {
 		this.myScene = myScene;
@@ -22,6 +28,8 @@ public class HomeController {
 		v_invite = new InvitePane();
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
@@ -51,5 +59,13 @@ public class HomeController {
 	public StatisticsPane getV_statistics() {
 		return v_statistics;
 	}
+<<<<<<< Updated upstream
+=======
+	private void threadMethod() throws NullPointerException {
+		System.out.println("Test");
+		Thread th = new Thread(c_hometc);
+		th.start();
+	}
+>>>>>>> Stashed changes
 
 }
