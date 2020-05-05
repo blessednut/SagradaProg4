@@ -1,8 +1,5 @@
 package View;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -12,22 +9,9 @@ import javafx.scene.shape.Circle;
 public class DicePattern extends GridPane {
 	private final static int RADIUS = 5;
 
-	public DicePattern(IntegerProperty value, double width, double height) {
+	public DicePattern(int value, double width, double height) {
 		this.setMaxSize(width, height);
-		fillGridPane(value.getValue(), width, height);
 
-		final ChangeListener<Number> changeListener = new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				fillGridPane(value.getValue(), width, height);
-			}
-
-		};
-		value.addListener(changeListener);
-	}
-
-	private void fillGridPane(int value, double width, double height) {
 		// Make Grid
 		for (int x = 0; x < 3; x++) {
 			for (int y = 0; y < 3; y++) {
@@ -73,6 +57,11 @@ public class DicePattern extends GridPane {
 			getStackPaneFromGrid(this, 2, 2).getChildren().add(makeDot(RADIUS));
 			break;
 		default:
+			for (int x = 0; x < 3; x++) {
+				for (int y = 0; y < 3; y++) {
+					getStackPaneFromGrid(this, x, y).getChildren().add(makeDot(3));
+				}
+			}
 			break;
 		}
 	}

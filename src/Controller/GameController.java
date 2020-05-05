@@ -21,16 +21,4 @@ public class GameController {
 		myscene.getMyscene().switchPane(v_game);
 	}
 
-	public LogInController getC_login() {
-		return c_login;
-	}
-
-	public GameModel getM_game() {
-		return m_game;
-	}
-	
-	
-	
-	
-
 }

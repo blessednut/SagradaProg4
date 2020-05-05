@@ -1,6 +1,5 @@
 package View;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -17,9 +16,9 @@ public class DiceView extends StackPane {
 	private final static Insets INSETS = new Insets(5);
 	private final static BorderWidths BORDERWIDTH = new BorderWidths(2);
 	private Color color;
-	private IntegerProperty value;
+	private int value;
 
-	public DiceView(Color color, IntegerProperty value) {
+	public DiceView(Color color, int value) {
 		this.color = color;
 		this.value = value;
 	}
@@ -27,14 +26,8 @@ public class DiceView extends StackPane {
 	public void drawDice(double width, double height) {
 		this.setPrefSize(width, height);
 		this.setMaxSize(width, height);
-
 		this.setBackground(new Background(new BackgroundFill(color, RADIUS, INSETS)));
-
 		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, RADIUS, BORDERWIDTH, INSETS)));
 		this.getChildren().add(new DicePattern(value, width, height));
-	}
-
-	public void setValue(IntegerProperty value) {
-		this.value = value;
 	}
 }
