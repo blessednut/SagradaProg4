@@ -8,9 +8,10 @@ public class HomeThreadController implements Runnable {
 	private InviteController c_Invite;
 	private LogInController c_login;
 	
-	public HomeThreadController(LogInController c_login) {
+	public HomeThreadController(LogInController c_login, InviteController c_Invite) {
 		this.c_login = c_login;
 		this.c_home = c_home;
+		this.c_Invite = c_Invite;
 		this.m_home = new HomeThreadModel();
 	}
 	
