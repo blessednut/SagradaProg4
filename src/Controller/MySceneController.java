@@ -12,6 +12,7 @@ public class MySceneController {
 		v_scene = new MyScene(this);
 		c_home = new HomeController(this, c_login);
 		System.out.println("hoi");
+
 	}
 
 	public MyScene getMyscene() {

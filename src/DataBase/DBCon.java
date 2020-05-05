@@ -19,8 +19,11 @@ public class DBCon {
 	private Statement st;
 	private PreparedStatement ps;
 	private ResultSet rs;
+	
+	private GameModel m_game;
 
 	public DBCon() {
+		this.m_game = new GameModel(this);
 	}
 
 	public void createConnection() {
@@ -42,8 +45,8 @@ public class DBCon {
 			String query = "select password from account where username = '" + username + "';";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				result = rs.getString("password");
-
+				result = rs.getString("Password");
+				System.out.println(result);
 			}
 			con.close();
 		} catch (Exception ex) {
@@ -65,12 +68,10 @@ public class DBCon {
 			succes.showAndWait();
 			if (succes.getResult() == ButtonType.OK) {
 				succes.close();
+				con.close();
 			}
-			con.close();
-			} catch (Exception ex) {
-			Alert exception = new Alert(AlertType.ERROR,
-					"De gebruikersnaam die je wilt gebruiken bestaat al.\nKies een andere gebruiksnaam alstublieft.",
-					ButtonType.YES, ButtonType.NO);
+		} catch (Exception ex) {	
+			Alert exception = new Alert(AlertType.ERROR, "De gebruikersnaam die je wilt gebruiken bestaat al.\\nKies een andere gebruiksnaam alstublieft.", ButtonType.YES,ButtonType.NO);
 			exception.showAndWait();
 			if (exception.getResult() == ButtonType.YES) {
 				exception.close();
@@ -84,56 +85,28 @@ public class DBCon {
 		return rs;
 	}
 
-	public PatternCardModel getPatternCard(int idPatternCard) {
-		createConnection();
-
-		try {
-			String query = "SELECT * \r\n" + "FROM patterncard\r\n" + "WHERE idpatterncard = '" + idPatternCard + "';";
-			rs = st.executeQuery(query);
-
-			while (rs.next()) {
-				return new PatternCardModel(rs.getInt("idpatterncard"), rs.getString("name"), rs.getInt("difficulty"),
-						rs.getBoolean("standard"));
-			}
-			con.close();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
+	public GameModel getM_game() {
+		return m_game;
 	}
 
-	public PatternCardFieldModel[][] getField(int idPatternCard) {
-		createConnection();
-
-		try {
-			PatternCardFieldModel[][] field = new PatternCardFieldModel[5][4];
-			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard
-					+ "';";
-			rs = st.executeQuery(query);
-
-			while (rs.next()) {
-				int x = rs.getInt("position_x");
-				int y = rs.getInt("position_y");
-				field[x - 1][y - 1] = new PatternCardFieldModel(rs.getInt("idpatterncard"), x, y, rs.getString("color"),
-						rs.getInt("value"));
-			}con.close();
-			return field;
-			} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
+	public Connection getCon() {
+		return con;
 	}
 
 	public Statement getSt() {
 		return st;
 	}
 
-	public void setSt(Statement st) {
-		this.st = st;
-	}
-
 	public PreparedStatement getPs() {
 		return ps;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
+	public void setSt(Statement st) {
+		this.st = st;
 	}
 
 	public void setPs(PreparedStatement ps) {
@@ -144,11 +117,15 @@ public class DBCon {
 		this.rs = rs;
 	}
 
-	public Connection getCon() {
-		return con;
+	public void setM_game(GameModel m_game) {
+		this.m_game = m_game;
 	}
+	
+	
+	
+	
+	
+	
+	
 
-	public void setCon(Connection con) {
-		this.con = con;
-	}
 }

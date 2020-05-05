@@ -16,7 +16,7 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadModel m_home;
-	private homeThread lookingForInvite;
+	private HomeThreadController c_hometc;
 
 	
 	
@@ -28,18 +28,12 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
-		lookingForInvite = new homeThread();
-		lookingForInvite.start();
-		try {
-			homeThread.sleep(50000L);
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-		
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		threadMethod();
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
-		v_home.getGames().setOnAction(e -> openGamePane());
+		v_home.getGames().setOnAction(e -> c_game.setGamePane());
 	}
 
 	public void openGamePane() {
@@ -66,9 +60,10 @@ public class HomeController {
 		return v_statistics;
 	}
 
-	public LogInController getC_login() {
-		return c_login;
+	private void threadMethod() throws NullPointerException {
+		System.out.println("Test");
+		Thread th = new Thread(c_hometc);
+		th.start();
 	}
-	
 
 }
