@@ -3,7 +3,6 @@ package Controller;
 import View.CreditsPane;
 import View.HomePane;
 import View.StatisticsPane;
-import model.HomeThreadModel;
 
 public class HomeController {
 
@@ -14,21 +13,15 @@ public class HomeController {
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
 	private GameController c_game;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
 
 	
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
-		c_game = new GameController(myScene, c_login);
+//		c_game = new GameController(myScene, c_login);
 		v_home = new HomePane(this);
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
@@ -40,7 +33,7 @@ public class HomeController {
 	}
 
 	public void openGamePane() {
-		c_game = new GameController(myScene, c_login);
+//		c_game = new GameController(myScene, c_login);
 	}
 
 	public void openInvitePane() {
@@ -63,15 +56,10 @@ public class HomeController {
 		return v_statistics;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private void threadMethod() throws NullPointerException {
 		System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
-=======
->>>>>>> parent of 5e7dfa1... fixed the exception for the invite thread
+
 }
