@@ -15,8 +15,12 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
+<<<<<<< Updated upstream
 	private HomeThreadModel m_home;
 
+=======
+	private homeThread lookingForInvite;
+>>>>>>> Stashed changes
 
 	
 	
@@ -28,6 +32,14 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
+		lookingForInvite = new homeThread();
+		lookingForInvite.start();
+		try {
+			homeThread.sleep(50000L);
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
