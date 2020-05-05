@@ -1,40 +1,24 @@
 package Controller;
 
+import DataBase.DBCon;
 import View.GamePane;
-import model.GameModel;
 
 public class GameController {
-	private MySceneController myScene;
-	private GamePane gamePane;
-	private PatternCardController c_patternCard;
-	private GameModel m_game;
-	private LogInController c_login;
-	private PlayerController c_player;
+	
+	private MySceneController myscene;
+	private GamePane v_game;
+	private DBCon con;
 
-	public GameController(MySceneController myScene, LogInController c_login) {
-		this.myScene = myScene;
-		this.c_login = c_login;
-		this.c_player = new PlayerController(this);
-		this.gamePane = new GamePane(this);
-		this.m_game = new GameModel();
-
+	public GameController(MySceneController myscene) {
+		this.v_game = new GamePane();
+		this.myscene = myscene;
+		con = new DBCon();
+		v_game.getEndTurn().setOnAction(e -> con.getM_game().getTokenAmount());
+		
 	}
-	public void createGamePane() {
-//		m_game.creatGameRoom();
-		myScene.getMyscene().switchPane(gamePane);
-		c_patternCard = new PatternCardController(this);
-	}
-
-	public GamePane getGamePane() {
-		return gamePane;
-	}
-
-	public MySceneController getMyscene() {
-		return myScene;
-	}
-
-	public PatternCardController getC_patternCard() {
-		return c_patternCard;
+	
+	public void setGamePane() {
+		myscene.getMyscene().switchPane(v_game);
 	}
 
 	public LogInController getC_login() {

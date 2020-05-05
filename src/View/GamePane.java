@@ -92,7 +92,9 @@ public class GamePane extends BorderPane {
 		chatbox.setY(psb.getMaxY());
 		chatbox.setX(psb.getMinX());
 
-		Button endTurn = new Button("Einde beurt");
+		
+		
+		endTurn = new Button("Einde beurt");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -137,6 +139,13 @@ public class GamePane extends BorderPane {
 		this.getChildren().addAll(window, speler2RaamPatroon, speler3RaamPatroon, speler4RaamPatroon, chatbox,
 				privObjCard, scoreBoard, toolCards, dice, pubObjCards);
 	}
+
+	public Button getEndTurn() {
+		return endTurn;
+	}
+	
+	
+}
 
 	public void createChoicePane(WindowPatternView card1, WindowPatternView card2, WindowPatternView card3,
 			WindowPatternView card4) {

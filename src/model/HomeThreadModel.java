@@ -44,6 +44,7 @@ public class HomeThreadModel {
 			con.setRs(con.getSt().executeQuery(query));
 			if(con.getRs().next()) {
 				username = con.getRs().getString("username");
+				System.out.println(username);
 			}
 			con.getCon().close();
 		}catch(Exception e){

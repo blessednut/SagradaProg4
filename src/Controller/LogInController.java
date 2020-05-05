@@ -14,6 +14,8 @@ public class LogInController {
 	private String username;
 	private HomeThreadController c_hometc;
 
+	private String username;
+
 	public LogInController(MySceneController c_myscene) {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
@@ -21,6 +23,11 @@ public class LogInController {
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
 				v_login.getPassword().getText()));
+
+		v_login.getLogin().setOnAction(e -> SetInlogInfo());
+		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
+				v_login.getPassword().getText()));
+
 		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
 	}
 
