@@ -24,5 +24,4 @@ public class PlayerModel {
 	public void setCurrentGameID(int currentGameID) {
 		this.currentGameID = currentGameID;
 	}
-
 }

@@ -19,7 +19,7 @@ public class LogInController {
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
-		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
+		v_login.getRegister().setOnAction(e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
 		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
 	}
 
@@ -45,7 +45,7 @@ public class LogInController {
 
 		try {
 
-			if (m_login.getDbcon().getPassword(username).equals(password)) {
+			if (m_login.getCon().getPassword(username).equals(password)) {
 				c_myscene.getMyscene().switchPane(c_myscene.getC_home().getV_home());
 
 			} else {
