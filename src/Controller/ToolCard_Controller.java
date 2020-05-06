@@ -16,7 +16,7 @@ public class ToolCard_Controller {
 //	private ToolCard v_ToolCard;
 //	private String cardname = "";
 
-	public ToolCard_Controller(String cardName) {
+	public ToolCard_Controller() {
 		cards = new ArrayList<String>();
 		panes = new ArrayList<ToolCard>();
 		tcm = new ToolCardModel();

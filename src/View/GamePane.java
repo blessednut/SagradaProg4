@@ -3,18 +3,15 @@ package View;
 import Controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 
 public class GamePane extends BorderPane {
 	private static final int HEIGHTODDPLAYER = 150;
@@ -36,7 +33,7 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		createGamePane2();
+		createGamePane();
 	}
 
 	public GamePane() {
@@ -44,21 +41,50 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		createGamePane2();
+		createGamePane();
 	}
 
-	public void createGamePane2() {
+	public void createGamePane() {
 		this.getChildren().clear();
-		Rectangle2D psb = Screen.getPrimary().getVisualBounds();
-		
 		HBox gamePaneBottom = new HBox();
+		HBox gamePaneCenter = new HBox();
+		VBox gamePaneLeft = new VBox();
+		VBox gamePaneRight = new VBox();
+		this.setBottom(gamePaneBottom);
+		this.setCenter(gamePaneCenter);
+		this.setLeft(gamePaneLeft);
+		this.setRight(gamePaneRight);
 		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
+		gamePaneCenter.setAlignment(Pos.CENTER);
+		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
+		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
+//		windowPatternCard
 		if (ownWindow == null) {
-			
+
 		} else {
 			gamePaneBottom.getChildren().add(ownWindow);
 		}
-		this.setBottom(gamePaneBottom);
+//		Private Objective card
+		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
+//		Toolcards
+		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
+			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
+		}
+//		Public Objective cards
+//		TODO: hier komt het aanbod toevoegen		
+		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
+			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
+		}
+//		End turn button
+		Button endTurn = new Button("Einde beurt");
+		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		gamePaneLeft.getChildren().add(endTurn);
+//		roundCounter
+		Label roundCounter = new Label("Ronde: X");
+		roundCounter.setFont(new Font("Arial", 16));
+		gamePaneRight.getChildren().add(roundCounter);
 	}
 
 //	public void createGamePane() {
