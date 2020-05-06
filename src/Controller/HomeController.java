@@ -62,7 +62,7 @@ public class HomeController {
 	}
 
 	private void threadMethod() throws NullPointerException {
-		System.out.println("Test");
+		//System.out.println("Test");
 		Thread th = new Thread(c_hometc);
 		th.start();
 	}

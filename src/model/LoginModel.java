@@ -3,13 +3,13 @@ package model;
 import java.util.HashMap;
 
 import Controller.LogInController;
-import DataBase.DBCon;
-import DataBase.QueryDB;
+import DataBase.LoginDB;
+import DataBase.InviteDB;
 
 public class LoginModel {
 	private LogInController c_login;
 
-	private QueryDB dbcon;
+	private LoginDB con;
 	private String username;
 	private String password;
 
@@ -17,7 +17,7 @@ public class LoginModel {
 	private HashMap<String, String> loginUser;
 
 	public LoginModel() {
-		dbcon = new QueryDB();
+		con = new LoginDB();
 	}
 
 	public void fillHashMap() {
@@ -40,8 +40,8 @@ public class LoginModel {
 		return password;
 	}
 
-	public QueryDB getDbcon() {
-		return dbcon;
+	public LoginDB getCon() {
+		return this.con;
 	}
 
 	public LogInController getC_login() {

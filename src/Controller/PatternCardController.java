@@ -1,7 +1,6 @@
 package Controller;
 
-import DataBase.DBCon;
-import DataBase.QueryDB;
+import DataBase.WindowPatternDB;
 import View.WindowPatternView;
 import View.squareView;
 import model.PatternCardFieldModel;
@@ -10,11 +9,11 @@ import model.PatternCardModel;
 public class PatternCardController {
 
 	private GameController c_game;
-	private QueryDB con;
+	private WindowPatternDB con;
 
 	public PatternCardController(GameController c_game) {
 		this.c_game = c_game;
-		this.con = new QueryDB();
+		this.con = new WindowPatternDB();
 		generatePatternCardChoice();
 	}
 

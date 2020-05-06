@@ -1,6 +1,6 @@
 package model;
 
-import DataBase.QueryDB;
+import DataBase.HomeThreadDB;
 
 public class HomeThreadModel {
 	private int gameID;
@@ -11,13 +11,14 @@ public class HomeThreadModel {
 	
 	// methode om de gameID op te halen die de laatste creationdate heeft
 	public int getGameID(String playstatus) {
-		return new QueryDB().getGameID(playstatus);
+		return new HomeThreadDB().getGameID(playstatus);
 	}
 	
 	//methode om de username van de challenger te vinden die de laatste game heeft aangemaakt
 	public String getUsernameOfChallenger(String playstatus) {
-		return new QueryDB().getUsernameOfChallenger(playstatus);
+		return new HomeThreadDB().getUsernameOfChallenger(playstatus);
 	}
+	
 	public String getUsername() {
 		return username;
 	}
