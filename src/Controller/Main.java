@@ -35,7 +35,7 @@ public class Main extends Application {
 		}
 
 	}
-	
+
 	@Override
 	public void stop(){
 	    System.out.println("Stage is closing");
