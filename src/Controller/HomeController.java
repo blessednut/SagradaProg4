@@ -15,10 +15,7 @@ public class HomeController {
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
-	private HomeThreadModel m_home;
-
-
-	
+	private HomeThreadController c_hometc;
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -28,6 +25,10 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
+		
+		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		this.ThreadMethod();
+		
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
@@ -62,5 +63,8 @@ public class HomeController {
 		return c_login;
 	}
 	
-
+	private void ThreadMethod () throws NullPointerException {
+		Thread th = new Thread(this.c_hometc);
+		th.start();
+	}
 }

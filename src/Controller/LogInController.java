@@ -18,7 +18,6 @@ public class LogInController {
 		v_login = new LoginPane();
 		m_login = new LoginModel();
 		this.c_myscene = c_myscene;
-		this.c_hometc = new HomeThreadController(this);
 		
 		v_login.getLogin().setOnAction(e -> SetInlogInfo());
 		v_login.getRegister().setOnAction(e -> m_login.getDbcon().registerLogin(v_login.getUsername().getText(),
@@ -65,7 +64,4 @@ public class LogInController {
 	public String getUsername() {
 		return username;
 	}
-	
-	
-
 }
