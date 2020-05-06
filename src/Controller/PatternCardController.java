@@ -46,6 +46,6 @@ public class PatternCardController {
 
 	public void setChosenCard(WindowPatternView chosenCard) {
 		this.c_game.getGamePane().setOwnWindow(chosenCard);
-		this.c_game.getGamePane().createGamePane();
+		this.c_game.getGamePane().createGamePane2();
 	}
 }
