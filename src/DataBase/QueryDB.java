@@ -12,15 +12,47 @@ import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class QueryDB {
-	//private DBCon con;
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 	
 	public QueryDB () {
-		//con = DBCon.getInstance();
 		this.st = DBCon.getInstance().getSt();
 		this.ps = DBCon.getInstance().getPs();
+	}
+	
+	public int getGameID(String playstatus) {
+		int gameID = 0;
+		try {
+			String query = "select game.creationdate, game.idgame from player\r\n" + 
+					"left join game on player.idgame = game.idgame\r\n" + 
+					"where creationdate = (select max(creationdate) from game)  and player.playstatus like '" + playstatus + "';";
+			rs = st.executeQuery(query);
+			if(rs.next()) {
+				gameID = rs.getInt("idgame");
+				System.out.println(rs.getTime("creationdate"));
+				System.out.println(rs.getDate("creationdate"));
+				System.out.println(rs.getInt("idgame"));
+			}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return gameID;
+	}
+	
+	public String getUsernameOfChallenger(String playstatus) {
+		String username = null;
+		try {
+			String query = "select username from player\r\n" + 
+					"where idgame = " + getGameID("Challengee") + " and playstatus like '" + playstatus + "';";
+			rs = st.executeQuery(query);
+			if(rs.next()) {
+				username = rs.getString("username");
+			}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return username;
 	}
 	
 	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {
@@ -40,14 +72,12 @@ public class QueryDB {
 	
 	public String checkInDatabase(String username) {
 		String result = null;
-		//con.createConnection();
 		try {
 			String query = "select username from account where username = '" + username + "' ;";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				result = rs.getString("username");
 			}
-			//con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -56,7 +86,6 @@ public class QueryDB {
 	
 	public int maxPlayerId() {
 		int playerId = 0;
-		//con.createConnection();
 		try {
 			String query = "select MAX(idplayer) as idplayer from player";
 			rs = st.executeQuery(query);
@@ -64,7 +93,6 @@ public class QueryDB {
 				playerId = rs.getInt("idplayer");
 			}
 			playerId++;
-			//con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -72,36 +100,30 @@ public class QueryDB {
 	}
 	
 	public void challengeeSelf(int playerID, String username, int gameID, String playerStatus, String playercolor) {
-		//con.createConnection();
 		try {
 			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
 					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
 					+ "');";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
-
-		//	con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 	
 	public void challengeeOther(int playerID, String username, int gameID, String playerStatus, String playercolor) {
-//		con.createConnection();
 		try {
 			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
 					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
 					+ "');";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
-//			con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 	
 	public String getColor(String color) {
-		//con.createConnection();
 		String result = "";
 		try {
 			String query = "select color from color where color = '" + color + "';";
@@ -109,7 +131,6 @@ public class QueryDB {
 			while (rs.next()) {
 				result = rs.getString("color");
 			}
-			//con.getCon().close();
 		} catch (Exception e) {
 			System.out.println("e");
 		}
@@ -118,14 +139,12 @@ public class QueryDB {
 	
 	public String getPlayerStatus(String playerstatus) {
 		String result = "";
-		//con.createConnection();
 		try {
 			String query = "SELECT playstatus from playstatus where playstatus = '" + playerstatus + "';";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				result = rs.getString("playstatus");
 			}
-			//con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -135,26 +154,22 @@ public class QueryDB {
 	public int createGameRoom() {
 		int x = 0;
 		int GameId = 0;;
-		//con.createConnection();
 		try {
 			String query = "select MAX(idgame) as idgame from game;";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				GameId = rs.getInt("idgame");
 			}
-		//con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		GameId++;
 		
-		//con.createConnection();
 		try {
 			String query = "insert into game values(?,null,now());";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.setInt(1, GameId);
 			ps.execute();
-		//	con.getCon().close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -163,7 +178,6 @@ public class QueryDB {
 	}
 	
 	public PatternCardFieldModel[][] getField(int idPatternCard) {
-		//createConnection();
 		try {
 			PatternCardFieldModel[][] field = new PatternCardFieldModel[5][4];
 			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard
@@ -176,7 +190,6 @@ public class QueryDB {
 				field[x - 1][y - 1] = new PatternCardFieldModel(rs.getInt("idpatterncard"), x, y, rs.getString("color"),
 						rs.getInt("value"));
 			}
-			//con.close();
 			return field;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -185,8 +198,6 @@ public class QueryDB {
 	}
 
 	public PatternCardModel getPatternCard(int idPatternCard) {
-		//createConnection();
-
 		try {
 			String query = "SELECT * \r\n" + "FROM patterncard\r\n" + "WHERE idpatterncard = '" + idPatternCard + "';";
 			ResultSet rs = DBCon.getInstance().getSt().executeQuery(query);
@@ -196,7 +207,6 @@ public class QueryDB {
 				return new PatternCardModel(rs.getInt("idpatterncard"), rs.getString("name"), rs.getInt("difficulty"),
 						rs.getBoolean("standard"));
 			}
-			//con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -204,12 +214,9 @@ public class QueryDB {
 	}
 
 	public void registerLogin(String Username, String Password) {
-		//createConnection();
-
 		try {
 			String query = "insert into Account values(?,?)";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
-			//ps = con.prepareStatement(query);
 			ps.setString(1, Username);
 			ps.setString(2, Password);
 			ps.execute();
@@ -218,7 +225,6 @@ public class QueryDB {
 			if (succes.getResult() == ButtonType.OK) {
 				succes.close();
 			}
-			//con.close();
 		} catch (Exception ex) {
 			Alert exception = new Alert(AlertType.ERROR,
 					"De gebruikersnaam die je wilt gebruiken bestaat al.\nKies een andere gebruiksnaam alstublieft.",
@@ -234,7 +240,6 @@ public class QueryDB {
 
 	public String getPassword(String username) {
 		String result = null;
-		//createConnection();
 		try {
 			String query = "select password from account where username = '" + username + "';";
 			rs = st.executeQuery(query);
@@ -242,7 +247,6 @@ public class QueryDB {
 				result = rs.getString("password");
 
 			}
-		//	con.close();
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}

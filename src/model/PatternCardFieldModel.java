@@ -46,6 +46,4 @@ public class PatternCardFieldModel {
 	public final IntegerProperty valueProperty () {
 		return new SimpleIntegerProperty(this, "value", value);
 	}
-	
-
 }
