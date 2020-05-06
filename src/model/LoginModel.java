@@ -4,11 +4,12 @@ import java.util.HashMap;
 
 import Controller.LogInController;
 import DataBase.DBCon;
+import DataBase.QueryDB;
 
 public class LoginModel {
 	private LogInController c_login;
 
-	private DBCon dbcon;
+	private QueryDB dbcon;
 	private String username;
 	private String password;
 
@@ -16,7 +17,7 @@ public class LoginModel {
 	private HashMap<String, String> loginUser;
 
 	public LoginModel() {
-		dbcon = new DBCon();
+		dbcon = new QueryDB();
 	}
 
 	public void fillHashMap() {
@@ -39,7 +40,7 @@ public class LoginModel {
 		return password;
 	}
 
-	public DBCon getDbcon() {
+	public QueryDB getDbcon() {
 		return dbcon;
 	}
 

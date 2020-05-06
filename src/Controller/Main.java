@@ -1,5 +1,7 @@
 package Controller;
 
+import DataBase.DBCon;
+import DataBase.QueryDB;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -33,5 +35,10 @@ public class Main extends Application {
 		}
 
 	}
-
+	
+	@Override
+	public void stop(){
+	    System.out.println("Stage is closing");
+	    DBCon.getInstance().closeConnection();
+	}
 }

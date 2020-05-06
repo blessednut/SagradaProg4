@@ -10,7 +10,6 @@ public class PatternCardFieldModel {
 	private final int idPatternCard;
 	private final int x, y, value;
 	private final String color;
-	private DBCon con;
 	
 	public PatternCardFieldModel (int idPatternCard, int x, int y, String color, int value) {
 		this.idPatternCard = idPatternCard;
@@ -18,7 +17,6 @@ public class PatternCardFieldModel {
 		this.y = y;
 		this.color = color;
 		this.value = value;
-		con = new DBCon();
 	}
 	
 	public int getIdPatternCard () {
