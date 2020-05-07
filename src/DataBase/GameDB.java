@@ -11,7 +11,6 @@ public class GameDB {
 	
 	public GameDB () {
 		this.st = DBCon.getInstance().getSt();
-		this.ps = DBCon.getInstance().getPs();
 	}
 	
 	public int createGameRoom() {

@@ -18,7 +18,6 @@ public class InviteDB {
 	
 	public InviteDB () {
 		this.st = DBCon.getInstance().getSt();
-		this.ps = DBCon.getInstance().getPs();
 	}
 	
 	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {

@@ -16,7 +16,6 @@ public class LoginDB {
 
 	public LoginDB () {
 		this.st = DBCon.getInstance().getSt();
-		this.ps = DBCon.getInstance().getPs();
 	}
 	
 	public void registerLogin(String Username, String Password) {

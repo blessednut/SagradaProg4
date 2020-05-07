@@ -14,7 +14,6 @@ public class WindowPatternDB {
 
 	public WindowPatternDB() {
 		this.st = DBCon.getInstance().getSt();
-		this.ps = DBCon.getInstance().getPs();
 	}
 
 	public PatternCardFieldModel[][] getField(int idPatternCard) {

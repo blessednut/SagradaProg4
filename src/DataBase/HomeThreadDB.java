@@ -11,7 +11,6 @@ public class HomeThreadDB {
 	
 	public HomeThreadDB () {
 		this.st = DBCon.getInstance().getSt();
-		this.ps = DBCon.getInstance().getPs();
 	}
 	
 	public int getGameID(String playstatus) {
@@ -23,9 +22,6 @@ public class HomeThreadDB {
 			rs = st.executeQuery(query);
 			if(rs.next()) {
 				gameID = rs.getInt("idgame");
-//				System.out.println(rs.getTime("creationdate"));
-//				System.out.println(rs.getDate("creationdate"));
-//				System.out.println(rs.getInt("idgame"));
 			}
 		}catch(Exception e){
 			System.out.println(e);
