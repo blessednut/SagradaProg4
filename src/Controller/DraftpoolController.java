@@ -1,0 +1,75 @@
+package Controller;
+
+import DataBase.DBCon;
+import model.DiceModel;
+import model.GameDiceModel;
+
+public class DraftpoolController {
+	// private list gameDie
+	private DBCon con;
+	private int numberPlayers;
+	private DiceModel[] die;
+	private GameDiceModel[] draft;
+
+	public DraftpoolController(int numberPlayers) {
+		this.con = new DBCon();
+		this.numberPlayers = numberPlayers;
+
+		importDice();
+		createDraftPool();
+	}
+	
+	public void getDraftPool () {
+		//Is there a draftpool?
+		//	Get from database
+		//else
+		//	createDraftPool
+	}
+
+	private void importDice() {
+		// System.out.println(con.getDieAmount());
+		this.die = con.importDie();
+
+		for (DiceModel dice : die) {
+			System.out.println(dice.getNumber() + " - " + dice.getColor());
+		}
+	}
+
+	private int getDiceAmount() {
+		return ((numberPlayers * 2) + 1);
+	}
+
+	private void createDraftPool() {
+		this.draft = new GameDiceModel[getDiceAmount()];
+
+		for (int i = 0; i < draft.length; i++) {
+			DiceModel dice = getRandomDice();
+			
+			//TODO: IDGame, Roundtrack, RoundID waarde veranderen
+			draft[i] = new GameDiceModel(0, dice.getNumber(), dice.getColor(), getRandomInt(1, 6), 0, 0); 
+		}
+	}
+
+	private DiceModel getRandomDice() {
+		// choose random die
+		DiceModel dice = die[getRandomInt(0, die.length - 1)];
+		
+		// is duplicate?
+		return (!isDuplicate(dice))  ? dice : getRandomDice();
+	}
+
+	private boolean isDuplicate (DiceModel dice) {
+		for (int i = 0; i < draft.length; i++) {
+			if (draft[i] != null) {
+				if (draft[i].getDieNumber() == dice.getNumber() && draft[i].getDieColor() == dice.getColor()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private int getRandomInt (int min, int max) {
+		return (int) Math.floor((Math.random() * ((max - min) + 1)) + min);
+	}
+}

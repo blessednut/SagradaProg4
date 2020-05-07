@@ -41,6 +41,9 @@ public class GameController {
 	public void createGamePane() {
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
+		
+		draftController = new DraftpoolController(4);
+		
 	}
 
 	public GamePane getGamePane() {

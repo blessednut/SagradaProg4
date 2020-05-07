@@ -42,6 +42,48 @@ public class DBCon {
 			e.printStackTrace();
 		}
 	}
+	
+	public DiceModel[] importDie() {
+		createConnection();
+
+		try {
+			DiceModel[] die = new DiceModel[getDieAmount()];
+			
+			String query = "SELECT *\r\n" + 
+					"FROM die;";
+			rs = st.executeQuery(query);
+
+			int i = 0;
+			while (rs.next()) {
+				die[i] = new DiceModel(rs.getInt("number"), rs.getString("color"));
+				i++;
+			}
+			return die;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	private int getDieAmount() {
+		createConnection();
+
+		try {
+			int value = 0;
+			String query = "SELECT COUNT(*) \r\n" + 
+					"FROM die";
+			rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				value = rs.getInt(1);
+			}
+			
+			return value;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
+	}
 
 	public Statement getSt() {
 		return st;

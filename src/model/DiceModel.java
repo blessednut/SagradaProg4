@@ -1,23 +1,19 @@
 package model;
 
 public class DiceModel {
-	private int idgame;
-	private int dienumber;
-	private String diecolor;
-	private int eyes;
-	private int roundtrack;
-	private int roundID;
+	private int number;
+	private String color;
 	
-	public DiceModel (int idgame, int dienumber, String diecolor, int eyes, int roundtrack, int roundID) {
-		this.idgame = idgame;
-		this.dienumber = dienumber;
-		this.diecolor = diecolor;
-		this.eyes = eyes;
-		this.roundtrack = roundtrack;
-		this.roundID = roundID;
+	public DiceModel (int number, String color) {
+		this.number = number;
+		this.color = color;
 	}
 	
-	public int getIdgame () {
-		return this.idgame;
+	public int getNumber () {
+		return this.number;
+	}
+	
+	public String getColor () {
+		return this.color;
 	}
 }
