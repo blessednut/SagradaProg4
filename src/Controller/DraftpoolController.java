@@ -1,18 +1,19 @@
 package Controller;
 
 import DataBase.DBCon;
+import DataBase.DiceDB;
 import model.DiceModel;
 import model.GameDiceModel;
 
 public class DraftpoolController {
 	// private list gameDie
-	private DBCon con;
+	private DiceDB con;
 	private int numberPlayers;
 	private DiceModel[] die;
 	private GameDiceModel[] draft;
 
 	public DraftpoolController(int numberPlayers) {
-		this.con = new DBCon();
+		this.con = new DiceDB();
 		this.numberPlayers = numberPlayers;
 
 		importDice();
@@ -28,6 +29,7 @@ public class DraftpoolController {
 
 	private void importDice() {
 		// System.out.println(con.getDieAmount());
+		//this.die = con.importDie();
 		this.die = con.importDie();
 
 		for (DiceModel dice : die) {

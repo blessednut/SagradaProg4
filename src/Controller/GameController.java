@@ -13,6 +13,7 @@ public class GameController {
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
+	private DraftpoolController draftController;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
