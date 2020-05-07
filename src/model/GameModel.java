@@ -1,8 +1,6 @@
 package model;
 
-import DataBase.DBCon;
 import DataBase.GameDB;
-import DataBase.InviteDB;
 
 public class GameModel {
 	private int GameId;

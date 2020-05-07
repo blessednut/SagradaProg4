@@ -2,18 +2,8 @@ package DataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import model.GameModel;
-import model.PatternCardFieldModel;
-import model.PatternCardModel;
 
 public class DBCon {
 	private Connection con;
