@@ -8,24 +8,30 @@ public class HomeThreadDB {
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
+	private String username;
+	private int gameID;
 	
 	public HomeThreadDB () {
 		this.st = DBCon.getInstance().getSt();
 		this.ps = DBCon.getInstance().getPs();
 	}
 	
-	public int getGameID(String playstatus) {
-		int gameID = 0;
+	public int getGameID() {
+		gameID = 0;
 		try {
-			String query = "select game.creationdate, game.idgame from player\r\n" + 
-					"left join game on player.idgame = game.idgame\r\n" + 
-					"where creationdate = (select max(creationdate) from game)  and player.playstatus like '" + playstatus + "';";
+//			String query = "Select MAX(creationdate) as creationdate from player left join game on player.idgame where player.idgame = game.idgame and username = '" + username + "' and playstatus = '" + playstatus + "'; ";
+//			String query = "select game.creationdate, game.idgame from player\r\n" + 
+//					"left join game on player.idgame = game.idgame\r\n" + 
+//					"where creationdate = (select max(creationdate) from game)  and player.playstatus like '" + playstatus + "';";
+			
+			String query = "select MAX(idgame) as idgame, Max(creationdate) as creationdate from game;";
 			rs = st.executeQuery(query);
+			System.out.println("kut");
 			if(rs.next()) {
 				gameID = rs.getInt("idgame");
-//				System.out.println(rs.getTime("creationdate"));
-//				System.out.println(rs.getDate("creationdate"));
-//				System.out.println(rs.getInt("idgame"));
+				System.out.println(rs.getTime("creationdate"));
+				System.out.println(rs.getDate("creationdate"));
+				System.out.println(rs.getInt("idgame"));
 			}
 		}catch(Exception e){
 			System.out.println(e);
@@ -34,10 +40,10 @@ public class HomeThreadDB {
 	}
 	
 	public String getUsernameOfChallenger(String playstatus) {
-		String username = null;
 		try {
+			System.out.println("hey");
 			String query = "select username from player\r\n" + 
-					"where idgame = " + getGameID("Challengee") + " and playstatus like '" + playstatus + "';";
+					"where idgame = " + getGameID() + " and playstatus like '" + playstatus + "';";
 			rs = st.executeQuery(query);
 			if(rs.next()) {
 				username = rs.getString("username");
