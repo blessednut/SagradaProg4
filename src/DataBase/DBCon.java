@@ -16,10 +16,8 @@ import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class DBCon {
-	protected Connection con;
-	protected Statement st;
-	protected PreparedStatement ps;
-	protected ResultSet rs;
+	private Connection con;
+	private Statement st;
 
 	private static DBCon single_instance;
 
@@ -41,7 +39,6 @@ public class DBCon {
 			con = DriverManager
 					.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=bboomen&password=Ab12345");
 			st = con.createStatement();
-
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 		}
@@ -56,35 +53,11 @@ public class DBCon {
 		}
 	}
 
-	public ResultSet getRs() {
-		return rs;
-	}
-
 	public Statement getSt() {
 		return st;
 	}
 
-	public void setSt(Statement st) {
-		this.st = st;
-	}
-
-	public PreparedStatement getPs() {
-		return ps;
-	}
-
-	public void setPs(PreparedStatement ps) {
-		this.ps = ps;
-	}
-
-	public void setRs(ResultSet rs) {
-		this.rs = rs;
-	}
-
 	public Connection getCon() {
 		return con;
-	}
-
-	public void setCon(Connection con) {
-		this.con = con;
 	}
 }
