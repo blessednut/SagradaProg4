@@ -27,7 +27,7 @@ public class GameDB {
 		GameId++;
 		
 		try {
-			String query = "insert into game values(?,null,now());";
+			String query = "insert into game values(?,null,null,now());";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.setInt(1, GameId);
 			ps.execute();
