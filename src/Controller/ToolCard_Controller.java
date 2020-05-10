@@ -13,17 +13,11 @@ public class ToolCard_Controller {
 	private ArrayList<String> cards;
 	private ArrayList<ToolCard> panes;
 	private Alert tcInstruction;
-//	private ToolCard v_ToolCard;
-//	private String cardname = "";
 
 	public ToolCard_Controller() {
 		cards = new ArrayList<String>();
 		panes = new ArrayList<ToolCard>();
 		tcm = new ToolCardModel();
-		
-//		v_ToolCard = new ToolCard(cardname, this);
-//		v_ToolCard.getButton().setOnAction(Event -> useCard(cardName));
-		
 		getCards();
 		
 //		Elke toolcard krijgt krijgt nu mee welke methode ze moeten gebruiken als ze aangeklikt worden.
@@ -37,7 +31,7 @@ public class ToolCard_Controller {
 	private void getCards() {
 		String temp;
 		while (cards.size() <= 2) {
-			temp = tcm.getCard();
+			temp = tcm.getCardName();
 			if (!cards.contains(temp)) {
 				cards.add(temp);
 				panes.add(new ToolCard(temp, this));
