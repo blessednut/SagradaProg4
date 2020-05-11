@@ -17,9 +17,9 @@ public class DiceView extends StackPane {
 	private final static Insets INSETS = new Insets(5);
 	private final static BorderWidths BORDERWIDTH = new BorderWidths(2);
 	private Color color;
-	private IntegerProperty value;
+	private int value;
 
-	public DiceView(Color color, IntegerProperty value) {
+	public DiceView(Color color, int value) {
 		this.color = color;
 		this.value = value;
 	}
@@ -34,7 +34,7 @@ public class DiceView extends StackPane {
 		this.getChildren().add(new DicePattern(value, width, height));
 	}
 
-	public void setValue(IntegerProperty value) {
-		this.value = value;
-	}
+//	public void setValue(int value) {
+//		this.value = value;
+//	}
 }

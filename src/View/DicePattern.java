@@ -12,19 +12,20 @@ import javafx.scene.shape.Circle;
 public class DicePattern extends GridPane {
 	private final static int RADIUS = 5;
 
-	public DicePattern(IntegerProperty value, double width, double height) {
+	public DicePattern(int value, double width, double height) {
 		this.setMaxSize(width, height);
-		fillGridPane(value.getValue(), width, height);
+		fillGridPane(value, width, height);
 
-		final ChangeListener<Number> changeListener = new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				fillGridPane(value.getValue(), width, height);
-			}
-
-		};
-		value.addListener(changeListener);
+//		final ChangeListener<Number> changeListener = new ChangeListener<Number>() {
+//
+//			@Override
+//			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+//				fillGridPane(value, width, height);
+//			}
+//
+//		};
+//		value.addListener(changeListener);
+		//fillGridPane(value, width, height);
 	}
 
 	private void fillGridPane(int value, double width, double height) {

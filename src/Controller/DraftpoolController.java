@@ -20,7 +20,8 @@ public class DraftpoolController {
 		createDraftPool();
 	}
 	
-	public void getDraftPool () {
+	public GameDiceModel[] getDraftPool () {
+		return draft;
 		//Is there a draftpool?
 		//	Get from database
 		//else
@@ -63,7 +64,7 @@ public class DraftpoolController {
 	private boolean isDuplicate (DiceModel dice) {
 		for (int i = 0; i < draft.length; i++) {
 			if (draft[i] != null) {
-				if (draft[i].getDieNumber() == dice.getNumber() && draft[i].getDieColor() == dice.getColor()) {
+				if (draft[i].getDieNumber() == dice.getNumber() && draft[i].colorProperty().getValue() == dice.getColor()) {
 					return true;
 				}
 			}

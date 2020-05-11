@@ -1,5 +1,6 @@
 package View;
 
+import Controller.DraftpoolController;
 import Controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +27,7 @@ public class GamePane extends BorderPane {
 	private static final int PUBOBJCARDSIZE = 150;
 	private GameController gameController;
 	private WindowPatternView ownWindow;
+	private DraftPoolView draftpool;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -33,6 +35,7 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
+		
 		createGamePane();
 	}
 
@@ -71,7 +74,12 @@ public class GamePane extends BorderPane {
 			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
 		}
 //		Public Objective cards
-//		TODO: hier komt het aanbod toevoegen	
+//		TODO: hier komt het aanbod toevoegen
+		if (draftpool != null) {
+			gamePaneCenter.getChildren().add(draftpool);
+		}
+		
+		
 		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
 			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
 		}
@@ -111,5 +119,9 @@ public class GamePane extends BorderPane {
 
 	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
+	}
+	
+	public void setDrafpool (DraftPoolView draftpool) {
+		this.draftpool = draftpool;
 	}
 }

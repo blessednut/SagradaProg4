@@ -18,7 +18,6 @@ public class InviteController {
 		v_invite.getName().setOnMouseClicked(e -> setSearchButton());
 		v_invite.getSearch().setOnMouseClicked(e -> searchForUsername(v_invite.getName().getText()));
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
-		
 	}
 	
 	public void inVitePlayer() {

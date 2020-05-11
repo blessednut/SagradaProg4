@@ -1,18 +1,23 @@
 package model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class GameDiceModel {
 	private int idgame;
 	private int dieNumber;
-	private String dieColor;
-	private int eyes;
+	private StringProperty dieColor = new SimpleStringProperty(this, "dieColor", null);
+	private IntegerProperty eyes = new SimpleIntegerProperty(this, "eyes", 0);
 	private int roundtrack;
 	private int roundID;
 	
 	public GameDiceModel (int idgame, int dieNumber, String dieColor, int eyes, int roundtrack, int roundID) {
 		this.idgame = idgame;
 		this.dieNumber = dieNumber;
-		this.dieColor = dieColor;
-		this.eyes = eyes;
+		this.dieColor.set(dieColor);
+		this.eyes.set(eyes);
 		this.roundtrack = roundtrack;
 		this.roundID = roundID;
 	}
@@ -25,7 +30,11 @@ public class GameDiceModel {
 		return this.dieNumber;
 	}
 	
-	public String getDieColor () {
-		return this.dieColor;
-	} 
+	public final StringProperty colorProperty () {
+		return dieColor;
+	}
+	
+	public final IntegerProperty valueProperty () {
+		return eyes;
+	}
 }

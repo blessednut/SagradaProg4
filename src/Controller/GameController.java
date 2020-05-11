@@ -1,5 +1,6 @@
 package Controller;
 
+import View.DraftPoolView;
 import View.GamePane;
 import model.GameModel;
 
@@ -25,11 +26,8 @@ public class GameController {
 		this.TCC = new ToolCard_Controller();
 		this.gamePane = new GamePane(this);
 		this.m_game = new GameModel();
-
-
-		
-
 	}
+	
 	public Public_Objective_Card_Controller getPublic_OCC() {
 		return public_OCC;
 	}
@@ -43,8 +41,8 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
 		
-		draftController = new DraftpoolController(4);
-		
+		draftController = new DraftpoolController(2);
+		gamePane.setDrafpool(new DraftPoolView(366, 366, draftController.getDraftPool()));
 	}
 
 	public GamePane getGamePane() {

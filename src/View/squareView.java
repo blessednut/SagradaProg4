@@ -24,7 +24,7 @@ public class squareView extends Pane {
 		this.setMinSize(width, height);
 		
 		if (dice == null) {
-			this.getChildren().add(new DicePattern(value, width, height));
+			//this.getChildren().add(new DicePattern(value, width, height));
 		} else {
 			this.getChildren().add(dice);
 			dice.drawDice(width, height);
