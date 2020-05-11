@@ -67,4 +67,10 @@ public class HomeController {
 		th.start();
 	}
 
+	public HomeThreadController getC_hometc() {
+		return c_hometc;
+	}
+	
+	
+
 }

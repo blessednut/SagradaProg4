@@ -18,4 +18,5 @@ public class GameModel {
 	public int getGameId() {
 		return this.GameId;
 	}
+	
 }

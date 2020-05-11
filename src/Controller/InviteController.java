@@ -21,13 +21,13 @@ public class InviteController {
 		// er gekozen moet worden.
 		v_invite.getSearch().setOnMouseClicked(e -> {
 			switch (v_invite.getButtons().getSelectedToggle().getUserData().toString()) {
-			case "2":
+			case "twee":
 				searchForUsername(v_invite.getName1().getText());
 				break;
-			case "3":
+			case "drie":
 				searchForTwoUsernames(v_invite.getName1().getText(), v_invite.getName2().getText());
 				break;
-			case "4":
+			case "vier":
 				searchForThreeUsernames(v_invite.getName1().getText(), v_invite.getName2().getText(),
 						v_invite.getName3().getText());
 				break;
@@ -35,13 +35,16 @@ public class InviteController {
 		});
 
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
+		
+		//invitation part.
+		
 
 	}
 
 	public void inVitePlayer() {
 		switch (v_invite.getButtons().getSelectedToggle().getUserData().toString()) {
-		case "2":
-			// c_game.getM_game().createGameRoom();
+		case "twee":
+			 c_game.getM_game().createGameRoom();
 			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
 					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
 			// uitgedaagde
@@ -49,7 +52,7 @@ public class InviteController {
 					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
 			c_game.createGamePane();
 			break;
-		case "3":
+		case "drie":
 			c_game.getM_game().createGameRoom();
 			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
 					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
@@ -61,7 +64,7 @@ public class InviteController {
 					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"),	m_invite.getColor("purple"));
 			c_game.createGamePane();
 			break;
-		case "4":
+		case "vier":
 			c_game.getM_game().createGameRoom();
 			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
 					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));

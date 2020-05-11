@@ -28,9 +28,7 @@ public class HomeThreadDB {
 			System.out.println("kut");
 			if(rs.next()) {
 				gameID = rs.getInt("idgame");
-				System.out.println(rs.getTime("creationdate"));
-				System.out.println(rs.getDate("creationdate"));
-				System.out.println(rs.getInt("idgame"));
+
 			}
 		}catch(Exception e){
 			System.out.println(e);
@@ -41,15 +39,24 @@ public class HomeThreadDB {
 	public String getUsernameOfChallenger(String playstatus) {
 		try {
 			System.out.println("hey");
-			String query = "select username from player\r\n" + 
+			String query = "select username, idgame from player\r\n" + 
 					"where idgame = " + getGameID() + " and playstatus like '" + playstatus + "';";
 			rs = st.executeQuery(query);
 			if(rs.next()) {
 				username = rs.getString("username");
+				gameID = rs.getInt("idgame");
 			}
 		}catch(Exception e){
 			System.out.println(e);
 		}
 		return username;
 	}
+	
+	public int getGameIdForInvite() {
+		return gameID;
+	}
+	
+	
+	
+	
 }

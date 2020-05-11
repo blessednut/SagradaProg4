@@ -26,10 +26,15 @@ public class InvitePane extends HBox {
 	private VBox vbox;
 	private VBox vbox2;
 	private VBox vbox3;
+	private VBox vbox4;
+
+	private Label titel3;
+	private Label titel4;
+	private TextField gameId;
 
 	private Label titel1;
 	private Label titel2;
-	private TextArea Username;
+	private TextField Username;
 	private TextField name1;
 	private TextField name2;
 	private TextField name3;
@@ -47,13 +52,14 @@ public class InvitePane extends HBox {
 
 	private ImageView labelBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	private ImageView labelNameBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
+	private ImageView labelGameIDBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 
 	public InvitePane() {
 		this.setMinSize((screenX / 8 * 7), screenY);
 		this.setMaxSize((screenX / 8 * 7), screenY);
 		this.setPrefSize((screenX / 8 * 7), screenY);
 		createPane();
-		showInvite("piet");
+		showInvite();
 		rb2.setOnAction(e -> {
 			name1.setVisible(true);
 			name2.setVisible(false);
@@ -85,17 +91,17 @@ public class InvitePane extends HBox {
 		rb2.setTextFill(Color.MAROON);
 		rb2.setToggleGroup(buttons);
 		rb2.setSelected(true);
-		rb2.setUserData("2");
+		rb2.setUserData("twee");
 
 		rb3 = new RadioButton("drie");
 		rb3.setTextFill(Color.MAROON);
 		rb3.setToggleGroup(buttons);
-		rb3.setUserData("3");
+		rb3.setUserData("drie");
 
 		rb4 = new RadioButton("vier");
 		rb4.setTextFill(Color.MAROON);
 		rb4.setToggleGroup(buttons);
-		rb4.setUserData("4");
+		rb4.setUserData("vier");
 
 		name1 = new TextField();
 		name1.setText("Gebruikersnaam 1");
@@ -138,13 +144,14 @@ public class InvitePane extends HBox {
 		vbox3 = new VBox(rb2, rb3, rb4);
 		vbox3.setAlignment(Pos.CENTER);
 		vbox = new VBox(titel1, vbox3, name1, name2, name3, hbox);
+
 		vbox2 = new VBox();
 		this.getChildren().addAll(vbox, vbox2);
 	}
 
-	public void showInvite(String username) {
+	public void showInvite() {
 		hbox2 = new HBox();
-
+		vbox4 = new VBox();
 		labelNameBackground.setFitWidth(300);
 		labelNameBackground.setFitHeight(100);
 
@@ -153,11 +160,17 @@ public class InvitePane extends HBox {
 		titel2.setStyle("-fx-font-weight: bold");
 		titel2.setContentDisplay(ContentDisplay.CENTER);
 
-		Username = new TextArea();
-		Username.setMinSize(300, 100);
-		Username.setPrefSize(300, 100);
-		Username.setMaxSize(300, 100);
-		Username.setText(username);
+		Username = new TextField();
+		Username.setMinSize(300, 50);
+		Username.setPrefSize(300, 50);
+		Username.setMaxSize(300, 50);
+
+
+		gameId = new TextField();
+		gameId.setMinSize(300, 50);
+		gameId.setPrefSize(300, 50);
+		gameId.setMaxSize(300, 50);
+		
 
 		accept = new Button();
 		accept.setText("accepteer");
@@ -172,14 +185,15 @@ public class InvitePane extends HBox {
 		refuse.setMaxSize(150, 30);
 
 		hbox2.getChildren().addAll(accept, refuse);
-		vbox2.getChildren().addAll(titel2, Username, hbox2);
+		vbox4.getChildren().addAll(Username, gameId);
+		vbox2.getChildren().addAll(titel2, vbox4, hbox2);
 	}
 
 	public Button getSearch() {
 		return search;
 	}
 
-	public TextArea getUsername() {
+	public TextField getUsername() {
 		return Username;
 	}
 
@@ -195,7 +209,7 @@ public class InvitePane extends HBox {
 		return refuse;
 	}
 
-	public void setUsername(TextArea username) {
+	public void setUsername(TextField username) {
 		Username = username;
 	}
 
@@ -215,5 +229,8 @@ public class InvitePane extends HBox {
 		return buttons;
 	}
 
-	
+	public TextField getGameId() {
+		return gameId;
+	}
+
 }

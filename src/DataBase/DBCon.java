@@ -23,6 +23,7 @@ public class DBCon {
 
 	private DBCon() {
 		createConnection();
+		System.out.println("tering");
 	}
 
 	public static DBCon getInstance() {
