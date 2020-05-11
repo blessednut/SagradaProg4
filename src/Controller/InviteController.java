@@ -27,6 +27,7 @@ public class InviteController {
 //		System.out.println("hallo");
 		m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName().getText(), c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
 		c_game.createGamePane();
+		System.out.println(c_game.getM_game().getGameId());
 	}
 	
 	public void searchForUsername(String username) {

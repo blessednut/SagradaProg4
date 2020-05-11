@@ -17,13 +17,16 @@ public class GameController {
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
+
+		this.m_game = new GameModel();
 		this.c_player = new PlayerController(this);
 		this.public_OCC = new Public_Objective_Card_Controller();
+		
 //		TODO: playerID veriabelen meegeven aan de constructor.
-		this.private_OCC = new Private_Objective_Card_Controller("private_geel");
+		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
 		this.TCC = new ToolCard_Controller();
 		this.gamePane = new GamePane(this);
-		this.m_game = new GameModel();
+		
 
 
 		
