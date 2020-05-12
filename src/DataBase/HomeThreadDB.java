@@ -25,7 +25,6 @@ public class HomeThreadDB {
 			
 			String query = "select MAX(idgame) as idgame, Max(creationdate) as creationdate from game;";
 			rs = st.executeQuery(query);
-			System.out.println("kut");
 			if(rs.next()) {
 				gameID = rs.getInt("idgame");
 

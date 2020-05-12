@@ -60,12 +60,6 @@ public class GameController {
 	public GameModel getM_game() {
 		return m_game;
 	}
-	public PlayerController getC_player() {
-		return c_player;
-	}
-	public void setC_player(PlayerController c_player) {
-		this.c_player = c_player;
-	}
 		
 
 }

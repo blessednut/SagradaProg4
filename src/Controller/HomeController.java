@@ -25,10 +25,7 @@ public class HomeController {
 		c_game = new GameController(myScene, c_login);
 		//test
 		this.c_player = new PlayerController(c_game);
-//		v_home = new HomePane(this);
 		c_Invite = new InviteController(c_game,this);
-//		v_credits = new CreditsPane();
-//		v_statistics = new StatisticsPane();
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);	
 		threadMethod();
 		v_home = new HomePane(this);

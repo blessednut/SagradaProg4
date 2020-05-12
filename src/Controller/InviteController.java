@@ -14,7 +14,7 @@ public class InviteController {
 		this.c_game = c_game;
 		this.home = home;
 		m_invite = new InviteModel(this);
-		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
+		v_invite = new InvitePane();
 
 		// de switchcase bepaalt aan de hand van de selected RadioButton welke methode
 		// er gekozen moet worden.
@@ -32,6 +32,7 @@ public class InviteController {
 				break;
 			}
 		});
+		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
 
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
