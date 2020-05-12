@@ -11,21 +11,44 @@ public class DraftpoolController {
 	private int numberPlayers;
 	private DiceModel[] die;
 	private GameDiceModel[] draft;
+	private DraftpoolSquareController[] draftpool;
+	private GameDiceModel selectedDice = null;
+	private GameController controller;
 
-	public DraftpoolController(int numberPlayers) {
+	public DraftpoolController(GameController controller, int numberPlayers) {
 		this.con = new DiceDB();
 		this.numberPlayers = numberPlayers;
+		this.controller = controller;
 
 		importDice();
 		createDraftPool();
 	}
 	
-	public GameDiceModel[] getDraftPool () {
-		return draft;
-		//Is there a draftpool?
-		//	Get from database
-		//else
-		//	createDraftPool
+//	public GameDiceModel[] getDraftPool () {
+//		return draft;
+//		//Is there a draftpool?
+//		//	Get from database
+//		//else
+//		//	createDraftPool
+//	}
+	
+	public void setSelectedDice(GameDiceModel dice) {
+		this.selectedDice = dice;
+		this.controller.placeDice(dice);
+	}
+	
+	public DraftpoolSquareController[] getDraftPool () {
+		draftpool = new DraftpoolSquareController[9];
+		
+		for (int i = 0; i < draftpool.length; i++) {
+			if (i < draft.length) {
+				draftpool[i] = new DraftpoolSquareController(this, draft[i]);
+			} else {
+				draftpool[i] = new DraftpoolSquareController();
+			}
+		}
+		
+		return draftpool;
 	}
 
 	private void importDice() {
@@ -75,4 +98,6 @@ public class DraftpoolController {
 	private int getRandomInt (int min, int max) {
 		return (int) Math.floor((Math.random() * ((max - min) + 1)) + min);
 	}
+
+
 }

@@ -28,6 +28,10 @@ public class DicePattern extends GridPane {
 		//fillGridPane(value, width, height);
 	}
 
+	public DicePattern(Color white, int value) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void fillGridPane(int value, double width, double height) {
 		// Make Grid
 		for (int x = 0; x < 3; x++) {

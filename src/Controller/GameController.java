@@ -2,6 +2,7 @@ package Controller;
 
 import View.DraftPoolView;
 import View.GamePane;
+import model.GameDiceModel;
 import model.GameModel;
 
 public class GameController {
@@ -41,7 +42,7 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
 		
-		draftController = new DraftpoolController(2);
+		draftController = new DraftpoolController(this, 2);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftController.getDraftPool()));
 	}
 
@@ -65,8 +66,7 @@ public class GameController {
 		return m_game;
 	}
 	
-	
-	
-	
-
+	public void placeDice (GameDiceModel dice) {
+		this.c_patternCard.placeDice(dice);
+	}
 }

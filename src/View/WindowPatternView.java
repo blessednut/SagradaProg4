@@ -1,5 +1,6 @@
 package View;
 
+import Controller.WindowPatternSquareController;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,7 +30,7 @@ public class WindowPatternView extends BorderPane {
 	private GridPane window;
 	private int width, height;
 	
-	public WindowPatternView (int width, int height, StringProperty title, IntegerProperty tokenAmount, squareView[][] fieldView) {
+	public WindowPatternView (int width, int height, StringProperty title, IntegerProperty tokenAmount, WindowPatternSquareController[][] fieldView) {
 		this.width = width;
 		this.height = height;
 		this.setPrefSize(width, height);
@@ -56,11 +57,22 @@ public class WindowPatternView extends BorderPane {
 			for (int y = 0; y < fieldView[x].length; y++) {
 				double fieldWidth = (width - (2 * BORDERSIZE)) / fieldView.length;
 				double fieldHeight = (height - (2 * BORDERSIZE)) / fieldView[x].length;
-
-				fieldView[x][y].setSize(fieldWidth, fieldHeight);
-				window.add(fieldView[x][y], x, y);
+				
+				WindowPatternSquareView square = new WindowPatternSquareView(fieldView[x][y]);
+				square.setSize(fieldWidth, fieldHeight);
+				window.add(square, x, y);
 			}
 		}
+		
+//		for (int x = 0; x < fieldView.length; x++) {
+//			for (int y = 0; y < fieldView[x].length; y++) {
+//				double fieldWidth = (width - (2 * BORDERSIZE)) / fieldView.length;
+//				double fieldHeight = (height - (2 * BORDERSIZE)) / fieldView[x].length;
+//
+//				fieldView[x][y].setSize(fieldWidth, fieldHeight);
+//				window.add(fieldView[x][y], x, y);
+//			}
+//		}
 		this.setCenter(window);
 		
 		//Luistert wanneer de tokenAmount verandert in het model

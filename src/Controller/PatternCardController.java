@@ -2,19 +2,30 @@ package Controller;
 
 import DataBase.WindowPatternDB;
 import View.WindowPatternView;
-import View.squareView;
+import View.WindowPatternSquareView;
+import model.GameDiceModel;
 import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class PatternCardController {
-
 	private GameController c_game;
+	private WindowPatternSquareController[][] fieldController;
+	private WindowPatternSquareController selectedSquare = null;
+	
+	//TODO: CONNECTIE WEGHALEN
 	private WindowPatternDB con;
 
 	public PatternCardController(GameController c_game) {
 		this.c_game = c_game;
 		this.con = new WindowPatternDB();
 		generatePatternCardChoice();
+	}
+	
+	public void placeDice (GameDiceModel dice) {
+		if (selectedSquare != null) {
+			selectedSquare.setDice(dice);
+			System.out.println("Dice is geplaatst!");
+		}
 	}
 
 	private void generatePatternCardChoice() {
@@ -23,14 +34,16 @@ public class PatternCardController {
 				makeRandomCard(getRandomIntBetweenRange(1, 24)));
 	}
 
-	private squareView[][] makeSquareView(PatternCardFieldModel[][] field) {
-		squareView[][] fieldView = new squareView[5][4];
-		for (int x = 0; x < fieldView.length; x++) {
-			for (int y = 0; y < fieldView[x].length; y++) {
-				fieldView[x][y] = new squareView(field[x][y].colorProperty(), field[x][y].valueProperty(), null);
+	private WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
+		//WindowPatternSquareView[][] fieldView = new WindowPatternSquareView[5][4];
+		fieldController = new WindowPatternSquareController[5][4];
+		
+		for (int x = 0; x < fieldController.length; x++) {
+			for (int y = 0; y < fieldController[x].length; y++) {
+				fieldController[x][y] = new WindowPatternSquareController(this, field[x][y]);
 			}
 		}
-		return fieldView;
+		return fieldController;
 	}
 
 	private WindowPatternView makeRandomCard(int cardId) {
@@ -46,5 +59,9 @@ public class PatternCardController {
 	public void setChosenCard(WindowPatternView chosenCard) {
 		this.c_game.getGamePane().setOwnWindow(chosenCard);
 		this.c_game.getGamePane().createGamePane();
+	}
+
+	public void setSelected(WindowPatternSquareController selectedSquare) {
+		this.selectedSquare = selectedSquare;
 	}
 }
