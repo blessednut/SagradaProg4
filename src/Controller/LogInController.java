@@ -16,16 +16,17 @@ public class LogInController {
 	private String password;
 
 	public LogInController(MySceneController c_myscene) {
-		c_home = new HomeController(c_myscene, this);
-		v_login = new LoginPane();
-		m_login = new LoginModel();
-
 		this.c_myscene = c_myscene;
+		m_login = new LoginModel();
+		v_login = new LoginPane();
+//		c_home = new HomeController(c_myscene, this);
+
 		v_login.getLogin().setOnAction(e -> {
 			username = v_login.getUsername().getText();
 			password = v_login.getPassword().getText();
 			m_login.setUsername(username);
 			SetInlogInfo();
+			c_home = new HomeController(c_myscene, this);
 		});
 		v_login.getRegister().setOnAction(
 				e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));

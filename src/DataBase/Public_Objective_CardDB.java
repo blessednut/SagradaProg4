@@ -19,7 +19,7 @@ public class Public_Objective_CardDB {
 			rs = st.executeQuery(query);
 			if(rs.next()) {
 				cardName = rs.getString("name");
-				System.out.println(cardName);
+				cardName.toString();
 			}
 		}
 		catch(Exception e) {

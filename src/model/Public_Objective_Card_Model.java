@@ -19,7 +19,6 @@ public class Public_Objective_Card_Model {
 		int min = 1;
 		int poCardID = rand.nextInt((max - min) + 1) + min;
 		cardName=pocDB.getCardName(poCardID);
-		System.out.println(cardName);
 		return cardName;
 		
 		

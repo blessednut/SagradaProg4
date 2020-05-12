@@ -13,8 +13,8 @@ public class InviteController {
 	public InviteController(GameController c_game, HomeController home) {
 		this.c_game = c_game;
 		this.home = home;
-		v_invite = new InvitePane();
 		m_invite = new InviteModel(this);
+		v_invite = new InvitePane();
 		v_invite.getName().setOnMouseClicked(e -> setSearchButton());
 		v_invite.getSearch().setOnMouseClicked(e -> searchForUsername(v_invite.getName().getText()));
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());

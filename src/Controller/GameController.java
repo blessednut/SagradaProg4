@@ -9,7 +9,7 @@ public class GameController {
 	private PatternCardController c_patternCard;
 	private GameModel m_game;
 	private LogInController c_login;
-	private PlayerController c_player;
+
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
@@ -19,29 +19,24 @@ public class GameController {
 		this.c_login = c_login;
 
 		this.m_game = new GameModel();
-		this.c_player = new PlayerController(this);
-		this.public_OCC = new Public_Objective_Card_Controller();
-		
-//		TODO: playerID veriabelen meegeven aan de constructor.
-		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
-		this.TCC = new ToolCard_Controller();
-		this.gamePane = new GamePane(this);
-		
-
+//		this.gamePane = new GamePane(this);
 
 		
-
 	}
 	public Public_Objective_Card_Controller getPublic_OCC() {
+		this.public_OCC = new Public_Objective_Card_Controller();
 		return public_OCC;
 	}
 	public Private_Objective_Card_Controller getPrivate_OCC() {
+		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
+		this.TCC = new ToolCard_Controller();
 		return TCC;
 	}
 	public void createGamePane() {
+		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
 		c_patternCard = new PatternCardController(this);
 	}
