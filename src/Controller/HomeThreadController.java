@@ -20,7 +20,6 @@ public class HomeThreadController implements Runnable {
 		try {
 			m_home.getUsernameOfChallenger("challengee");
 			c_Invite.getV_InvitePane().getUsername().setText(m_home.getUsernameOfChallenger("challenger"));
-
 			System.out.println(m_home.getUsernameOfChallenger("challenger"));
 
 		} catch(Exception e) {

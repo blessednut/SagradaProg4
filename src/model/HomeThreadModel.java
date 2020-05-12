@@ -11,7 +11,7 @@ public class HomeThreadModel {
 	
 	// methode om de gameID op te halen die de laatste creationdate heeft
 	public int getGameID(String playstatus) {
-		return new HomeThreadDB().getGameID(playstatus);
+		return new HomeThreadDB().getGameID();
 	}
 	
 	//methode om de username van de challenger te vinden die de laatste game heeft aangemaakt
