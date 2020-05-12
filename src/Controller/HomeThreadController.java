@@ -17,14 +17,13 @@ public class HomeThreadController implements Runnable {
 	
 	@Override
 	public void run() {
+		int i = 0;
+		
 		try {
-			m_home.getUsernameOfChallenger("challengee");
-			c_Invite.getV_InvitePane().getUsername().setText(m_home.getUsernameOfChallenger("challenger"));
-			System.out.println(m_home.getUsernameOfChallenger("challenger"));
-
+			m_home.getGameID(c_login.getUsername());	
+			// while loop omheen om de lijst uit te breiden.
+			c_Invite.getV_InvitePane().getUsername().setText(m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(1)));
 		} catch(Exception e) {
-
-			System.out.println(e);
 		}
 	}
 }
