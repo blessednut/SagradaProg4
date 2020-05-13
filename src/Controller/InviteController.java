@@ -33,12 +33,14 @@ public class InviteController {
 			}
 		});
 		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
-
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
-		//invitation part.
+		v_invite.getAccept().setOnAction(e -> acceptinvitation(home.getC_login().getUsername(), home.getC_hometc().getM_home().getChallengedGameID().get(1)));
 		
-
+	}
+	
+	public void acceptinvitation(String username, int gameID) {
+		
 	}
 
 	public void inVitePlayer() {

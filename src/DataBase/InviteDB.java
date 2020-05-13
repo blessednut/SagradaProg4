@@ -15,11 +15,11 @@ public class InviteDB {
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
-	
-	public InviteDB () {
+
+	public InviteDB() {
 		this.st = DBCon.getInstance().getSt();
 	}
-	
+
 	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {
 		boolean invited = false;
 		try {
@@ -34,7 +34,7 @@ public class InviteDB {
 		}
 		return invited;
 	}
-	
+
 	public String checkInDatabase(String username) {
 		String result = null;
 		try {
@@ -48,7 +48,7 @@ public class InviteDB {
 		}
 		return result;
 	}
-	
+
 	public int maxPlayerId() {
 		int playerId = 0;
 		try {
@@ -63,7 +63,7 @@ public class InviteDB {
 		}
 		return playerId;
 	}
-	
+
 	public void challengeeSelf(int playerID, String username, int gameID, String playerStatus, String playercolor) {
 		try {
 			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
@@ -75,7 +75,7 @@ public class InviteDB {
 			System.out.println(e);
 		}
 	}
-	
+
 	public void challengeeOther(int playerID, String username, int gameID, String playerStatus, String playercolor) {
 		try {
 			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
@@ -87,7 +87,7 @@ public class InviteDB {
 			System.out.println(e);
 		}
 	}
-	
+
 	public String getColor(String color) {
 		String result = "";
 		try {
@@ -101,7 +101,7 @@ public class InviteDB {
 		}
 		return result;
 	}
-	
+
 	public String getPlayerStatus(String playerstatus) {
 		String result = "";
 		try {
@@ -115,6 +115,57 @@ public class InviteDB {
 		}
 		return result;
 	}
-	
-	
+
+	public void updatePlayerStatusChallengee(String username, int gameid) {
+		try {
+			String query = "update player set playstatus = 'accepted' where username = '" + username + "' and idgame = "
+					+ gameid + " and playstatus = 'challengee';";
+			rs = st.executeQuery(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public void updatePlayerStatusChallenger(String username, int gameid) {
+		try {
+			String query = "update player set playstatus = 'accepted' where username = '" + username + "' and idgame = "
+					+ gameid + " and playstatus = 'challenger';";
+			rs = st.executeQuery(query);
+		} catch (Exception e) {
+
+		}
+	}
+
+	// checken voor hoeveelheid accepted.
+	public int getAcceptedAmount(int gameid) {
+		int result = 0;
+
+		try {
+			String query = "select count(username) as amountAccepted from player where idgame = " + gameid
+					+ " and playstatus = 'accepted';";
+			rs = st.executeQuery(query);
+			if (rs.next()) {
+				result = rs.getInt("AmountAccepted");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
+
+	public int getRefusedAmount(int gameid) {
+		int result = 0;
+
+		try {
+			String query = "select count(username) as amountRefused from player where idgame = " + gameid
+					+ " and playstatus = 'refused';";
+			rs = st.executeQuery(query);
+			if (rs.next()) {
+				result = rs.getInt("amountRefused");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
 }
