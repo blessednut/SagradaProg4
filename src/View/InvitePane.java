@@ -2,6 +2,7 @@ package View;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -53,6 +54,8 @@ public class InvitePane extends HBox {
 	private ImageView labelBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	private ImageView labelNameBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	private ImageView labelGameIDBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
+	
+	private ComboBox<String> invites;
 
 	public InvitePane() {
 		this.setMinSize((screenX / 8 * 7), screenY);
@@ -160,16 +163,22 @@ public class InvitePane extends HBox {
 		titel2.setStyle("-fx-font-weight: bold");
 		titel2.setContentDisplay(ContentDisplay.CENTER);
 
-		Username = new TextField();
-		Username.setMinSize(300, 50);
-		Username.setPrefSize(300, 50);
-		Username.setMaxSize(300, 50);
-
-
-		gameId = new TextField();
-		gameId.setMinSize(300, 50);
-		gameId.setPrefSize(300, 50);
-		gameId.setMaxSize(300, 50);
+//		Username = new TextField();
+//		Username.setMinSize(300, 50);
+//		Username.setPrefSize(300, 50);
+//		Username.setMaxSize(300, 50);
+//
+//
+//		gameId = new TextField();
+//		gameId.setMinSize(300, 50);
+//		gameId.setPrefSize(300, 50);
+//		gameId.setMaxSize(300, 50);
+		invites = new ComboBox<>();
+		invites.setMinSize(300, 50);
+		invites.setPrefSize(300, 50);
+		invites.setMaxSize(300, 50);
+		invites.setPromptText("Welke uitnodiging zou je willen accepteren/wijgeren");
+		
 		
 
 		accept = new Button();
@@ -185,7 +194,7 @@ public class InvitePane extends HBox {
 		refuse.setMaxSize(150, 30);
 
 		hbox2.getChildren().addAll(accept, refuse);
-		vbox4.getChildren().addAll(Username, gameId);
+		vbox4.getChildren().addAll(invites);
 		vbox2.getChildren().addAll(titel2, vbox4, hbox2);
 	}
 
@@ -193,8 +202,8 @@ public class InvitePane extends HBox {
 		return search;
 	}
 
-	public TextField getUsername() {
-		return Username;
+	public ComboBox<String> getInvites() {
+		return invites;
 	}
 
 	public Button getInviteButton() {
@@ -209,8 +218,8 @@ public class InvitePane extends HBox {
 		return refuse;
 	}
 
-	public void setUsername(TextField username) {
-		Username = username;
+	public void invites(ComboBox<String> invites) {
+		this.invites = invites;
 	}
 
 	public TextField getName1() {

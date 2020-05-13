@@ -18,12 +18,18 @@ public class HomeThreadController implements Runnable {
 	@Override
 	public void run() {
 		int i = 0;
-
+		String nameOfChallenger = "";
+		String IDOFChallenger = "";
 		try {
 			m_home.getGameID(c_login.getUsername());
-			// while loop omheen om de lijst uit te breiden.
-			c_Invite.getV_InvitePane().getUsername()
-					.setText(m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(1)));
+			while(i< m_home.getChallengedGameID().size()) {
+				nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
+				IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
+				c_Invite.getV_InvitePane().getInvites().getItems()
+						.add(nameOfChallenger + " + " + IDOFChallenger);
+				i++;
+			}
+			
 		} catch (Exception e) {
 		}
 	}
@@ -31,6 +37,5 @@ public class HomeThreadController implements Runnable {
 	public HomeThreadModel getM_home() {
 		return m_home;
 	}
-	
-	
+
 }
