@@ -26,7 +26,7 @@ public class HomeThreadController implements Runnable {
 				nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
 				IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
 				c_Invite.getV_InvitePane().getInvites().getItems()
-						.add(nameOfChallenger + " + " + IDOFChallenger);
+						.add(nameOfChallenger + "+" + IDOFChallenger);
 				i++;
 			}
 			

@@ -45,4 +45,8 @@ public class InviteModel {
 	public String getPlayerStatus(String playerstatus) {
 		return new InviteDB().getPlayerStatus(playerstatus);
 	}
+	
+	public void updatePlayerStatusChallengee(String username, int gameid, String playstatus) {
+		new InviteDB().updatePlayerStatusChallengee(username, gameid, playstatus);
+	}
 }

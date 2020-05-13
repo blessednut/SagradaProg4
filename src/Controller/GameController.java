@@ -27,6 +27,7 @@ public class GameController {
 		this.public_OCC = new Public_Objective_Card_Controller();
 		return public_OCC;
 	}
+	
 	public Private_Objective_Card_Controller getPrivate_OCC() {
 		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
 		return private_OCC;

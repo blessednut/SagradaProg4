@@ -116,11 +116,11 @@ public class InviteDB {
 		return result;
 	}
 
-	public void updatePlayerStatusChallengee(String username, int gameid) {
+	public void updatePlayerStatusChallengee(String username, int gameid, String playstatus) {
 		try {
-			String query = "update player set playstatus = 'accepted' where username = '" + username + "' and idgame = "
-					+ gameid + " and playstatus = 'challengee';";
-			rs = st.executeQuery(query);
+			String query = "update player set playstatus = '" + playstatus + "' where username = '" + username
+					+ "' and idgame = " + gameid + " and playstatus = 'challengee';";
+			st.executeUpdate(query);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -130,7 +130,7 @@ public class InviteDB {
 		try {
 			String query = "update player set playstatus = 'accepted' where username = '" + username + "' and idgame = "
 					+ gameid + " and playstatus = 'challenger';";
-			rs = st.executeQuery(query);
+			st.executeUpdate(query);
 		} catch (Exception e) {
 
 		}

@@ -9,6 +9,8 @@ public class InviteController {
 	private InviteModel m_invite;
 	private GameController c_game;
 	private HomeController home;
+	
+	private static final String ACCEPTED = "accepted";
 
 	public InviteController(GameController c_game, HomeController home) {
 		this.c_game = c_game;
@@ -35,12 +37,21 @@ public class InviteController {
 		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
-		v_invite.getAccept().setOnAction(e -> acceptinvitation(home.getC_login().getUsername(), home.getC_hometc().getM_home().getChallengedGameID().get(1)));
+		
+		v_invite.getAccept().setOnMouseClicked(e -> acceptinvitation(home.getC_login().getUsername()));
 		
 	}
 	
-	public void acceptinvitation(String username, int gameID) {
+	public void acceptinvitation(String username) {
+		String[] parts = v_invite.getInvites().getValue().split("\\+");
+		System.out.println(parts);
+		String StringGameID = parts[1];
+		System.out.println(StringGameID);
 		
+		int Gameid = Integer.parseInt(StringGameID);
+		c_game.getM_game().setGameId(Gameid);
+		m_invite.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
+		c_game.createGamePane();
 	}
 
 	public void inVitePlayer() {
