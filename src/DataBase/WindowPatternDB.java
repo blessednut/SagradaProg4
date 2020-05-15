@@ -67,4 +67,14 @@ public class WindowPatternDB {
 		}
 		return 0;
 	}
+	
+	public void makePlayerFrameField(int playerID, int x, int  y) {
+		try {
+			String query = "insert into playerframefield (idplayer, position_x, position_y) values (" + playerID + "," + x + "," + y + ");";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }

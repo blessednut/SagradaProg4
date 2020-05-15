@@ -3,18 +3,21 @@ package Controller;
 import model.PlayerModel;
 
 public class PlayerController {
+	private GameController gameController;
+	private PatternCardController cardController;
+	private PlayerModel playerModel;
 	
-	private GameController c_game;
-	private PlayerModel m_player;
-	
-	public PlayerController(GameController c_game) {
-		this.c_game = c_game;
-		m_player = new PlayerModel();
-		m_player.setUsername(c_game.getC_login().SetInlogInfo());
+	public PlayerController (GameController gameController, int gameID, String username) {
+		this.gameController = gameController;
+		this.cardController = new PatternCardController(this.gameController, this);
+		this.playerModel = new PlayerModel(gameID, username);
 	}
 	
-	public void setGameID() {
-		m_player.setCurrentGameID(c_game.getM_game().getGameId());
+	public PatternCardController getPatternCard () {
+		return this.cardController;
 	}
-
+	
+	public int getPlayerID () {
+		return this.playerModel.getPlayerID();
+	}
 }

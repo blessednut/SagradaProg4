@@ -7,14 +7,20 @@ import model.PatternCardModel;
 
 public class PatternCardController {
 	private GameController c_game;
+	private PlayerController playerController;
 	private WindowPatternSquareController[][] fieldController;
 	private WindowPatternSquareController selectedSquare = null;
 	private PatternCardModel chosenCard;
 	private PatternCardModel[] optionCard;
 
-	public PatternCardController(GameController c_game) {
+	public PatternCardController(GameController c_game, PlayerController playerController) {
 		this.c_game = c_game;
+		this.playerController = playerController;
 		generatePatternCardChoice();
+	}
+	
+	public PlayerController getPlayerController () {
+		return this.playerController;
 	}
 	
 	public void placeDice (GameDiceModel dice) {
@@ -29,7 +35,7 @@ public class PatternCardController {
 		
 		//Check hier voor mogelijke dubbele patterncards
 		for (int i = 0; i < optionCard.length; i++) {
-			this.optionCard[i] = new PatternCardModel(getRandomIntBetweenRange(1, 24));
+			this.optionCard[i] = new PatternCardModel(this, getRandomIntBetweenRange(1, 24));
 		}
 		
 		this.c_game.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
@@ -62,6 +68,7 @@ public class PatternCardController {
 
 	public void setChosenCard(int index) {
 		this.chosenCard = this.optionCard[index];
+		this.chosenCard.makePlayerFrameField();
 		this.c_game.getGamePane().setOwnWindow(makeView(chosenCard));
 		this.c_game.getGamePane().createGamePane();
 	}

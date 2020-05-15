@@ -1,5 +1,6 @@
 package model;
 
+import Controller.PatternCardController;
 import DataBase.WindowPatternDB;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -7,7 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PatternCardModel {
-	//private int player
+	private PatternCardController controller;
+	
 	private final int idPatternCard;
 	private String name;
 	private int difficulty;
@@ -17,7 +19,8 @@ public class PatternCardModel {
 	
 	private WindowPatternDB con;
 
-	public PatternCardModel(int idPatternCard) {
+	public PatternCardModel(PatternCardController controller, int idPatternCard) {
+		this.controller = controller;
 		this.idPatternCard = idPatternCard;
 		
 		this.con = new WindowPatternDB();
@@ -57,6 +60,19 @@ public class PatternCardModel {
 	public void importField () {
 		field = new PatternCardFieldModel[5][4];
 		this.field = con.getField(this.idPatternCard);
+	}
+	
+	public void makePlayerFrameField () {
+		int playerID = controller.getPlayerController().getPlayerID();
+		
+		for (int x = 0; x < field.length; x++) {
+			for (int y = 0; y < field[x].length; y++) {
+				con.makePlayerFrameField(playerID, x+1, y+1);
+			}
+		}
+		
+//		System.out.println("PatternCardModel:");
+//		System.out.println("PlayerID = " + playerID);
 	}
 	
 	public PatternCardFieldModel[][] getField () {

@@ -8,7 +8,7 @@ import model.GameModel;
 public class GameController {
 	private MySceneController myScene;
 	private GamePane gamePane;
-	private PatternCardController c_patternCard;
+	//private PatternCardController c_patternCard;
 	private GameModel m_game;
 	private LogInController c_login;
 
@@ -16,6 +16,9 @@ public class GameController {
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
 	private DraftpoolController draftController;
+	
+	//test
+	private PlayerController playerController;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -23,6 +26,8 @@ public class GameController {
 
 		this.m_game = new GameModel();
 //		this.gamePane = new GamePane(this);
+		
+		
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {
@@ -41,7 +46,10 @@ public class GameController {
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
-		c_patternCard = new PatternCardController(this);
+		
+		//test 
+		this.playerController = new PlayerController(this, m_game.getGameId(), c_login.getUsername());
+		//c_patternCard = new PatternCardController(this);
 
 		draftController = new DraftpoolController(this, 2);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftController.getDraftPool()));
@@ -56,7 +64,7 @@ public class GameController {
 	}
 
 	public PatternCardController getC_patternCard() {
-		return c_patternCard;
+		return this.playerController.getPatternCard();
 	}
 
 	public LogInController getC_login() {
@@ -68,6 +76,6 @@ public class GameController {
 	}
 
 	public void placeDice (GameDiceModel dice) {
-		this.c_patternCard.placeDice(dice);
+		this.playerController.getPatternCard().placeDice(dice);
 	}
 }
