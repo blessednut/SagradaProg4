@@ -13,7 +13,7 @@ public class ToolCard extends CardPane{
 	private Popup popup;
 
 	public ToolCard(String cardName, ToolCard_Controller tc_Controller) {
-		super(cardName);
+		super();
 		popup = new Popup(); 
 		this.tc_Controller = tc_Controller;
 		createToolCard(cardName);

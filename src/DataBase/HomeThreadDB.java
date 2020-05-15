@@ -4,43 +4,58 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import model.HomeThreadModel;
+
 public class HomeThreadDB {
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
+	private String username;
+	private int gameID;
+	private HomeThreadModel home;
 	
-	public HomeThreadDB () {
+	public HomeThreadDB (HomeThreadModel home) {
+		this.home = home;
 		this.st = DBCon.getInstance().getSt();
 	}
 	
-	public int getGameID(String playstatus) {
-		int gameID = 0;
-		try {
-			String query = "select game.creationdate, game.idgame from player\r\n" + 
-					"left join game on player.idgame = game.idgame\r\n" + 
-					"where creationdate = (select max(creationdate) from game)  and player.playstatus like '" + playstatus + "';";
+	public int getGameID(String username) {
+		gameID = 0;
+		try {			
+			String query = "select idgame from player where username = '" + username + "' and playstatus = 'challengee';";
 			rs = st.executeQuery(query);
-			if(rs.next()) {
+			while(rs.next()) {
 				gameID = rs.getInt("idgame");
+				home.addToArray(gameID);
 			}
 		}catch(Exception e){
 			System.out.println(e);
 		}
 		return gameID;
-	}
+	}	
 	
-	public String getUsernameOfChallenger(String playstatus) {
-		String username = null;
+	
+	
+	public String getUsernameOfChallenger(int gameid) {
 		try {
-			String query = "select username from player\r\n" + 
-					"where idgame = " + getGameID("Challengee") + " and playstatus like '" + playstatus + "';";
+			System.out.println("hey");
+			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
 			rs = st.executeQuery(query);
-			if(rs.next()) {
+			while(rs.next()) {
 				username = rs.getString("username");
+				System.out.println(username);
 			}
 		}catch(Exception e){
 			System.out.println(e);
 		}
 		return username;
 	}
+	
+	public int getGameIdForInvite() {
+		return gameID;
+	}
+	
+	
+	
+	
 }

@@ -2,35 +2,24 @@ package model;
 
 import java.util.Random;
 
+import DataBase.Public_Objective_CardDB;
+
 public class Public_Objective_Card_Model {
-	private String a;
-	private String b;
-	private String c;
+	private Public_Objective_CardDB pocDB;
+
 	
 	public Public_Objective_Card_Model() {
-		
+		pocDB = new Public_Objective_CardDB();
 	}
 	
 	public String getCard() {
-//		TODO code veranderen naar een connectie met de database
-//		dit is nu testcode
-		a = "public_donker";
-		b = "public_kleurvariëteitPerKolom";
-		c = "public_kleurDiagonalen";
+		String cardName;
 		Random rand = new Random();
-		int max = 3;
+		int max = 10;
 		int min = 1;
-		int randomNum = rand.nextInt((max - min) + 1) + min;
-		
-		if(randomNum == 1) {
-			return a;
-		}
-		else if(randomNum == 2) {
-			return b;
-		}
-		else {
-			return c;
-		}
+		int poCardID = rand.nextInt((max - min) + 1) + min;
+		cardName=pocDB.getCardName(poCardID);
+		return cardName;
 		
 		
 	}

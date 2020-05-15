@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 public class Public_Objective_Card extends CardPane {
 
 	public Public_Objective_Card(String cardName) {
-		super(cardName);
+		super();
 		createPublic_Objective_Card(cardName);
 	}
 	

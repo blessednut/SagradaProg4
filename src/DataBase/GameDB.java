@@ -4,13 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import model.GameModel;
+
 public class GameDB {
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
+	private GameModel GM;
 	
-	public GameDB () {
+	public GameDB (GameModel GM) {
 		this.st = DBCon.getInstance().getSt();
+		this.GM = GM;
 	}
 	
 	public int createGameRoom() {
@@ -25,9 +29,10 @@ public class GameDB {
 			System.out.println(e);
 		}
 		GameId++;
+		GM.setGameId(GameId);
 		
 		try {
-			String query = "insert into game values(?,null,now());";
+			String query = "insert into game(idgame,creationdate) values(?,now());";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.setInt(1, GameId);
 			ps.execute();

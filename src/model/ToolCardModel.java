@@ -2,35 +2,26 @@ package model;
 
 import java.util.Random;
 
+import DataBase.ToolCardDB;
+
 public class ToolCardModel {
-	private String a;
-	private String b;
-	private String c;
+	private ToolCardDB tcDB;
 	
 	public ToolCardModel() {
-		
+		tcDB = new ToolCardDB();
 	}
 	
-	public String getCard() {
-//		TODO code veranderen naar een connectie met de database
-//		dit is nu testcode
-		a = "Driepuntstang";
-		b = "Fluxborstel";
-		c = "Fluxverwijderaar";
+	public String getCardName() {
+		String cardName;
 		Random rand = new Random();
-		int max = 3;
+		int max = 12;
 		int min = 1;
-		int randomNum = rand.nextInt((max - min) + 1) + min;
+		int toolCardID = rand.nextInt((max - min) + 1) + min;
+		cardName=tcDB.getCardName(toolCardID);
+		return cardName;
 		
-		if(randomNum == 1) {
-			return a;
-		}
-		else if(randomNum == 2) {
-			return b;
-		}
-		else {
-			return c;
-		}
+		
+
 		
 		
 	
