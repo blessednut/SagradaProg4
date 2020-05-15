@@ -64,15 +64,6 @@ public class WindowPatternView extends BorderPane {
 			}
 		}
 		
-//		for (int x = 0; x < fieldView.length; x++) {
-//			for (int y = 0; y < fieldView[x].length; y++) {
-//				double fieldWidth = (width - (2 * BORDERSIZE)) / fieldView.length;
-//				double fieldHeight = (height - (2 * BORDERSIZE)) / fieldView[x].length;
-//
-//				fieldView[x][y].setSize(fieldWidth, fieldHeight);
-//				window.add(fieldView[x][y], x, y);
-//			}
-//		}
 		this.setCenter(window);
 		
 		//Luistert wanneer de tokenAmount verandert in het model

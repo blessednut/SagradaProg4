@@ -38,12 +38,4 @@ public class PatternCardFieldModel {
 	public String getColor () {
 		return this.color;
 	}
-	
-//	public final StringProperty colorProperty () {
-//		return new SimpleStringProperty(this, "color", color);
-//	}
-//	
-//	public final IntegerProperty valueProperty () {
-//		return new SimpleIntegerProperty(this, "value", value);
-//	}
 }

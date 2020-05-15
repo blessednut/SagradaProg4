@@ -23,8 +23,6 @@ public class GameController {
 
 		this.m_game = new GameModel();
 //		this.gamePane = new GamePane(this);
-
-
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {

@@ -35,20 +35,36 @@ public class WindowPatternDB {
 		}
 		return null;
 	}
-
-	public PatternCardModel getPatternCard(int idPatternCard) {
+	
+	public String getName (int idPatternCard) {
 		try {
-			String query = "SELECT * \r\n" + "FROM patterncard\r\n" + "WHERE idpatterncard = '" + idPatternCard + "';";
-			ResultSet rs = DBCon.getInstance().getSt().executeQuery(query);
+			String query = "SELECT name FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
 			rs = st.executeQuery(query);
 
+			String name = "";
 			while (rs.next()) {
-				return new PatternCardModel(rs.getInt("idpatterncard"), rs.getString("name"), rs.getInt("difficulty"),
-						rs.getBoolean("standard"));
+				name = rs.getString("name");
 			}
+			return name;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	public int getDifficulty (int idPatternCard) {
+		try {
+			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
+			rs = st.executeQuery(query);
+
+			int difficulty = 0;
+			while (rs.next()) {
+				difficulty = rs.getInt("difficulty");
+			}
+			return difficulty;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
 	}
 }
