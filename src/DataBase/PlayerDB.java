@@ -8,14 +8,24 @@ public class PlayerDB {
 	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
-	
-	public PlayerDB () {
+
+	public PlayerDB() {
 		this.st = DBCon.getInstance().getSt();
 	}
-	
-	public void getInviteGameID(String username, String Playstatus, String challenger) {
-		
-	}
-	
 
+	public int getPlayerID(int gameID, String username) {
+		try {
+			String query = "select idplayer from player where username = '" + username + "' and idgame = " + gameID + ";";
+			rs = st.executeQuery(query);
+
+			int playerID = 0;
+			while (rs.next()) {
+				playerID = rs.getInt("idplayer");
+			}
+			return playerID;
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		}
+	}
 }

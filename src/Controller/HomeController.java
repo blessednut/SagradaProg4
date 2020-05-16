@@ -16,15 +16,15 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-	//test
-	private PlayerController c_player;
+//	//test
+//	private PlayerController c_player;
 	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
 		c_game = new GameController(myScene, c_login);
-		//test
-		this.c_player = new PlayerController(c_game);
+//		//test
+//		this.c_player = new PlayerController(c_game);
 		c_Invite = new InviteController(c_game,this);
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);	
 		threadMethod();

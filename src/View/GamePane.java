@@ -68,7 +68,6 @@ public class GamePane extends BorderPane {
 			gamePaneBottom.getChildren().add(ownWindow);
 		}
 //		Private Objective card
-		
 		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
 		
 //		Toolcards
@@ -101,10 +100,11 @@ public class GamePane extends BorderPane {
 			WindowPatternView card4) {
 		this.getChildren().clear();
 
-		card1.setOnMouseClicked(e -> chooseCardEvent(card1));
-		card2.setOnMouseClicked(e -> chooseCardEvent(card2));
-		card3.setOnMouseClicked(e -> chooseCardEvent(card3));
-		card4.setOnMouseClicked(e -> chooseCardEvent(card4));
+		//TODO: Magic numbers vervangen
+		card1.setOnMouseClicked(e -> chooseCardEvent(0));
+		card2.setOnMouseClicked(e -> chooseCardEvent(1));
+		card3.setOnMouseClicked(e -> chooseCardEvent(2));
+		card4.setOnMouseClicked(e -> chooseCardEvent(3));
 
 		card1.setPadding(new Insets(10, 10, 10, 10));
 		card2.setPadding(new Insets(10, 10, 10, 10));
@@ -115,7 +115,7 @@ public class GamePane extends BorderPane {
 		this.getChildren().add(box);
 	}
 
-	private void chooseCardEvent(WindowPatternView chosenCard) {
+	private void chooseCardEvent(int chosenCard) {
 		gameController.getC_patternCard().setChosenCard(chosenCard);
 	};
 

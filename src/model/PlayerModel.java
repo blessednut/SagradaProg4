@@ -1,27 +1,54 @@
 package model;
 
+import DataBase.PlayerDB;
+
 public class PlayerModel {
+	private int gameID;
+	private String username;
+	private int playerID;
 
-	private String username = null;
-	private int currentGameID;
+	private PlayerDB con;
 
-	public PlayerModel() {
-
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
+	public PlayerModel(int gameID, String username) {
+		this.con = new PlayerDB();
+		this.gameID = gameID;
 		this.username = username;
+		this.playerID = importPlayerID();
+		
+		System.out.println("PlayerModel:");
+		System.out.println("Player ID = " + this.playerID);
+		System.out.println("Game ID = " + this.gameID);
+		System.out.println("Username = " + this.username);
 	}
 
-	public int getCurrentGameID() {
-		return currentGameID;
+	private int importPlayerID() {
+		return con.getPlayerID(this.gameID, this.username);
+	}
+	
+	public int getPlayerID () {
+		return this.playerID;
 	}
 
-	public void setCurrentGameID(int currentGameID) {
-		this.currentGameID = currentGameID;
-	}
+//	private String username = null;
+//	private int currentGameID;
+//
+//	public PlayerModel() {
+//
+//	}
+//
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
+//
+//	public int getCurrentGameID() {
+//		return currentGameID;
+//	}
+//
+//	public void setCurrentGameID(int currentGameID) {
+//		this.currentGameID = currentGameID;
+//	}
 }
