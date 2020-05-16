@@ -1,6 +1,6 @@
 package View;
 
-import Controller.DraftpoolController;
+//import Controller.DraftpoolController;
 import Controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

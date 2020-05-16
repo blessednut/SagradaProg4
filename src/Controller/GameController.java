@@ -1,7 +1,10 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import View.DraftPoolView;
 import View.GamePane;
+import model.DiceModel;
 import model.GameDiceModel;
 import model.GameModel;
 
@@ -15,10 +18,14 @@ public class GameController {
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
-	private DraftpoolController draftController;
+	//private DraftpoolController draftController;
 	
-	//test
 	private PlayerController playerController;
+	
+	//test 
+	//private DiceModel[] dice;
+	private DiceModel2 dice;
+	private DraftpoolController2 draftpoolController;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -47,12 +54,29 @@ public class GameController {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
 		
-		//test 
+		this.dice = new DiceModel2(this);
 		this.playerController = new PlayerController(this, m_game.getGameId(), c_login.getUsername());
+		
+		this.draftpoolController = new DraftpoolController2(this);
+		
 		//c_patternCard = new PatternCardController(this);
 
-		draftController = new DraftpoolController(this, 2);
-		gamePane.setDrafpool(new DraftPoolView(366, 366, draftController.getDraftPool()));
+		//draftController = new DraftpoolController(this, 2);
+		
+		//Belangrijk::
+		this.draftpoolController.createDraftPool(4);
+		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()));
+	}
+	
+	public GameDiceModel pickDiceFromBag () {
+		//Vraag om een lijst van dobbelstenen die nog in de zak zitten
+		ArrayList<GameDiceModel> diceBag = this.dice.getBag();
+		//Selecteer willekeurig een dice uit de zak
+		GameDiceModel gameDice = diceBag.get(getRandomInt(0, diceBag.size() - 1));
+		//Voeg de dice toe aan het diceModel
+		this.dice.addDice(gameDice);
+		//Return de geselecteerde dice
+		return gameDice;
 	}
 
 	public GamePane getGamePane() {
@@ -77,5 +101,9 @@ public class GameController {
 
 	public void placeDice (GameDiceModel dice) {
 		this.playerController.getPatternCard().placeDice(dice);
+	}
+	
+	private int getRandomInt(int min, int max) {
+		return (int) Math.floor((Math.random() * ((max - min) + 1)) + min);
 	}
 }
