@@ -101,9 +101,15 @@ public class GameController {
 
 	public void placeDice (GameDiceModel dice) {
 		this.playerController.getPatternCard().placeDice(dice);
+		System.out.println("GameController:");
+		System.out.println(dice.getDieNumber());
 	}
 	
 	private int getRandomInt(int min, int max) {
 		return (int) Math.floor((Math.random() * ((max - min) + 1)) + min);
+	}
+
+	public void endTurn() {
+		this.playerController.updatePlayerFrameField();
 	}
 }

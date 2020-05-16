@@ -26,6 +26,7 @@ public class WindowPatternSquareController {
 	public void setDice(GameDiceModel dice) {
 		this.dice = dice;
 		squareView.setDice();
+		square.setDice(dice);
 	}
 
 	public GameDiceModel getDice() {

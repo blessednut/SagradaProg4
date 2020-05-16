@@ -19,6 +19,10 @@ public class PatternCardController {
 		generatePatternCardChoice();
 	}
 	
+	public void updatePlayerFrameField () {
+		this.chosenCard.updatePlayerFrameField(c_game.getM_game().getGameId(), playerController.getPlayerID());
+	}
+	
 	public PlayerController getPlayerController () {
 		return this.playerController;
 	}
@@ -26,7 +30,9 @@ public class PatternCardController {
 	public void placeDice (GameDiceModel dice) {
 		if (selectedSquare != null) {
 			selectedSquare.setDice(dice);
-			System.out.println("Dice is geplaatst!");
+			//System.out.println("Dice is geplaatst!");
+			
+			//Maak database
 		}
 	}
 

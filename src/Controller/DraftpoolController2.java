@@ -7,6 +7,7 @@ public class DraftpoolController2 {
 	private DraftpoolModel2 draftpoolModel;
 	private GameController controller;
 	private DraftpoolSquareController[] draftpoolController;
+	private GameDiceModel selectedDice;
 	
 	public DraftpoolController2 (GameController controller) {
 		this.draftpoolModel = new DraftpoolModel2();
@@ -40,5 +41,10 @@ public class DraftpoolController2 {
 		}
 		
 		return draftpoolController;
+	}
+	
+	public void setSelectedDice (GameDiceModel dice) {
+		this.selectedDice = dice;
+		this.controller.placeDice(dice);
 	}
 }

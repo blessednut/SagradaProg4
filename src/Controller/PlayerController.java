@@ -20,4 +20,8 @@ public class PlayerController {
 	public int getPlayerID () {
 		return this.playerModel.getPlayerID();
 	}
+	
+	public void updatePlayerFrameField () {
+		this.cardController.updatePlayerFrameField();
+	}
 }

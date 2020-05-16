@@ -27,6 +27,14 @@ public class PatternCardModel {
 		this.importValues(); 
 		this.importField();
 	}
+	
+	public void updatePlayerFrameField (int gameID, int playerID) {
+		for (int x = 0; x < field.length; x++) {
+			for (int y = 0; y < field[x].length; y++) {
+				field[x][y].updatePlayerFrameField(gameID, playerID);
+			}
+		}
+	}
 
 	public int getIdPatternCard() {
 		return this.idPatternCard;

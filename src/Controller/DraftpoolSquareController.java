@@ -3,11 +3,11 @@ package Controller;
 import model.GameDiceModel;
 
 public class DraftpoolSquareController {
-	//private DraftpoolController controller;
+	private DraftpoolController2 controller;
 	private GameDiceModel dice;
 	
 	public DraftpoolSquareController (DraftpoolController2 controller, GameDiceModel dice) {
-		//this.controller = controller;
+		this.controller = controller;
 		this.dice = dice;
 	}
 	
@@ -20,7 +20,7 @@ public class DraftpoolSquareController {
 		
 		if (dice != null) {
 			System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
-			//controller.setSelectedDice(dice);
+			controller.setSelectedDice(dice);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package model;
 
 import DataBase.DBCon;
+import DataBase.DiceDB;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +11,8 @@ public class PatternCardFieldModel {
 	private final int idPatternCard;
 	private final int x, y, value;
 	private final String color;
+	private GameDiceModel dice;
+	private DiceDB con;
 	
 	public PatternCardFieldModel (int idPatternCard, int x, int y, String color, int value) {
 		this.idPatternCard = idPatternCard;
@@ -17,6 +20,14 @@ public class PatternCardFieldModel {
 		this.y = y;
 		this.color = color;
 		this.value = value;
+		
+		this.con = new DiceDB();
+	}
+	
+	public void updatePlayerFrameField (int gameID, int playerID) {
+		if (dice != null) {
+			con.updatePlayerFrameField(gameID, dice, playerID, x, y);
+		}
 	}
 	
 	public int getIdPatternCard () {
@@ -37,5 +48,9 @@ public class PatternCardFieldModel {
 	
 	public String getColor () {
 		return this.color;
+	}
+
+	public void setDice(GameDiceModel dice) {
+		this.dice = dice;
 	}
 }

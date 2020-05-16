@@ -2,10 +2,12 @@ package View;
 
 //import Controller.DraftpoolController;
 import Controller.GameController;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -90,10 +92,26 @@ public class GamePane extends BorderPane {
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		gamePaneLeft.getChildren().add(endTurn);
+		
+		endTurn.setOnMouseClicked(new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent event) {
+				onClickEndTurn();
+			}
+		});
+		
+		
+		
 //		roundCounter
 		Label roundCounter = new Label("Ronde: X");
 		roundCounter.setFont(new Font("Arial", 16));
 		gamePaneRight.getChildren().add(roundCounter);
+	}
+	
+	private void onClickEndTurn() {
+		System.out.println("GamePane:");
+		System.out.println("End Turn");
+		this.gameController.endTurn();
 	}
 
 	public void createChoicePane(WindowPatternView card1, WindowPatternView card2, WindowPatternView card3,
