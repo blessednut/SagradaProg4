@@ -18,22 +18,6 @@ public abstract class CardPane extends Pane {
 		this.setPrefSize(cardWidth, cardHeight);
 	}
 	      
-//		TODO: Code voor een hover functie
-//	        animTimer.scheduleAtFixedRate(new TimerTask() {
-//	            int i = 0;
-//
-//	            @Override
-//	            public void run() {
-//	                if(i < 100) {
-//	                    cardWidth += 5;
-//	                    cardHeight += 5;
-//	                } else {
-//	                    this.cancel();
-//	                }
-//	                i++;
-//	            }
-//
-//	        }, 1000, 25);
 
 
 	}
