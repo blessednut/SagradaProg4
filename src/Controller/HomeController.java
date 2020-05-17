@@ -26,6 +26,7 @@ public class HomeController {
 		this.c_player = new PlayerController(c_game);
 		c_Invite = new InviteController(c_game,this);
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		c_hometc.setDaemon(true);
 		c_hometc.start();
 //		threadMethod();
 		v_home = new HomePane(this);

@@ -16,6 +16,7 @@ public class HomeThreadController extends Thread {
 	}
 	
 	// TODO COMBOBOX NOG CHECKEN OF HIJ LEEG IS VOOR DAT HIJ DE DATA INLAAD. AANDERS COMBOX LEEG MAKEN.
+	// TODO ook een mogelijkheid om de combox new aan te maken elke als hij of je uitnodigingen hebt.
 
 	// de run methode is de methode die continue blijft draaien.
 	public void run() {

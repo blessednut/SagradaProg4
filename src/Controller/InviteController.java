@@ -9,6 +9,7 @@ public class InviteController {
 	private InviteModel m_invite;
 	private GameController c_game;
 	private HomeController home;
+	private GameAcceptionThreadController gameAcceptionThread;
 	
 	private static final String ACCEPTED = "accepted";
 
@@ -51,7 +52,8 @@ public class InviteController {
 		int Gameid = Integer.parseInt(StringGameID);
 		c_game.getM_game().setGameId(Gameid);
 		m_invite.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
-		c_game.createGamePane();
+		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this);
+		gameAcceptionThread.start();
 	}
 
 	public void inVitePlayer() {
