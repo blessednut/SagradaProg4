@@ -33,7 +33,10 @@ public class HomeThreadModel {
 	}
 
 	public void addToArray(int GameID) {
+		if(!challengedGameID.contains(GameID)) {
 			challengedGameID.add(GameID);
+		}
+		
 	}
 	
 	public ArrayList<Integer> getChallengedGameID() {

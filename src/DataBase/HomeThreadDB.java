@@ -31,14 +31,15 @@ public class HomeThreadDB {
 				home.addToArray(gameID);
 			}
 		} catch (Exception e) {
+			System.out.println("getGameID");
 			System.out.println(e);
 		}
 		return gameID;
 	}
 
 	public String getUsernameOfChallenger(int gameid) {
+		username = "";
 		try {
-			System.out.println("hey");
 			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
 			rs = st.executeQuery(query);
 			while (rs.next()) {
@@ -46,6 +47,7 @@ public class HomeThreadDB {
 				System.out.println(username);
 			}
 		} catch (Exception e) {
+			System.out.println("getusername");
 			System.out.println(e);
 		}
 		return username;

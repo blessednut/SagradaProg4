@@ -1,6 +1,9 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.DefaultComboBoxModel;
 
 import model.HomeThreadModel;
 
@@ -9,12 +12,16 @@ public class HomeThreadController extends Thread {
 	private HomeController c_home;
 	private InviteController c_Invite;
 	private LogInController c_login;
-
+	private ArrayList<String> challengedGameIDString; 
+	private String username;
+	
 	public HomeThreadController(LogInController c_login, InviteController c_invite) {
 		this.c_login = c_login;
 		this.c_home = c_home;
 		this.c_Invite = c_invite;
 		this.m_home = new HomeThreadModel();
+		challengedGameIDString = new ArrayList<String>();
+		username = c_login.getUsername();
 	}
 	
 	// TODO COMBOBOX NOG CHECKEN OF HIJ LEEG IS VOOR DAT HIJ DE DATA INLAAD. AANDERS COMBOX LEEG MAKEN.
@@ -34,11 +41,18 @@ public class HomeThreadController extends Thread {
 				// loop om je uitdaging
 				while(i< m_home.getChallengedGameID().size()) {
 					nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
+					System.out.println("nameOfChallenger: " + nameOfChallenger);
 					IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
-					
-					
-					c_Invite.getV_InvitePane().getInvites().getItems()
-							.add(nameOfChallenger + "+" + IDOFChallenger);
+					System.out.println("IDOFChallenger: " + IDOFChallenger);
+					if(!challengedGameIDString.contains(IDOFChallenger)) {
+						challengedGameIDString.add(IDOFChallenger);
+						System.out.println(challengedGameIDString);
+						c_Invite.getV_InvitePane().getInvites().getItems()
+						.add(nameOfChallenger + "+" + IDOFChallenger);
+						System.out.println("HomeThreadController:");
+						System.out.println("toegevoegd");
+					}
+					System.out.println("HomeThreadController:");
 					System.out.println("ik doe het");
 					i++;
 				}
