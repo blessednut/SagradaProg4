@@ -11,30 +11,23 @@ import model.GameModel;
 public class GameController {
 	private MySceneController myScene;
 	private GamePane gamePane;
-	//private PatternCardController c_patternCard;
 	private GameModel m_game;
 	private LogInController c_login;
 
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
-	//private DraftpoolController draftController;
 	
 	private PlayerController playerController;
 	
-	//test 
-	//private DiceModel[] dice;
-	private DiceModel2 dice;
-	private DraftpoolController2 draftpoolController;
+	private DiceModel dice;
+	private DraftpoolController draftpoolController;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
 
 		this.m_game = new GameModel();
-//		this.gamePane = new GamePane(this);
-		
-		
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {
@@ -54,16 +47,11 @@ public class GameController {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
 		
-		this.dice = new DiceModel2(this);
+		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, m_game.getGameId(), c_login.getUsername());
 		
-		this.draftpoolController = new DraftpoolController2(this);
+		this.draftpoolController = new DraftpoolController(this);
 		
-		//c_patternCard = new PatternCardController(this);
-
-		//draftController = new DraftpoolController(this, 2);
-		
-		//Belangrijk::
 		this.draftpoolController.createDraftPool(4);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()));
 	}

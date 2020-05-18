@@ -30,7 +30,6 @@ public class PatternCardController {
 	public void placeDice (GameDiceModel dice) {
 		if (selectedSquare != null) {
 			selectedSquare.setDice(dice);
-			//System.out.println("Dice is geplaatst!");
 			
 			//Maak database
 		}
@@ -60,7 +59,6 @@ public class PatternCardController {
 	
 	private WindowPatternView makeView (int index) {
 		//Magic Number weghalen
-		//Property weghalen uit model
 		return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(), makeSquareView(optionCard[index].getField()));
 	}
 	

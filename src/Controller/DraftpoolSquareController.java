@@ -3,10 +3,10 @@ package Controller;
 import model.GameDiceModel;
 
 public class DraftpoolSquareController {
-	private DraftpoolController2 controller;
+	private DraftpoolController controller;
 	private GameDiceModel dice;
 	
-	public DraftpoolSquareController (DraftpoolController2 controller, GameDiceModel dice) {
+	public DraftpoolSquareController (DraftpoolController controller, GameDiceModel dice) {
 		this.controller = controller;
 		this.dice = dice;
 	}

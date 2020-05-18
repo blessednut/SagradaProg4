@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.DiceModel;
 import model.GameDiceModel;
 
 public class DiceDB {
@@ -84,58 +83,5 @@ public class DiceDB {
 		}
 
 		return null;
-	}
-	
-	//Old
-	public int countGameDice(int gameID) {
-		try {
-			String query = "select count(idgame) as numberOfDice from gamedie where idgame = " + gameID + ";";
-			rs = st.executeQuery(query);
-
-			int amount = 0;
-			while (rs.next()) {
-				amount = rs.getInt(1);
-			}
-			return amount;
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return 0;
-	}
-
-	public DiceModel[] importDie() {
-		try {
-			DiceModel[] die = new DiceModel[getDieAmount()];
-
-			String query = "SELECT *\r\n" + "FROM die;";
-			rs = st.executeQuery(query);
-
-			int i = 0;
-			while (rs.next()) {
-				die[i] = new DiceModel(rs.getInt("number"), rs.getString("color"));
-				i++;
-			}
-			return die;
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-
-	private int getDieAmount() {
-		try {
-			int value = 0;
-			String query = "SELECT COUNT(*) \r\n" + "FROM die";
-			rs = st.executeQuery(query);
-
-			while (rs.next()) {
-				value = rs.getInt(1);
-			}
-
-			return value;
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return 0;
 	}
 }

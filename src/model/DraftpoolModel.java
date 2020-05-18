@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class DraftpoolModel2 {
+public class DraftpoolModel {
 	private ArrayList<GameDiceModel> draftpool;
 	
-	public DraftpoolModel2 () {
+	public DraftpoolModel () {
 		this.draftpool = new ArrayList<GameDiceModel>();
 	}
 	

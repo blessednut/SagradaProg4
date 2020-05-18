@@ -1,19 +1,41 @@
 package model;
 
+import java.util.ArrayList;
+
+import Controller.GameController;
+import DataBase.DiceDB;
+
 public class DiceModel {
-	private int number;
-	private String color;
+	private ArrayList<GameDiceModel> dice;
+	private GameController controller;
+	private DiceDB con;
 	
-	public DiceModel (int number, String color) {
-		this.number = number;
-		this.color = color;
+	public DiceModel (GameController controller) {
+		this.controller = controller;
+		this.dice = new ArrayList<GameDiceModel>();
+		this.con = new DiceDB();
+		
+		this.importGameDice(controller.getM_game().getGameId());
 	}
 	
-	public int getNumber () {
-		return this.number;
+	public void addGameDice (GameDiceModel gameDice) {
+		this.dice.add(gameDice);
 	}
 	
-	public String getColor () {
-		return this.color;
+	public ArrayList<GameDiceModel> getBag () {
+		return this.con.getBag(controller.getM_game().getGameId());
 	}
+	
+	public void addDice (GameDiceModel gameDice) {
+		this.dice.add(gameDice);
+		
+		//insert Query
+		this.con.insertGameDice(gameDice);
+	}
+	
+	private void importGameDice (int gameID) {
+		this.dice = con.importGameDice(gameID);
+	}
+	
+	//Maken update Query
 }

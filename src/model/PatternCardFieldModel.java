@@ -12,6 +12,8 @@ public class PatternCardFieldModel {
 	private final int x, y, value;
 	private final String color;
 	private GameDiceModel dice;
+	
+	//TODO: query verplaatsen naar andere database klasse
 	private DiceDB con;
 	
 	public PatternCardFieldModel (int idPatternCard, int x, int y, String color, int value) {
@@ -25,6 +27,7 @@ public class PatternCardFieldModel {
 	}
 	
 	public void updatePlayerFrameField (int gameID, int playerID) {
+		//BELANGRIJK wanneer het veld is veranderd naar een leegvak, wordt dit nog niet geupdate.
 		if (dice != null) {
 			con.updatePlayerFrameField(gameID, dice, playerID, x, y);
 		}
