@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.Iterator;
+
 import model.HomeThreadModel;
 
 public class HomeThreadController extends Thread {
@@ -20,18 +22,11 @@ public class HomeThreadController extends Thread {
 
 	// de run methode is de methode die continue blijft draaien.
 	public void run() {
+		String nameOfChallenger = "";
+		String IDOFChallenger = "";
 		// door deze loop blijft het programma 1000.000 keer draaien.
 		for(int x = 0; x < 1000000; x++) {
-			int i = 0;
-			String nameOfChallenger = "";
-			String IDOFChallenger = "";
-			// hier kijkt de thread of de combobox leeg is.
-			for(int c = 0; c < c_Invite.getV_InvitePane().getInvites().getItems().size(); c++) {
-				// zo niet dan maakt hij deze leeg.
-				if(!c_Invite.getV_InvitePane().getInvites().getItems().isEmpty()) {
-					c_Invite.getV_InvitePane().getInvites().getItems().remove(c);
-				}
-			}
+			int i = 0;			
 			//try vanwege de mysql code.
 			try {
 				// vraagt je gamid op aan de hand van je username. username komt uit de login controller
@@ -40,6 +35,8 @@ public class HomeThreadController extends Thread {
 				while(i< m_home.getChallengedGameID().size()) {
 					nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
 					IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
+					
+					
 					c_Invite.getV_InvitePane().getInvites().getItems()
 							.add(nameOfChallenger + "+" + IDOFChallenger);
 					System.out.println("ik doe het");

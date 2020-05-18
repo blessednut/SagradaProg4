@@ -163,16 +163,7 @@ public class InvitePane extends HBox {
 		titel2.setStyle("-fx-font-weight: bold");
 		titel2.setContentDisplay(ContentDisplay.CENTER);
 
-//		Username = new TextField();
-//		Username.setMinSize(300, 50);
-//		Username.setPrefSize(300, 50);
-//		Username.setMaxSize(300, 50);
-//
-//
-//		gameId = new TextField();
-//		gameId.setMinSize(300, 50);
-//		gameId.setPrefSize(300, 50);
-//		gameId.setMaxSize(300, 50);
+
 		invites = new ComboBox<>();
 		invites.setMinSize(300, 50);
 		invites.setPrefSize(300, 50);

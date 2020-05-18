@@ -9,7 +9,6 @@ public class HomeController {
 
 	private HomePane v_home;
 	private InviteController c_Invite;
-//	private InvitePane v_invite;
 	private CreditsPane v_credits;
 	private StatisticsPane v_statistics;
 	private MySceneController myScene;
@@ -28,7 +27,6 @@ public class HomeController {
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);
 		c_hometc.setDaemon(true);
 		c_hometc.start();
-//		threadMethod();
 		v_home = new HomePane(this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
@@ -65,12 +63,6 @@ public class HomeController {
 	public LogInController getC_login() {
 		return c_login;
 	}
-//
-//	private void threadMethod() throws NullPointerException {
-//		System.out.println("Test");
-//		Thread th = new Thread(c_hometc);
-//		th.start();
-//	}
 
 	public HomeThreadController getC_hometc() {
 		return c_hometc;
