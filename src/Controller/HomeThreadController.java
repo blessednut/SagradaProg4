@@ -41,19 +41,14 @@ public class HomeThreadController extends Thread {
 				// loop om je uitdaging
 				while(i< m_home.getChallengedGameID().size()) {
 					nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
-					System.out.println("nameOfChallenger: " + nameOfChallenger);
 					IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
-					System.out.println("IDOFChallenger: " + IDOFChallenger);
 					if(!challengedGameIDString.contains(IDOFChallenger)) {
 						challengedGameIDString.add(IDOFChallenger);
-						System.out.println(challengedGameIDString);
 						c_Invite.getV_InvitePane().getInvites().getItems()
 						.add(nameOfChallenger + "+" + IDOFChallenger);
-						System.out.println("HomeThreadController:");
-						System.out.println("toegevoegd");
+						
 					}
-					System.out.println("HomeThreadController:");
-					System.out.println("ik doe het");
+					
 					i++;
 				}
 				

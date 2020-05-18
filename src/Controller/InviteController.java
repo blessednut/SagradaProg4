@@ -38,7 +38,7 @@ public class InviteController {
 		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
 		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
-		
+		// acceptation button uit de invitepane.
 		v_invite.getAccept().setOnMouseClicked(e -> acceptinvitation(home.getC_login().getUsername()));
 		
 	}
