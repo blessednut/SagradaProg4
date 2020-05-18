@@ -5,92 +5,93 @@ import model.InviteModel;
 
 public class InviteController {
 
-	private InvitePane v_invite;
-	private InviteModel m_invite;
-	private GameController c_game;
+	private InvitePane invitePane;
+	private InviteModel inviteModel;
+	private GameController gameController;
 	private HomeController home;
 	private GameAcceptionThreadController gameAcceptionThread;
 	
 	private static final String ACCEPTED = "accepted";
 
-	public InviteController(GameController c_game, HomeController home) {
-		this.c_game = c_game;
+	public InviteController(GameController gameController, HomeController home) {
+		this.gameController = gameController;
 		this.home = home;
-		m_invite = new InviteModel(this);
-		v_invite = new InvitePane();
+		inviteModel = new InviteModel(this);
+		invitePane = new InvitePane();
 
 		// de switchcase bepaalt aan de hand van de selected RadioButton welke methode
 		// er gekozen moet worden.
-		v_invite.getSearch().setOnMouseClicked(e -> {
-			switch (v_invite.getButtons().getSelectedToggle().getUserData().toString()) {
+		invitePane.getSearch().setOnMouseClicked(e -> {
+			switch (invitePane.getButtons().getSelectedToggle().getUserData().toString()) {
 			case "twee":
-				searchForUsername(v_invite.getName1().getText());
+				searchForUsername(invitePane.getName1().getText());
 				break;
 			case "drie":
-				searchForTwoUsernames(v_invite.getName1().getText(), v_invite.getName2().getText());
+				searchForTwoUsernames(invitePane.getName1().getText(), invitePane.getName2().getText());
 				break;
 			case "vier":
-				searchForThreeUsernames(v_invite.getName1().getText(), v_invite.getName2().getText(),
-						v_invite.getName3().getText());
+				searchForThreeUsernames(invitePane.getName1().getText(), invitePane.getName2().getText(),
+						invitePane.getName3().getText());
 				break;
 			}
 		});
-		v_invite.getName1().setOnMouseClicked(e -> setSearchButton());
-		v_invite.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
+		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
+		invitePane.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
-		// acceptation button uit de invitepane.
-		v_invite.getAccept().setOnMouseClicked(e -> acceptinvitation(home.getC_login().getUsername()));
+		
+		invitePane.getAccept().setOnMouseClicked(e -> acceptinvitation(home.getC_login().getUsername()));
 		
 	}
 	
 	public void acceptinvitation(String username) {
-		String[] parts = v_invite.getInvites().getValue().split("\\+");
+		String[] parts = invitePane.getInvites().getValue().split("\\+");
 		System.out.println(parts);
 		String StringGameID = parts[1];
 		System.out.println(StringGameID);
 		
 		int Gameid = Integer.parseInt(StringGameID);
-		c_game.getM_game().setGameId(Gameid);
-		m_invite.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
+		gameController.getM_game().setGameId(Gameid);
+		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
+		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this);
 		gameAcceptionThread.start();
 	}
 
 	public void inVitePlayer() {
-		switch (v_invite.getButtons().getSelectedToggle().getUserData().toString()) {
+		switch (invitePane.getButtons().getSelectedToggle().getUserData().toString()) {
 		case "twee":
-			 c_game.getM_game().createGameRoom();
-			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
+			 gameController.getM_game().createGameRoom();
+			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
 			// uitgedaagde
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName1().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
-			c_game.createGamePane();
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
+			gameController.createGamePane();
 			break;
 		case "drie":
-			c_game.getM_game().createGameRoom();
-			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
+			gameController.getM_game().createGameRoom();
+			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
 			// eerste uitgedaagde
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName1().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
 			// tweede uigedaagde
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName2().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"),	m_invite.getColor("purple"));
-			c_game.createGamePane();
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),	inviteModel.getColor("purple"));
+			gameController.createGamePane();
 			break;
 		case "vier":
-			c_game.getM_game().createGameRoom();
-			m_invite.challengeeSelf(m_invite.maxPlayerId(), home.getC_login().getUsername(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challenger"), m_invite.getColor("blue"));
+			gameController.getM_game().createGameRoom();
+			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
 			// eerste uitgedaagde
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName1().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("green"));
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName2().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"),	m_invite.getColor("purple"));
-			m_invite.challengeeOther(m_invite.maxPlayerId(), v_invite.getName3().getText(),
-					c_game.getM_game().getGameId(), m_invite.getPlayerStatus("challengee"), m_invite.getColor("red"));
-			c_game.createGamePane();
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),	inviteModel.getColor("purple"));
+			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("red"));
+			gameController.createGamePane();
 			break;
 
 		}
@@ -98,9 +99,9 @@ public class InviteController {
 
 	public void searchForUsername(String username) {
 		try {
-			if (m_invite.checkInDatabase(username).equals(username)) {
-				v_invite.getInviteButton().setVisible(true);
-				v_invite.getSearch().setVisible(false);
+			if (inviteModel.checkInDatabase(username).equals(username)) {
+				invitePane.getInviteButton().setVisible(true);
+				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -109,10 +110,10 @@ public class InviteController {
 
 	public void searchForTwoUsernames(String username1, String username2) {
 		try {
-			if (m_invite.checkInDatabase(username1).equals(username1)
-					&& m_invite.checkInDatabase(username2).equals(username2)) {
-				v_invite.getInviteButton().setVisible(true);
-				v_invite.getSearch().setVisible(false);
+			if (inviteModel.checkInDatabase(username1).equals(username1)
+					&& inviteModel.checkInDatabase(username2).equals(username2)) {
+				invitePane.getInviteButton().setVisible(true);
+				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -121,11 +122,11 @@ public class InviteController {
 
 	public void searchForThreeUsernames(String username1, String username2, String username3) {
 		try {
-			if (m_invite.checkInDatabase(username1).equals(username1)
-					&& m_invite.checkInDatabase(username2).equals(username2)
-					&& m_invite.checkInDatabase(username3).equals(username3)) {
-				v_invite.getInviteButton().setVisible(true);
-				v_invite.getSearch().setVisible(false);
+			if (inviteModel.checkInDatabase(username1).equals(username1)
+					&& inviteModel.checkInDatabase(username2).equals(username2)
+					&& inviteModel.checkInDatabase(username3).equals(username3)) {
+				invitePane.getInviteButton().setVisible(true);
+				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -133,17 +134,17 @@ public class InviteController {
 	}
 
 	public void setSearchButton() {
-		v_invite.getName1().clear();
-		v_invite.getInviteButton().setVisible(false);
-		v_invite.getSearch().setVisible(true);
+		invitePane.getName1().clear();
+		invitePane.getInviteButton().setVisible(false);
+		invitePane.getSearch().setVisible(true);
 	}
 
 	public InvitePane getV_InvitePane() {
-		return v_invite;
+		return invitePane;
 	}
 
 	public GameController getC_game() {
-		return c_game;
+		return gameController;
 	}
 
 }
