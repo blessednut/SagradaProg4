@@ -49,4 +49,5 @@ public class InviteModel {
 	public void updatePlayerStatusChallengee(String username, int gameid, String playstatus) {
 		new InviteDB().updatePlayerStatusChallengee(username, gameid, playstatus);
 	}
+	
 }

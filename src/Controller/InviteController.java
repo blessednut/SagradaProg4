@@ -12,6 +12,7 @@ public class InviteController {
 	private GameAcceptionThreadController gameAcceptionThread;
 	
 	private static final String ACCEPTED = "accepted";
+	private static final String REFUSED = "refused";
 
 	public InviteController(GameController gameController, HomeController home) {
 		this.gameController = gameController;
@@ -39,22 +40,34 @@ public class InviteController {
 		invitePane.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 		
 		
-		invitePane.getAccept().setOnMouseClicked(e -> acceptinvitation(home.getC_login().getUsername()));
+		invitePane.getAccept().setOnMouseClicked(e -> acceptInvitation(home.getC_login().getUsername()));
+		invitePane.getRefuse().setOnMouseClicked(e -> refuseInvitation(home.getC_login().getUsername()));
 		
 	}
 	
-	public void acceptinvitation(String username) {
+	public void acceptInvitation(String username) {
 		String[] parts = invitePane.getInvites().getValue().split("\\+");
-		System.out.println(parts);
 		String StringGameID = parts[1];
-		System.out.println(StringGameID);
 		
 		int Gameid = Integer.parseInt(StringGameID);
 		gameController.getM_game().setGameId(Gameid);
+		
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
+		
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this);
 		gameAcceptionThread.start();
+	}
+	
+	public void refuseInvitation(String username) {
+		String[] parts = invitePane.getInvites().getValue().split("\\+");
+		String StringGameID = parts[1];
+		
+		int Gameid = Integer.parseInt(StringGameID);
+		gameController.getM_game().setGameId(Gameid);
+		
+		inviteModel.updatePlayerStatusChallengee(username, Gameid, REFUSED);
+		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 	}
 
 	public void inVitePlayer() {
