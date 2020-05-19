@@ -1,6 +1,9 @@
 package Controller;
 
 import View.InvitePane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import model.InviteModel;
 
 public class InviteController {
@@ -55,7 +58,7 @@ public class InviteController {
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 		
-		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this);
+		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
 		gameAcceptionThread.start();
 	}
 	
@@ -68,6 +71,11 @@ public class InviteController {
 		
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, REFUSED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
+		
+		Alert exception = new Alert(AlertType.ERROR,
+				"Je hebt de uitnodiging nu geweigerd",
+				ButtonType.OK);
+		exception.showAndWait();
 	}
 
 	public void inVitePlayer() {

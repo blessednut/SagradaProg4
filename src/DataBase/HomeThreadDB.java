@@ -44,11 +44,8 @@ public class HomeThreadDB {
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				username = rs.getString("username");
-				System.out.println(username);
 			}
 		} catch (Exception e) {
-			System.out.println("getusername");
-			System.out.println(e);
 		}
 		return username;
 	}

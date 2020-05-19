@@ -19,5 +19,9 @@ public class GameAcceptionThreadModel {
 	public int getAmountRefused(int gameID) {
 		return new GameAcceptionThreadDB(this).getAmountRefused(gameID);
 	}
+	
+	public void setRefused(int gameid) {
+		new GameAcceptionThreadDB(this).setRefused(gameid);
+	}
 
 }

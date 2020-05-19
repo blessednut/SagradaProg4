@@ -36,7 +36,7 @@ public class GameAcceptionThreadDB {
 		int result = 0;
 		try {
 			String query = "select COUNT(username) as aantal from player where idgame = '" + gameID
-					+ "' and playstatus = 'accepted';";
+					+ "' and playstatus = 'challengee';";
 			rs = st.executeQuery(query);
 			if (rs.next()) {
 				result = rs.getInt("aantal");
@@ -59,6 +59,15 @@ public class GameAcceptionThreadDB {
 			
 		}
 		return result;
+	}
+	
+	public void setRefused(int gameid) {
+		try {
+			String query = "update player set playerstatus = 'refused' where idgame = "+gameid+";";
+			st.execute(query);
+		}catch(Exception e) {
+			
+		}
 	}
 
 }
