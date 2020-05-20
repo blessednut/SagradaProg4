@@ -24,7 +24,6 @@ public class HomeThreadModel {
 	// todo
 	public String getUsernameOfChallenger(int gameid) {
 		String username = new HomeThreadDB(this).getUsernameOfChallenger(gameid);
-		System.out.println(username);
 		return username;
 		
 	}

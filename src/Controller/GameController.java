@@ -40,7 +40,7 @@ public class GameController {
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
-		this.TCC = new ToolCard_Controller();
+		this.TCC = new ToolCard_Controller(this);
 		return TCC;
 	}
 	public void createGamePane() {
@@ -100,4 +100,9 @@ public class GameController {
 	public void endTurn() {
 		this.playerController.updatePlayerFrameField();
 	}
+
+	public DraftpoolController getDraftpoolController() {
+		return draftpoolController;
+	}
+	
 }

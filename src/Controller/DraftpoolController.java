@@ -45,4 +45,9 @@ public class DraftpoolController {
 		this.selectedDice = dice;
 		this.controller.placeDice(dice);
 	}
+
+	public GameDiceModel getSelectedDice() {
+		return selectedDice;
+	}
+	
 }

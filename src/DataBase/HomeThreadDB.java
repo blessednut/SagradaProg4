@@ -38,12 +38,10 @@ public class HomeThreadDB {
 	
 	public String getUsernameOfChallenger(int gameid) {
 		try {
-			System.out.println("hey");
 			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
 			rs = st.executeQuery(query);
 			while(rs.next()) {
 				username = rs.getString("username");
-				System.out.println(username);
 			}
 		}catch(Exception e){
 			System.out.println(e);

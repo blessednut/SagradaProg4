@@ -19,14 +19,11 @@ public class ToolCardModel {
 		int toolCardID = rand.nextInt((max - min) + 1) + min;
 		cardName=tcDB.getCardName(toolCardID);
 		return cardName;
-		
-		
-
-		
-		
+	}
 	
-
-}
+	public void removeDiceFromGameDie(int idgame, int dienumber, String color) {
+		tcDB.removeDiceFromGameDie(idgame, dienumber, color);
+	}
 }
 	
 	

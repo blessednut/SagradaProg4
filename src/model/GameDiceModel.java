@@ -12,6 +12,7 @@ public class GameDiceModel {
 	private IntegerProperty eyes = new SimpleIntegerProperty(this, "eyes", 0);
 	private int roundtrack;
 	private int roundID;
+	private String color;
 	
 	public GameDiceModel (int idgame, int dieNumber, String dieColor, int eyes, int roundtrack, int roundID) {
 		this.idgame = idgame;
@@ -20,8 +21,13 @@ public class GameDiceModel {
 		this.eyes.set(eyes);
 		this.roundtrack = roundtrack;
 		this.roundID = roundID;
+		this.color = dieColor;
 	}
 	
+	public String getColor() {
+		return color;
+	}
+
 	public int getIdgame () {
 		return this.idgame;
 	}
@@ -37,4 +43,13 @@ public class GameDiceModel {
 	public final IntegerProperty valueProperty () {
 		return eyes;
 	}
+
+	public void setDieColor(StringProperty dieColor) {
+		this.dieColor = dieColor;
+	}
+
+	public void setEyes(int eyes) {
+		this.eyes.setValue(eyes);;
+	}
+	
 }

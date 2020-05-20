@@ -1,11 +1,12 @@
 package Controller;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import View.ToolCard;
+import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import model.ToolCardModel;
 
 public class ToolCard_Controller {
@@ -13,11 +14,15 @@ public class ToolCard_Controller {
 	private ArrayList<String> cards;
 	private ArrayList<ToolCard> panes;
 	private Alert tcInstruction;
+	private Random rand = new Random();
+	
+	private GameController gameController;
 
-	public ToolCard_Controller() {
+	public ToolCard_Controller(GameController gameController) {
 		cards = new ArrayList<String>();
 		panes = new ArrayList<ToolCard>();
 		tcm = new ToolCardModel();
+		this.gameController = gameController;
 		getCards();
 		
 //		Elke toolcard krijgt krijgt nu mee welke methode ze moeten gebruiken als ze aangeklikt worden.
@@ -31,13 +36,15 @@ public class ToolCard_Controller {
 	private void getCards() {
 		String temp;
 		while (cards.size() <= 2) {
-			temp = tcm.getCardName();
-			if (!cards.contains(temp)) {
+//			temp = tcm.getCardName();
+			temp = "Flux Brush";
+//			if (!cards.contains(temp)) {
 				cards.add(temp);
 				panes.add(new ToolCard(temp, this));
-			}
+//			}
 		}
 
+		
 	}
 
 	public ArrayList<ToolCard> getPanes() {
@@ -45,50 +52,88 @@ public class ToolCard_Controller {
 	}
 
 	public void useCard(String cardName) {
-		if(cardName.equals("Driepuntstang")) {
-			System.out.println("i was pressed1");
-			 tcInstruction = new Alert(AlertType.INFORMATION, "Selecteer een dobbelsteen om de waarde van te verhogen of te verlagen", ButtonType.CLOSE);
+		if(cardName.equals("Grozing Pliers")) {
+			 tcInstruction = new Alert(AlertType.INFORMATION, "Druk op YES om de waarde van de dobbelsteen te verhogen. \n Druk op NO om de waarde van de dobbelsteen te verlagen", ButtonType.YES, ButtonType.NO);
 			 tcInstruction.showAndWait();
-			 if(tcInstruction.getResult() == ButtonType.CLOSE) {
-				 tcInstruction.close();
+			 if(tcInstruction.getResult() == ButtonType.YES) {
+				 if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() < 6) {
+					 gameController.getDraftpoolController().getSelectedDice().setEyes((gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() + 1)); 
+				 }
+			 }
+			 else if(tcInstruction.getResult() == ButtonType.NO) {
+				 if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() > 1) {
+					 gameController.getDraftpoolController().getSelectedDice().setEyes((gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() - 1)); 
+				 }
 			 }
 		}
-		else if(cardName.equals("Fluxborstel")) {
-			System.out.println("i was pressed2");
+		else if(cardName.equals("Flux Brush")) {
+			int max = 6;
+			int min = 1;
+			int newEyesOfDice = rand.nextInt((max - min) + 1) + min;
+			gameController.getDraftpoolController().getSelectedDice().setEyes(newEyesOfDice);
+			
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Églomisé Borstel")) {
-			return;
+		else if(cardName.equals("Eglomise Brush")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Fluxverwijderaar")) {
-			System.out.println("i was pressed3");
+		else if(cardName.equals("Flux Remover")) {
+//			TODO werkend maken
+//			gameController.pickDiceFromBag();
+			String color = gameController.getDraftpoolController().getSelectedDice().getColor();
+			int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
+			int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
+			tcm.removeDiceFromGameDie(idgame, dienumber, color);
+			
+			
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Folie-aandrukker")) {
-			return;
+		else if(cardName.equals("Copper Foil Burnisher")) {
+			//kunnen we nog niet maken. moeten de spelregels van het windowpatterncard klaar voor zijn
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Glasbreektang")) {
-			return;
+		else if(cardName.equals("Running Pliers")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Loodhamer")) {
-			return;
+		else if(cardName.equals("Glazing Hammer")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Loodopenhaler")) {
-			return;
+		else if(cardName.equals("Lathekin")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Olieglassnijder")) {
-			return;
+		else if(cardName.equals("Tap Wheel")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Rondesnijder")) {
-			return;
+		else if(cardName.equals("Lens Cutter")) {
+			System.out.println(cardName + "ToolCard_Controller");
 		}
-		else if(cardName.equals("Schuurblok")) {
-			return;
+		else if(cardName.equals("Grinding Stone")) {
+			if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 1) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(6);
+			}
+			else if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 2) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(5);
+			}
+			else if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 3) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(4);
+			}
+			else if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 4) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(3);
+			}
+			else if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 5) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(2);
+			}
+			else if(gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 6) {
+				gameController.getDraftpoolController().getSelectedDice().setEyes(1);
+			}
+			System.out.println(cardName + " ToolCard_Controller");
 		}
-		else if(cardName.equals("Snijliniaal")) {
-			return;
+		else if(cardName.equals("Cork-backed Straightedge")) {
+			System.out.println(cardName + " ToolCard_Controller");
 		}
 		else {
 //			TODO error message
-			System.out.println("er gaat iets mis");
+			System.out.println("ToolCard_Controller 89: Er is iets mis gegaan");
 		}
 
 	}
