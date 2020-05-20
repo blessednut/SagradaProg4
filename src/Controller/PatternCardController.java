@@ -28,10 +28,30 @@ public class PatternCardController {
 	}
 	
 	public void placeDice (GameDiceModel dice) {
-		if (selectedSquare != null) {
-			selectedSquare.setDice(dice);
+		if (selectedSquare != null ) {
+//			System.out.println("PatternCardController");
+//			System.out.println("SelectedSquare = " + selectedSquare.getSquare().getColor());
+//			System.out.println("Dice = " + dice.colorProperty().getValue());
+//			System.out.println(selectedSquare.getSquare().getColor().toString());
+//			System.out.println(dice.colorProperty().getValue().toString());
+//			System.out.println(selectedSquare.getSquare().getColor().toString() == dice.colorProperty().getValue().toString());
 			
+			if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor().toString().equals(dice.colorProperty().getValue().toString())) {
+				if (selectedSquare.getSquare().getValue() == 0 || selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
+					System.out.println("TRUE");
+					this.selectedSquare.setDice(dice);
+				} else {
+					System.out.println("FALSE");
+				}
+				
+				//return true;
+			} else {
+				System.out.println("FALSE");
+				//return false;
+			}
 			//Maak database
+		} else {
+			//return false;
 		}
 	}
 
