@@ -26,8 +26,9 @@ public class GameController {
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
-
+		
 		this.m_game = new GameModel();
+
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {
@@ -40,7 +41,6 @@ public class GameController {
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
-		this.TCC = new ToolCard_Controller(this);
 		return TCC;
 	}
 	public void createGamePane() {
@@ -103,6 +103,10 @@ public class GameController {
 
 	public DraftpoolController getDraftpoolController() {
 		return draftpoolController;
+	}
+	
+	public void makeTCC() {
+		this.TCC = new ToolCard_Controller(this);
 	}
 	
 }

@@ -66,6 +66,7 @@ public class PatternCardController {
 		} else {
 			return false;
 		}
+
 	}
 
 	private void generatePatternCardChoice() {
@@ -107,7 +108,7 @@ public class PatternCardController {
 		this.chosenCard = this.optionCard[index];
 		this.chosenCard.makePlayerFrameField();
 		this.c_game.getGamePane().setOwnWindow(makeView(chosenCard));
-		this.c_game.getGamePane().createGamePane();
+		this.c_game.getGamePane().createGamePane2();
 	}
 
 	public void setSelected(WindowPatternSquareController selectedSquare) {

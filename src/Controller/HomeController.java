@@ -37,9 +37,7 @@ public class HomeController {
 //		v_home.getGames().setOnAction(e -> openGamePane());
 	}
 
-//	public void openGamePane() {
-//		c_game = new GameController(myScene, c_login);
-//	}
+
 	
 	public void openInvitePane() {
 		v_home.makeReservedSpace(c_Invite.getV_InvitePane());

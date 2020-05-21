@@ -46,6 +46,8 @@ public class DraftpoolController {
 		
 		if (this.controller.placeDice(dice)) {
 			SquareController.removeDice();
+			draftpoolModel.removeDiceFromDraftpool(dice);
+			selectedDice = null;
 		}
 	}
 

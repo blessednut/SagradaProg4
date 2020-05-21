@@ -4,6 +4,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ToolCardDB {
 	private ResultSet rs;
@@ -39,6 +40,49 @@ public class ToolCardDB {
 			System.out.println("ToolcardDB: de query doet het niet");
 			e.printStackTrace();
 		}
+	}
+	
+	private int generategametoolcardid() {
+		int gametoolcardid = 0;
+		try {
+			String query = "SELECT \r\n" + 
+					"    MAX(gametoolcard) AS maxtoolcardid\r\n" + 
+					"FROM\r\n" + 
+					"    gametoolcard";
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				gametoolcardid = (resultset.getInt("maxtoolcardid") + 1);
+				System.out.println("ToolCardDB 51: "+ gametoolcardid);
+			}
+		}catch(Exception e) {
+			System.out.println("Toolcard 58: dit is een foutmelding");
+			e.printStackTrace();
+		}
+		return gametoolcardid;
+	}
+	
+	
+	public void insertToolCardIntoGameToolCardTable(int idtoolcard, int idgame) {
+		try {
+			String query = "INSERT INTO gametoolcard (gametoolcard, idtoolcard, idgame) VALUES ("+ generategametoolcardid() +", "+ idtoolcard + ", "+ idgame +");";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public ArrayList<Integer> getGameToolCardID(int gameid) {
+		ArrayList<Integer> intList = new ArrayList<>();
+		try {
+			String query = "select idtoolcard from gametoolcard where idgame = "+ gameid;
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				intList.add(resultset.getInt("idtoolcard"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return intList;
 	}
 
 }
