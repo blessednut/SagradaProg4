@@ -1,7 +1,6 @@
 package Controller;
 
 import View.CreditsPane;
-import View.GamePane;
 import View.HomePane;
 import View.StatisticsPane;
 

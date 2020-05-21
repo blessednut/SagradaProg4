@@ -53,13 +53,16 @@ public class InviteController {
 		String StringGameID = parts[1];
 		
 		int Gameid = Integer.parseInt(StringGameID);
+		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
+		gameAcceptionThread.setDaemon(true);
+		gameAcceptionThread.start();
+		
 		gameController.getM_game().setGameId(Gameid);
 		
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 		
-		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
-		gameAcceptionThread.start();
+		
 	}
 	
 	public void refuseInvitation(String username) {

@@ -31,8 +31,7 @@ public class HomeThreadDB {
 				home.addToArray(gameID);
 			}
 		} catch (Exception e) {
-			System.out.println("getGameID");
-			System.out.println(e);
+			// throws nullpointerexception when there are no more invitations.
 		}
 		return gameID;
 	}
