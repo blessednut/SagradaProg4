@@ -27,31 +27,44 @@ public class PatternCardController {
 		return this.playerController;
 	}
 	
-	public void placeDice (GameDiceModel dice) {
-		if (selectedSquare != null ) {
-//			System.out.println("PatternCardController");
+	public boolean placeDice (GameDiceModel dice) {
+		//Check of er een square is geselecteerd en of er geen andere dobbelsteen ligt
+		if (selectedSquare != null && selectedSquare.getSquare().isEmpty()) {
+			System.out.println("PatternCardController");
 //			System.out.println("SelectedSquare = " + selectedSquare.getSquare().getColor());
 //			System.out.println("Dice = " + dice.colorProperty().getValue());
 //			System.out.println(selectedSquare.getSquare().getColor().toString());
 //			System.out.println(dice.colorProperty().getValue().toString());
 //			System.out.println(selectedSquare.getSquare().getColor().toString() == dice.colorProperty().getValue().toString());
 			
-			if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor().toString().equals(dice.colorProperty().getValue().toString())) {
-				if (selectedSquare.getSquare().getValue() == 0 || selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
-					System.out.println("TRUE");
-					this.selectedSquare.setDice(dice);
-				} else {
-					System.out.println("FALSE");
+			//System.out.println("IsBoardEmpty = " + this.chosenCard.isWindowCardEmpty());
+			int x = this.selectedSquare.getSquare().getX();
+			int y = this.selectedSquare.getSquare().getY();
+//			System.out.println("x = " + x);
+//			System.out.println("y = " + y);
+			//chosenCard.hasSurroundingDice(x, y);
+			if (this.chosenCard.isWindowCardEmpty()) {
+				if (x > 1 && x < 5) {
+					if (y > 1 && y < 4) {
+						return false;
+					}
 				}
-				
-				//return true;
-			} else {
-				System.out.println("FALSE");
-				//return false;
 			}
-			//Maak database
+			
+			//Check op kleur
+			if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor().toString().equals(dice.colorProperty().getValue().toString())) {
+				//Check op waarde
+				if (selectedSquare.getSquare().getValue() == 0 || selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
+					this.selectedSquare.setDice(dice);
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
 		} else {
-			//return false;
+			return false;
 		}
 	}
 
