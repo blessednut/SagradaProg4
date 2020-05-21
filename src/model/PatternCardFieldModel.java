@@ -56,4 +56,8 @@ public class PatternCardFieldModel {
 	public void setDice(GameDiceModel dice) {
 		this.dice = dice;
 	}
+	
+	public boolean isEmpty () {
+		return (dice == null) ? true : false;
+	}
 }

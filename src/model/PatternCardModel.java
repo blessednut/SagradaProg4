@@ -35,6 +35,42 @@ public class PatternCardModel {
 			}
 		}
 	}
+	
+	public boolean isWindowCardEmpty () {
+		for (int x = 0; x < field.length; x++) {
+			for (int y = 0; y < field[x].length; y++) {
+				if (!field[x][y].isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void hasSurroundingDice (int x, int y) {
+		int tempX;
+		int tempY;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				//System.out.println("i = " + i + "  j = " + j);
+				tempX = x + i - 1;
+				tempY = y + j - 1;
+				System.out.println("x = " + tempX + "  y = " + tempY);
+				if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+					System.out.println("ER IS EEN SURROUNDING DICE!");
+				}
+			}
+		}
+	}
+	
+	private boolean isFieldPos (int x, int y) {
+		if (x >= 0 && x < 5) {
+			if (y >= 0 && y < 4) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public int getIdPatternCard() {
 		return this.idPatternCard;

@@ -41,9 +41,12 @@ public class DraftpoolController {
 		return draftpoolController;
 	}
 	
-	public void setSelectedDice (GameDiceModel dice) {
+	public void setSelectedDice (GameDiceModel dice, DraftpoolSquareController SquareController) {
 		this.selectedDice = dice;
-		this.controller.placeDice(dice);
+		
+		if (this.controller.placeDice(dice)) {
+			SquareController.removeDice();
+		}
 	}
 
 	public GameDiceModel getSelectedDice() {

@@ -18,6 +18,7 @@ public class DraftPoolSquareView extends StackPane {
 	//Square met een dice
 	public DraftPoolSquareView (double width, double height, DraftpoolSquareController diceController) {
 		this.diceController = diceController;
+		this.diceController.setView(this);
 		
 		this.setPrefSize(width, height);
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
@@ -25,14 +26,51 @@ public class DraftPoolSquareView extends StackPane {
 		this.setOnMouseEntered(event -> fieldHover());
 		this.setOnMouseExited(event -> fieldUnhover());
 		
+		this.drawView();
+		
+//		if (diceController.getDice() != null) {
+//			GameDiceModel dice = diceController.getDice();
+//			
+//			dice.colorProperty().addListener(new ChangeListener<String>() {
+//				@Override
+//				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
+//					setDiceView(color, dice.valueProperty().getValue());
+//				}
+//				
+//			});
+//			
+//			dice.valueProperty().addListener(new ChangeListener<Number>() {
+//				@Override
+//				public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+//					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
+//					setDiceView(color, dice.valueProperty().getValue());
+//				}
+//			});
+//			
+//			setDiceView(new ColorConverter().colorConverter((dice.colorProperty().getValue())), dice.valueProperty().getValue());
+//			
+//			this.setOnMouseClicked(new EventHandler<MouseEvent> () {
+//				@Override
+//				public void handle(MouseEvent event) {
+//					onClick();
+//				}
+//			});
+//		}
+	}
+	
+	public void updateView () {
+		drawView();
+	}
+	
+	private void drawView () {
+		this.getChildren().clear();
 		if (diceController.getDice() != null) {
 			GameDiceModel dice = diceController.getDice();
 			
 			dice.colorProperty().addListener(new ChangeListener<String>() {
 				@Override
 				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//					//Test 2
-//					System.out.println("Test 2");
 					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
 					setDiceView(color, dice.valueProperty().getValue());
 				}
@@ -42,8 +80,6 @@ public class DraftPoolSquareView extends StackPane {
 			dice.valueProperty().addListener(new ChangeListener<Number>() {
 				@Override
 				public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-					//Test 2
-//					System.out.println("Test 1");
 					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
 					setDiceView(color, dice.valueProperty().getValue());
 				}
@@ -58,27 +94,7 @@ public class DraftPoolSquareView extends StackPane {
 				}
 			});
 		}
-		
-//		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				text.setText("Clicked!");
-//			}
-//		});
-		
-		
-		
-		
-		//Test voor binding
-//		dice.colorProperty().setValue("red");
-//		dice.valueProperty().setValue(6);
 	}
-	
-	//Square zonder een dice
-//	public DraftPoolSquareView (double width, double height) {
-//		this.setPrefSize(width, height);
-//		this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-//	}
 	
 	private void setDiceView (Color color, int eyes) {
 		this.getChildren().clear();
