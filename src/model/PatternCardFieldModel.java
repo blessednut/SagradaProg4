@@ -60,4 +60,8 @@ public class PatternCardFieldModel {
 	public boolean isEmpty () {
 		return (dice == null) ? true : false;
 	}
+	
+	public GameDiceModel getDice () {
+		return this.dice;
+	}
 }

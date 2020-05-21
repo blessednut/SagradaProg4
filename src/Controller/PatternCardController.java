@@ -18,17 +18,17 @@ public class PatternCardController {
 		this.playerController = playerController;
 		generatePatternCardChoice();
 	}
-	
-	public void updatePlayerFrameField () {
+
+	public void updatePlayerFrameField() {
 		this.chosenCard.updatePlayerFrameField(c_game.getM_game().getGameId(), playerController.getPlayerID());
 	}
-	
-	public PlayerController getPlayerController () {
+
+	public PlayerController getPlayerController() {
 		return this.playerController;
 	}
-	
-	public boolean placeDice (GameDiceModel dice) {
-		//Check of er een square is geselecteerd en of er geen andere dobbelsteen ligt
+
+	public boolean placeDice(GameDiceModel dice) {
+		// Check of er een square is geselecteerd en of er geen andere dobbelsteen ligt
 		if (selectedSquare != null && selectedSquare.getSquare().isEmpty()) {
 			System.out.println("PatternCardController");
 //			System.out.println("SelectedSquare = " + selectedSquare.getSquare().getColor());
@@ -36,32 +36,59 @@ public class PatternCardController {
 //			System.out.println(selectedSquare.getSquare().getColor().toString());
 //			System.out.println(dice.colorProperty().getValue().toString());
 //			System.out.println(selectedSquare.getSquare().getColor().toString() == dice.colorProperty().getValue().toString());
-			
-			//System.out.println("IsBoardEmpty = " + this.chosenCard.isWindowCardEmpty());
+
+			// System.out.println("IsBoardEmpty = " + this.chosenCard.isWindowCardEmpty());
 			int x = this.selectedSquare.getSquare().getX();
 			int y = this.selectedSquare.getSquare().getY();
 //			System.out.println("x = " + x);
 //			System.out.println("y = " + y);
-			//chosenCard.hasSurroundingDice(x, y);
+			// chosenCard.hasSurroundingDice(x, y);
 			if (this.chosenCard.isWindowCardEmpty()) {
 				if (x > 1 && x < 5) {
 					if (y > 1 && y < 4) {
 						return false;
 					}
 				}
-			}
-			
-			//Check op kleur
-			if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor().toString().equals(dice.colorProperty().getValue().toString())) {
-				//Check op waarde
-				if (selectedSquare.getSquare().getValue() == 0 || selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
-					this.selectedSquare.setDice(dice);
-					return true;
+				// Plaat eerste steen
+				// Check op kleur
+				if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor().toString()
+						.equals(dice.colorProperty().getValue().toString())) {
+					// Check op waarde
+					if (selectedSquare.getSquare().getValue() == 0
+							|| selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
+						this.selectedSquare.setDice(dice);
+						return true;
+					} else {
+						return false;
+					}
 				} else {
 					return false;
 				}
 			} else {
-				return false;
+				if (this.chosenCard.hasSurroundingDice(x, y)) {
+					// Check voor dubbele waarde
+					if (this.chosenCard.hasDoubleSurroundingColorAndValue(x, y, dice.colorProperty().getValue(),
+							dice.valueProperty().getValue())) {
+						// Check op kleur
+						if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor()
+								.toString().equals(dice.colorProperty().getValue().toString())) {
+							// Check op waarde
+							if (selectedSquare.getSquare().getValue() == 0
+									|| selectedSquare.getSquare().getValue() == dice.valueProperty().getValue()) {
+								this.selectedSquare.setDice(dice);
+								return true;
+							} else {
+								return false;
+							}
+						} else {
+							return false;
+						}
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
 			}
 		} else {
 			return false;
@@ -70,18 +97,18 @@ public class PatternCardController {
 
 	private void generatePatternCardChoice() {
 		this.optionCard = new PatternCardModel[4];
-		
-		//Check hier voor mogelijke dubbele patterncards
+
+		// Check hier voor mogelijke dubbele patterncards
 		for (int i = 0; i < optionCard.length; i++) {
 			this.optionCard[i] = new PatternCardModel(this, getRandomIntBetweenRange(1, 24));
 		}
-		
+
 		this.c_game.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 
 	private WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
 		fieldController = new WindowPatternSquareController[5][4];
-		
+
 		for (int x = 0; x < fieldController.length; x++) {
 			for (int y = 0; y < fieldController[x].length; y++) {
 				fieldController[x][y] = new WindowPatternSquareController(this, field[x][y]);
@@ -89,14 +116,16 @@ public class PatternCardController {
 		}
 		return fieldController;
 	}
-	
-	private WindowPatternView makeView (int index) {
-		//Magic Number weghalen
-		return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(), makeSquareView(optionCard[index].getField()));
+
+	private WindowPatternView makeView(int index) {
+		// Magic Number weghalen
+		return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
+				makeSquareView(optionCard[index].getField()));
 	}
-	
-	private WindowPatternView makeView (PatternCardModel card) {
-		return new WindowPatternView(450, 300, card.nameProperty(), card.tokenAmount(), makeSquareView(card.getField()));
+
+	private WindowPatternView makeView(PatternCardModel card) {
+		return new WindowPatternView(450, 300, card.nameProperty(), card.tokenAmount(),
+				makeSquareView(card.getField()));
 	}
 
 	public int getRandomIntBetweenRange(int min, int max) {

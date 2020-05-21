@@ -36,6 +36,56 @@ public class PatternCardModel {
 		}
 	}
 	
+	public boolean hasDoubleSurroundingColorAndValue (int x, int y, String color, int value) {
+		this.printField();
+		//Check rechts
+		x = x - 1;
+		y = y - 1;
+		int tempX = x + 1;
+		int tempY = y;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
+				System.out.println("FALSE");
+				return false;
+			}
+		}
+		
+		//Check onder
+		tempX = x;
+		tempY = y + 1;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
+				System.out.println("FALSE");
+				return false;
+			}
+		}
+		
+		//Check links
+		tempX = x - 1;
+		tempY = y;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
+				System.out.println("FALSE");
+				return false;
+			}
+		}
+		
+		//Check rechts
+		tempX = x;
+		tempY = y - 1;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
+				System.out.println("FALSE");
+				return false;
+			}
+		}
+		
+		System.out.println("TRUE");
+		System.out.println("Kleur = " + color);
+		System.out.println("Value = " + value);
+		return true;
+	}
+	
 	public boolean isWindowCardEmpty () {
 		for (int x = 0; x < field.length; x++) {
 			for (int y = 0; y < field[x].length; y++) {
@@ -47,7 +97,7 @@ public class PatternCardModel {
 		return true;
 	}
 	
-	public void hasSurroundingDice (int x, int y) {
+	public boolean hasSurroundingDice (int x, int y) {
 		int tempX;
 		int tempY;
 		for (int i = -1; i <= 1; i++) {
@@ -55,12 +105,14 @@ public class PatternCardModel {
 				//System.out.println("i = " + i + "  j = " + j);
 				tempX = x + i - 1;
 				tempY = y + j - 1;
-				System.out.println("x = " + tempX + "  y = " + tempY);
+				//System.out.println("x = " + tempX + "  y = " + tempY);
 				if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-					System.out.println("ER IS EEN SURROUNDING DICE!");
+					//System.out.println("ER IS EEN SURROUNDING DICE!");
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 	
 	private boolean isFieldPos (int x, int y) {
@@ -121,5 +173,16 @@ public class PatternCardModel {
 	
 	public PatternCardFieldModel[][] getField () {
 		return this.field;
+	}
+	
+	private void printField () {
+		for (int x = 0; x < field.length; x++) {
+			for (int y = 0; y < field[y].length; y++) {
+				if (!field[x][y].isEmpty()) {
+					GameDiceModel fieldDice = field[x][y].getDice();
+					System.out.println("FieldDice = " + fieldDice.getDieNumber());
+				}
+			}
+		}
 	}
 }
