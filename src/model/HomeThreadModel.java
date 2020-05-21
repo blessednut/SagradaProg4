@@ -24,7 +24,6 @@ public class HomeThreadModel {
 	// todo
 	public String getUsernameOfChallenger(int gameid) {
 		String username = new HomeThreadDB(this).getUsernameOfChallenger(gameid);
-		System.out.println(username);
 		return username;
 		
 	}
@@ -34,10 +33,12 @@ public class HomeThreadModel {
 	}
 
 	public void addToArray(int GameID) {
-		int i = 0;
-		challengedGameID.add(GameID);
+		if(!challengedGameID.contains(GameID)) {
+			challengedGameID.add(GameID);
+		}
+		
 	}
-
+	
 	public ArrayList<Integer> getChallengedGameID() {
 		return challengedGameID;
 	}

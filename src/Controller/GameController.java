@@ -17,9 +17,9 @@ public class GameController {
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
-	
+
 	private PlayerController playerController;
-	
+
 	private DiceModel dice;
 	private DraftpoolController draftpoolController;
 
@@ -28,10 +28,15 @@ public class GameController {
 		this.c_login = c_login;
 
 		this.m_game = new GameModel();
+		this.public_OCC = new Public_Objective_Card_Controller();
+		this.TCC = new ToolCard_Controller();
+//		this.gamePane = new GamePane(this);
+
+
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {
-		this.public_OCC = new Public_Objective_Card_Controller();
+
 		return public_OCC;
 	}
 
@@ -40,22 +45,22 @@ public class GameController {
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
-		this.TCC = new ToolCard_Controller();
+
 		return TCC;
 	}
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
-		
+
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, m_game.getGameId(), c_login.getUsername());
-		
+
 		this.draftpoolController = new DraftpoolController(this);
-		
+
 		this.draftpoolController.createDraftPool(4);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()));
 	}
-	
+
 	public GameDiceModel pickDiceFromBag () {
 		//Vraag om een lijst van dobbelstenen die nog in de zak zitten
 		ArrayList<GameDiceModel> diceBag = this.dice.getBag();
@@ -92,7 +97,7 @@ public class GameController {
 		System.out.println("GameController:");
 		System.out.println(dice.getDieNumber());
 	}
-	
+
 	private int getRandomInt(int min, int max) {
 		return (int) Math.floor((Math.random() * ((max - min) + 1)) + min);
 	}

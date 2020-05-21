@@ -73,4 +73,11 @@ public class LogInController {
 	public String getUsername() {
 		return username;
 	}
+
+	public HomeController getC_home() {
+		return c_home;
+	}
+	
+	
+	
 }
