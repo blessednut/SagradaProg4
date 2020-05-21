@@ -7,7 +7,9 @@ import java.sql.Statement;
 import model.GameAcceptionThreadModel;
 
 public class GameAcceptionThreadDB {
-	private ResultSet rs;
+	private ResultSet amountInvited;
+	private ResultSet amountAccepted;
+	private ResultSet amountRefused;
 	private Statement st;
 	private PreparedStatement ps;
 
@@ -22,9 +24,9 @@ public class GameAcceptionThreadDB {
 		int result = 0;
 		try {
 			String query = "select COUNT(username) as aantal from player where idgame = '" + gameID + "';";
-			rs = st.executeQuery(query);
-			if (rs.next()) {
-				result = rs.getInt("aantal");
+			amountInvited = st.executeQuery(query);
+			if (amountInvited.next()) {
+				result = amountInvited.getInt("aantal");
 			}
 		} catch (Exception e) {
 
@@ -35,11 +37,11 @@ public class GameAcceptionThreadDB {
 	public int getAmountAccepted(int gameID) {
 		int result = 0;
 		try {
-			String query = "select COUNT(username) as aantal from player where idgame = " + gameID
-					+ " and playstatus = 'challengee';";
-			rs = st.executeQuery(query);
-			if (rs.next()) {
-				result = rs.getInt("aantal");
+			String query = "select COUNT(username) as aantal from player where idgame = '" + gameID
+					+ "' and playstatus = 'challengee';";
+			amountAccepted = st.executeQuery(query);
+			if (amountAccepted.next()) {
+				result = amountAccepted.getInt("aantal");
 			}
 		} catch (Exception e) {
 
@@ -50,10 +52,10 @@ public class GameAcceptionThreadDB {
 	public int getAmountRefused(int gameID) {
 		int result = 0;
 		try {
-			String query = "select COUNT(username) as aantal from player where idgame = " + gameID + " and playstatus = 'refused';";
-			rs = st.executeQuery(query);
-			if(rs.next()) {
-				result = rs.getInt("aantal");
+			String query = "select COUNT(username) as aantal from player where idgame = '"+gameID+"' and playstatus = 'refused';";
+			amountRefused = st.executeQuery(query);
+			if(amountRefused.next()) {
+				result = amountRefused.getInt("aantal");
 			}
 		}catch(Exception e) {
 			
