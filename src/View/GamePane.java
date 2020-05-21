@@ -69,9 +69,9 @@ public class GamePane extends BorderPane {
 		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
 		
 //		Toolcards
-		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
-			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
-		}
+//		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
+//			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
+//		}
 //		Public Objective cards
 //		TODO: hier komt het aanbod toevoegen	
 		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {

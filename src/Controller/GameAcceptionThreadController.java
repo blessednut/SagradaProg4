@@ -16,11 +16,13 @@ public class GameAcceptionThreadController extends Thread {
 
 	public GameAcceptionThreadController(LogInController logInController, InviteController inViteController, int gameid
 			) {
+		System.out.println("vooran constructor");
 		this.logInController = logInController;
 		this.inViteController = inViteController;
 		gameThreadModel = new GameAcceptionThreadModel();
 		this.gameid = gameid;
 		gamestart = new Alert(AlertType.CONFIRMATION, "lets play a game", ButtonType.YES, ButtonType.NO);
+		System.out.println("achteraan constructor");
 	}
 
 	public void run() {
@@ -49,10 +51,11 @@ public class GameAcceptionThreadController extends Thread {
 			}
 			System.out.println("voor de alertbox: " + amountAccepted);
 			if (amountAccepted == 0) {
-				gamestart.showAndWait();
-				if (gamestart.getResult() == ButtonType.YES) {
+				System.out.println("in de if");
+//				gamestart.showAndWait();
+//				if (gamestart.getResult() == ButtonType.YES) {
 					inViteController.getC_game().createGamePane();
-				}
+//				}
 			}
 			try {
 				Thread.sleep(2000);
