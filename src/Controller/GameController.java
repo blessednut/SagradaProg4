@@ -19,12 +19,14 @@ public class GameController {
 		this.c_login = c_login;
 
 		this.m_game = new GameModel();
+		this.public_OCC = new Public_Objective_Card_Controller();
+		this.TCC = new ToolCard_Controller();
 //		this.gamePane = new GamePane(this);
 
 		
 	}
 	public Public_Objective_Card_Controller getPublic_OCC() {
-		this.public_OCC = new Public_Objective_Card_Controller();
+		
 		return public_OCC;
 	}
 	
@@ -33,7 +35,7 @@ public class GameController {
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
-		this.TCC = new ToolCard_Controller();
+		
 		return TCC;
 	}
 	public void createGamePane() {
