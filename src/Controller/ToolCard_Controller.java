@@ -71,19 +71,18 @@ public class ToolCard_Controller {
 			int min = 1;
 			int newEyesOfDice = rand.nextInt((max - min) + 1) + min;
 			gameController.getDraftpoolController().getSelectedDice().setEyes(newEyesOfDice);
-			
+	
 			System.out.println(cardName + " ToolCard_Controller");
 		}
 		else if(cardName.equals("Eglomise Brush")) {
 			System.out.println(cardName + " ToolCard_Controller");
 		}
 		else if(cardName.equals("Flux Remover")) {
-//			TODO werkend maken
-//			gameController.pickDiceFromBag();
-			String color = gameController.getDraftpoolController().getSelectedDice().getColor();
-			int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
-			int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
-			tcm.removeDiceFromGameDie(idgame, dienumber, color);
+
+//			String color = gameController.getDraftpoolController().getSelectedDice().getColor();
+//			int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
+//			int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
+//			tcm.removeDiceFromGameDie(idgame, dienumber, color);
 			
 			
 			System.out.println(cardName + " ToolCard_Controller");
