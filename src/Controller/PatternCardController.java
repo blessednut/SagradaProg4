@@ -119,5 +119,8 @@ public class PatternCardController {
 		return selectedSquare;
 	}
 	
-	
+	//test
+	public WindowPatternSquareController[][] getFieldController () {
+		return this.fieldController;
+	} 
 }
