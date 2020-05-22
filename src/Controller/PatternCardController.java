@@ -67,8 +67,7 @@ public class PatternCardController {
 			} else {
 				if (this.chosenCard.hasSurroundingDice(x, y)) {
 					// Check voor dubbele waarde
-					if (this.chosenCard.hasDoubleSurroundingColorAndValue(x, y, dice.colorProperty().getValue(),
-							dice.valueProperty().getValue())) {
+					if (this.chosenCard.hasDoubleSurroundingColor(x, y, dice.colorProperty().getValue()) && this.chosenCard.hasDoubleSurroundingValue(x, y, dice.valueProperty().getValue())) {
 						// Check op kleur
 						if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor()
 								.toString().equals(dice.colorProperty().getValue().toString())) {

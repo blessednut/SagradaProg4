@@ -36,7 +36,7 @@ public class PatternCardModel {
 		}
 	}
 	
-	public boolean hasDoubleSurroundingColorAndValue (int x, int y, String color, int value) {
+	public boolean hasDoubleSurroundingColor (int x, int y, String color) {
 		this.printField();
 		//Check rechts
 		x = x - 1;
@@ -44,8 +44,7 @@ public class PatternCardModel {
 		int tempX = x + 1;
 		int tempY = y;
 		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
-				System.out.println("FALSE");
+			if (field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
 				return false;
 			}
 		}
@@ -54,8 +53,7 @@ public class PatternCardModel {
 		tempX = x;
 		tempY = y + 1;
 		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
-				System.out.println("FALSE");
+			if (field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
 				return false;
 			}
 		}
@@ -64,8 +62,7 @@ public class PatternCardModel {
 		tempX = x - 1;
 		tempY = y;
 		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
-				System.out.println("FALSE");
+			if (field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
 				return false;
 			}
 		}
@@ -74,15 +71,54 @@ public class PatternCardModel {
 		tempX = x;
 		tempY = y - 1;
 		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-			if (field[tempX][tempY].getDice().valueProperty().getValue() == value || field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
-				System.out.println("FALSE");
+			if (field[tempX][tempY].getDice().colorProperty().getValue().equals(color)) {
 				return false;
 			}
 		}
 		
-		System.out.println("TRUE");
-		System.out.println("Kleur = " + color);
-		System.out.println("Value = " + value);
+		return true;
+	}
+	
+	public boolean hasDoubleSurroundingValue (int x, int y, int value) {
+		this.printField();
+		//Check rechts
+		x = x - 1;
+		y = y - 1;
+		int tempX = x + 1;
+		int tempY = y;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value) {
+				return false;
+			}
+		}
+		
+		//Check onder
+		tempX = x;
+		tempY = y + 1;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value) {
+				return false;
+			}
+		}
+		
+		//Check links
+		tempX = x - 1;
+		tempY = y;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value) {
+				return false;
+			}
+		}
+		
+		//Check rechts
+		tempX = x;
+		tempY = y - 1;
+		if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
+			if (field[tempX][tempY].getDice().valueProperty().getValue() == value) {
+				return false;
+			}
+		}
+		
 		return true;
 	}
 	
