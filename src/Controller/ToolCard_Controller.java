@@ -250,6 +250,22 @@ public class ToolCard_Controller {
 	}
 	
 	private void swapDice () {
+		if(!gameController.getPlayerController().getPatternCard().getChosenCard().isWindowCardEmpty()) {
+			if(this.sender.getDice() != null) {
+				if(gameController.getPlayerController().getPatternCard().getChosenCard().hasDoubleSurroundingColor(this.receiver.getSquare().getX(), this.receiver.getSquare().getY(), this.receiver.getDice().getColor()) && gameController.getPlayerController().getPatternCard().getChosenCard().hasSurroundingDice(this.receiver.getSquare().getX(), this.receiver.getSquare().getY())) {
+					if(this.sender.getSquare().getValue() == 0 || this.receiver.getSquare().getValue() == this.sender.getDice().valueProperty().getValue()) {
+						
+					}
+				}
+			}
+
+		}else{
+			if((this.receiver.getSquare().getX() == 1 || this.receiver.getSquare().getX() == 5) && (this.receiver.getSquare().getY() == 1 || this.receiver.getSquare().getY() == 4)) {
+				
+            }
+		}
+//		gameController.getPlayerController().getPatternCard().getChosenCard().hasDoubleSurroundingColor(x, y, color)
+//		gameController.getPlayerController().getPatternCard().getChosenCard().hasSurroundingDice(x, y)
 		System.out.println("SWAP SWAP!");
 	}
 }

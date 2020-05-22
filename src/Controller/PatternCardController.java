@@ -150,5 +150,11 @@ public class PatternCardController {
 	//test
 	public WindowPatternSquareController[][] getFieldController () {
 		return this.fieldController;
+	}
+
+	public PatternCardModel getChosenCard() {
+		return chosenCard;
 	} 
+	
+	
 }
