@@ -52,10 +52,10 @@ public class ToolCard_Controller {
 //				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
 //			}
 //		}
-		cards.add("Copper Foil Burnisher");
+		cards.add("Flux Remover");
 		cards.add("Grinding Stone");
 		cards.add("Glazing Hammer");
-		panes.add(new ToolCard("Copper Foil Burnisher", this));
+		panes.add(new ToolCard("Flux Remover", this));
 		panes.add(new ToolCard("Grinding Stone", this));
 		panes.add(new ToolCard("Glazing Hammer", this));
 	}
@@ -97,16 +97,19 @@ public class ToolCard_Controller {
 
 			}
 
-//			else if(cardName.equals("Flux Remover")) {
-//
-//				String color = gameController.getDraftpoolController().getSelectedDice().getColor();
-//				int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
-//				int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
-//				tcm.removeDiceFromGameDie(idgame, dienumber, color);
-//				gameController.getDraftpoolController().getDraftpoolControllerSquareController().removeDice();
-//				gameController.getDraftpoolController().getDraftpoolControllerSquareController().updateView();
-//				System.out.println(cardName + " ToolCard_Controller");
-//			}
+			else if(cardName.equals("Flux Remover")) {
+
+				String color = gameController.getDraftpoolController().getSelectedDice().getColor();
+				int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
+				int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
+				tcm.removeDiceFromGameDie(idgame, dienumber, color);
+				gameController.getDraftpoolController().getDraftpoolControllerSquareController().removeDice();
+				
+				
+				gameController.getDraftpoolController().getDraftpoolControllerSquareController().setDice(gameController.pickDiceFromBag());
+				gameController.getDraftpoolController().getDraftpoolControllerSquareController().updateView();
+				System.out.println(cardName + " ToolCard_Controller");
+			}
 
 			else if (cardName.equals("Glazing Hammer")) {
 
