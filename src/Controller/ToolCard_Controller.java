@@ -45,11 +45,9 @@ public class ToolCard_Controller {
 //				}
 //			}
 //			if(!toolCardInGame) {
-//				System.out.println("CardName: " + temp + " is toegevoegd");
 //				cards.add(temp);
 //				panes.add(new ToolCard(temp, this));
 //				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
-//				System.out.println("ToolCardid: " + tcm.getToolCardID() + "gameID: " + gameController.getM_game().getGameId());
 //			}
 //		}
 		cards.add("Grozing Pliers");
@@ -159,7 +157,13 @@ public class ToolCard_Controller {
 				System.out.println("ToolCard_Controller 89: Er is iets mis gegaan");
 			}
 		}else if(gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
+			
 			if(cardName.equals("Copper Foil Burnisher")) {
+				//TODO dice van windowpatterncard selecteren
+				//TODO volgend vakje selecteren
+				//TODO dice verplaatsen
+				gameController.getPlayerController().getPatternCard().getSelectedSquare();
+				
 				System.out.println(cardName + " ToolCard_Controller");
 			}
 			else if(cardName.equals("Eglomise Brush")) {
