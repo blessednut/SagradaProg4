@@ -3,10 +3,10 @@ package Controller;
 import java.util.ArrayList;
 import java.util.Random;
 import View.ToolCard;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import model.GameDiceModel;
 import model.ToolCardModel;
 
 public class ToolCard_Controller {
@@ -34,26 +34,30 @@ public class ToolCard_Controller {
 
 	}
 	private void getCards() {
-		String temp;
-		while(cards.size() < 3) {
-			boolean toolCardInGame = false;
-			temp = tcm.getToolCard();
-			System.out.println("CardName: " + temp);
-			for(int i = 0; i < cards.size(); i++) {
-				if(cards.get(i).equals(temp)) {
-					toolCardInGame = true;
-				}
-			}
-			if(!toolCardInGame) {
-				System.out.println("CardName: " + temp + " is toegevoegd");
-				cards.add(temp);
-				panes.add(new ToolCard(temp, this));
-				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
-				System.out.println("ToolCardid: " + tcm.getToolCardID() + "gameID: " + gameController.getM_game().getGameId());
-			}
-		}
-	
-	
+//		String temp;
+//		while(cards.size() < 3) {
+//			boolean toolCardInGame = false;
+//			temp = tcm.getToolCard();
+//			System.out.println("CardName: " + temp);
+//			for(int i = 0; i < cards.size(); i++) {
+//				if(cards.get(i).equals(temp)) {
+//					toolCardInGame = true;
+//				}
+//			}
+//			if(!toolCardInGame) {
+//				System.out.println("CardName: " + temp + " is toegevoegd");
+//				cards.add(temp);
+//				panes.add(new ToolCard(temp, this));
+//				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
+//				System.out.println("ToolCardid: " + tcm.getToolCardID() + "gameID: " + gameController.getM_game().getGameId());
+//			}
+//		}
+		cards.add("Grozing Pliers");
+		cards.add("Grinding Stone");
+		cards.add("Glazing Hammer");
+		panes.add(new ToolCard("Grozing Pliers", this));
+		panes.add(new ToolCard("Grinding Stone", this));
+		panes.add(new ToolCard("Glazing Hammer", this));
 	}
 		
 
@@ -90,35 +94,41 @@ public class ToolCard_Controller {
 				}
 
 			}
-			else if(cardName.equals("Eglomise Brush")) {
-				System.out.println(cardName + " ToolCard_Controller");
-			}
-			else if(cardName.equals("Flux Remover")) {
 
+//			else if(cardName.equals("Flux Remover")) {
+//
 //				String color = gameController.getDraftpoolController().getSelectedDice().getColor();
 //				int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
 //				int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
 //				tcm.removeDiceFromGameDie(idgame, dienumber, color);
-				
-				
-				System.out.println(cardName + " ToolCard_Controller");
-			}
-			else if(cardName.equals("Copper Foil Burnisher")) {
-				//kunnen we nog niet maken. moeten de spelregels van het windowpatterncard klaar voor zijn
-				System.out.println(cardName + " ToolCard_Controller");
-			}
-			else if(cardName.equals("Running Pliers")) {
-				System.out.println(cardName + " ToolCard_Controller");
-			}
+//				gameController.getDraftpoolController().getDraftpoolControllerSquareController().removeDice();
+//				gameController.getDraftpoolController().getDraftpoolControllerSquareController().updateView();
+//				System.out.println(cardName + " ToolCard_Controller");
+//			}
+
+
 			else if(cardName.equals("Glazing Hammer")) {
+
+				gameController.getDraftpoolController().getDraftpoolModel().getDraftpool();
+				for(int i = 0; i < gameController.getDraftpoolController().getDraftpoolModel().getDraftpool().size(); i++) {
+					int max = 6;
+					int min = 1;
+					int newEyesOfDice = rand.nextInt((max - min) + 1) + min;
+					gameController.getDraftpoolController().getDraftpoolModel().getDraftpool().get(i).setEyes(newEyesOfDice);
+				}
 				System.out.println(cardName + " ToolCard_Controller");
 			}
 			else if(cardName.equals("Lathekin")) {
+				GameDiceModel dice = gameController.getPlayerController().getPatternCard().getSelectedSquare().getDice();
+				gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(null);
+				gameController.getPlayerController().getPatternCard().setSelected(null);
+				if(gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
+					gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(dice);
+				}
+
 				System.out.println(cardName + " ToolCard_Controller");
 			}
-			else if(cardName.equals("Tap Wheel")) {
-				System.out.println(cardName + " ToolCard_Controller");
-			}
+
 			else if(cardName.equals("Lens Cutter")) {
 				System.out.println(cardName + "ToolCard_Controller");
 			}
@@ -143,13 +153,39 @@ public class ToolCard_Controller {
 				}
 				System.out.println(cardName + " ToolCard_Controller");
 			}
+
+			else {
+
+				System.out.println("ToolCard_Controller 89: Er is iets mis gegaan");
+			}
+		}else if(gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
+			if(cardName.equals("Copper Foil Burnisher")) {
+				System.out.println(cardName + " ToolCard_Controller");
+			}
+			else if(cardName.equals("Eglomise Brush")) {
+				System.out.println(cardName + " ToolCard_Controller");
+			}
+			else if(cardName.equals("Lathekin")) {
+//DOET HET NIE
+//				GameDiceModel dice = gameController.getPlayerController().getPatternCard().getSelectedSquare().getDice();
+//				gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(null);
+//				gameController.getPlayerController().getPatternCard().setSelected(null);
+//				if(gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
+//					gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(dice);
+//				}
+
+				System.out.println(cardName + " ToolCard_Controller");
+			}
+			else if(cardName.equals("Running Pliers")) {
+				System.out.println(cardName + " ToolCard_Controller");
+			}
+			else if(cardName.equals("Tap Wheel")) {
+				System.out.println(cardName + " ToolCard_Controller");
+			}
 			else if(cardName.equals("Cork-backed Straightedge")) {
 				System.out.println(cardName + " ToolCard_Controller");
 			}
-			else {
-//				TODO error message
-				System.out.println("ToolCard_Controller 89: Er is iets mis gegaan");
-			}
+
 		}else {
 			System.out.println("ToolCardController: dit vakje is leeg bosmongool");
 		}

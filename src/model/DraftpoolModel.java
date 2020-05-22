@@ -42,4 +42,9 @@ public class DraftpoolModel {
 			System.out.println("DraftpoolModel: Wordt er iets verwijderd");
 		}
 	}
+
+	public ArrayList<GameDiceModel> getDraftpool() {
+		return draftpool;
+	}
+	
 }

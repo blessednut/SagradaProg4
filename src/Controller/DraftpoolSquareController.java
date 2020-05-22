@@ -41,7 +41,12 @@ public class DraftpoolSquareController {
 		this.view = view;
 	}
 	
-	private void updateView () {
+	public void updateView () {
 		this.view.updateView();
 	}
+
+	public void setDice(GameDiceModel dice) {
+		this.dice = dice;
+	}
+	
 }

@@ -28,16 +28,15 @@ public class ToolCardModel {
 	}
 	
 	public void insertToolCardIntoGameToolCardTable(int idtoolcard, int idgame) {
+		System.out.println("ToolcardModel: dsfhgbsoilbdv");
 		tcDB.insertToolCardIntoGameToolCardTable(idtoolcard, idgame);
-	}
-	
-	public ArrayList<Integer> getGameToolCardID(int gameid){	
-		return tcDB.getGameToolCardID(gameid);
-	}
+	}	
 
 	public int getToolCardID() {
 		return toolCardID;
 	}
+	
+
 	
 
 	

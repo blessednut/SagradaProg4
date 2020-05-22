@@ -108,5 +108,11 @@ public class GameController {
 	public void makeTCC() {
 		this.TCC = new ToolCard_Controller(this);
 	}
+
+	public PlayerController getPlayerController() {
+		return playerController;
+	}
+	
+	
 	
 }

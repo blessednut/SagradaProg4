@@ -114,4 +114,10 @@ public class PatternCardController {
 	public void setSelected(WindowPatternSquareController selectedSquare) {
 		this.selectedSquare = selectedSquare;
 	}
+
+	public WindowPatternSquareController getSelectedSquare() {
+		return selectedSquare;
+	}
+	
+	
 }

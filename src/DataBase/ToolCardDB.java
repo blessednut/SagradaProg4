@@ -71,18 +71,7 @@ public class ToolCardDB {
 			e.printStackTrace();
 		}
 	}
-	public ArrayList<Integer> getGameToolCardID(int gameid) {
-		ArrayList<Integer> intList = new ArrayList<>();
-		try {
-			String query = "select idtoolcard from gametoolcard where idgame = "+ gameid;
-			ResultSet resultset = st.executeQuery(query);
-			while(resultset.next()) {
-				intList.add(resultset.getInt("idtoolcard"));
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return intList;
-	}
+	
+
 
 }
