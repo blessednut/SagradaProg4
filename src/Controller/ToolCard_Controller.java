@@ -52,7 +52,7 @@ public class ToolCard_Controller {
 //				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
 //			}
 //		}
-		cards.add("Flux Remover");
+		cards.add("Copper Foil Burnisher");
 		cards.add("Grinding Stone");
 		cards.add("Glazing Hammer");
 		panes.add(new ToolCard("Flux Remover", this));
