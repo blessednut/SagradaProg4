@@ -61,7 +61,7 @@ public class InviteController {
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
 		gameAcceptionThread.setDaemon(true);
 		gameAcceptionThread.start();
-
+		
 		gameController.getM_game().setGameId(Gameid);
 
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
@@ -191,5 +191,17 @@ public class InviteController {
 	public GameController getC_game() {
 		return gameController;
 	}
+
+	public HomeController getHome() {
+		return home;
+	}
+
+	public InviteStart getInviteStart() {
+		return inviteStart;
+	}
+	
+	
+	
+	
 
 }

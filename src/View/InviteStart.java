@@ -15,7 +15,7 @@ public class InviteStart extends Pane {
 	private Button startGame;
 	private Label gameID;
 	private Label numberRemaining;
-	private static final int CONTENTWITDH = 120;
+	private static final int CONTENTWITDH = 150;
 	private static final int CONTENTHEIGHT = 30;
 	
 	
@@ -58,10 +58,6 @@ public class InviteStart extends Pane {
 		
 		vbox.getChildren().addAll(this.gameID,this.numberRemaining, this.startGame);
 		this.getChildren().add(vbox);
-	}
-	
-	public InviteStart getInviteStartPane() {
-		return this;
 	}
 	
 	public HomeController getHomeController() {

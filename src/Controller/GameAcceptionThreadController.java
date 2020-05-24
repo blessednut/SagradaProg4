@@ -1,8 +1,6 @@
 package Controller;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
+import javafx.application.Platform;
 import model.GameAcceptionThreadModel;
 
 public class GameAcceptionThreadController extends Thread {
@@ -12,7 +10,8 @@ public class GameAcceptionThreadController extends Thread {
 	private GameAcceptionThreadModel gameThreadModel;
 	private int amountInGame;
 	private int gameid;
-	private Alert gamestart;
+	private String amountNotAcceptedString;
+
 
 	public GameAcceptionThreadController(LogInController logInController, InviteController inViteController, int gameid
 			) {
@@ -21,13 +20,12 @@ public class GameAcceptionThreadController extends Thread {
 		this.inViteController = inViteController;
 		gameThreadModel = new GameAcceptionThreadModel();
 		this.gameid = gameid;
-		gamestart = new Alert(AlertType.CONFIRMATION, "lets play a game", ButtonType.YES, ButtonType.NO);
 		System.out.println("achteraan constructor");
 	}
 
 	public void run() {
 		int amountRefused = 0;
-		int amountAccepted = 1;
+		int amountNotAccepted = 1;
 		System.out.println("gameid: "+gameid);
 		
 		for (int x = 0; x < 1000000; x++) {
@@ -41,29 +39,59 @@ public class GameAcceptionThreadController extends Thread {
 			if (amountRefused == 1) {
 				System.out.println("huil huil huil huil huil");
 				gameThreadModel.setRefused(gameid);
-				System.out.println("na refused: " + amountRefused);
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						
+						removeGameStart();
+					}
+					
+				});
+				System.out.println("help ik stop");
 				return;
 			}
 			try {
-				amountAccepted = gameThreadModel.getAmountAccepted(gameid);
+				amountNotAccepted = gameThreadModel.getAmountAccepted(gameid);
+				amountNotAcceptedString = Integer.toString(amountNotAccepted);
 			} catch (Exception e) {
 
 			}
-			System.out.println("voor de alertbox: " + amountAccepted);
-			if (amountAccepted == 0) {
+			System.out.println("voor de alertbox: " + amountNotAccepted);
+			if (amountNotAccepted == 0) {
 				System.out.println("in de if");
-//				gamestart.showAndWait();
-//				if (gamestart.getResult() == ButtonType.YES) {
-//					inViteController.getC_game().createGamePane();
-//				}
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						inViteController.getInviteStart().getNumberRemaining().setText("niet geaccepteed: "+amountNotAcceptedString);
+						inViteController.getInviteStart().getStartGame().setVisible(true);
+						
+					}
+					
+				});
+				return;
+			} else {
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						inViteController.getInviteStart().getNumberRemaining().setText("niet geaccepteed: "+amountNotAcceptedString);
+						
+					}
+				});
 			}
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (Exception e) {
 
 			}
 
 		}
 
+	}
+	
+	public void removeGameStart() {
+		inViteController.getHome().removeInviteStartPane(inViteController.getInviteStart());
 	}
 }

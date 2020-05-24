@@ -4,6 +4,7 @@ import View.LoginPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import jdk.jfr.StackTrace;
 import model.LoginModel;
 
 public class LogInController {
@@ -26,7 +27,7 @@ public class LogInController {
 			password = v_login.getPassword().getText();
 			m_login.setUsername(username);
 			SetInlogInfo();
-			c_home = new HomeController(c_myscene, this);
+			makeHomcontroller();
 		});
 		v_login.getRegister().setOnAction(
 				e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
@@ -37,7 +38,11 @@ public class LogInController {
 		@Override
 		public void handle(KeyEvent event) {
 			if (event.getCode() == KeyCode.ENTER) {
+				username = v_login.getUsername().getText();
+				password = v_login.getPassword().getText();
+				m_login.setUsername(username);
 				SetInlogInfo();
+				makeHomcontroller();
 			}
 		}
 
@@ -48,12 +53,6 @@ public class LogInController {
 	}
 
 	public String SetInlogInfo() {
-
-//		username = v_login.getUsername().getText();
-//		String password = v_login.getPassword().getText();
-
-//		m_login.setUsername(username);
-
 		try {
 
 			if (m_login.getCon().getPassword(username).equals(password)) {
@@ -63,11 +62,14 @@ public class LogInController {
 				v_login.errorPassword();
 			}
 		} catch (Exception ex) {
-//			v_login.errorUsername();
-
+//			ex.printStackTrace();
 		}
 		return username;
 
+	}
+	
+	public void makeHomcontroller() {
+		c_home = new HomeController(c_myscene, this);
 	}
 
 	public String getUsername() {
