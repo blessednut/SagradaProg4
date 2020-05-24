@@ -54,7 +54,7 @@ public class GameAcceptionThreadController extends Thread {
 				System.out.println("in de if");
 //				gamestart.showAndWait();
 //				if (gamestart.getResult() == ButtonType.YES) {
-					inViteController.getC_game().createGamePane();
+//					inViteController.getC_game().createGamePane();
 //				}
 			}
 			try {

@@ -1,6 +1,7 @@
 package Controller;
 
 import View.InvitePane;
+import View.InviteStart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -13,6 +14,8 @@ public class InviteController {
 	private GameController gameController;
 	private HomeController home;
 	private GameAcceptionThreadController gameAcceptionThread;
+	private InviteStart inviteStart;
+	private String StringGameID;
 
 	private static final String ACCEPTED = "accepted";
 	private static final String REFUSED = "refused";
@@ -42,15 +45,17 @@ public class InviteController {
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		invitePane.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
 
-
-		invitePane.getAccept().setOnMouseClicked(e -> acceptInvitation(home.getC_login().getUsername()));
+		invitePane.getAccept().setOnMouseClicked(e -> {
+			acceptInvitation(home.getC_login().getUsername());
+			createInviteStartPane(StringGameID);
+		});
 		invitePane.getRefuse().setOnMouseClicked(e -> refuseInvitation(home.getC_login().getUsername()));
 
 	}
 
 	public void acceptInvitation(String username) {
 		String[] parts = invitePane.getInvites().getValue().split("\\+");
-		String StringGameID = parts[1];
+		StringGameID = parts[1];
 
 		int Gameid = Integer.parseInt(StringGameID);
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
@@ -61,7 +66,6 @@ public class InviteController {
 
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
-
 
 	}
 
@@ -75,46 +79,53 @@ public class InviteController {
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, REFUSED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 
-		Alert exception = new Alert(AlertType.ERROR,
-				"Je hebt de uitnodiging nu geweigerd",
-				ButtonType.OK);
+		Alert exception = new Alert(AlertType.ERROR, "Je hebt de uitnodiging nu geweigerd", ButtonType.OK);
 		exception.showAndWait();
 	}
 
 	public void inVitePlayer() {
 		switch (invitePane.getButtons().getSelectedToggle().getUserData().toString()) {
 		case "twee":
-			 gameController.getM_game().createGameRoom();
+			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
+					inviteModel.getColor("blue"));
 			// uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("green"));
 			gameController.createGamePane();
 			break;
 		case "drie":
 			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
+					inviteModel.getColor("blue"));
 			// eerste uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("green"));
 			// tweede uigedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),	inviteModel.getColor("purple"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("purple"));
 			gameController.createGamePane();
 			break;
 		case "vier":
 			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"), inviteModel.getColor("blue"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
+					inviteModel.getColor("blue"));
 			// eerste uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("green"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("green"));
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),	inviteModel.getColor("purple"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("purple"));
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"), inviteModel.getColor("red"));
+					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+					inviteModel.getColor("red"));
 			gameController.createGamePane();
 			break;
 
@@ -155,6 +166,16 @@ public class InviteController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+
+	public void createInviteStartPane(String gameID) {
+		inviteStart = new InviteStart(gameID);
+		home.addInviteStartPane(inviteStart);
+		inviteStart.getStartGame().setOnMouseClicked(e -> {home.removeInviteStartPane(inviteStart);gameController.createGamePane();});
+		
+	}
+	public void setStartButtonVisable() {
+		inviteStart.getStartGame().setVisible(true);
 	}
 
 	public void setSearchButton() {

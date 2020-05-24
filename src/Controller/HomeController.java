@@ -2,6 +2,7 @@ package Controller;
 
 import View.CreditsPane;
 import View.HomePane;
+import View.InviteStart;
 import View.StatisticsPane;
 
 public class HomeController {
@@ -30,7 +31,7 @@ public class HomeController {
 		v_home = new HomePane(this);
 		v_credits = new CreditsPane();
 		v_statistics = new StatisticsPane();
-		v_home.getVrienden().setOnAction(e -> openInvitePane());
+		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
 //		v_home.getGames().setOnAction(e -> openGamePane());
@@ -66,6 +67,13 @@ public class HomeController {
 
 	public HomeThreadController getC_hometc() {
 		return c_hometc;
+	}
+	
+	public void addInviteStartPane(InviteStart inviteStart) {
+		v_home.getHomePaneBottom().getChildren().add(inviteStart);
+	}
+	public void removeInviteStartPane(InviteStart inviteStart) {
+		v_home.getHomePaneBottom().getChildren().remove(inviteStart);
 	}
 
 

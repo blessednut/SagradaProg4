@@ -4,6 +4,7 @@ import Controller.HomeController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
@@ -38,6 +39,7 @@ public class HomePane extends BorderPane {
 	private Button invite;
 	private Button statistics;
 	private Button credits;
+	private HBox HomePaneBottom;
 
 	private HBox reservedSpace = new HBox();
 	private HomeController homeController;
@@ -64,6 +66,8 @@ public class HomePane extends BorderPane {
 
 	public void makeHomePane() {
 		VBox layout = new VBox();
+		
+		
 		layout.setMinSize(200, screenY);
 		Font buttonFont = new Font("Algerian", 24);
 		buttonOne.setFitWidth((screenX / 8));
@@ -126,6 +130,13 @@ public class HomePane extends BorderPane {
 		this.getChildren().addAll(layout);
 
 	}
+	public void makeInvites() {
+		HomePaneBottom = new HBox();
+//		HomePaneBottom.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		HomePaneBottom.setPadding(new Insets(0, 0, 100, 0));
+		this.setBottom(HomePaneBottom);
+		HomePaneBottom.setAlignment(Pos.TOP_CENTER);
+	}
 
 	public void setReservedSpace(HBox reservedSpace) {
 		this.reservedSpace = reservedSpace;
@@ -150,4 +161,10 @@ public class HomePane extends BorderPane {
 	public Button getCredits() {
 		return credits;
 	}
+
+	public HBox getHomePaneBottom() {
+		return HomePaneBottom;
+	}
+	
+	
 }
