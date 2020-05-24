@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.GameDiceModel;
+import model.PatternCardModel;
 import model.ToolCardModel;
 
 public class ToolCard_Controller {
@@ -17,10 +18,11 @@ public class ToolCard_Controller {
 	private Random rand = new Random();
 
 	private GameController gameController;
-	
-	//test
+
+	// test
 	private WindowPatternSquareController sender;
 	private WindowPatternSquareController receiver;
+	private WindowPatternSquareController[][] fieldController;
 
 	public ToolCard_Controller(GameController gameController) {
 		cards = new ArrayList<String>();
@@ -55,7 +57,7 @@ public class ToolCard_Controller {
 		cards.add("Copper Foil Burnisher");
 		cards.add("Grinding Stone");
 		cards.add("Glazing Hammer");
-		panes.add(new ToolCard("Flux Remover", this));
+		panes.add(new ToolCard("Copper Foil Burnisher", this));
 		panes.add(new ToolCard("Grinding Stone", this));
 		panes.add(new ToolCard("Glazing Hammer", this));
 	}
@@ -97,16 +99,16 @@ public class ToolCard_Controller {
 
 			}
 
-			else if(cardName.equals("Flux Remover")) {
+			else if (cardName.equals("Flux Remover")) {
 
 				String color = gameController.getDraftpoolController().getSelectedDice().getColor();
 				int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
 				int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
 				tcm.removeDiceFromGameDie(idgame, dienumber, color);
 				gameController.getDraftpoolController().getDraftpoolControllerSquareController().removeDice();
-				
-				
-				gameController.getDraftpoolController().getDraftpoolControllerSquareController().setDice(gameController.pickDiceFromBag());
+
+				gameController.getDraftpoolController().getDraftpoolControllerSquareController()
+						.setDice(gameController.pickDiceFromBag());
 				gameController.getDraftpoolController().getDraftpoolControllerSquareController().updateView();
 				System.out.println(cardName + " ToolCard_Controller");
 			}
@@ -164,17 +166,15 @@ public class ToolCard_Controller {
 				System.out.println(cardName + " ToolCard_Controller");
 
 				// list van WindowPatternSquareController
-				WindowPatternSquareController[][] fieldController = this.gameController.getPlayerController()
+				this.fieldController = this.gameController.getPlayerController()
 						.getPatternCard().getFieldController();
-				
+
 				for (int x = 0; x < fieldController.length; x++) {
 					for (int y = 0; y < fieldController[x].length; y++) {
 						fieldController[x][y].setToolCard(this);
 					}
 				}
-				
-				
-				
+
 //				this.resetField(fieldController);
 //				
 //				WindowPatternSquareController senderSquare = null;
@@ -237,8 +237,8 @@ public class ToolCard_Controller {
 //			}
 //		}
 //	}
-	
-	public void setSquare (WindowPatternSquareController square) {
+
+	public void setSquare(WindowPatternSquareController square) {
 		if (this.sender == null) {
 			this.sender = square;
 			System.out.println("SENDER IS SET");
@@ -248,24 +248,58 @@ public class ToolCard_Controller {
 			this.swapDice();
 		}
 	}
-	
-	private void swapDice () {
-		if(!gameController.getPlayerController().getPatternCard().getChosenCard().isWindowCardEmpty()) {
-			if(this.sender.getDice() != null) {
-				if(gameController.getPlayerController().getPatternCard().getChosenCard().hasDoubleSurroundingColor(this.receiver.getSquare().getX(), this.receiver.getSquare().getY(), this.receiver.getDice().getColor()) && gameController.getPlayerController().getPatternCard().getChosenCard().hasSurroundingDice(this.receiver.getSquare().getX(), this.receiver.getSquare().getY())) {
-					if(this.sender.getSquare().getValue() == 0 || this.receiver.getSquare().getValue() == this.sender.getDice().valueProperty().getValue()) {
-						
-					}
-				}
-			}
 
-		}else{
-			if((this.receiver.getSquare().getX() == 1 || this.receiver.getSquare().getX() == 5) && (this.receiver.getSquare().getY() == 1 || this.receiver.getSquare().getY() == 4)) {
-				
-            }
-		}
+	private void swapDice() {
+
 //		gameController.getPlayerController().getPatternCard().getChosenCard().hasDoubleSurroundingColor(x, y, color)
 //		gameController.getPlayerController().getPatternCard().getChosenCard().hasSurroundingDice(x, y)
 		System.out.println("SWAP SWAP!");
+		
+		if (isValidCopperFoilPlacement()) {
+			this.receiver.setDice(this.sender.getDice());
+			this.sender.removeDice();
+			
+			for (int x = 0; x < fieldController.length; x++) {
+				for (int y = 0; y < fieldController[x].length; y++) {
+					fieldController[x][y].removeToolCard();
+				}
+			}
+		} else {
+			this.sender = null;
+			this.receiver = null;
+		}
+	}
+
+	private boolean isValidCopperFoilPlacement() {
+		GameDiceModel dice = this.sender.getDice();
+		int receiverX = this.receiver.getSquare().getX();
+		int receiverY = this.receiver.getSquare().getY();
+		
+		if (receiverX == this.sender.getSquare().getX() && receiverY == this.sender.getSquare().getY()) {
+			return false;
+		}
+		
+		PatternCardModel chosenCard = gameController.getPlayerController().getPatternCard().getChosenCard();
+
+		if (this.sender.getDice() != null) {
+			if (!chosenCard.isWindowCardEmpty()) {
+				if (chosenCard.hasDoubleSurroundingColor(receiverX, receiverY, dice.getColor())
+						&& chosenCard.hasSurroundingDice(receiverX, receiverY)) {
+					if (this.receiver.getSquare().getValue() == 0
+							|| this.receiver.getSquare().getValue() == dice.valueProperty().getValue()) {
+						return true;
+					}
+				}
+			} else {
+				// TODO: remove magic numbers
+				if ((receiverX == 1 || receiverX == 5) && (receiverY == 1 || receiverY == 4)) {
+					if (this.receiver.getSquare().getValue() == 0
+							|| this.receiver.getSquare().getValue() == dice.valueProperty().getValue()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

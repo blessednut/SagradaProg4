@@ -64,4 +64,8 @@ public class PatternCardFieldModel {
 	public GameDiceModel getDice () {
 		return this.dice;
 	}
+	
+	public void removeDice () {
+		this.dice = null;
+	}
 }

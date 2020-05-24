@@ -9,18 +9,12 @@ public class WindowPatternSquareController {
 	private PatternCardFieldModel square;
 	private GameDiceModel dice;
 	private WindowPatternSquareView squareView;
-	
-	//test
-	private boolean isClicked;
 	private ToolCard_Controller toolController;
 
 	public WindowPatternSquareController(PatternCardController controller, PatternCardFieldModel square) {
 		this.controller = controller;
 		this.square = square;
 		toolController = null;
-		
-		//test
-		isClicked = false;
 	}
 	
 	public void setView (WindowPatternSquareView squareView) {
@@ -34,6 +28,12 @@ public class WindowPatternSquareController {
 		} else {
 			toolController.setSquare(this);
 		}
+	}
+	
+	public void removeDice() {
+		this.dice = null;
+		this.square.removeDice();
+		this.squareView.updateView();
 	}
 
 	public void setDice(GameDiceModel dice) {
@@ -50,15 +50,11 @@ public class WindowPatternSquareController {
 		return this.square;
 	}
 	
-//	public boolean isClicked () {
-//		return this.isClicked;
-//	}
-//	
-//	public void resetClicked () {
-//		this.isClicked = false;
-//	}
-	
 	public void setToolCard (ToolCard_Controller toolController) {
 		this.toolController = toolController;
+	}
+	
+	public void removeToolCard () {
+		this.toolController = null;
 	}
 }
