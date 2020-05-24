@@ -23,6 +23,9 @@ public class ToolCard_Controller {
 	private WindowPatternSquareController sender;
 	private WindowPatternSquareController receiver;
 	private WindowPatternSquareController[][] fieldController;
+	
+	private String activeToolCard;
+	
 
 	public ToolCard_Controller(GameController gameController) {
 		cards = new ArrayList<String>();
@@ -55,11 +58,11 @@ public class ToolCard_Controller {
 //			}
 //		}
 		cards.add("Copper Foil Burnisher");
-		cards.add("Grinding Stone");
-		cards.add("Glazing Hammer");
+		cards.add("Eglomise Brush");
+		cards.add("Cork-backed Straightedge");
 		panes.add(new ToolCard("Copper Foil Burnisher", this));
-		panes.add(new ToolCard("Grinding Stone", this));
-		panes.add(new ToolCard("Glazing Hammer", this));
+		panes.add(new ToolCard("Eglomise Brush", this));
+		panes.add(new ToolCard("Cork-backed Straightedge", this));
 	}
 
 	public ArrayList<ToolCard> getPanes() {
@@ -69,6 +72,7 @@ public class ToolCard_Controller {
 	public void useCard(String cardName) {
 		if (gameController.getDraftpoolController().getSelectedDice() != null) {
 			if (cardName.equals("Grozing Pliers")) {
+				activeToolCard = cardName;
 				tcInstruction = new Alert(AlertType.INFORMATION,
 						"Druk op YES om de waarde van de dobbelsteen te verhogen. \n Druk op NO om de waarde van de dobbelsteen te verlagen",
 						ButtonType.YES, ButtonType.NO);
@@ -87,6 +91,7 @@ public class ToolCard_Controller {
 					}
 				}
 			} else if (cardName.equals("Flux Brush")) {
+				activeToolCard = cardName;
 				if (gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() != null) {
 					int max = 6;
 					int min = 1;
@@ -100,7 +105,7 @@ public class ToolCard_Controller {
 			}
 
 			else if (cardName.equals("Flux Remover")) {
-
+				activeToolCard = cardName;
 				String color = gameController.getDraftpoolController().getSelectedDice().getColor();
 				int dienumber = gameController.getDraftpoolController().getSelectedDice().getDieNumber();
 				int idgame = gameController.getDraftpoolController().getSelectedDice().getIdgame();
@@ -114,7 +119,7 @@ public class ToolCard_Controller {
 			}
 
 			else if (cardName.equals("Glazing Hammer")) {
-
+				activeToolCard = cardName;
 				gameController.getDraftpoolController().getDraftpoolModel().getDraftpool();
 				for (int i = 0; i < gameController.getDraftpoolController().getDraftpoolModel().getDraftpool()
 						.size(); i++) {
@@ -126,6 +131,7 @@ public class ToolCard_Controller {
 				}
 				System.out.println(cardName + " ToolCard_Controller");
 			} else if (cardName.equals("Lathekin")) {
+				activeToolCard = cardName;
 				GameDiceModel dice = gameController.getPlayerController().getPatternCard().getSelectedSquare()
 						.getDice();
 				gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(null);
@@ -138,8 +144,10 @@ public class ToolCard_Controller {
 			}
 
 			else if (cardName.equals("Lens Cutter")) {
+				activeToolCard = cardName;
 				System.out.println(cardName + "ToolCard_Controller");
 			} else if (cardName.equals("Grinding Stone")) {
+				activeToolCard = cardName;
 				if (gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 1) {
 					gameController.getDraftpoolController().getSelectedDice().setEyes(6);
 				} else if (gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue() == 2) {
@@ -162,7 +170,8 @@ public class ToolCard_Controller {
 			}
 
 		} else if (gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
-			if (cardName.equals("Copper Foil Burnisher")) {
+			if (cardName.equals("Eglomise Brush")) {
+				activeToolCard = cardName;
 				System.out.println(cardName + " ToolCard_Controller");
 
 				// list van WindowPatternSquareController
@@ -175,41 +184,39 @@ public class ToolCard_Controller {
 					}
 				}
 
-//				this.resetField(fieldController);
-//				
-//				WindowPatternSquareController senderSquare = null;
-//				WindowPatternSquareController receivingSquare = null;
-//				
-//				while (senderSquare == null) {
-//					senderSquare = isSquareClicked(fieldController);
-//				}
-//				System.out.println("SENDER GESELECTEERD");
-//				
-//				this.resetField(fieldController);
-//				
-//				while (receivingSquare == null) {
-//					receivingSquare = isSquareClicked(fieldController);
-//				}
-//				System.out.println("RECEIVER GESELECTEERD");
-//				
-//				System.out.println("HOERA! HET IS GELUKT!");
-			} else if (cardName.equals("Eglomise Brush")) {
-				System.out.println(cardName + " ToolCard_Controller");
-			} else if (cardName.equals("Lathekin")) {
-//DOET HET NIE
-//				GameDiceModel dice = gameController.getPlayerController().getPatternCard().getSelectedSquare().getDice();
-//				gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(null);
-//				gameController.getPlayerController().getPatternCard().setSelected(null);
-//				if(gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
-//					gameController.getPlayerController().getPatternCard().getSelectedSquare().setDice(dice);
-//				}
 
+			} else if (cardName.equals("Copper Foil Burnisher")) {
+				activeToolCard = cardName;
+				System.out.println(cardName + " ToolCard_Controller");
+				this.fieldController = this.gameController.getPlayerController()
+						.getPatternCard().getFieldController();
+
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].setToolCard(this);
+					}
+				}
+
+			} else if (cardName.equals("Lathekin")) {
+				activeToolCard = cardName;
 				System.out.println(cardName + " ToolCard_Controller");
 			} else if (cardName.equals("Running Pliers")) {
+				activeToolCard = cardName;
 				System.out.println(cardName + " ToolCard_Controller");
 			} else if (cardName.equals("Tap Wheel")) {
+				activeToolCard = cardName;
 				System.out.println(cardName + " ToolCard_Controller");
 			} else if (cardName.equals("Cork-backed Straightedge")) {
+				activeToolCard = cardName;
+				System.out.println(cardName + " ToolCard_Controller");
+				this.fieldController = this.gameController.getPlayerController()
+						.getPatternCard().getFieldController();
+
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].setToolCard(this);
+					}
+				}
 				System.out.println(cardName + " ToolCard_Controller");
 			}
 
@@ -219,58 +226,69 @@ public class ToolCard_Controller {
 
 	}
 
-//	private WindowPatternSquareController isSquareClicked(WindowPatternSquareController[][] fieldController) {
-//		for (int x = 0; x < fieldController.length; x++) {
-//			for (int y = 0; y < fieldController[x].length; y++) {
-//				if (fieldController[x][y].isClicked()) {
-//					return fieldController[x][y];
-//				}
-//			}
-//		}
-//		return null;
-//	}
-//
-//	private void resetField(WindowPatternSquareController[][] fieldController) {
-//		for (int x = 0; x < fieldController.length; x++) {
-//			for (int y = 0; y < fieldController[x].length; y++) {
-//				fieldController[x][y].resetClicked();
-//			}
-//		}
-//	}
 
-	public void setSquare(WindowPatternSquareController square) {
+	public void setSquare(WindowPatternSquareController square, String cardName) {
 		if (this.sender == null) {
 			this.sender = square;
 			System.out.println("SENDER IS SET");
 		} else {
 			this.receiver = square;
 			System.out.println("RECEIVER IS SET");
-			this.swapDice();
+			this.swapDice(cardName);
+
 		}
 	}
 
-	private void swapDice() {
-
-//		gameController.getPlayerController().getPatternCard().getChosenCard().hasDoubleSurroundingColor(x, y, color)
-//		gameController.getPlayerController().getPatternCard().getChosenCard().hasSurroundingDice(x, y)
+	private void swapDice(String cardName) {
 		System.out.println("SWAP SWAP!");
 		
-		if (isValidCopperFoilPlacement()) {
-			this.receiver.setDice(this.sender.getDice());
-			this.sender.removeDice();
-			
-			for (int x = 0; x < fieldController.length; x++) {
-				for (int y = 0; y < fieldController[x].length; y++) {
-					fieldController[x][y].removeToolCard();
+		if(cardName.equals("Eglomise Brush")) {
+			if (isValidEglomiseBrushPlacement()) {
+				this.receiver.setDice(this.sender.getDice());
+				this.sender.removeDice();
+				
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].removeToolCard();
+					}
 				}
-			}
-		} else {
-			this.sender = null;
-			this.receiver = null;
+			} else {
+				this.sender = null;
+				this.receiver = null;
+			}	
+		}else if(cardName.equals("Copper Foil Burnisher")) {
+			if (isValidCopperFoilBurnisherPlacement()) {
+				this.receiver.setDice(this.sender.getDice());
+				this.sender.removeDice();
+				
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].removeToolCard();
+					}
+				}
+			} else {
+				this.sender = null;
+				this.receiver = null;
+			}	
+		}else if(cardName.equals("Cork-backed Straightedge")) {
+			if (isCorkBackedStraightedgePlacement()) {
+				this.receiver.setDice(this.sender.getDice());
+				this.sender.removeDice();
+				
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].removeToolCard();
+					}
+				}
+			} else {
+				this.sender = null;
+				this.receiver = null;
+			}	
 		}
+
 	}
 
-	private boolean isValidCopperFoilPlacement() {
+	private boolean isValidEglomiseBrushPlacement() {
 		GameDiceModel dice = this.sender.getDice();
 		int receiverX = this.receiver.getSquare().getX();
 		int receiverY = this.receiver.getSquare().getY();
@@ -285,8 +303,7 @@ public class ToolCard_Controller {
 			if (!chosenCard.isWindowCardEmpty()) {
 				if (chosenCard.hasDoubleSurroundingColor(receiverX, receiverY, dice.getColor())
 						&& chosenCard.hasSurroundingDice(receiverX, receiverY)) {
-					if (this.receiver.getSquare().getValue() == 0
-							|| this.receiver.getSquare().getValue() == dice.valueProperty().getValue()) {
+					if (this.receiver.getSquare().getValue() == 0 || this.receiver.getSquare().getValue() == dice.valueProperty().getValue()) {
 						return true;
 					}
 				}
@@ -302,4 +319,75 @@ public class ToolCard_Controller {
 		}
 		return false;
 	}
+	
+	private boolean isValidCopperFoilBurnisherPlacement() {
+		GameDiceModel dice = this.sender.getDice();
+		int receiverX = this.receiver.getSquare().getX();
+		int receiverY = this.receiver.getSquare().getY();
+		
+		if (receiverX == this.sender.getSquare().getX() && receiverY == this.sender.getSquare().getY()) {
+			return false;
+		}
+		
+		PatternCardModel chosenCard = gameController.getPlayerController().getPatternCard().getChosenCard();
+
+		if (this.sender.getDice() != null) {
+			if (!chosenCard.isWindowCardEmpty()) {
+				if (chosenCard.hasDoubleSurroundingColor(receiverX, receiverY, dice.getColor()) && chosenCard.hasSurroundingDice(receiverX, receiverY)) {
+					if (this.receiver.getSquare().getColor() == null  || this.receiver.getSquare().getColor().equals(dice.colorProperty().getValue())) {
+						if (this.receiver.getSquare().getValue() == 0 || this.receiver.getSquare().getValue() == dice.valueProperty().getValue()) {
+							return true;
+						}
+					}
+				}
+			} else {
+				// TODO: remove magic numbers
+				if ((receiverX == 1 || receiverX == 5) && (receiverY == 1 || receiverY == 4)) {
+					if (this.receiver.getSquare().getColor().equals(null)|| this.receiver.getSquare().getColor().equals(dice.colorProperty().getValue())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	private boolean isCorkBackedStraightedgePlacement() {
+		GameDiceModel dice = this.sender.getDice();
+		int receiverX = this.receiver.getSquare().getX();
+		int receiverY = this.receiver.getSquare().getY();
+		
+		if (receiverX == this.sender.getSquare().getX() && receiverY == this.sender.getSquare().getY()) {
+			return false;
+		}
+		
+		PatternCardModel chosenCard = gameController.getPlayerController().getPatternCard().getChosenCard();
+
+		if (this.sender.getDice() != null) {
+			if (!chosenCard.isWindowCardEmpty()) {
+				if (chosenCard.hasDoubleSurroundingColor(receiverX, receiverY, dice.getColor())) {
+					if (this.receiver.getSquare().getColor() == null  || this.receiver.getSquare().getColor().equals(dice.colorProperty().getValue())) {
+						return true;
+					}
+				}
+			} else {
+				// TODO: remove magic numbers
+				if ((receiverX == 1 || receiverX == 5) && (receiverY == 1 || receiverY == 4)) {
+					if (this.receiver.getSquare().getColor().equals(null)|| this.receiver.getSquare().getColor().equals(dice.colorProperty().getValue())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	
+
+	public String getActiveToolCard() {
+		return activeToolCard;
+	}
+	
+	
 }

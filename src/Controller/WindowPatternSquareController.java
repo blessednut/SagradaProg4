@@ -26,7 +26,7 @@ public class WindowPatternSquareController {
 			//isClicked = true;
 			this.controller.setSelected(this);
 		} else {
-			toolController.setSquare(this);
+			toolController.setSquare(this, toolController.getActiveToolCard());
 		}
 	}
 	
