@@ -2,7 +2,7 @@ package Controller;
 
 import model.HomeThreadModel;
 
-public class HomeThreadController implements Runnable {
+public class HomeThreadController extends Thread {
 	private HomeThreadModel m_home;
 	private HomeController c_home;
 	private InviteController c_Invite;

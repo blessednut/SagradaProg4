@@ -75,9 +75,4 @@ public class HomeController {
 	public void removeInviteStartPane(InviteStart inviteStart) {
 		v_home.getHomePaneBottom().getChildren().remove(inviteStart);
 	}
-
-
-
-
-
 }

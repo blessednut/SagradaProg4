@@ -1,11 +1,6 @@
  package model;
 
-import DataBase.DBCon;
 import DataBase.DiceDB;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class PatternCardFieldModel {
 	private final int idPatternCard;

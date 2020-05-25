@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import model.PatternCardFieldModel;
-import model.PatternCardModel;
 
 public class WindowPatternDB {
 	private ResultSet rs;

@@ -7,7 +7,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import model.GameDiceModel;
 
 public class DraftPoolView extends BorderPane {
 	private double width, height;

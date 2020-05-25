@@ -3,8 +3,8 @@ package Controller;
 import View.InvitePane;
 import View.InviteStart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import model.InviteModel;
 
 public class InviteController {

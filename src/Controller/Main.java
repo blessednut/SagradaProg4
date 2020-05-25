@@ -1,7 +1,6 @@
 package Controller;
 
 import DataBase.DBCon;
-import DataBase.InviteDB;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

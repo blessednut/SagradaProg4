@@ -1,7 +1,6 @@
 package model;
 
 import Controller.InviteController;
-import DataBase.DBCon;
 import DataBase.InviteDB;
 
 public class InviteModel {

@@ -3,6 +3,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import model.GameAcceptionThreadModel;
 
 public class GameAcceptionThreadDB {

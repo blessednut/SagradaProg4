@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import Controller.LogInController;
 import DataBase.LoginDB;
-import DataBase.InviteDB;
 
 public class LoginModel {
 	private LogInController c_login;

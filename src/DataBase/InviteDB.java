@@ -4,13 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
-import model.PatternCardFieldModel;
-import model.PatternCardModel;
-
 public class InviteDB {
 	private ResultSet rs;
 	private Statement st;
