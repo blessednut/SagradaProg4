@@ -31,7 +31,7 @@ public class WindowPatternDB {
 			}
 			return field;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -47,7 +47,7 @@ public class WindowPatternDB {
 			}
 			return name;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -63,7 +63,7 @@ public class WindowPatternDB {
 			}
 			return difficulty;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -74,7 +74,7 @@ public class WindowPatternDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }

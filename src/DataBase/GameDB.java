@@ -26,7 +26,7 @@ public class GameDB {
 				GameId = rs.getInt("idgame");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		GameId++;
 		GM.setGameId(GameId);
@@ -37,7 +37,7 @@ public class GameDB {
 			ps.setInt(1, GameId);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		return GameId;

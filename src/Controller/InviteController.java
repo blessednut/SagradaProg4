@@ -101,7 +101,7 @@ public class InviteController {
 				v_invite.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -113,7 +113,7 @@ public class InviteController {
 				v_invite.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -126,7 +126,7 @@ public class InviteController {
 				v_invite.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

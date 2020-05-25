@@ -30,7 +30,7 @@ public class InviteDB {
 				invited = true;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return invited;
 	}
@@ -44,7 +44,7 @@ public class InviteDB {
 				result = rs.getString("username");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -59,7 +59,7 @@ public class InviteDB {
 			}
 			playerId++;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return playerId;
 	}
@@ -72,7 +72,7 @@ public class InviteDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -84,7 +84,7 @@ public class InviteDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -111,7 +111,7 @@ public class InviteDB {
 				result = rs.getString("playstatus");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -122,7 +122,7 @@ public class InviteDB {
 					+ "' and idgame = " + gameid + " and playstatus = 'challengee';";
 			st.executeUpdate(query);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -148,7 +148,7 @@ public class InviteDB {
 				result = rs.getInt("AmountAccepted");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -164,7 +164,7 @@ public class InviteDB {
 				result = rs.getInt("amountRefused");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return result;
 	}

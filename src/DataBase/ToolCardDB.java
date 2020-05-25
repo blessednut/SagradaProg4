@@ -26,7 +26,7 @@ public class ToolCardDB {
 			}
 		}
 		catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return cardName;
 	}

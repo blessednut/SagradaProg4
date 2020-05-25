@@ -23,7 +23,7 @@ public class Public_Objective_CardDB {
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return cardName;
 	}

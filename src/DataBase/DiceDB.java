@@ -26,7 +26,7 @@ public class DiceDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class DiceDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class DiceDB {
 			}
 			return bag;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 		return null;
@@ -79,7 +79,7 @@ public class DiceDB {
 			}
 			return die;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 		return null;

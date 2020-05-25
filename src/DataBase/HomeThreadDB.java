@@ -29,7 +29,7 @@ public class HomeThreadDB {
 				home.addToArray(gameID);
 			}
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return gameID;
 	}	
@@ -44,7 +44,7 @@ public class HomeThreadDB {
 				username = rs.getString("username");
 			}
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return username;
 	}

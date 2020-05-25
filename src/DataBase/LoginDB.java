@@ -52,8 +52,8 @@ public class LoginDB {
 				result = rs.getString("password");
 
 			}
-		} catch (Exception ex) {
-			System.out.println(ex);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
