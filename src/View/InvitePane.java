@@ -6,7 +6,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 public class InvitePane extends HBox {
@@ -160,16 +163,7 @@ public class InvitePane extends HBox {
 		titel2.setStyle("-fx-font-weight: bold");
 		titel2.setContentDisplay(ContentDisplay.CENTER);
 
-//		Username = new TextField();
-//		Username.setMinSize(300, 50);
-//		Username.setPrefSize(300, 50);
-//		Username.setMaxSize(300, 50);
-//
-//
-//		gameId = new TextField();
-//		gameId.setMinSize(300, 50);
-//		gameId.setPrefSize(300, 50);
-//		gameId.setMaxSize(300, 50);
+
 		invites = new ComboBox<>();
 		invites.setMinSize(300, 50);
 		invites.setPrefSize(300, 50);

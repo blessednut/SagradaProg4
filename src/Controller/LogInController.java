@@ -19,15 +19,14 @@ public class LogInController {
 		this.c_myscene = c_myscene;
 		m_login = new LoginModel();
 		v_login = new LoginPane();
-
+//		c_home = new HomeController(c_myscene, this);
 
 		v_login.getLogin().setOnAction(e -> {
 			username = v_login.getUsername().getText();
 			password = v_login.getPassword().getText();
 			m_login.setUsername(username);
 			SetInlogInfo();
-			System.out.println("LogINCOntroller 29: Test om te kijken of er iets 2 keer wordt aangemaakt");
-			c_home = new HomeController(c_myscene, this);
+			makeHomcontroller();
 		});
 		v_login.getRegister().setOnAction(
 				e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
@@ -38,7 +37,11 @@ public class LogInController {
 		@Override
 		public void handle(KeyEvent event) {
 			if (event.getCode() == KeyCode.ENTER) {
+				username = v_login.getUsername().getText();
+				password = v_login.getPassword().getText();
+				m_login.setUsername(username);
 				SetInlogInfo();
+				makeHomcontroller();
 			}
 		}
 
@@ -49,12 +52,6 @@ public class LogInController {
 	}
 
 	public String SetInlogInfo() {
-
-//		username = v_login.getUsername().getText();
-//		String password = v_login.getPassword().getText();
-
-//		m_login.setUsername(username);
-
 		try {
 
 			if (m_login.getCon().getPassword(username).equals(password)) {
@@ -64,14 +61,24 @@ public class LogInController {
 				v_login.errorPassword();
 			}
 		} catch (Exception ex) {
-//			v_login.errorUsername();
-
+//			ex.printStackTrace();
 		}
 		return username;
 
+	}
+	
+	public void makeHomcontroller() {
+		c_home = new HomeController(c_myscene, this);
 	}
 
 	public String getUsername() {
 		return username;
 	}
+
+	public HomeController getC_home() {
+		return c_home;
+	}
+	
+	
+	
 }
