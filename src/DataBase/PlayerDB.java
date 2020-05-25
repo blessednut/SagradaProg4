@@ -16,11 +16,11 @@ public class PlayerDB {
 	public int getPlayerID(int gameID, String username) {
 		try {
 			String query = "select idplayer from player where username = '" + username + "' and idgame = " + gameID + ";";
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
 			int playerID = 0;
-			while (rs.next()) {
-				playerID = rs.getInt("idplayer");
+			while (resultset.next()) {
+				playerID = resultset.getInt("idplayer");
 			}
 			return playerID;
 		} catch (Exception e) {

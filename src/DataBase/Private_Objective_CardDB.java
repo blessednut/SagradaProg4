@@ -21,9 +21,9 @@ public class Private_Objective_CardDB {
 		String cardColor = "";
 		try {
 			String query = "Select private_objectivecard_color from player where idgame = " + GameId + " and username = '" + username + "';";
-			rs = st.executeQuery(query);
-			if(rs.next()) {
-				cardColor = rs.getString("private_objectivecard_color");
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				cardColor = resultset.getString("private_objectivecard_color");
 			}
 		}
 		catch(Exception e){

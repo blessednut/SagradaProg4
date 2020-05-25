@@ -21,9 +21,9 @@ public class GameDB {
 		int GameId = 0;
 		try {
 			String query = "select MAX(idgame) as idgame from game;";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				GameId = rs.getInt("idgame");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				GameId = resultset.getInt("idgame");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

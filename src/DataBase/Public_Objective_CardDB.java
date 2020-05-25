@@ -16,9 +16,9 @@ public class Public_Objective_CardDB {
 		String cardName = "";
 		try {
 			String query = " select name from public_objectivecard where idpublic_objectivecard =" + cardID + ";";
-			rs = st.executeQuery(query);
-			if(rs.next()) {
-				cardName = rs.getString("name");
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				cardName = resultset.getString("name");
 				cardName.toString();
 			}
 		}

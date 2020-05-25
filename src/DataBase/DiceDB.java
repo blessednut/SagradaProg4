@@ -49,10 +49,10 @@ public class DiceDB {
 			System.out.println("DiceDB:");
 			System.out.println("Query = " + query);
 			
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
-			while (rs.next()) {
-				bag.add(new GameDiceModel(gameID, rs.getInt("number"), rs.getString("color"), getRandomInt(1, 6), 0, 0));
+			while (resultset.next()) {
+				bag.add(new GameDiceModel(gameID, resultset.getInt("number"), resultset.getString("color"), getRandomInt(1, 6), 0, 0));
 			}
 			return bag;
 		} catch (Exception e) {
@@ -71,11 +71,11 @@ public class DiceDB {
 			ArrayList<GameDiceModel> die = new ArrayList<GameDiceModel>();
 
 			String query = "SELECT * FROM gamedie WHERE idgame = " + gameID + ";";
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
-			while (rs.next()) {
-				die.add(new GameDiceModel(gameID, rs.getInt("dienumber"), rs.getString("diecolor"), rs.getInt("eyes"),
-						rs.getInt("roundtrack"), rs.getInt("roundID")));
+			while (resultset.next()) {
+				die.add(new GameDiceModel(gameID, resultset.getInt("dienumber"), resultset.getString("diecolor"), resultset.getInt("eyes"),
+						resultset.getInt("roundtrack"), resultset.getInt("roundID")));
 			}
 			return die;
 		} catch (Exception e) {

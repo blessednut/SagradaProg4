@@ -25,8 +25,8 @@ public class InviteDB {
 		try {
 			String query = "select '" + username + "' from player where idgame = " + idgame + " and playstatus = '"
 					+ playstatus + "' ;";
-			rs = (st.executeQuery(query));
-			if (rs.next()) {
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
 				invited = true;
 			}
 		} catch (Exception e) {
@@ -39,9 +39,9 @@ public class InviteDB {
 		String result = null;
 		try {
 			String query = "select username from account where username = '" + username + "' ;";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				result = rs.getString("username");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				result = resultset.getString("username");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,9 +53,9 @@ public class InviteDB {
 		int playerId = 0;
 		try {
 			String query = "select MAX(idplayer) as idplayer from player";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				playerId = rs.getInt("idplayer");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				playerId = resultset.getInt("idplayer");
 			}
 			playerId++;
 		} catch (Exception e) {
@@ -92,9 +92,9 @@ public class InviteDB {
 		String result = "";
 		try {
 			String query = "select color from color where color = '" + color + "';";
-			rs = (st.executeQuery(query));
-			while (rs.next()) {
-				result = rs.getString("color");
+			ResultSet resultset = (st.executeQuery(query));
+			while (resultset.next()) {
+				result = resultset.getString("color");
 			}
 		} catch (Exception e) {
 			System.out.println("e");
@@ -106,9 +106,9 @@ public class InviteDB {
 		String result = "";
 		try {
 			String query = "SELECT playstatus from playstatus where playstatus = '" + playerstatus + "';";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				result = rs.getString("playstatus");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				result = resultset.getString("playstatus");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,9 +143,9 @@ public class InviteDB {
 		try {
 			String query = "select count(username) as amountAccepted from player where idgame = " + gameid
 					+ " and playstatus = 'accepted';";
-			rs = st.executeQuery(query);
-			if (rs.next()) {
-				result = rs.getInt("AmountAccepted");
+			ResultSet resultset = st.executeQuery(query);
+			if (resultset.next()) {
+				result = resultset.getInt("AmountAccepted");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,9 +159,9 @@ public class InviteDB {
 		try {
 			String query = "select count(username) as amountRefused from player where idgame = " + gameid
 					+ " and playstatus = 'refused';";
-			rs = st.executeQuery(query);
-			if (rs.next()) {
-				result = rs.getInt("amountRefused");
+			ResultSet resultset = st.executeQuery(query);
+			if (resultset.next()) {
+				result = resultset.getInt("amountRefused");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

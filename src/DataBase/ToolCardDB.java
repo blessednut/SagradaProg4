@@ -20,9 +20,9 @@ public class ToolCardDB {
 		String cardName = "";
 		try {
 			String query = "Select name from toolcard where idtoolcard =" +  cardID + ";";
-			rs = st.executeQuery(query);
-			if(rs.next()) {
-				cardName = rs.getString("name");
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				cardName = resultset.getString("name");
 			}
 		}
 		catch(Exception e){

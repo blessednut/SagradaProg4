@@ -47,9 +47,9 @@ public class LoginDB {
 		String result = null;
 		try {
 			String query = "select password from account where username = '" + username + "';";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				result = rs.getString("password");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				result = resultset.getString("password");
 
 			}
 		} catch (Exception e) {

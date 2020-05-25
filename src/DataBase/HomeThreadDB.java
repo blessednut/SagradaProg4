@@ -23,9 +23,9 @@ public class HomeThreadDB {
 		gameID = 0;
 		try {			
 			String query = "select idgame from player where username = '" + username + "' and playstatus = 'challengee';";
-			rs = st.executeQuery(query);
-			while(rs.next()) {
-				gameID = rs.getInt("idgame");
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				gameID = resultset.getInt("idgame");
 				home.addToArray(gameID);
 			}
 		}catch(Exception e){
@@ -39,9 +39,9 @@ public class HomeThreadDB {
 	public String getUsernameOfChallenger(int gameid) {
 		try {
 			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
-			rs = st.executeQuery(query);
-			while(rs.next()) {
-				username = rs.getString("username");
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				username = resultset.getString("username");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
