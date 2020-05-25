@@ -32,7 +32,7 @@ public class GameController {
 	}
 
 	public Public_Objective_Card_Controller getPublic_OCC() {
-		this.public_OCC = new Public_Objective_Card_Controller();
+		this.public_OCC = new Public_Objective_Card_Controller(this);
 		return public_OCC;
 	}
 

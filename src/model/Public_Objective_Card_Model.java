@@ -6,6 +6,7 @@ import DataBase.Public_Objective_CardDB;
 
 public class Public_Objective_Card_Model {
 	private Public_Objective_CardDB pocDB;
+	private int poCardID;
 
 	
 	public Public_Objective_Card_Model() {
@@ -17,11 +18,16 @@ public class Public_Objective_Card_Model {
 		Random rand = new Random();
 		int max = 10;
 		int min = 1;
-		int poCardID = rand.nextInt((max - min) + 1) + min;
+		poCardID = rand.nextInt((max - min) + 1) + min;
 		cardName=pocDB.getCardName(poCardID);
 		return cardName;
 		
 		
 	}
+	
+	public void insertPublicObjectiveCards(int gameID) {
+		pocDB.insertPublicOC(gameID, poCardID);
+	}
 
 }
+

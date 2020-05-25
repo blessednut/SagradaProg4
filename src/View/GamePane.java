@@ -75,14 +75,14 @@ public class GamePane extends BorderPane {
 
 //		Public Objective cards
 //		TODO: hier komt het aanbod toevoegen
-		if (draftpool != null) {
-			gamePaneCenter.getChildren().add(draftpool);
-		}
-		
-		
-		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-		}
+//		if (draftpool != null) {
+//			gamePaneCenter.getChildren().add(draftpool);
+//		}
+//		
+//		
+//		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
+//			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
+//		}
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -127,19 +127,19 @@ public class GamePane extends BorderPane {
 		}
 //		Private Objective card
 		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
-		
+
 //		Toolcards
 		gameController.makeTCC();
 		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
 			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
 		}
-//		Public Objective cards
-//		TODO: hier komt het aanbod toevoegen
+
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
 		}
-		
-		
+//		Public Objective cards
+		gameController.makePublicOC();
+
 		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
 			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
 		}
@@ -149,21 +149,20 @@ public class GamePane extends BorderPane {
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		gamePaneLeft.getChildren().add(endTurn);
-		
-		endTurn.setOnMouseClicked(new EventHandler<MouseEvent> () {
+
+		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				onClickEndTurn();
 			}
 		});
-		
-		
-		
+
 //		roundCounter
 		Label roundCounter = new Label("Ronde: X");
 		roundCounter.setFont(new Font("Arial", 16));
 		gamePaneRight.getChildren().add(roundCounter);
 	}
+
 	
 	
 	private void onClickEndTurn() {
