@@ -31,10 +31,10 @@ public class GameController {
 
 	}
 
-	public Public_Objective_Card_Controller getPublic_OCC() {
+	public void makePublicOC() {
 		this.public_OCC = new Public_Objective_Card_Controller(this);
-		return public_OCC;
 	}
+
 
 	public Private_Objective_Card_Controller getPrivate_OCC() {
 		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
@@ -108,6 +108,11 @@ public class GameController {
 	public void makeTCC() {
 		this.TCC = new ToolCard_Controller(this);
 	}
+	
+	public Public_Objective_Card_Controller getPublic_OCC() {
+		return public_OCC;
+	}
+
 
 	public PlayerController getPlayerController() {
 		return playerController;
