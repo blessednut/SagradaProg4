@@ -8,43 +8,41 @@ import javax.swing.DefaultComboBoxModel;
 import model.HomeThreadModel;
 
 public class HomeThreadController extends Thread {
-	private HomeThreadModel m_home;
-	private HomeController c_home;
-	private InviteController c_Invite;
-	private LogInController c_login;
+	private HomeThreadModel homeModel;
+	private HomeController homeController;
+	private InviteController inviteController;
+	private LogInController loginController;
 	private ArrayList<String> challengedGameIDString; 
 	private String username;
+	private String nameOfChallenger;
+	private String IDOFChallenger;
 	
-	public HomeThreadController(LogInController c_login, InviteController c_invite) {
-		this.c_login = c_login;
-		this.c_home = c_home;
-		this.c_Invite = c_invite;
-		this.m_home = new HomeThreadModel();
+	public HomeThreadController(LogInController loginController, InviteController inviteController) {
+		this.loginController = loginController;
+		this.homeController = homeController;
+		this.inviteController = inviteController;
+		this.homeModel = new HomeThreadModel();
 		challengedGameIDString = new ArrayList<String>();
-		username = c_login.getUsername();
+		username = loginController.getUsername();
 	}
-	
-	// TODO COMBOBOX NOG CHECKEN OF HIJ LEEG IS VOOR DAT HIJ DE DATA INLAAD. AANDERS COMBOX LEEG MAKEN.
-	// TODO ook een mogelijkheid om de combox new aan te maken elke als hij of je uitnodigingen hebt.
-
 	// de run methode is de methode die continue blijft draaien.
 	public void run() {
-		String nameOfChallenger = "";
-		String IDOFChallenger = "";
+		nameOfChallenger = "";
+		IDOFChallenger = "";
 		// door deze loop blijft het programma 1000.000 keer draaien.
 		for(int x = 0; x < 1000000; x++) {
 			int i = 0;			
 			//try vanwege de mysql code.
 			try {
 				// vraagt je gamid op aan de hand van je username. username komt uit de login controller
-				m_home.getGameID(c_login.getUsername());
+				homeModel.getGameID(username);
 				// loop om je uitdaging
-				while(i< m_home.getChallengedGameID().size()) {
-					nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
-					IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
+				while(i< homeModel.getChallengedGameID().size()) {
+					nameOfChallenger = homeModel.getUsernameOfChallenger(homeModel.getChallengedGameID().get(i));
+					IDOFChallenger = homeModel.getChallengedGameID().get(i).toString();
 					if(!challengedGameIDString.contains(IDOFChallenger)) {
 						challengedGameIDString.add(IDOFChallenger);
-						c_Invite.getV_InvitePane().getInvites().getItems()
+						inviteController.getV_InvitePane().getInvites().getItems()
 						.add(nameOfChallenger + "+" + IDOFChallenger);
 						
 					}
@@ -53,20 +51,23 @@ public class HomeThreadController extends Thread {
 				}
 				
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			// 2 000 miliseconde = sec aan vertraging.
+			// 5 000 miliseconde = 5 sec aan vertraging.
 			try {
 				Thread.sleep(5000);
 			}
 			catch(InterruptedException e) 
-			{}
+			{
+				e.printStackTrace();
+			}
 			
 			x++;
 		}
 	}
 
 	public HomeThreadModel getM_home() {
-		return m_home;
+		return homeModel;
 	}
 
 }
