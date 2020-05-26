@@ -28,8 +28,9 @@ public class HomeThreadController extends Thread {
 	}
 	
 	public void beginAgain() {
-		running = true;
 		this.homeModel = new HomeThreadModel();
+		running = true;
+		
 	}
 	
 	public void terminate() {
@@ -40,8 +41,9 @@ public class HomeThreadController extends Thread {
 		nameOfChallenger = "";
 		IDOFChallenger = "";
 		// door deze loop blijft het programma 1000.000 keer draaien.
-		while(running) {
-			int i = 0;			
+		int i = 0;	
+		while(running) {	
+			System.out.println("ik run weer");
 			//try vanwege de mysql code.
 			try {
 				// vraagt je gamid op aan de hand van je username. username komt uit de login controller

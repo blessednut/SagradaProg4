@@ -28,7 +28,7 @@ public class HomeThreadDB {
 			String query = "select idgame from player where username = '" + username
 					+ "' and playstatus = 'challengee';";
 			ResultSet resultset = st.executeQuery(query);
-			if (resultset.next()) {
+			while (resultset.next()) {
 				gameID = resultset.getInt("idgame");
 				home.addToArray(gameID);
 			}
