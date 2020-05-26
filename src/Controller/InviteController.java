@@ -43,7 +43,11 @@ public class InviteController {
 			}
 		});
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
-		invitePane.getInviteButton().setOnMouseClicked(e -> inVitePlayer());
+		invitePane.getInviteButton().setOnMouseClicked(e -> {
+			inVitePlayer();
+			acceptInvitation(home.getC_login().getUsername(),gameController.getM_game().getGameId());
+			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
+		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
 			acceptInvitation(home.getC_login().getUsername());
@@ -61,11 +65,19 @@ public class InviteController {
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
 		gameAcceptionThread.setDaemon(true);
 		gameAcceptionThread.start();
-		
+
 		gameController.getM_game().setGameId(Gameid);
 
 		inviteModel.updatePlayerStatusChallengee(username, Gameid, ACCEPTED);
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
+
+	}
+	public void acceptInvitation(String username, int gameID) {
+		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, gameID);
+		gameAcceptionThread.setDaemon(true);
+		gameAcceptionThread.start();
+
+		gameController.getM_game().setGameId(gameID);
 
 	}
 
@@ -94,7 +106,7 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("green"));
-			gameController.createGamePane();
+//			gameController.createGamePane();
 			break;
 		case "drie":
 			gameController.getM_game().createGameRoom();
@@ -109,7 +121,7 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("purple"));
-			gameController.createGamePane();
+//			gameController.createGamePane();
 			break;
 		case "vier":
 			gameController.getM_game().createGameRoom();
@@ -126,7 +138,7 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("red"));
-			gameController.createGamePane();
+//			gameController.createGamePane();
 			break;
 
 		}
@@ -171,9 +183,13 @@ public class InviteController {
 	public void createInviteStartPane(String gameID) {
 		inviteStart = new InviteStart(gameID);
 		home.addInviteStartPane(inviteStart);
-		inviteStart.getStartGame().setOnMouseClicked(e -> {home.removeInviteStartPane(inviteStart);gameController.createGamePane();});
-		
+		inviteStart.getStartGame().setOnMouseClicked(e -> {
+			home.removeInviteStartPane(inviteStart);
+			gameController.createGamePane();
+		});
+
 	}
+
 	public void setStartButtonVisable() {
 		inviteStart.getStartGame().setVisible(true);
 	}
@@ -199,9 +215,5 @@ public class InviteController {
 	public InviteStart getInviteStart() {
 		return inviteStart;
 	}
-	
-	
-	
-	
 
 }

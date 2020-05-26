@@ -161,4 +161,20 @@ public class InviteDB {
 		}
 		return result;
 	}
+	
+	public int getInviteGameID() {
+		int result = 0;
+		
+		try {
+			String query = "select MAX(idgame) as idplayer from player";
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				result = resultset.getInt("idplayer");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
