@@ -15,32 +15,38 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
-//	//test
-//	private PlayerController c_player;
-
+	
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
+		//aan maak homepane.
+		v_home = new HomePane(this);
+		
+		//aan maak gamecontroller.
 		c_game = new GameController(myScene, c_login);
-//		//test
-//		this.c_player = new PlayerController(c_game);
+
+		// aan maak invitecontroller.
 		c_Invite = new InviteController(c_game,this);
+		
+		// aan maak homethreadController.
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		
 		c_hometc.setDaemon(true);
 		c_hometc.start();
-		v_home = new HomePane(this);
+		
+
+		// aan maak credits pane
 		v_credits = new CreditsPane();
+		// aan maak statspane.
 		v_statistics = new StatisticsPane();
+		
+		// buttons 
 		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
-//		v_home.getGames().setOnAction(e -> openGamePane());
+		
 	}
-
-//	public void openGamePane() {
-//		c_game = new GameController(myScene, c_login);
-//	}
-
+	
 	public void openInvitePane() {
 		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
 	}

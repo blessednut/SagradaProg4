@@ -25,8 +25,8 @@ public class LogInController {
 			username = v_login.getUsername().getText();
 			password = v_login.getPassword().getText();
 			m_login.setUsername(username);
+			makeHomecontroller();
 			SetInlogInfo();
-			makeHomcontroller();
 		});
 		v_login.getRegister().setOnAction(
 				e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
@@ -40,8 +40,9 @@ public class LogInController {
 				username = v_login.getUsername().getText();
 				password = v_login.getPassword().getText();
 				m_login.setUsername(username);
+				makeHomecontroller();
 				SetInlogInfo();
-				makeHomcontroller();
+
 			}
 		}
 
@@ -67,7 +68,7 @@ public class LogInController {
 
 	}
 	
-	public void makeHomcontroller() {
+	public void makeHomecontroller() {
 		c_home = new HomeController(c_myscene, this);
 	}
 

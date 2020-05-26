@@ -132,9 +132,11 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("green"));
+			// tweede uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("purple"));
+			// derde uitgedaagde.
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("red"));
@@ -186,8 +188,28 @@ public class InviteController {
 		inviteStart.getStartGame().setOnMouseClicked(e -> {
 			home.removeInviteStartPane(inviteStart);
 			gameController.createGamePane();
+			closeGameAcceptionThreadCon();
+			closeHomeThreadCon();
+			
+//			try {
+//				home.getC_hometc().wait();
+//			} catch(InterruptedException ex) {
+//				ex.printStackTrace();
+//			}
+			
 		});
 
+	}
+	
+	public void closeHomeThreadCon() {
+		home.getC_hometc().terminate();
+		home.getC_hometc().getM_home().getHomeThreadDB().getDbCon().closeConnection();
+
+	}
+	
+	public void closeGameAcceptionThreadCon() {
+		gameAcceptionThread.terminate();
+		gameAcceptionThread.getGameThreadModel().getGameAcceptionThreadDB().getConNection().closeConnection();
 	}
 
 	public void setStartButtonVisable() {
