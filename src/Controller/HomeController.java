@@ -11,7 +11,14 @@ public class HomeController {
 	private InviteController c_Invite;
 //	private InvitePane v_invite;
 	private CreditsPane v_credits;
-	private StatisticsPane v_statistics;
+	
+	
+	
+	//private StatisticsPane v_statistics;
+	private StatisticController statisticController;
+	
+	
+	
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
@@ -30,7 +37,10 @@ public class HomeController {
 		threadMethod();
 		v_home = new HomePane(this);
 		v_credits = new CreditsPane();
-		v_statistics = new StatisticsPane();
+		
+		//v_statistics = new StatisticsPane();
+		statisticController = new StatisticController();
+		
 		v_home.getVrienden().setOnAction(e -> openInvitePane());
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
@@ -44,7 +54,7 @@ public class HomeController {
 	}
 
 	public void openStatisticsPane() {
-		v_home.makeReservedSpace(v_statistics);
+		v_home.makeReservedSpace(statisticController.getView());
 	}
 	
 	public void openCreditsPane() {
@@ -53,10 +63,6 @@ public class HomeController {
 
 	public HomePane getV_home() {
 		return v_home;
-	}
-
-	public StatisticsPane getV_statistics() {
-		return v_statistics;
 	}
 
 	public LogInController getC_login() {
