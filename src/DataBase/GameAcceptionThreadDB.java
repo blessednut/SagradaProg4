@@ -13,10 +13,12 @@ public class GameAcceptionThreadDB {
 	private Statement st;
 	private PreparedStatement ps;
 	private GameAcceptionThreadModel gameAcceptionThread;
+	private DBCon conNection;
 
 	public GameAcceptionThreadDB(GameAcceptionThreadModel gameAcceptionThread) {
 		this.gameAcceptionThread = gameAcceptionThread;
-		this.st = DBCon.getInstance().getSt();
+		this.conNection = new DBCon();
+		this.st = conNection.getSt();
 	}
 
 	public int getAmountInvitited(int gameID) {
@@ -70,4 +72,10 @@ public class GameAcceptionThreadDB {
 			e.printStackTrace();
 		}
 	}
+
+	public DBCon getConNection() {
+		return conNection;
+	}
+	
+	
 }

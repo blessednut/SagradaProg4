@@ -26,9 +26,11 @@ public class GameController {
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
-		
 		this.m_game = new GameModel();
 
+	}
+	public void switchBackToHome() {
+		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
 	}
 
 	public void makePublicOC() {
