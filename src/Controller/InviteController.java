@@ -1,5 +1,8 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import View.InvitePane;
 import View.InviteStart;
 import javafx.scene.control.Alert;
@@ -19,6 +22,10 @@ public class InviteController {
 
 	private static final String ACCEPTED = "accepted";
 	private static final String REFUSED = "refused";
+	
+	private ArrayList<String> ColorArray = new ArrayList<>();
+	private int randomColorInt;
+	private boolean added = true;
 
 	public InviteController(GameController gameController, HomeController home) {
 		this.gameController = gameController;
@@ -101,45 +108,45 @@ public class InviteController {
 			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
-					inviteModel.getColor("blue"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("green"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 //			gameController.createGamePane();
 			break;
 		case "drie":
 			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
-					inviteModel.getColor("blue"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// eerste uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("green"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// tweede uigedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("purple"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 //			gameController.createGamePane();
 			break;
 		case "vier":
 			gameController.getM_game().createGameRoom();
 			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
-					inviteModel.getColor("blue"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// eerste uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("green"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// tweede uitgedaagde
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("purple"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 			// derde uitgedaagde.
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor("red"));
+					inviteModel.getColor(createRandomPrivatObjColor()));
 //			gameController.createGamePane();
 			break;
 
@@ -199,6 +206,43 @@ public class InviteController {
 
 		});
 
+	}
+	
+	public String createRandomPrivatObjColor() {
+		Random rand = new Random();
+		int max = 5;
+		int min = 1;
+		added = false;
+		
+		String result = "";
+
+		while(!added) {
+			randomColorInt = rand.nextInt((max - min) + 1) + min ;
+			switch (randomColorInt) {
+			case 1:
+				result = "blue";
+				break;
+			case 2:
+				result = "green";
+				break;
+			case 3:
+				result = "purple";
+				break;
+			case 4:
+				result = "red";
+				break;
+			case 5:
+				result = "yellow";
+				break;
+			}
+			if(!ColorArray.contains(result)) {
+				ColorArray.add(result);
+				added = true;
+			}
+			
+		}	
+		System.out.println(result);
+		return result;
 	}
 
 	public void closeHomeThreadCon() {

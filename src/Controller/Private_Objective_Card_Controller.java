@@ -1,5 +1,8 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import View.Private_Objective_Card;
 import javafx.scene.layout.Pane;
 import model.Private_Objective_Card_Model;
@@ -8,6 +11,7 @@ public class Private_Objective_Card_Controller {
 	private Pane pane;
 	private Private_Objective_Card_Model pocm;
 
+	
 	public Private_Objective_Card_Controller(int GameId, String username) {
 		pocm = new Private_Objective_Card_Model(GameId, username);
 //		TODO: zorgen dat de cardName aan de hand van de IDPlayer kan worden opgehaald. dus niet in de constructor meegegeven wordt.
@@ -18,4 +22,6 @@ public class Private_Objective_Card_Controller {
 	public Pane getPane() {
 		return pane;
 	}
+
+	
 }
