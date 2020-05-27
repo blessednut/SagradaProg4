@@ -40,6 +40,7 @@ public class HomeThreadController extends Thread {
 				m_home.getGameID(c_login.getUsername());
 				// loop om je uitdaging
 				while(i< m_home.getChallengedGameID().size()) {
+					System.out.println("homeThreadController: " + m_home.getChallengedGameID().get(i));
 					nameOfChallenger = m_home.getUsernameOfChallenger(m_home.getChallengedGameID().get(i));
 					IDOFChallenger = m_home.getChallengedGameID().get(i).toString();
 					if(!challengedGameIDString.contains(IDOFChallenger)) {

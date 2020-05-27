@@ -11,6 +11,7 @@ public class GameAcceptionThreadController extends Thread {
 	private int amountInGame;
 	private int gameid;
 	private String amountNotAcceptedString;
+	private boolean running = true;
 
 
 	public GameAcceptionThreadController(LogInController logInController, InviteController inViteController, int gameid
@@ -22,13 +23,16 @@ public class GameAcceptionThreadController extends Thread {
 		this.gameid = gameid;
 		System.out.println("achteraan constructor");
 	}
+	public void terminate() {
+		running = false;
+	}
 
 	public void run() {
 		int amountRefused = 0;
 		int amountNotAccepted = 1;
 		System.out.println("gameid: "+gameid);
 		
-		for (int x = 0; x < 1000000; x++) {
+		while (running) {
 			System.out.println("ik doe het");
 			try {
 				amountRefused = gameThreadModel.getAmountRefused(gameid);

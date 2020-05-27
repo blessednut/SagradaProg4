@@ -33,7 +33,6 @@ public class HomeThreadModel {
 	}
 
 	public void addToArray(int GameID) {
-		int i = 0;
 		challengedGameID.add(GameID);
 	}
 
