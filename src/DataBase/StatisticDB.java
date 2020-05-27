@@ -13,7 +13,7 @@ public class StatisticDB {
 	}
 	
 	public ArrayList<String> getRankList (boolean isASC) {
-		System.out.println("asdfasdfasdf");
+		//System.out.println("asdfasdfasdf");
 		ArrayList<String> rank = new ArrayList<String>();
 		try {
 			String query;
@@ -49,7 +49,7 @@ public class StatisticDB {
 			
 			ResultSet resultset = (st.executeQuery(query));
 			while (resultset.next()) {
-				System.out.println(resultset.getString("username") + " - " + resultset.getInt("numberOfWins"));
+				//System.out.println(resultset.getString("username") + " - " + resultset.getInt("numberOfWins"));
 				rank.add(resultset.getString("username") + " - " + resultset.getInt("numberOfWins"));
 			}
 		} catch (Exception e) {

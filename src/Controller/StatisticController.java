@@ -23,9 +23,6 @@ public class StatisticController {
 	
 	public void search (String username) {
 		if (model.usernameExists(username)) {
-			System.out.println("STATISTICCONTROLLER");
-			System.out.println("Gebruiker bestaat!");
-			
 			view.update();
 		}
 	}
