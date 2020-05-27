@@ -2,7 +2,6 @@ package View;
 
 import Controller.ToolCard_Controller;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Popup;

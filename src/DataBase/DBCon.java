@@ -11,7 +11,7 @@ public class DBCon {
 
 	private static DBCon single_instance;
 
-	private DBCon() {
+	public DBCon() {
 		createConnection();
 	}
 

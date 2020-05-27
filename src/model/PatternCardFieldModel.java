@@ -1,11 +1,6 @@
-package model;
+ package model;
 
-import DataBase.DBCon;
 import DataBase.DiceDB;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class PatternCardFieldModel {
 	private final int idPatternCard;
@@ -56,4 +51,18 @@ public class PatternCardFieldModel {
 	public void setDice(GameDiceModel dice) {
 		this.dice = dice;
 	}
+	
+	public boolean isEmpty () {
+		return (dice == null) ? true : false;
+	}
+	
+	public GameDiceModel getDice () {
+		return this.dice;
+	}
+
+	public void removeDice() {
+		this.dice = null;
+		
+	}
+	
 }

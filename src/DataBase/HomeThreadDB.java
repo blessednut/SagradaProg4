@@ -8,16 +8,19 @@ import java.util.Iterator;
 import model.HomeThreadModel;
 
 public class HomeThreadDB {
-	private ResultSet rs;
+
 	private Statement st;
 	private PreparedStatement ps;
 	private String username;
 	private int gameID;
 	private HomeThreadModel home;
+	private DBCon dbCon;
 
 	public HomeThreadDB(HomeThreadModel home) {
 		this.home = home;
-		this.st = DBCon.getInstance().getSt();
+		dbCon = new DBCon();
+		this.st = dbCon.getSt();
+
 	}
 
 	public int getGameID(String username) {
@@ -25,13 +28,13 @@ public class HomeThreadDB {
 		try {
 			String query = "select idgame from player where username = '" + username
 					+ "' and playstatus = 'challengee';";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				gameID = rs.getInt("idgame");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				gameID = resultset.getInt("idgame");
 				home.addToArray(gameID);
 			}
 		} catch (Exception e) {
-			// throws nullpointerexception when there are no more invitations.
+			e.printStackTrace();
 		}
 		return gameID;
 	}
@@ -40,11 +43,12 @@ public class HomeThreadDB {
 		username = "";
 		try {
 			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				username = rs.getString("username");
+			ResultSet resultset = st.executeQuery(query);
+			if (resultset.next()) {
+				username = resultset.getString("username");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return username;
 	}
@@ -52,5 +56,11 @@ public class HomeThreadDB {
 	public int getGameIdForInvite() {
 		return gameID;
 	}
+
+	public DBCon getDbCon() {
+		return dbCon;
+	}
+
+
 
 }

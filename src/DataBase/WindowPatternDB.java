@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import model.PatternCardFieldModel;
-import model.PatternCardModel;
 
 public class WindowPatternDB {
 	private ResultSet rs;
@@ -21,17 +20,17 @@ public class WindowPatternDB {
 			PatternCardFieldModel[][] field = new PatternCardFieldModel[5][4];
 			String query = "SELECT *\r\n" + "FROM patterncardfield\r\n" + "WHERE idpatterncard = '" + idPatternCard
 					+ "';";
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
-			while (rs.next()) {
-				int x = rs.getInt("position_x");
-				int y = rs.getInt("position_y");
-				field[x - 1][y - 1] = new PatternCardFieldModel(rs.getInt("idpatterncard"), x, y, rs.getString("color"),
-						rs.getInt("value"));
+			while (resultset.next()) {
+				int x = resultset.getInt("position_x");
+				int y = resultset.getInt("position_y");
+				field[x - 1][y - 1] = new PatternCardFieldModel(resultset.getInt("idpatterncard"), x, y, resultset.getString("color"),
+						resultset.getInt("value"));
 			}
 			return field;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -39,15 +38,15 @@ public class WindowPatternDB {
 	public String getName (int idPatternCard) {
 		try {
 			String query = "SELECT name FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
 			String name = "";
-			while (rs.next()) {
-				name = rs.getString("name");
+			while (resultset.next()) {
+				name = resultset.getString("name");
 			}
 			return name;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -55,15 +54,15 @@ public class WindowPatternDB {
 	public int getDifficulty (int idPatternCard) {
 		try {
 			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
-			rs = st.executeQuery(query);
+			ResultSet resultset = st.executeQuery(query);
 
 			int difficulty = 0;
-			while (rs.next()) {
-				difficulty = rs.getInt("difficulty");
+			while (resultset.next()) {
+				difficulty = resultset.getInt("difficulty");
 			}
 			return difficulty;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -74,7 +73,7 @@ public class WindowPatternDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }

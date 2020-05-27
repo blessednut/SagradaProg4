@@ -6,8 +6,8 @@ import java.sql.Statement;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class LoginDB {
 	private ResultSet rs;
@@ -47,13 +47,13 @@ public class LoginDB {
 		String result = null;
 		try {
 			String query = "select password from account where username = '" + username + "';";
-			rs = st.executeQuery(query);
-			while (rs.next()) {
-				result = rs.getString("password");
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				result = resultset.getString("password");
 
 			}
-		} catch (Exception ex) {
-			System.out.println(ex);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

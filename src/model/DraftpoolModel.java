@@ -35,4 +35,16 @@ public class DraftpoolModel {
 	public GameDiceModel getGameDiceModel (int index) {
 		return this.draftpool.get(index);
 	}
+	
+	public void removeDiceFromDraftpool(GameDiceModel dice) {
+		if(draftpool.contains(dice)) {
+			draftpool.remove(dice);
+			System.out.println("DraftpoolModel: Wordt er iets verwijderd");
+		}
+	}
+
+	public ArrayList<GameDiceModel> getDraftpool() {
+		return draftpool;
+	}
+	
 }

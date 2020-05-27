@@ -7,6 +7,7 @@ public class DraftpoolController {
 	private DraftpoolModel draftpoolModel;
 	private GameController controller;
 	private DraftpoolSquareController[] draftpoolController;
+	private DraftpoolSquareController selectedSquare;
 	private GameDiceModel selectedDice;
 	
 	public DraftpoolController (GameController controller) {
@@ -41,8 +42,29 @@ public class DraftpoolController {
 		return draftpoolController;
 	}
 	
-	public void setSelectedDice (GameDiceModel dice) {
+	public void setSelectedDice (GameDiceModel dice, DraftpoolSquareController SquareController) {
 		this.selectedDice = dice;
-		this.controller.placeDice(dice);
+		this.selectedSquare = SquareController;
+		
+		if (this.controller.placeDice(dice)) {
+			SquareController.removeDice();
+			draftpoolModel.removeDiceFromDraftpool(dice);
+			selectedDice = null;
+		}
 	}
+
+	public GameDiceModel getSelectedDice() {
+		return selectedDice;
+	}
+
+	public DraftpoolSquareController getDraftpoolControllerSquareController() {
+		return selectedSquare;
+	}
+
+	public DraftpoolModel getDraftpoolModel() {
+		return draftpoolModel;
+	}
+	
+	
+	
 }

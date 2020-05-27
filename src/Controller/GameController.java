@@ -26,26 +26,23 @@ public class GameController {
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
-
 		this.m_game = new GameModel();
-		this.public_OCC = new Public_Objective_Card_Controller();
-		this.TCC = new ToolCard_Controller();
-//		this.gamePane = new GamePane(this);
-
 
 	}
-
-	public Public_Objective_Card_Controller getPublic_OCC() {
-
-		return public_OCC;
+	public void switchBackToHome() {
+		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
 	}
+
+	public void makePublicOC() {
+		this.public_OCC = new Public_Objective_Card_Controller(this);
+	}
+
 
 	public Private_Objective_Card_Controller getPrivate_OCC() {
 		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
-
 		return TCC;
 	}
 	public void createGamePane() {
@@ -92,10 +89,10 @@ public class GameController {
 		return m_game;
 	}
 
-	public void placeDice (GameDiceModel dice) {
-		this.playerController.getPatternCard().placeDice(dice);
-		System.out.println("GameController:");
-		System.out.println(dice.getDieNumber());
+	public boolean placeDice (GameDiceModel dice) {
+		return this.playerController.getPatternCard().placeDice(dice);
+//		System.out.println("GameController:");
+//		System.out.println(dice.getDieNumber());
 	}
 
 	private int getRandomInt(int min, int max) {
@@ -105,4 +102,24 @@ public class GameController {
 	public void endTurn() {
 		this.playerController.updatePlayerFrameField();
 	}
+
+	public DraftpoolController getDraftpoolController() {
+		return draftpoolController;
+	}
+
+	public void makeTCC() {
+		this.TCC = new ToolCard_Controller(this);
+	}
+
+	public Public_Objective_Card_Controller getPublic_OCC() {
+		return public_OCC;
+	}
+
+
+	public PlayerController getPlayerController() {
+		return playerController;
+	}
+
+
+
 }

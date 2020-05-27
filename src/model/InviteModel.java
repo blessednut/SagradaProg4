@@ -1,7 +1,6 @@
 package model;
 
 import Controller.InviteController;
-import DataBase.DBCon;
 import DataBase.InviteDB;
 
 public class InviteModel {
@@ -45,9 +44,13 @@ public class InviteModel {
 	public String getPlayerStatus(String playerstatus) {
 		return new InviteDB().getPlayerStatus(playerstatus);
 	}
-	
+
 	public void updatePlayerStatusChallengee(String username, int gameid, String playstatus) {
 		new InviteDB().updatePlayerStatusChallengee(username, gameid, playstatus);
 	}
-	
+	public String getInviteGameID() {
+		int result = new InviteDB().getInviteGameID();
+		System.out.println(result);
+		return Integer.toString(result);
+	}
 }

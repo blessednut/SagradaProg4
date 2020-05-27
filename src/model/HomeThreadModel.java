@@ -8,14 +8,17 @@ public class HomeThreadModel {
 	private int gameID;
 	private String username;
 	private ArrayList<Integer> challengedGameID;
+	private HomeThreadDB homeThreadDB;
 
 	public HomeThreadModel() {
+
+		this.homeThreadDB = new HomeThreadDB(this);
 		challengedGameID = new ArrayList<Integer>();
 	}
 
 	// methode om de gameID op te halen die de laatste creationdate heeft
 	public int getGameID(String username) {
-		return new HomeThreadDB(this).getGameID(username);
+		return homeThreadDB.getGameID(username);
 	}
 
 	// methode om de username van de challenger te vinden die de laatste game heeft
@@ -23,7 +26,7 @@ public class HomeThreadModel {
 
 	// todo
 	public String getUsernameOfChallenger(int gameid) {
-		String username = new HomeThreadDB(this).getUsernameOfChallenger(gameid);
+		String username = homeThreadDB.getUsernameOfChallenger(gameid);
 		return username;
 		
 	}
@@ -36,11 +39,15 @@ public class HomeThreadModel {
 		if(!challengedGameID.contains(GameID)) {
 			challengedGameID.add(GameID);
 		}
-		
 	}
-	
+
 	public ArrayList<Integer> getChallengedGameID() {
 		return challengedGameID;
 	}
+
+	public HomeThreadDB getHomeThreadDB() {
+		return homeThreadDB;
+	}
+
 
 }

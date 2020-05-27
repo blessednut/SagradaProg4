@@ -12,12 +12,13 @@ public class GameAcceptionThreadDB {
 	private ResultSet amountRefused;
 	private Statement st;
 	private PreparedStatement ps;
-
 	private GameAcceptionThreadModel gameAcceptionThread;
+	private DBCon conNection;
 
 	public GameAcceptionThreadDB(GameAcceptionThreadModel gameAcceptionThread) {
 		this.gameAcceptionThread = gameAcceptionThread;
-		this.st = DBCon.getInstance().getSt();
+		this.conNection = new DBCon();
+		this.st = conNection.getSt();
 	}
 
 	public int getAmountInvitited(int gameID) {
@@ -29,7 +30,7 @@ public class GameAcceptionThreadDB {
 				result = amountInvited.getInt("aantal");
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -44,7 +45,7 @@ public class GameAcceptionThreadDB {
 				result = amountAccepted.getInt("aantal");
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -58,18 +59,23 @@ public class GameAcceptionThreadDB {
 				result = amountRefused.getInt("aantal");
 			}
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 	public void setRefused(int gameid) {
 		try {
 			String query = "update player set playstatus = 'refused' where idgame = "+gameid+";";
 			st.execute(query);
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
+
+	public DBCon getConNection() {
+		return conNection;
+	}
+
 
 }

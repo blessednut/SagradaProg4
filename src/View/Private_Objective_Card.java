@@ -16,7 +16,7 @@ public class Private_Objective_Card extends CardPane {
 			ImageView objevtiveCard = new ImageView(cardimage);
 			getChildren().add(objevtiveCard);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

@@ -14,6 +14,7 @@ public class WindowPatternSquareView extends Pane {
 //	private IntegerProperty value;
 	//private DiceView diceView;
 	private WindowPatternSquareController controller;
+	private double width, height;
 
 	public WindowPatternSquareView(WindowPatternSquareController controller) {
 		this.controller = controller;
@@ -40,16 +41,26 @@ public class WindowPatternSquareView extends Pane {
 		diceView.drawDice(70, 70);
 		this.getChildren().add(diceView);
 		
-		System.out.println("asdfasdfasdfdsasdfadsafsdfdfssdf");
+		//System.out.println("asdfasdfasdfdsasdfadsafsdfdfssdf");
 	}
 
 	public void setSize(double width, double height) {
+		this.width = width;
+		this.height = height;
 		this.setMinSize(width, height);
 		this.getChildren().add(new DicePattern(controller.getSquare().getValue(), width, height));
 	}
 	
+	public void updateView () {
+		this.getChildren().clear();
+		
+		if (controller.getDice() != null) {
+			this.getChildren().add(new DicePattern(controller.getSquare().getValue(), width, height));
+		}
+	}
+	
 	private void onClick() {
-		System.out.println("Clicked");
+		//System.out.println("Clicked");
 		this.controller.onClick();
 	}
 

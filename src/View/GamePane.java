@@ -30,6 +30,7 @@ public class GamePane extends BorderPane {
 	private GameController gameController;
 	private WindowPatternView ownWindow;
 	private DraftPoolView draftpool;
+	private Button home;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -37,7 +38,6 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		
 		createGamePane();
 	}
 
@@ -48,7 +48,7 @@ public class GamePane extends BorderPane {
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
 		createGamePane();
 	}
-	
+
 	public void createGamePane() {
 		this.getChildren().clear();
 		HBox gamePaneBottom = new HBox();
@@ -71,43 +71,107 @@ public class GamePane extends BorderPane {
 		}
 //		Private Objective card
 		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
-		
-//		Toolcards
-//		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
-//			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
-//		}
+
 //		Public Objective cards
 //		TODO: hier komt het aanbod toevoegen
-		if (draftpool != null) {
-			gamePaneCenter.getChildren().add(draftpool);
-		}
-		
-		
-		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-		}
+//		if (draftpool != null) {
+//			gamePaneCenter.getChildren().add(draftpool);
+//		}
+//
+//
+//		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
+//			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
+//		}
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
+		Button home = new Button("home");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		gamePaneLeft.getChildren().add(endTurn);
-		
-		endTurn.setOnMouseClicked(new EventHandler<MouseEvent> () {
+		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		gamePaneLeft.getChildren().addAll(endTurn, home);
+
+		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				onClickEndTurn();
 			}
 		});
-		
-		
-		
+
 //		roundCounter
 		Label roundCounter = new Label("Ronde: X");
 		roundCounter.setFont(new Font("Arial", 16));
 		gamePaneRight.getChildren().add(roundCounter);
 	}
-	
+
+	public void createGamePane2() {
+		this.getChildren().clear();
+		HBox gamePaneBottom = new HBox();
+		HBox gamePaneCenter = new HBox();
+		VBox gamePaneLeft = new VBox();
+		VBox gamePaneRight = new VBox();
+		this.setBottom(gamePaneBottom);
+		this.setCenter(gamePaneCenter);
+		this.setLeft(gamePaneLeft);
+		this.setRight(gamePaneRight);
+		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
+		gamePaneCenter.setAlignment(Pos.CENTER);
+		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
+		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
+//		windowPatternCard
+		if (ownWindow == null) {
+
+		} else {
+			gamePaneBottom.getChildren().add(ownWindow);
+		}
+//		Private Objective card
+		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
+
+//		Toolcards
+		gameController.makeTCC();
+		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
+			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
+		}
+
+		if (draftpool != null) {
+			gamePaneCenter.getChildren().add(draftpool);
+		}
+//		Public Objective cards
+		gameController.makePublicOC();
+
+		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
+			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
+		}
+//		End turn button
+		Button endTurn = new Button("Einde beurt");
+		home = new Button("home");
+		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		gamePaneLeft.getChildren().addAll(endTurn, home);
+		home.setOnMouseClicked(e -> {
+			gameController.switchBackToHome();
+			gameController.getC_login().getC_home().getC_hometc().beginAgain();
+		});
+
+		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				onClickEndTurn();
+			}
+		});
+
+//		roundCounter
+		Label roundCounter = new Label("Ronde: X");
+		roundCounter.setFont(new Font("Arial", 16));
+		gamePaneRight.getChildren().add(roundCounter);
+	}
+
 	private void onClickEndTurn() {
 		System.out.println("GamePane:");
 		System.out.println("End Turn");
@@ -118,7 +182,7 @@ public class GamePane extends BorderPane {
 			WindowPatternView card4) {
 		this.getChildren().clear();
 
-		//TODO: Magic numbers vervangen
+		// TODO: Magic numbers vervangen
 		card1.setOnMouseClicked(e -> chooseCardEvent(0));
 		card2.setOnMouseClicked(e -> chooseCardEvent(1));
 		card3.setOnMouseClicked(e -> chooseCardEvent(2));
@@ -140,8 +204,13 @@ public class GamePane extends BorderPane {
 	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
 	}
-	
-	public void setDrafpool (DraftPoolView draftpool) {
+
+	public void setDrafpool(DraftPoolView draftpool) {
 		this.draftpool = draftpool;
 	}
+
+	public Button getHome() {
+		return home;
+	}
+
 }
