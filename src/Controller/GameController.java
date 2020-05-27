@@ -11,7 +11,7 @@ import model.GameModel;
 public class GameController {
 	private MySceneController myScene;
 	private GamePane gamePane;
-	private GameModel m_game;
+	private GameModel gameModel;
 	private LogInController c_login;
 
 	private Public_Objective_Card_Controller public_OCC;
@@ -26,9 +26,9 @@ public class GameController {
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
-		this.m_game = new GameModel();
-
+		this.gameModel = new GameModel();
 	}
+	
 	public void switchBackToHome() {
 		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
 	}
@@ -39,7 +39,7 @@ public class GameController {
 
 
 	public Private_Objective_Card_Controller getPrivate_OCC() {
-		this.private_OCC = new Private_Objective_Card_Controller(m_game.getGameId(), c_login.getUsername());
+		this.private_OCC = new Private_Objective_Card_Controller(gameModel.getGameId(), c_login.getUsername());
 		return private_OCC;
 	}
 	public ToolCard_Controller getTCC() {
@@ -50,7 +50,7 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, m_game.getGameId(), c_login.getUsername());
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername());
 
 		this.draftpoolController = new DraftpoolController(this);
 
@@ -86,7 +86,7 @@ public class GameController {
 	}
 
 	public GameModel getM_game() {
-		return m_game;
+		return gameModel;
 	}
 
 	public boolean placeDice (GameDiceModel dice) {
@@ -101,6 +101,70 @@ public class GameController {
 
 	public void endTurn() {
 		this.playerController.updatePlayerFrameField();
+		
+		int roundID = gameModel.getRoundID();
+		int playerID = gameModel.getTurnPlayerID();
+		int playerSeqnr = gameModel.getSeqNR(playerID);
+		int highestSeqnr = gameModel.getHighestSeqnr();
+		boolean isClockwise = gameModel.getClockwise();
+		
+		if (isClockwise) {
+			if (playerSeqnr == highestSeqnr) {
+				//RoundID + 1 wanneer < 20 veranderen
+				gameModel.setRoundID();
+				//Zelfde speler blijft aan de beurt
+			} else {
+				//Turn player id aanpassen 
+					//met playerSeqnr + 1
+				int newPlayerID = gameModel.getPlayerID(playerSeqnr + 1);
+				gameModel.changeTurnPlayerID(newPlayerID);
+			}
+		} else {
+			if (playerSeqnr == 1) {
+				//Dobbelstenen wegschrijven naar rondespoor
+				
+				//RoundID + 1 wanneer < 20 veranderen
+				if (roundID == 20) {
+					//Set playerstatus = finished
+					//Tel punten
+					//bepaal winnaar
+				} else {
+					//Nieuwe segNr zetten
+					System.out.println("UPDATE SEQNR");
+					int[] playerIDs = new int [highestSeqnr];
+					for (int i = 0; i < playerIDs.length; i++) {
+						playerIDs[i] = gameModel.getPlayerID(i + 1);
+					}
+					
+					for (int j = 0; j < playerIDs.length; j++) {
+						if (j == 0) {
+							gameModel.updateSeqNR(playerIDs[j], highestSeqnr);
+						} else {
+							gameModel.updateSeqNR(playerIDs[j], j);
+						}
+					}
+					
+//					for (int i = 1; i < highestSeqnr; i++) {
+//						int player = gameModel.getPlayerID(i);
+//						if (i == 1) {
+//							gameModel.updateSeqNR(player, highestSeqnr);
+//						} else {
+//							gameModel.updateSeqNR(player, i--);
+//						}
+//					}
+					
+					//Nieuwe turn speler met seqnr 1
+					int newPlayerID = gameModel.getPlayerID(1);
+					gameModel.changeTurnPlayerID(newPlayerID);
+					gameModel.setRoundID();
+				}
+			} else {
+				//Turn player id aanpassen 
+					//met playerSeqnr - 1
+				int newPlayerID = gameModel.getPlayerID(playerSeqnr - 1);
+				gameModel.changeTurnPlayerID(newPlayerID);
+			}
+		}
 	}
 
 	public DraftpoolController getDraftpoolController() {
@@ -119,7 +183,9 @@ public class GameController {
 	public PlayerController getPlayerController() {
 		return playerController;
 	}
-
-
-
+	
+	public void refresh() {
+		System.out.println("GAMECONTROLLER:");
+		System.out.println("REFRESH");
+	}
 }

@@ -30,16 +30,47 @@ public class GameDB {
 		}
 		GameId++;
 		GM.setGameId(GameId);
-		
+//		System.out.println("GAMEDB");
+//		System.out.println("GameID = " + GameId);
+//		System.out.println("PlayerID = " + getPlayerID(GameId, 1));
 		try {
-			String query = "insert into game(idgame,creationdate) values(?,now());";
+			String query = "insert into game(idgame, current_roundID, creationdate) values(" + GameId + ", 1,now());";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
-			ps.setInt(1, GameId);
+			//ps.setInt(1, GameId);
+			//ps.setInt(2, );
 			ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return GameId;
+	}
+	
+	private int getPlayerID (int idgame, int seqNR) {
+		int playerID = 0;
+		try {
+			String query = "SELECT idplayer FROM player WHERE idgame = " + idgame + " AND seqnr = " + seqNR;
+			ResultSet resultset = (st.executeQuery(query));
+			while (resultset.next()) {
+				playerID = resultset.getInt("idplayer");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return playerID;
+	}
+
+	public void updatePlayerTurn(int seqNR) {
+		int gameID = GM.getGameId();
+		int playerID = getPlayerID(gameID, seqNR);
+		System.out.println("gameID = " + gameID);
+		System.out.println("playerID = " + playerID);
+		try {
+			String query = "update game set turn_idplayer = " + playerID + " WHERE idgame = " + gameID + ";";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

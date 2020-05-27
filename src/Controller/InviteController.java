@@ -45,7 +45,7 @@ public class InviteController {
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
 			inVitePlayer();
-			acceptInvitation(home.getC_login().getUsername(),gameController.getM_game().getGameId());
+			acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
 			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
 		});
 
@@ -72,6 +72,7 @@ public class InviteController {
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 
 	}
+
 	public void acceptInvitation(String username, int gameID) {
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, gameID);
 		gameAcceptionThread.setDaemon(true);
@@ -121,6 +122,7 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor("purple"));
+
 //			gameController.createGamePane();
 			break;
 		case "vier":
@@ -144,6 +146,7 @@ public class InviteController {
 			break;
 
 		}
+		gameController.getM_game().updatePlayerTurn(1);
 	}
 
 	public void searchForUsername(String username) {
@@ -237,9 +240,5 @@ public class InviteController {
 	public InviteStart getInviteStart() {
 		return inviteStart;
 	}
-
-
-
-
 
 }
