@@ -74,6 +74,10 @@ public class HomeController {
 	public HomeThreadController getC_hometc() {
 		return c_hometc;
 	}
+	
+	public InviteController getC_Invite() {
+		return c_Invite;
+	}
 
 	public void addInviteStartPane(InviteStart inviteStart) {
 		v_home.getHomePaneBottom().getChildren().add(inviteStart);
