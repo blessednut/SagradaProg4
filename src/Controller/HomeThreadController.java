@@ -41,6 +41,7 @@ public class HomeThreadController extends Thread {
 	}
 	// de run methode is de methode die continue blijft draaien.
 	public void run() {
+		inviteController.getV_InvitePane().getInvites().getItems().clear();
 		nameOfChallenger = "";
 		IDOFChallenger = "";
 		// door deze loop blijft het programma oneindig keer draaien.

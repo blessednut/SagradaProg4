@@ -2,6 +2,7 @@ package View;
 
 //import Controller.DraftpoolController;
 import Controller.GameController;
+import Controller.HomeThreadController;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -156,7 +157,8 @@ public class GamePane extends BorderPane {
 		gamePaneLeft.getChildren().addAll(endTurn, home);
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
-			gameController.getC_login().getC_home().getC_hometc().beginAgain();
+			HomeThreadController home = new HomeThreadController(gameController.getC_login(), gameController.getC_login().getC_home().getC_Invite());
+			home.start();
 		});
 
 		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
