@@ -1,5 +1,6 @@
 package DataBase;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -20,11 +21,16 @@ public class OpenGamesDB {
 
 	public int GetOpenGameID(String username) {
 		int result = 0;
+		String resultString = "";
+		Date resultDate = null;
 		try {
-			String query = "select idgame from player where username = '" + username + "' and playstatus = 'accepted'; ";
+			String query = "select player.idgame, game.creationdate from player right join game on player.idgame where game.idgame = player.idgame and username = '" + username+ "' and playstatus = 'accepted';";
 			ResultSet resultSet = st.executeQuery(query);
 			while(resultSet.next()) {
 				result = resultSet.getInt("idgame");
+				resultDate = resultSet.getDate("creationdate");
+				resultString = Integer.toString(result);
+				gamesModel.fillOldGames(resultString, resultDate);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

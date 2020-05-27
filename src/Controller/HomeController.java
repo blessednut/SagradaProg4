@@ -3,6 +3,7 @@ package Controller;
 import View.CreditsPane;
 import View.HomePane;
 import View.InviteStart;
+import View.OpenGamesPane;
 import View.StatisticsPane;
 
 public class HomeController {
@@ -15,6 +16,7 @@ public class HomeController {
 	private GameController c_game;
 	private LogInController c_login;
 	private HomeThreadController c_hometc;
+	private OpenGamesController OGC;
 
 	public HomeController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -27,6 +29,9 @@ public class HomeController {
 
 		// aan maak invitecontroller.
 		c_Invite = new InviteController(c_game,this);
+		
+		//aan maak OpenGamesController.
+		OGC = new OpenGamesController(c_login);
 
 		// aan maak homethreadController.
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);
@@ -44,6 +49,7 @@ public class HomeController {
 		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
+		v_home.getGames().setOnAction(e -> {openOpenGamesPane();OGC.getOGM().GetOpenGameID(c_login.getUsername());OGC.fillGames();});
 
 	}
 
@@ -57,6 +63,9 @@ public class HomeController {
 
 	public void openCreditsPane() {
 		v_home.makeReservedSpace(v_credits);
+	}
+	public void openOpenGamesPane() {
+		v_home.makeReservedSpace(OGC.getOGP());
 	}
 
 	public HomePane getV_home() {
