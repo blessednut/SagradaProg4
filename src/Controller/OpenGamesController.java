@@ -23,6 +23,7 @@ public class OpenGamesController {
 	}
 	
 	public void fillGames() {
+		OGP.getOldGamesBox().getItems().clear();
 		for (int i = 0; i < OGM.getOldGamesArray().size(); i++) {
 			if(!OGP.getOldGamesBox().getItems().contains(OGM.getOldGamesArray().get(i))) {
 				OGP.getOldGamesBox().getItems().add("Spel ID: "+ OGM.getOldGamesArray().get(i) +",		Datum van spelcreatie: "+ OGM.getOldGamesDateArray().get(i));

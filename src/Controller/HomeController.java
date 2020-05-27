@@ -49,7 +49,7 @@ public class HomeController {
 		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
-		v_home.getGames().setOnAction(e -> {openOpenGamesPane();OGC.getOGM().GetOpenGameID(c_login.getUsername());OGC.fillGames();});
+		v_home.getGames().setOnAction(e -> { openOpenGamesPane();OGC.getOGM().GetOpenGameID(c_login.getUsername());OGC.fillGames();});
 
 	}
 

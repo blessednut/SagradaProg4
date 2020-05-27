@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import DataBase.OpenGamesDB;
@@ -8,19 +9,19 @@ import DataBase.OpenGamesDB;
 public class OpenGamesModel {
 	private OpenGamesDB openGamesDB;
 	private ArrayList<String> oldGamesIDArray;
-	private ArrayList<Date> oldGamesDateArray;
+	private ArrayList<Timestamp> oldGamesDateArray;
 	
 	public OpenGamesModel() {
 		this.openGamesDB = new OpenGamesDB(this);
 		oldGamesIDArray = new ArrayList<String>();
-		oldGamesDateArray = new ArrayList<Date>();
+		oldGamesDateArray = new ArrayList<Timestamp>();
 	}
 	
 	public int GetOpenGameID(String username) {
 		return this.openGamesDB.GetOpenGameID(username);
 	}
 	
-	public void fillOldGames(String gameIDString, Date date) {
+	public void fillOldGames(String gameIDString, Timestamp date) {
 		if(!oldGamesIDArray.contains(gameIDString)) {
 			oldGamesIDArray.add(gameIDString);
 			oldGamesDateArray.add(date);
@@ -31,7 +32,7 @@ public class OpenGamesModel {
 		return oldGamesIDArray;
 	}
 	
-	public ArrayList<Date> getOldGamesDateArray(){
+	public ArrayList<Timestamp> getOldGamesDateArray(){
 		return oldGamesDateArray;
 	}
 
