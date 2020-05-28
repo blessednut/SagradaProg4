@@ -190,10 +190,10 @@ public class GamePane extends BorderPane {
 		card3.setOnMouseClicked(e -> chooseCardEvent(2));
 		card4.setOnMouseClicked(e -> chooseCardEvent(3));
 
-		card1.setPadding(new Insets(10, 10, 10, 10));
-		card2.setPadding(new Insets(10, 10, 10, 10));
-		card3.setPadding(new Insets(10, 10, 10, 10));
-		card4.setPadding(new Insets(10, 10, 10, 10));
+		card1.setPadding(new Insets(10));
+		card2.setPadding(new Insets(10));
+		card3.setPadding(new Insets(10));
+		card4.setPadding(new Insets(10));
 		HBox box = new HBox(card1, card2, card3, card4);
 		box.setPadding(new Insets(0, 30, 0, 30));
 		this.getChildren().add(box);

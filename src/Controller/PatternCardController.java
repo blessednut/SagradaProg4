@@ -61,7 +61,8 @@ public class PatternCardController {
 			} else {
 				if (this.chosenCard.hasSurroundingDice(x, y)) {
 					// Check voor dubbele waarde
-					if (this.chosenCard.hasDoubleSurroundingColor(x, y, dice.colorProperty().getValue()) && this.chosenCard.hasDoubleSurroundingValue(x, y, dice.valueProperty().getValue())) {
+					if (this.chosenCard.hasDoubleSurroundingColor(x, y, dice.colorProperty().getValue())
+							&& this.chosenCard.hasDoubleSurroundingValue(x, y, dice.valueProperty().getValue())) {
 						// Check op kleur
 						if (selectedSquare.getSquare().getColor() == null || selectedSquare.getSquare().getColor()
 								.toString().equals(dice.colorProperty().getValue().toString())) {
@@ -93,10 +94,22 @@ public class PatternCardController {
 		this.optionCard = new PatternCardModel[4];
 
 		// Check hier voor mogelijke dubbele patterncards
-		for (int i = 0; i < optionCard.length; i++) {
-			this.optionCard[i] = new PatternCardModel(this, getRandomIntBetweenRange(1, 24));
+		int i = 0;
+		while (i < optionCard.length) {
+			PatternCardModel temp = new PatternCardModel(this, getRandomIntBetweenRange(1, 24));
+			System.out.println(temp.getIdPatternCard() + "adafhvdjhgasdgfa");
+			if (optionCard[i] == null) {
+				this.optionCard[i] = temp;
+			} else if (!(optionCard[i].getIdPatternCard() == temp.getIdPatternCard())) {
+				this.optionCard[i] = temp;
+				
+			}
+			i++;
+
 		}
 
+//		TODO: check voor vaker voorkomen views
+//		TODO: opties wegschrijven naar de database
 		this.c_game.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 
@@ -140,15 +153,14 @@ public class PatternCardController {
 	public WindowPatternSquareController getSelectedSquare() {
 		return selectedSquare;
 	}
-	
-	//test
-	public WindowPatternSquareController[][] getFieldController () {
+
+	// test
+	public WindowPatternSquareController[][] getFieldController() {
 		return this.fieldController;
 	}
 
 	public PatternCardModel getChosenCard() {
 		return chosenCard;
-	} 
-	
-	
+	}
+
 }
