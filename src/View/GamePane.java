@@ -32,6 +32,8 @@ public class GamePane extends BorderPane {
 	private DraftPoolView draftpool;
 	private Button home;
 	private Label isTurn;
+	
+	HBox gamePaneCenter;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -113,7 +115,7 @@ public class GamePane extends BorderPane {
 	public void createGamePane2() {
 		this.getChildren().clear();
 		HBox gamePaneBottom = new HBox();
-		HBox gamePaneCenter = new HBox();
+		gamePaneCenter = new HBox();
 		VBox gamePaneLeft = new VBox();
 		VBox gamePaneRight = new VBox();
 		this.setBottom(gamePaneBottom);
@@ -142,6 +144,7 @@ public class GamePane extends BorderPane {
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
 		}
+		
 //		Public Objective cards
 		gameController.makePublicOC();
 
@@ -187,15 +190,13 @@ public class GamePane extends BorderPane {
 			}
 		});
 
-//		roundCounter
-		Label roundCounter = new Label("Ronde: X");
-		roundCounter.setFont(new Font("Arial", 16));
+		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 		
 		isTurn = new Label ("");
 		isTurn.setFont(new Font("Arial", 32));
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
-		gamePaneRight.getChildren().addAll(roundCounter, isTurn);
+		gamePaneRight.getChildren().addAll(isTurn);
 	}
 	
 	public void updateIsTurn (boolean isTurn) {
@@ -241,8 +242,11 @@ public class GamePane extends BorderPane {
 		this.ownWindow = window;
 	}
 
-	public void setDrafpool(DraftPoolView draftpool) {
+	public void setDrafpool(DraftPoolView draftpool, boolean replace) {
 		this.draftpool = draftpool;
+		if (replace) { 
+			gamePaneCenter.getChildren().set(0, draftpool);
+		}
 	}
 
 	public Button getHome() {

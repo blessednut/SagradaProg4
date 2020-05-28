@@ -20,6 +20,7 @@ public class GameController {
 
 	private PlayerController playerController;
 	private boolean isTurn;
+	private RoundtrackController roundtrackController;
 
 	private DiceModel dice;
 	private DraftpoolController draftpoolController;
@@ -56,7 +57,7 @@ public class GameController {
 		this.draftpoolController = new DraftpoolController(this);
 
 		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr());
-		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()));
+		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 		
 		this.checkPlayerTurn();
 		System.out.println("isPlayerTurn = " + isTurn);
@@ -126,6 +127,15 @@ public class GameController {
 		} else {
 			if (playerSeqnr == 1) {
 				//Dobbelstenen wegschrijven naar rondespoor
+				System.out.println("GAMECONTROLLER MOVE TO ROUND TRACK");
+				System.out.println("ROUND ID = " + gameModel.getRoundID());
+				System.out.println("Round NUMBER = " + gameModel.getRoundNR());
+				this.draftpoolController.moveToRoundtrack(gameModel.getRoundNR());
+				this.roundtrackController.fillRoundtrack();
+				
+				//Make new draftpool
+				this.draftpoolController.createDraftPool(highestSeqnr);
+				gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 				
 				//RoundID + 1 wanneer < 20 veranderen
 				if (roundID == 20) {
@@ -204,9 +214,15 @@ public class GameController {
 		System.out.println("GAMECONTROLLER:");
 		System.out.println("REFRESH");
 		checkPlayerTurn();
+		this.roundtrackController.fillRoundtrack();
 	}
 	
 	public boolean getIsTurn () {
 		return this.isTurn;
 	}
+	
+	public RoundtrackController getRoundtrackController() {
+        this.roundtrackController = new RoundtrackController(gameModel.getGameId());
+        return roundtrackController;
+    }
 }

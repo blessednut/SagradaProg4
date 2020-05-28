@@ -48,7 +48,7 @@ public class GameModel {
 	}
 	
 	public int getRoundNR () {
-		return this.con.getRoundID(idgame);
+		return this.con.getRoundNR(idgame);
 	}
 	
 	public int getHighestSeqnr () {
