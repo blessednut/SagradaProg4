@@ -9,6 +9,7 @@ import model.GameDiceModel;
 import model.GameModel;
 
 public class GameController {
+	
 	private MySceneController myScene;
 	private GamePane gamePane;
 	private GameModel m_game;
@@ -17,6 +18,7 @@ public class GameController {
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
+	private ChatController CC;
 
 	private PlayerController playerController;
 
@@ -119,7 +121,11 @@ public class GameController {
 	public PlayerController getPlayerController() {
 		return playerController;
 	}
-
+	
+	public ChatController makeCC() {
+		return this.CC = new ChatController(this);
+		
+	}
 
 
 }
