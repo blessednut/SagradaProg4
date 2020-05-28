@@ -8,23 +8,23 @@ import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class PatternCardController {
-	private GameController c_game;
+	private GameController gameController;
 	private PlayerController playerController;
 	private WindowPatternSquareController[][] fieldController;
 	private WindowPatternSquareController selectedSquare = null;
 	private PatternCardModel chosenCard;
 	private PatternCardModel[] optionCard;
-	
+
 	private ArrayList<Integer> idpatterncardoptions;
 
 	public PatternCardController(GameController c_game, PlayerController playerController) {
-		this.c_game = c_game;
+		this.gameController = c_game;
 		this.playerController = playerController;
 		generatePatternCardChoice();
 	}
 
 	public void updatePlayerFrameField() {
-		this.chosenCard.updatePlayerFrameField(c_game.getM_game().getGameId(), playerController.getPlayerID());
+		this.chosenCard.updatePlayerFrameField(gameController.getM_game().getGameId(), playerController.getPlayerID());
 	}
 
 	public PlayerController getPlayerController() {
@@ -104,8 +104,8 @@ public class PatternCardController {
 			int randomNumber = getRandomIntBetweenRange(1, 24);
 			PatternCardModel temp = new PatternCardModel(this, randomNumber);
 			System.out.println(temp.getIdPatternCard() + "adafhvdjhgasdgfa");
-			
-			
+
+
 			if(optionCard[i] == null && !idpatterncardoptions.contains(temp.getIdPatternCard())) {
 				this.optionCard[i] = temp;
 				System.out.println(c_game.getM_game().getGameId() + ": gameid");
@@ -119,13 +119,11 @@ public class PatternCardController {
 				i++;
 			}
 			else {
-				
+
 			}
 		}
 
-//		TODO: check voor vaker voorkomen views
-//		TODO: opties wegschrijven naar de database
-		this.c_game.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
+		this.gameController.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 
 	private WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
@@ -133,7 +131,7 @@ public class PatternCardController {
 
 		for (int x = 0; x < fieldController.length; x++) {
 			for (int y = 0; y < fieldController[x].length; y++) {
-				fieldController[x][y] = new WindowPatternSquareController(this, field[x][y]);
+				fieldController[x][y] = new WindowPatternSquareController(gameController, this, field[x][y]);
 			}
 		}
 		return fieldController;

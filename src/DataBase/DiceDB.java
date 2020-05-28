@@ -19,10 +19,10 @@ public class DiceDB {
 	// New
 	public void updatePlayerFrameField(int gameID, GameDiceModel dice, int playerID, int x, int y) {
 		try {
-			System.out.println(dice.colorProperty().getValue());
+			//System.out.println(dice.colorProperty().getValue());
 			String query = "update playerframefield set idgame = " + gameID + ", dienumber = " + dice.getDieNumber() + ", diecolor = '" + dice.colorProperty().getValue()  + "' where idplayer = " + playerID + " AND position_x = " + x + " AND position_y = " + y + ";";
-			System.out.println("DiceDB:");
-			System.out.println("Query = " + query);
+//			System.out.println("DiceDB:");
+//			System.out.println("Query = " + query);
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
@@ -30,9 +30,9 @@ public class DiceDB {
 		}
 	}
 	
-	public void insertGameDice (GameDiceModel dice) {
+	public void insertGameDice (GameDiceModel dice, int roundID) {
 		try {
-			String query = "insert into gamedie (idgame,dienumber,diecolor,eyes)values (" + dice.getIdgame() + ", " + dice.getDieNumber() + ", '" + dice.colorProperty().getValue() + "', " + dice.valueProperty().getValue() + ");";
+			String query = "insert into gamedie (idgame,dienumber,diecolor,eyes,roundID)values (" + dice.getIdgame() + ", " + dice.getDieNumber() + ", '" + dice.colorProperty().getValue() + "', " + dice.valueProperty().getValue() + ", " + roundID + ");";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {

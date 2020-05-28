@@ -59,8 +59,8 @@ public class InviteDB {
 
 	public void challengeeSelf(int playerID, String username, int gameID, String playerStatus, String playercolor) {
 		try {
-			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
-					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
+			String query = "insert into player(idplayer, username, idgame, playstatus, seqnr, private_objectivecard_color) values('"
+					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "', " + getSeqNR(gameID) + ", '" + playercolor
 					+ "');";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
@@ -71,14 +71,30 @@ public class InviteDB {
 
 	public void challengeeOther(int playerID, String username, int gameID, String playerStatus, String playercolor) {
 		try {
-			String query = "insert into player(idplayer,username,idgame,playstatus,private_objectivecard_color) values('"
-					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "','" + playercolor
+			String query = "insert into player(idplayer, username, idgame, playstatus, seqnr, private_objectivecard_color) values('"
+					+ playerID + "','" + username + "', '" + gameID + "','" + playerStatus + "', " + getSeqNR(gameID) + ",'" + playercolor
 					+ "');";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private int getSeqNR (int gameID) {
+		int newSeqNR = 0;
+		try {
+			String query = "SELECT COUNT(*) + 1 AS seqNR\r\n" + 
+					"FROM player\r\n" + 
+					"WHERE idgame = " + gameID;
+			ResultSet resultset = (st.executeQuery(query));
+			while (resultset.next()) {
+				newSeqNR = resultset.getInt("seqNR");
+			}
+		} catch (Exception e) {
+			System.out.println("e");
+		}
+		return newSeqNR;
 	}
 
 	public String getColor(String color) {

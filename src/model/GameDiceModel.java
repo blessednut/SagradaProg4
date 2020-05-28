@@ -52,4 +52,7 @@ public class GameDiceModel {
 		this.eyes.setValue(eyes);;
 	}
 	
+	public int getRoundtrack() {
+		return this.roundtrack;
+	}
 }

@@ -26,11 +26,11 @@ public class DiceModel {
 		return this.con.getBag(controller.getM_game().getGameId());
 	}
 	
-	public void addDice (GameDiceModel gameDice) {
+	public void addDice (GameDiceModel gameDice, int roundID) {
 		this.dice.add(gameDice);
 		
 		//insert Query
-		this.con.insertGameDice(gameDice);
+		this.con.insertGameDice(gameDice, roundID);
 	}
 	
 	private void importGameDice (int gameID) {

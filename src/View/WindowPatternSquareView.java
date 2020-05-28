@@ -60,7 +60,6 @@ public class WindowPatternSquareView extends Pane {
 	}
 	
 	private void onClick() {
-		//System.out.println("Clicked");
 		this.controller.onClick();
 	}
 

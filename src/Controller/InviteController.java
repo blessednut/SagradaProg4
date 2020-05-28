@@ -22,7 +22,7 @@ public class InviteController {
 
 	private static final String ACCEPTED = "accepted";
 	private static final String REFUSED = "refused";
-	
+
 	private ArrayList<String> ColorArray = new ArrayList<>();
 	private int randomColorInt;
 	private boolean added = true;
@@ -52,7 +52,7 @@ public class InviteController {
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
 			inVitePlayer();
-			acceptInvitation(home.getC_login().getUsername(),gameController.getM_game().getGameId());
+			acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
 			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
 		});
 
@@ -79,6 +79,7 @@ public class InviteController {
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 
 	}
+
 	public void acceptInvitation(String username, int gameID) {
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, gameID);
 		gameAcceptionThread.setDaemon(true);
@@ -148,6 +149,7 @@ public class InviteController {
 			break;
 
 		}
+		gameController.getM_game().updatePlayerTurn(1);
 	}
 
 	public void searchForUsername(String username) {
@@ -204,13 +206,13 @@ public class InviteController {
 		});
 
 	}
-	
+
 	public String createRandomPrivatObjColor() {
 		Random rand = new Random();
 		int max = 5;
 		int min = 1;
 		added = false;
-		
+
 		String result = "";
 
 		while(!added) {
@@ -236,8 +238,8 @@ public class InviteController {
 				ColorArray.add(result);
 				added = true;
 			}
-			
-		}	
+
+		}
 		System.out.println(result);
 		return result;
 	}
@@ -278,9 +280,5 @@ public class InviteController {
 	public InviteStart getInviteStart() {
 		return inviteStart;
 	}
-
-
-
-
 
 }
