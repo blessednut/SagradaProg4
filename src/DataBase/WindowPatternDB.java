@@ -25,8 +25,8 @@ public class WindowPatternDB {
 			while (resultset.next()) {
 				int x = resultset.getInt("position_x");
 				int y = resultset.getInt("position_y");
-				field[x - 1][y - 1] = new PatternCardFieldModel(resultset.getInt("idpatterncard"), x, y, resultset.getString("color"),
-						resultset.getInt("value"));
+				field[x - 1][y - 1] = new PatternCardFieldModel(resultset.getInt("idpatterncard"), x, y,
+						resultset.getString("color"), resultset.getInt("value"));
 			}
 			return field;
 		} catch (Exception e) {
@@ -34,8 +34,8 @@ public class WindowPatternDB {
 		}
 		return null;
 	}
-	
-	public String getName (int idPatternCard) {
+
+	public String getName(int idPatternCard) {
 		try {
 			String query = "SELECT name FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
 			ResultSet resultset = st.executeQuery(query);
@@ -50,10 +50,11 @@ public class WindowPatternDB {
 		}
 		return null;
 	}
-	
-	public int getDifficulty (int idPatternCard) {
+
+	public int getDifficulty(int idPatternCard) {
 		try {
-			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
+			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard
+					+ ";";
 			ResultSet resultset = st.executeQuery(query);
 
 			int difficulty = 0;
@@ -66,14 +67,54 @@ public class WindowPatternDB {
 		}
 		return 0;
 	}
-	
-	public void makePlayerFrameField(int playerID, int x, int  y) {
+
+	public void makePlayerFrameField(int playerID, int x, int y) {
 		try {
-			String query = "insert into playerframefield (idplayer, position_x, position_y) values (" + playerID + "," + x + "," + y + ");";
+			String query = "insert into playerframefield (idplayer, position_x, position_y) values (" + playerID + ","
+					+ x + "," + y + ");";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void addToPatternCardOption(int idPlayer, int PatternCardID) {
+		try {
+			String query = "insert into patterncardoption(idpatterncard, idplayer) values(" + PatternCardID + ","
+					+ idPlayer + ");";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public int getPlayerID(int gameID, String username) {
+		try {
+			String query = "select idplayer from player where username = '" + username + "' and idgame = " + gameID
+					+ ";";
+			ResultSet resultset = st.executeQuery(query);
+
+			int playerID = 0;
+			while (resultset.next()) {
+				playerID = resultset.getInt("idplayer");
+			}
+			return playerID;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	public void updatePatternCardIDToPlayer(int idplayer, int idpatterncard) {
+		try {
+			String query = "update player set idpatterncard = " + idpatterncard + " where idplayer = " + idplayer
+					+ "; ";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.executeUpdate(query);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 }

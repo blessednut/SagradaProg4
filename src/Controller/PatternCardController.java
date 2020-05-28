@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import View.WindowPatternView;
 import model.GameDiceModel;
 import model.PatternCardFieldModel;
@@ -12,6 +14,8 @@ public class PatternCardController {
 	private WindowPatternSquareController selectedSquare = null;
 	private PatternCardModel chosenCard;
 	private PatternCardModel[] optionCard;
+	
+	private ArrayList<Integer> idpatterncardoptions;
 
 	public PatternCardController(GameController c_game, PlayerController playerController) {
 		this.c_game = c_game;
@@ -92,17 +96,27 @@ public class PatternCardController {
 
 	private void generatePatternCardChoice() {
 		this.optionCard = new PatternCardModel[4];
+		idpatterncardoptions = new ArrayList<Integer>();
 
 		// Check hier voor mogelijke dubbele patterncards
 		int i = 0;
 		while (i < optionCard.length) {
-			PatternCardModel temp = new PatternCardModel(this, getRandomIntBetweenRange(1, 24));
+			int randomNumber = getRandomIntBetweenRange(1, 24);
+			PatternCardModel temp = new PatternCardModel(this, randomNumber);
 			System.out.println(temp.getIdPatternCard() + "adafhvdjhgasdgfa");
-			if (optionCard[i] == null) {
-				this.optionCard[i] = temp;
-			} else if (!(optionCard[i].getIdPatternCard() == temp.getIdPatternCard())) {
-				this.optionCard[i] = temp;
-				
+			for (int x = 0; x < optionCard.length; x++) {
+				if (optionCard[i] == null) {
+					this.optionCard[i] = temp;
+					System.out.println(c_game.getM_game().getGameId() + ": gameid");
+					System.out.println(c_game.getC_login().getUsername() + ":username");
+					this.optionCard[i].addToPatternCardOption(optionCard[i].getPlayerID(c_game.getM_game().getGameId(),
+							c_game.getC_login().getUsername()), randomNumber);
+
+				} else if (!(optionCard[i].getIdPatternCard() == temp.getIdPatternCard())) {
+					this.optionCard[i] = temp;
+					this.optionCard[i].addToPatternCardOption(optionCard[i].getPlayerID(c_game.getM_game().getGameId(),
+							c_game.getC_login().getUsername()), randomNumber);
+				}
 			}
 			i++;
 
@@ -142,6 +156,10 @@ public class PatternCardController {
 	public void setChosenCard(int index) {
 		this.chosenCard = this.optionCard[index];
 		this.chosenCard.makePlayerFrameField();
+		// TODO add choice to playertable
+		this.chosenCard.updatePatternCardIDToPlayer(
+				optionCard[index].getPlayerID(c_game.getM_game().getGameId(), c_game.getC_login().getUsername()),
+				optionCard[index].getIdPatternCard());
 		this.c_game.getGamePane().setOwnWindow(makeView(chosenCard));
 		this.c_game.getGamePane().createGamePane2();
 	}

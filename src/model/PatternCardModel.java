@@ -221,4 +221,16 @@ public class PatternCardModel {
 			}
 		}
 	}
+	
+	public void addToPatternCardOption(int idPlayer, int PatternCardID) {
+		this.con.addToPatternCardOption(idPlayer, PatternCardID);
+	}
+	
+	public int getPlayerID (int gameID, String username) {
+		return this.con.getPlayerID(gameID, username);
+	}
+	
+	public void updatePatternCardIDToPlayer(int idplayer, int idpatterncard) {
+		this.con.updatePatternCardIDToPlayer(idplayer, idpatterncard);
+	}
 }
