@@ -113,7 +113,6 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName1().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor(createRandomPrivatObjColor()));
-//			gameController.createGamePane();
 			break;
 		case "drie":
 			gameController.getM_game().createGameRoom();
@@ -128,7 +127,6 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName2().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor(createRandomPrivatObjColor()));
-//			gameController.createGamePane();
 			break;
 		case "vier":
 			gameController.getM_game().createGameRoom();
@@ -147,7 +145,6 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getName3().getText(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor(createRandomPrivatObjColor()));
-//			gameController.createGamePane();
 			break;
 
 		}

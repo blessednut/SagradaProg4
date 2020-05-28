@@ -31,13 +31,7 @@ public class PatternCardController {
 		// Check of er een square is geselecteerd en of er geen andere dobbelsteen ligt
 		if (selectedSquare != null && selectedSquare.getSquare().isEmpty()) {
 			System.out.println("PatternCardController");
-//			System.out.println("SelectedSquare = " + selectedSquare.getSquare().getColor());
-//			System.out.println("Dice = " + dice.colorProperty().getValue());
-//			System.out.println(selectedSquare.getSquare().getColor().toString());
-//			System.out.println(dice.colorProperty().getValue().toString());
-//			System.out.println(selectedSquare.getSquare().getColor().toString() == dice.colorProperty().getValue().toString());
-
-			// System.out.println("IsBoardEmpty = " + this.chosenCard.isWindowCardEmpty());
+//
 			int x = this.selectedSquare.getSquare().getX();
 			int y = this.selectedSquare.getSquare().getY();
 //			System.out.println("x = " + x);

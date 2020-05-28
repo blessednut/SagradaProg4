@@ -35,17 +35,6 @@ public class ToolCardModel {
 		return toolCardID;
 	}
 	
-
-	
-
-	
-//	public String getNonRandomCardName(int givenToolCardID) {
-//		String cardName;
-//		cardName=tcDB.getCardName(givenToolCardID);
-//		return cardName;
-//	}
-	
-	
 }
 	
 	
