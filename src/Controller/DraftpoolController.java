@@ -15,17 +15,26 @@ public class DraftpoolController {
 		this.controller = controller;
 	}
 
-	public void createDraftPool(int numPlayers) {
-		// Calculate number of dice
-		int numDice = ((numPlayers * 2) + 1);
+	public void createDraftPool(int numPlayers, int roundID) {
+		if (!draftpoolModel.draftpoolExists(controller.getM_game().getGameId(), roundID)) {
+			// Calculate number of dice
+			int numDice = ((numPlayers * 2) + 1);
 
-		// Get all dice from the bag
-		for (int i = 0; i < numDice; i++) {
-			GameDiceModel die = this.controller.pickDiceFromBag();
+			// Get all dice from the bag
+			for (int i = 0; i < numDice; i++) {
+				GameDiceModel die = this.controller.pickDiceFromBag();
 
-			// Add dice to DraftpoolModel
-			this.draftpoolModel.addDiceToDraftpool(die);
+				// Add dice to DraftpoolModel
+				this.draftpoolModel.addDiceToDraftpool(die);
+			}
+		} else {
+			//add dice to gamedice
+			loadDice(controller.getM_game().getGameId());
 		}
+	}
+	
+	public void loadDice (int gameID) {
+		this.draftpoolModel.loadDice(gameID);
 	}
 
 	public DraftpoolSquareController[] getDraftPool() {

@@ -30,9 +30,9 @@ public class DiceDB {
 		}
 	}
 	
-	public void insertGameDice (GameDiceModel dice) {
+	public void insertGameDice (GameDiceModel dice, int roundID) {
 		try {
-			String query = "insert into gamedie (idgame,dienumber,diecolor,eyes)values (" + dice.getIdgame() + ", " + dice.getDieNumber() + ", '" + dice.colorProperty().getValue() + "', " + dice.valueProperty().getValue() + ");";
+			String query = "insert into gamedie (idgame,dienumber,diecolor,eyes,roundID)values (" + dice.getIdgame() + ", " + dice.getDieNumber() + ", '" + dice.colorProperty().getValue() + "', " + dice.valueProperty().getValue() + ", " + roundID + ");";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {

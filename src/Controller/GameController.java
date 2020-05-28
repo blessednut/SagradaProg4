@@ -56,7 +56,7 @@ public class GameController {
 
 		this.draftpoolController = new DraftpoolController(this);
 
-		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr());
+		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 		
 		this.checkPlayerTurn();
@@ -69,7 +69,7 @@ public class GameController {
 		//Selecteer willekeurig een dice uit de zak
 		GameDiceModel gameDice = diceBag.get(getRandomInt(0, diceBag.size() - 1));
 		//Voeg de dice toe aan het diceModel
-		this.dice.addDice(gameDice);
+		this.dice.addDice(gameDice, gameModel.getRoundID());
 		//Return de geselecteerde dice
 		return gameDice;
 	}
@@ -134,7 +134,7 @@ public class GameController {
 				this.roundtrackController.fillRoundtrack();
 				
 				//Make new draftpool
-				this.draftpoolController.createDraftPool(highestSeqnr);
+				this.draftpoolController.createDraftPool(highestSeqnr, gameModel.getRoundID());
 				gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 				
 				//RoundID + 1 wanneer < 20 veranderen
@@ -215,6 +215,9 @@ public class GameController {
 		System.out.println("REFRESH");
 		checkPlayerTurn();
 		this.roundtrackController.fillRoundtrack();
+		//this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
+		this.draftpoolController.loadDice(gameModel.getGameId());
+		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 	}
 	
 	public boolean getIsTurn () {

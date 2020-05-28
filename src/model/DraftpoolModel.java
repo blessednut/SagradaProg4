@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import DataBase.DraftpoolDB;
 
@@ -19,6 +20,10 @@ public class DraftpoolModel {
 	
 	public void addDiceToDraftpool (GameDiceModel dice) {
 		this.draftpool.add(dice);
+	}
+	
+	public boolean draftpoolExists (int idgame, int roundID) {
+		return con.draftpoolExists(idgame, roundID);
 	}
 	
 	//Wordt niet gebruikt?
@@ -59,5 +64,12 @@ public class DraftpoolModel {
 		}
 		
 		draftpool.clear();
+	}
+
+	public List<GameDiceModel> loadDice(int idgame) {
+		int roundID = con.getHighestRoundID(idgame);
+		ArrayList<GameDiceModel> dice = con.loadDice(idgame, roundID);
+		draftpool = dice;
+		return dice;
 	}
 }
