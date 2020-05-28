@@ -6,6 +6,7 @@ public class PlayerModel {
 	private int gameID;
 	private String username;
 	private int playerID;
+	private boolean isTurn;
 
 	private PlayerDB con;
 
@@ -27,6 +28,14 @@ public class PlayerModel {
 	
 	public int getPlayerID () {
 		return this.playerID;
+	}
+	
+	public boolean getTurn () {
+		return this.isTurn;
+	}
+	
+	public void setTurn (boolean isTurn) {
+		this.isTurn = isTurn;
 	}
 
 //	private String username = null;

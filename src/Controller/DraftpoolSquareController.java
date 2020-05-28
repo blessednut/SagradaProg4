@@ -4,11 +4,13 @@ import View.DraftPoolSquareView;
 import model.GameDiceModel;
 
 public class DraftpoolSquareController {
+	private GameController gameController;
 	private DraftpoolController controller;
 	private DraftPoolSquareView view;
 	private GameDiceModel dice;
 	
-	public DraftpoolSquareController (DraftpoolController controller, GameDiceModel dice) {
+	public DraftpoolSquareController (GameController gameController, DraftpoolController controller, GameDiceModel dice) {
+		this.gameController = gameController;
 		this.controller = controller;
 		this.dice = dice;
 	}
@@ -18,11 +20,11 @@ public class DraftpoolSquareController {
 	}
 	
 	public void onClick () {
-		System.out.println("Klik!");
-		
-		if (dice != null) {
-			System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
-			controller.setSelectedDice(dice, this);
+		if (gameController.getIsTurn()) {
+			if (dice != null) {
+				System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
+				controller.setSelectedDice(dice, this);
+			}
 		}
 	}
 	

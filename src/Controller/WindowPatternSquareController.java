@@ -10,8 +10,10 @@ public class WindowPatternSquareController {
 	private GameDiceModel dice;
 	private WindowPatternSquareView squareView;
 	private ToolCard_Controller toolController;
+	private GameController gameController;
 
-	public WindowPatternSquareController(PatternCardController controller, PatternCardFieldModel square) {
+	public WindowPatternSquareController(GameController gameController, PatternCardController controller, PatternCardFieldModel square) {
+		this.gameController = gameController;
 		this.controller = controller;
 		this.square = square;
 		toolController = null;
@@ -22,11 +24,13 @@ public class WindowPatternSquareController {
 	}
 
 	public void onClick() {
-		if (toolController == null) {
-			//isClicked = true;
-			this.controller.setSelected(this);
-		} else {
-			toolController.setSquare(this, toolController.getActiveToolCard());
+		if (gameController.getIsTurn()) {
+			if (toolController == null) {
+				//isClicked = true;
+				this.controller.setSelected(this);
+			} else {
+				toolController.setSquare(this, toolController.getActiveToolCard());
+			}
 		}
 	}
 	

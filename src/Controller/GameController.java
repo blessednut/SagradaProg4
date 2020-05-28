@@ -19,6 +19,7 @@ public class GameController {
 	private ToolCard_Controller TCC;
 
 	private PlayerController playerController;
+	private boolean isTurn;
 
 	private DiceModel dice;
 	private DraftpoolController draftpoolController;
@@ -54,8 +55,11 @@ public class GameController {
 
 		this.draftpoolController = new DraftpoolController(this);
 
-		this.draftpoolController.createDraftPool(4);
+		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr());
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()));
+		
+		this.checkPlayerTurn();
+		System.out.println("isPlayerTurn = " + isTurn);
 	}
 
 	public GameDiceModel pickDiceFromBag () {
@@ -165,7 +169,19 @@ public class GameController {
 				gameModel.changeTurnPlayerID(newPlayerID);
 			}
 		}
+		
+		checkPlayerTurn();
+		System.out.println("isPlayerTurn = " + isTurn);
 	}
+	
+	public void checkPlayerTurn () {
+		 if (gameModel.getTurnPlayerID() == playerController.getPlayerID()) {
+			this.isTurn = true; 
+		 } else {
+			this.isTurn = false;
+		 }
+		 this.gamePane.updateIsTurn(isTurn);
+	} 
 
 	public DraftpoolController getDraftpoolController() {
 		return draftpoolController;
@@ -187,5 +203,10 @@ public class GameController {
 	public void refresh() {
 		System.out.println("GAMECONTROLLER:");
 		System.out.println("REFRESH");
+		checkPlayerTurn();
+	}
+	
+	public boolean getIsTurn () {
+		return this.isTurn;
 	}
 }

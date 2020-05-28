@@ -33,7 +33,7 @@ public class DraftpoolController {
 		
 		for (int i = 0; i < draftpoolController.length; i++) {
 			if (i < this.draftpoolModel.getDraftpoolSize()) {
-				draftpoolController[i] = new DraftpoolSquareController(this, this.draftpoolModel.getGameDiceModel(i));
+				draftpoolController[i] = new DraftpoolSquareController(controller, this, this.draftpoolModel.getGameDiceModel(i));
 			} else {
 				draftpoolController[i] = new DraftpoolSquareController();
 			}

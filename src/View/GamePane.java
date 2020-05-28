@@ -31,6 +31,7 @@ public class GamePane extends BorderPane {
 	private WindowPatternView ownWindow;
 	private DraftPoolView draftpool;
 	private Button home;
+	private Label isTurn;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -173,7 +174,9 @@ public class GamePane extends BorderPane {
 		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				onClickEndTurn();
+				if (gameController.getIsTurn()) {
+					onClickEndTurn();
+				}
 			}
 		});
 		
@@ -187,7 +190,22 @@ public class GamePane extends BorderPane {
 //		roundCounter
 		Label roundCounter = new Label("Ronde: X");
 		roundCounter.setFont(new Font("Arial", 16));
-		gamePaneRight.getChildren().add(roundCounter);
+		
+		isTurn = new Label ("");
+		isTurn.setFont(new Font("Arial", 32));
+		isTurn.setTextFill(Color.WHITE);
+		updateIsTurn(gameController.getIsTurn());
+		gamePaneRight.getChildren().addAll(roundCounter, isTurn);
+	}
+	
+	public void updateIsTurn (boolean isTurn) {
+		if (this.isTurn != null) {
+			if (isTurn) {
+				this.isTurn.setText("Het is jouw beurt!");
+			} else {
+				this.isTurn.setText("Het is niet jouw beurt :,(!");
+			}
+		}
 	}
 
 	private void onClickEndTurn() {
