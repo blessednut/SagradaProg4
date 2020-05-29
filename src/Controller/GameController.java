@@ -9,6 +9,7 @@ import model.GameDiceModel;
 import model.GameModel;
 
 public class GameController {
+	
 	private MySceneController myScene;
 	private GamePane gamePane;
 	private GameModel gameModel;
@@ -17,6 +18,7 @@ public class GameController {
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
 	private ToolCard_Controller TCC;
+	private ChatController CC;
 
 	private PlayerController playerController;
 	private boolean isTurn;
@@ -33,6 +35,8 @@ public class GameController {
 	
 	public void switchBackToHome() {
 		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
+		closeChatThread();
+		
 	}
 
 	public void makePublicOC() {
@@ -228,4 +232,14 @@ public class GameController {
         this.roundtrackController = new RoundtrackController(gameModel.getGameId());
         return roundtrackController;
     }
+	public ChatController makeCC() {
+		return this.CC = new ChatController(this);		
+	}
+	
+	public void closeChatThread() {
+		CC.getThread().terminate();
+		CC.getThread().getModel().getDBCOn().closeConnection();
+	}
+	
+
 }

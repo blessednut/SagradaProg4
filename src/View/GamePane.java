@@ -145,13 +145,17 @@ public class GamePane extends BorderPane {
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
 		}
-		
-//		Public Objective cards
+//		Public Objective cards	
 		gameController.makePublicOC();
 
 		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
 			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
 		}
+//		Chat
+		gameController.makeCC();
+		gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
+		
+		
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
 		home = new Button("home");
