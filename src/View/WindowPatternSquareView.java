@@ -38,7 +38,7 @@ public class WindowPatternSquareView extends Pane {
 		
 		Color color = new ColorConverter().colorConverter(dice.colorProperty().getValue());
 		DiceView diceView = new DiceView(color, dice.valueProperty().getValue());
-		diceView.drawDice(70, 70);
+		diceView.drawDice(50, 50);
 		this.getChildren().add(diceView);
 		
 		//System.out.println("asdfasdfasdfdsasdfadsafsdfdfssdf");

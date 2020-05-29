@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
 public class PatternCardModel {
 	private PatternCardController controller;
 	
-	private final int idPatternCard;
+	private int idPatternCard;
 	private String name;
 	private int difficulty;
 	private boolean standard;

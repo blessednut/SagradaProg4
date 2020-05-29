@@ -12,9 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class GamePane extends BorderPane {
@@ -34,8 +37,9 @@ public class GamePane extends BorderPane {
 	private Button home;
 	private Label isTurn;
 	
-	HBox gamePaneCenter;
-
+	private HBox gamePaneCenter;
+	private HBox gamePaneTop;
+	
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
 		this.setMinSize(900, 900);
@@ -116,17 +120,26 @@ public class GamePane extends BorderPane {
 	public void createGamePane2() {
 		this.getChildren().clear();
 		HBox gamePaneBottom = new HBox();
+		
 		gamePaneCenter = new HBox();
 		VBox gamePaneLeft = new VBox();
 		VBox gamePaneRight = new VBox();
+		gamePaneTop = new HBox();
 		this.setBottom(gamePaneBottom);
 		this.setCenter(gamePaneCenter);
 		this.setLeft(gamePaneLeft);
 		this.setRight(gamePaneRight);
+		this.setTop(gamePaneTop);
 		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
 		gamePaneCenter.setAlignment(Pos.CENTER);
 		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
 		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
+		gamePaneTop.setAlignment(Pos.CENTER);
+		
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			addOpponentSquare();
+		}
+		
 //		windowPatternCard
 		if (ownWindow == null) {
 
@@ -199,6 +212,9 @@ public class GamePane extends BorderPane {
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
 		gamePaneRight.getChildren().addAll(isTurn);
+		
+		//load Opponents
+		
 	}
 	
 	public void updateIsTurn (boolean isTurn) {
@@ -243,6 +259,23 @@ public class GamePane extends BorderPane {
 	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
 	}
+	
+	public void setOpponentWindow (int index, WindowPatternView opponentCard) {
+		gamePaneTop.getChildren().set(index, opponentCard);
+	}
+	
+	public void addOpponentWindow (WindowPatternView opponentCard) {
+		gamePaneTop.getChildren().add(opponentCard);
+	}
+	
+	public void addOpponentSquare() {
+		Pane opponentSquare = new Pane ();
+		CornerRadii RADIUS = new CornerRadii(10.00);
+		opponentSquare.setPrefSize(350, 250);
+		opponentSquare.setMaxSize(350, 250);
+		opponentSquare.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
+		gamePaneTop.getChildren().add(opponentSquare);
+	}
 
 	public void setDrafpool(DraftPoolView draftpool, boolean replace) {
 		this.draftpool = draftpool;
@@ -254,5 +287,7 @@ public class GamePane extends BorderPane {
 	public Button getHome() {
 		return home;
 	}
+
+	
 
 }

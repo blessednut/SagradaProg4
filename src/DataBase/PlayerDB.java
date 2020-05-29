@@ -28,4 +28,34 @@ public class PlayerDB {
 			return 0;
 		}
 	}
+	
+	public boolean patterncardExists(int idplayer) {
+		int idpatterncard = 0;
+		try {
+			String query = "SELECT idpatterncard FROM player WHERE idplayer = " + idplayer;
+			ResultSet resultset = st.executeQuery(query);
+
+			if (resultset.next()) {
+				idpatterncard = resultset.getInt("idpatterncard");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (idpatterncard == 0) ? false : true;
+	}
+
+	public int getPatterncardID(int idplayer) {
+		int idpatterncard = 0;
+		try {
+			String query = "SELECT idpatterncard FROM player WHERE idplayer = " + idplayer;
+			ResultSet resultset = st.executeQuery(query);
+
+			if (resultset.next()) {
+				idpatterncard = resultset.getInt("idpatterncard");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return idpatterncard;
+	}
 }
