@@ -100,26 +100,27 @@ public class PatternCardController {
 
 		// Check hier voor mogelijke dubbele patterncards
 		int i = 0;
-		while (i < optionCard.length) {
+		while (true) {
 			int randomNumber = getRandomIntBetweenRange(1, 24);
 			PatternCardModel temp = new PatternCardModel(this, randomNumber);
 			System.out.println(temp.getIdPatternCard() + "adafhvdjhgasdgfa");
-			for (int x = 0; x < optionCard.length; x++) {
-				if (optionCard[i] == null) {
-					this.optionCard[i] = temp;
-					System.out.println(c_game.getM_game().getGameId() + ": gameid");
-					System.out.println(c_game.getC_login().getUsername() + ":username");
-					this.optionCard[i].addToPatternCardOption(optionCard[i].getPlayerID(c_game.getM_game().getGameId(),
-							c_game.getC_login().getUsername()), randomNumber);
-
-				} else if (!(optionCard[i].getIdPatternCard() == temp.getIdPatternCard())) {
-					this.optionCard[i] = temp;
-					this.optionCard[i].addToPatternCardOption(optionCard[i].getPlayerID(c_game.getM_game().getGameId(),
-							c_game.getC_login().getUsername()), randomNumber);
+			
+			
+			if(optionCard[i] == null && !idpatterncardoptions.contains(temp.getIdPatternCard())) {
+				this.optionCard[i] = temp;
+				System.out.println(c_game.getM_game().getGameId() + ": gameid");
+				System.out.println(c_game.getC_login().getUsername() + ":username");
+				this.optionCard[i].addToPatternCardOption(optionCard[i].getPlayerID(c_game.getM_game().getGameId(),
+						c_game.getC_login().getUsername()), randomNumber);
+				idpatterncardoptions.add(temp.getIdPatternCard());
+				if(optionCard[3]!= null) {
+					break;
 				}
+				i++;
 			}
-			i++;
-
+			else {
+				
+			}
 		}
 
 //		TODO: check voor vaker voorkomen views
