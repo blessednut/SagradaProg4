@@ -33,6 +33,8 @@ public class GameController {
 	}
 	public void switchBackToHome() {
 		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
+		closeChatThread();
+		
 	}
 
 	public void makePublicOC() {
@@ -123,9 +125,13 @@ public class GameController {
 	}
 	
 	public ChatController makeCC() {
-		return this.CC = new ChatController(this);
-		
+		return this.CC = new ChatController(this);		
 	}
-
+	
+	public void closeChatThread() {
+		CC.getThread().terminate();
+		CC.getThread().getModel().getDBCOn().closeConnection();
+	}
+	
 
 }

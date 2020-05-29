@@ -3,29 +3,32 @@ package DataBase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class ChatDB {
 	private Connection connection;
 	private PreparedStatement ps;
+	private Statement st;
+	private DBCon dbcon;
 	
 	 
 	public ChatDB() {
-		this.connection = DBCon.getInstance().getCon();
+		DBCon dbcon = new DBCon();
+		this.st = dbcon.getSt();
 	}
+	
 	//query om de username van het chatbericht op te halen
-	public String getUsernameForChat() {
+	public String getUsernameForChat(int idgame) {
 		String username = "";
 		try {
 			String query = "select player.username from player\r\n" + 
 					"left join chatline on chatline.idplayer = player.idplayer\r\n" + 
-					"where chatline.time = (select max(time) from chatline)";
-			ResultSet resultSet = connection.createStatement().executeQuery(query);
+					"where chatline.time = (select max(time) from chatline) and idgame =" + idgame + ";";
+			ResultSet resultSet = st.executeQuery(query);
 			while(resultSet.next()) {
 				username = resultSet.getString("username");
-				System.out.println(username);
-			}
-			
+			}			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -33,16 +36,15 @@ public class ChatDB {
 	}
 	
 	//query om het meest recente bericht op te halen uit de databse
-	public String getMessageForChat() {
+	public String getMessageForChat(int idgame) {
 		String chatmessage = "";
 		try {
 			String query = "select chatline.message from player\r\n" + 
 					"left join chatline on chatline.idplayer = player.idplayer\r\n" + 
-					"where chatline.time = (select max(time) from chatline)" ;
-			ResultSet resultSet = connection.createStatement().executeQuery(query);
+					"where chatline.time = (select max(time) from chatline) and idgame =" + idgame + ";";
+			ResultSet resultSet = st.executeQuery(query);
 			while(resultSet.next()) {
 				chatmessage = resultSet.getString("message");
-				System.out.println(chatmessage);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -54,10 +56,14 @@ public class ChatDB {
 	public void writeChatToDatabase(int idplayer, String message) {
 		try {
 			String query = "insert into chatline(idplayer, time, message) values("+ idplayer +" , now(), '" + message +"')";
-			ps = DBCon.getInstance().getCon().prepareStatement(query);
-			ps.execute();
+			st.execute(query);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public DBCon getDbcon() {
+		return dbcon;
+	}
+	
 }

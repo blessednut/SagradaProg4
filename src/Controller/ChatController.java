@@ -5,11 +5,10 @@ import javafx.scene.layout.Pane;
 import model.ChatModel;
 
 public class ChatController {
-	private String chatMessage;
-	private String chatFromDB;
 	private ChatModel ChatM;
 	private ChatView ChatV;
 	private GameController gamecontroller;
+	private ChatThreadController CTC;
 
 	private Pane pane;
 	
@@ -17,8 +16,8 @@ public class ChatController {
 		this.gamecontroller = gamecontroller;
 		this.ChatM = new ChatModel();
 		this.ChatV = new ChatView(this);
-		Thread fetchRecentChat = new Thread(new ChatThreadController(ChatM, this.ChatV));
-		fetchRecentChat.start();
+		CTC = new ChatThreadController(ChatM, this.ChatV, gamecontroller.getM_game().getGameId());
+		CTC.start();
 		pane = this.ChatV;
 
 	}
@@ -32,5 +31,9 @@ public class ChatController {
 	public void getChatMessage(String text) {
 		int idplayer = gamecontroller.getPlayerController().getPlayerID();
 		ChatM.writeChatToDatabase(idplayer, text);
+	}
+	
+	public ChatThreadController getThread() {
+		return CTC;
 	}
 }

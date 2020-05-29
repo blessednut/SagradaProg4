@@ -3,6 +3,7 @@ package View;
 import Controller.ChatController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,7 +20,7 @@ public class ChatView extends Pane{
 	private static final int BUTTONHEIGHT = 25;
 	
 	private TextField chatArea;
-	private Label recentchat;
+	private TextArea recentchat;
 	private Button sendChat;
 	private ChatController ChatC;
 
@@ -55,7 +56,7 @@ public class ChatView extends Pane{
 		CABox.setLayoutY(250);
 
 		// aanmaken van het recent chat label met afmetening
-		recentchat = new Label();
+		recentchat = new TextArea();
 		recentchat.setMinSize(600, 250);
 		recentchat.setPrefSize(600, 250);
 		recentchat.setMaxSize(600, 250);
@@ -78,5 +79,9 @@ public class ChatView extends Pane{
 	//zorgt ervoor dat de text uit het textfield gehaald kan worden
 	private void getTextFromField() {
 		ChatC.getChatMessage(chatArea.getText());
-	}	
+	}
+	//plaatst text op het scherm
+	public void setRecentChat(String text) {
+		recentchat.setText(text);
+	}
 }
