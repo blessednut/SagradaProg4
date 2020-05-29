@@ -22,7 +22,7 @@ public class InviteController {
 
 	private static final String ACCEPTED = "accepted";
 	private static final String REFUSED = "refused";
-	
+
 	private ArrayList<String> ColorArray = new ArrayList<>();
 	private int randomColorInt;
 	private boolean added = true;
@@ -52,7 +52,7 @@ public class InviteController {
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
 			inVitePlayer();
-			acceptInvitation(home.getC_login().getUsername(),gameController.getM_game().getGameId());
+			acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
 			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
 		});
 
@@ -79,6 +79,7 @@ public class InviteController {
 		invitePane.getInvites().getItems().remove(invitePane.getInvites().getValue());
 
 	}
+
 	public void acceptInvitation(String username, int gameID) {
 		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, gameID);
 		gameAcceptionThread.setDaemon(true);
@@ -152,37 +153,54 @@ public class InviteController {
 
 	public void searchForUsername(String username) {
 		try {
-			if (inviteModel.checkInDatabase(username).equals(username)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username.equals(gameController.getC_login().getUsername())) {
+				if (inviteModel.checkInDatabase(username).equals(username)) {
+					invitePane.getInviteButton().setVisible(true);
+					invitePane.getSearch().setVisible(false);
+				}
 			}
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void searchForTwoUsernames(String username1, String username2) {
 		try {
-			if (inviteModel.checkInDatabase(username1).equals(username1)
-					&& inviteModel.checkInDatabase(username2).equals(username2)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username1.equals(username2)) {
+				if (!username1.equals(gameController.getC_login().getUsername())
+						&& !username2.equals(gameController.getC_login().getUsername())) {
+					if (inviteModel.checkInDatabase(username1).equals(username1)
+							&& inviteModel.checkInDatabase(username2).equals(username2)) {
+						invitePane.getInviteButton().setVisible(true);
+						invitePane.getSearch().setVisible(false);
+					}
+				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
 	public void searchForThreeUsernames(String username1, String username2, String username3) {
 		try {
-			if (inviteModel.checkInDatabase(username1).equals(username1)
-					&& inviteModel.checkInDatabase(username2).equals(username2)
-					&& inviteModel.checkInDatabase(username3).equals(username3)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username1.equals(username2) && !username1.equals(username3) && !username2.equals(username3)) {
+				if (!username1.equals(gameController.getC_login().getUsername())
+						&& !username2.equals(gameController.getC_login().getUsername())
+						&& !username3.equals(gameController.getC_login().getUsername())) {
+					if (inviteModel.checkInDatabase(username1).equals(username1)
+							&& inviteModel.checkInDatabase(username2).equals(username2)
+							&& inviteModel.checkInDatabase(username3).equals(username3)) {
+						invitePane.getInviteButton().setVisible(true);
+						invitePane.getSearch().setVisible(false);
+					}
+				}
 			}
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -195,26 +213,20 @@ public class InviteController {
 			closeGameAcceptionThreadCon();
 			closeHomeThreadCon();
 
-//			try {
-//				home.getC_hometc().wait();
-//			} catch(InterruptedException ex) {
-//				ex.printStackTrace();
-//			}
-
 		});
 
 	}
-	
+
 	public String createRandomPrivatObjColor() {
 		Random rand = new Random();
 		int max = 5;
 		int min = 1;
 		added = false;
-		
+
 		String result = "";
 
-		while(!added) {
-			randomColorInt = rand.nextInt((max - min) + 1) + min ;
+		while (!added) {
+			randomColorInt = rand.nextInt((max - min) + 1) + min;
 			switch (randomColorInt) {
 			case 1:
 				result = "blue";
@@ -232,12 +244,12 @@ public class InviteController {
 				result = "yellow";
 				break;
 			}
-			if(!ColorArray.contains(result)) {
+			if (!ColorArray.contains(result)) {
 				ColorArray.add(result);
 				added = true;
 			}
-			
-		}	
+
+		}
 		System.out.println(result);
 		return result;
 	}
@@ -278,9 +290,5 @@ public class InviteController {
 	public InviteStart getInviteStart() {
 		return inviteStart;
 	}
-
-
-
-
 
 }
