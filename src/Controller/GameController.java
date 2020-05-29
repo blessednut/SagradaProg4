@@ -240,6 +240,9 @@ public class GameController {
 		}
 		
 		loadOpponent();
+		
+		//Laad huidige speler moet nog goed getest worden
+		playerController.getPatternCard().loadPatternCard();
 	}
 	
 	public boolean getIsTurn () {
@@ -257,6 +260,7 @@ public class GameController {
 			
 			if (opponent.getPatternCard().getChosenCard() != null) {
 				gamePane.setOpponentWindow(counter, opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
+				opponent.getPatternCard().loadPatternCard();
 			} else {
 				System.out.println("PANIEK PANIEK PANIEK!");
 			}

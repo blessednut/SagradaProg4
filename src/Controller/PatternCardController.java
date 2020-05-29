@@ -20,13 +20,13 @@ public class PatternCardController {
 	public PatternCardController(GameController c_game, PlayerController playerController) {
 		this.gameController = c_game;
 		this.playerController = playerController;
-		
+
 		loadChosenCard();
 	}
-	
-	public void loadChosenCard () {
+
+	public void loadChosenCard() {
 		if (playerController.getPlayerModel().patterncardExists()) {
-			//load patterncard
+			// load patterncard
 			System.out.println("PATTERNCARDCONTROLLER");
 			System.out.println("SET CHOSEN CARD");
 			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
@@ -196,4 +196,22 @@ public class PatternCardController {
 		return chosenCard;
 	}
 
+	public void loadPatternCard() {
+		if (chosenCard != null) {
+			chosenCard.loadPatterncardFieldModel();
+
+			if (fieldController != null) {
+				for (int x = 0; x < fieldController.length; x++) {
+					for (int y = 0; y < fieldController[x].length; y++) {
+						fieldController[x][y].removeDiceFromView();
+						GameDiceModel dice = chosenCard.getField()[x][y].getDice();
+
+						if (dice != null) {
+							fieldController[x][y].setDice(dice);
+						}
+					}
+				}
+			}
+		}
+	}
 }

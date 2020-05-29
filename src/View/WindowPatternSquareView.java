@@ -54,9 +54,10 @@ public class WindowPatternSquareView extends Pane {
 	public void updateView () {
 		this.getChildren().clear();
 		
-		if (controller.getDice() != null) {
+		//Dit is mischien nodig voor de toolcards
+		//if (controller.getDice() != null) {
 			this.getChildren().add(new DicePattern(controller.getSquare().getValue(), width, height));
-		}
+		//}
 	}
 	
 	private void onClick() {
