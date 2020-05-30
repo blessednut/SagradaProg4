@@ -218,6 +218,16 @@ public class GameController {
 		//this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
 		this.draftpoolController.loadDice(gameModel.getGameId());
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
+		
+//		toolcards
+		gamePane.getShuffleToolcards().setVisible(false);
+		this.getTCC().getCards(gameModel.getGameId());
+		for (int i = 0; i < this.getTCC().getPanes().size(); i++) {
+			if(!gamePane.getGamePaneBottom().getChildren().contains(this.getTCC().getPanes().get(i))) {
+				gamePane.getGamePaneBottom().getChildren().add(this.getTCC().getPanes().get(i));
+			}
+			
+		}
 	}
 	
 	public boolean getIsTurn () {
@@ -228,4 +238,12 @@ public class GameController {
         this.roundtrackController = new RoundtrackController(gameModel.getGameId());
         return roundtrackController;
     }
+	
+	public int getseqNumber() {
+		return gameModel.getSeqNR(playerController.getPlayerID());
+	}
+	
+	public int getGameRound() {
+		return gameModel.getRoundNR();
+	}
 }

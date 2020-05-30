@@ -39,7 +39,7 @@ public class OpenGamesPane extends HBox {
 		openGame.setMinSize(OPENGAMEBUTTONWITDH, OPENGAMEBUTTONHEIGHT);
 		openGame.setPrefSize(OPENGAMEBUTTONWITDH, OPENGAMEBUTTONHEIGHT);
 		openGame.setMaxSize(OPENGAMEBUTTONWITDH, OPENGAMEBUTTONHEIGHT);
-		openGame.setVisible(false);
+		openGame.setVisible(true);
 		
 		this.getChildren().addAll(oldGames, openGame);
 	}

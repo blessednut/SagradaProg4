@@ -4,6 +4,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ToolCardDB {
 	private ResultSet rs;
@@ -69,6 +70,24 @@ public class ToolCardDB {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Integer> getCardIDsPerGame(int gameid) {
+		ArrayList<Integer> cardIDsPerGame = new ArrayList<Integer>();
+		int result = 0;
+		try {
+			String query = "select idtoolcard from gametoolcard where idgame = "+gameid+";";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				result = resultset.getInt("idtoolcard");
+				cardIDsPerGame.add(result);
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cardIDsPerGame;
 	}
 	
 

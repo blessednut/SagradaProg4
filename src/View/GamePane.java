@@ -33,7 +33,15 @@ public class GamePane extends BorderPane {
 	private DraftPoolView draftpool;
 	private Button home;
 	private Label isTurn;
+	private HBox gamePaneBottom;
+	private VBox gamePaneLeft;
+	private VBox gamePaneRight;
+	private Button shuffleToolcards;
 	
+	public Button getShuffleToolcards() {
+		return shuffleToolcards;
+	}
+
 	HBox gamePaneCenter;
 
 	public GamePane(GameController gameController) {
@@ -53,72 +61,13 @@ public class GamePane extends BorderPane {
 		//createGamePane();
 	}
 
-//	public void createGamePane() {
-//		this.getChildren().clear();
-//		HBox gamePaneBottom = new HBox();
-//		HBox gamePaneCenter = new HBox();
-//		VBox gamePaneLeft = new VBox();
-//		VBox gamePaneRight = new VBox();
-//		this.setBottom(gamePaneBottom);
-//		this.setCenter(gamePaneCenter);
-//		this.setLeft(gamePaneLeft);
-//		this.setRight(gamePaneRight);
-//		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
-//		gamePaneCenter.setAlignment(Pos.CENTER);
-//		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
-//		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
-////		windowPatternCard
-//		if (ownWindow == null) {
-//
-//		} else {
-//			gamePaneBottom.getChildren().add(ownWindow);
-//		}
-////		Private Objective card
-//		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
-//
-////		Public Objective cards
-////		TODO: hier komt het aanbod toevoegen
-////		if (draftpool != null) {
-////			gamePaneCenter.getChildren().add(draftpool);
-////		}
-////
-////
-////		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-////			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-////		}
-////		End turn button
-//		Button endTurn = new Button("Einde beurt");
-//		Button home = new Button("home");
-//		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		
-//		
-//		
-//		gamePaneLeft.getChildren().addAll(endTurn, home);
-//
-//		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				onClickEndTurn();
-//			}
-//		});
-//
-////		roundCounter
-//		Label roundCounter = new Label("Ronde: X");
-//		roundCounter.setFont(new Font("Arial", 16));
-//		gamePaneRight.getChildren().add(roundCounter);
-//	}
 
-	public void createGamePane2() {
+	public void createGamePane() {
 		this.getChildren().clear();
-		HBox gamePaneBottom = new HBox();
+		gamePaneBottom = new HBox();
 		gamePaneCenter = new HBox();
-		VBox gamePaneLeft = new VBox();
-		VBox gamePaneRight = new VBox();
+		gamePaneLeft = new VBox();
+		gamePaneRight = new VBox();
 		this.setBottom(gamePaneBottom);
 		this.setCenter(gamePaneCenter);
 		this.setLeft(gamePaneLeft);
@@ -138,9 +87,10 @@ public class GamePane extends BorderPane {
 
 //		Toolcards
 		gameController.makeTCC();
-		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
-			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
-		}
+//		TODO: maken toolcards moet door de inviter gedaan worden met een knoppie.
+//		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
+//			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
+//		}
 
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
@@ -163,12 +113,23 @@ public class GamePane extends BorderPane {
 		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		
 		
-		Button refresh = new Button("Refresh");
+		Button refresh = new Button("ververs");
 		refresh.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		
-		gamePaneLeft.getChildren().addAll(endTurn, home, refresh);
+		shuffleToolcards = new Button("pak gereedschaps kaarten");
+		shuffleToolcards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shuffleToolcards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shuffleToolcards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+			shuffleToolcards.setVisible(true);
+		}
+		else {
+			shuffleToolcards.setVisible(false);
+		}
+		
+		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards);
 		
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
@@ -191,6 +152,14 @@ public class GamePane extends BorderPane {
 				gameController.refresh();
 			}
 		});
+		
+		shuffleToolcards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				gameController.getTCC().getCards();
+				shuffleToolcards.setVisible(false);
+			}
+		});
 
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 		
@@ -201,6 +170,18 @@ public class GamePane extends BorderPane {
 		gamePaneRight.getChildren().addAll(isTurn);
 	}
 	
+	public HBox getGamePaneBottom() {
+		return gamePaneBottom;
+	}
+
+	public VBox getGamePaneLeft() {
+		return gamePaneLeft;
+	}
+
+	public VBox getGamePaneRight() {
+		return gamePaneRight;
+	}
+
 	public void updateIsTurn (boolean isTurn) {
 		if (this.isTurn != null) {
 			if (isTurn) {
