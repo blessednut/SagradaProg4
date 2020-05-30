@@ -286,6 +286,10 @@ public class GameController {
 		return opponents.size();
 	}
 	
+	public String getOpponentName (String seqNR) {
+		return null;
+	}
+	
 //	public void addOpponentView () {
 //		for (PlayerController opponent : opponents) {
 //			if (opponent.getPatternCard().getChosenCard() != null) {

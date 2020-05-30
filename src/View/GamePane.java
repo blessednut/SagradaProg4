@@ -211,6 +211,14 @@ public class GamePane extends BorderPane {
 
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 		
+		//Punten telling 
+		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
+		
+		Label publicScore = new Label("Publieke score:");
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			
+		}
+		
 		isTurn = new Label ("");
 		isTurn.setFont(new Font("Arial", 32));
 		isTurn.setTextFill(Color.WHITE);
@@ -218,7 +226,6 @@ public class GamePane extends BorderPane {
 		gamePaneRight.getChildren().addAll(isTurn);
 		
 		//load Opponents
-		
 	}
 	
 	public void updateIsTurn (boolean isTurn) {
@@ -279,6 +286,12 @@ public class GamePane extends BorderPane {
 		opponentSquare.setMaxSize(350, 250);
 		opponentSquare.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
 		gamePaneTop.getChildren().add(opponentSquare);
+	}
+	
+	public Label publicScoreLabel (int seqNR) {
+		String name;
+		int publicScore;
+		return new Label;
 	}
 
 	public void setDrafpool(DraftPoolView draftpool, boolean replace) {

@@ -15,8 +15,6 @@ public class PuntenTeller {
 	private int emptySquares;
 	private int totalScore;
 	
-	
-	
 	public PuntenTeller(GameController gamecontroller) {
 		this.ptm = new PuntenTellerModel(this);
 		this.gamecontroller = gamecontroller;
@@ -24,7 +22,6 @@ public class PuntenTeller {
 		scorePublicCards = 0;
 		scorePrivateCard = 0;
 		scoreFavorTokens = 0;
-
 	}
 	
 	public void countEmptySquares() {
@@ -385,9 +382,6 @@ public class PuntenTeller {
 		}
 	}
 
-	
-	
-	
 	public int getEmptySquares() {
 		return emptySquares;
 	}
@@ -408,6 +402,7 @@ public class PuntenTeller {
 		totalScore = (scorePublicCards + scorePrivateCard +  scoreFavorTokens - emptySquares);
 		return totalScore;
 	}
+	
 	public void updateScoreInDataBase() {
 		totalScore = (scorePublicCards + scorePrivateCard +  scoreFavorTokens - emptySquares);
 		ptm.updateScore(totalScore, gamecontroller.getPlayerController().getPlayerID());
