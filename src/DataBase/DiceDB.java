@@ -84,4 +84,22 @@ public class DiceDB {
 
 		return null;
 	}
+	
+	public GameDiceModel getDice (int idplayer, int x, int y) {
+		GameDiceModel dice = null;
+		try {
+			String query = "select * from playerframefield p join gamedie g on p.idgame = g.idgame and p.dienumber = g.dienumber and p.diecolor = g.diecolor\r\n" + 
+					"where p.idplayer = " + idplayer + " and position_x = " + x + " and position_y = " + y;
+			ResultSet resultset = st.executeQuery(query);
+
+			if (resultset.next()) {
+				dice = new GameDiceModel(resultset.getInt("idgame"), resultset.getInt("dienumber"), resultset.getString("diecolor"), resultset.getInt("eyes"), resultset.getInt("roundtrack"), resultset.getInt("roundID"));
+				//int idgame, int dieNumber, String dieColor, int eyes, int roundtrack, int roundID)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dice;
+	}
 }

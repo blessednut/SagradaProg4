@@ -62,7 +62,11 @@ public class PatternCardFieldModel {
 
 	public void removeDice() {
 		this.dice = null;
-		
 	}
 	
+	//Test
+	public void loadDice (int idplayer) {
+		removeDice();
+		this.dice = con.getDice(idplayer, x, y);
+	}
 }

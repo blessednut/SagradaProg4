@@ -3,6 +3,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.GameModel;
 
@@ -141,5 +142,19 @@ public class InGameDB {
 			e.printStackTrace();
 		}
 		return playerID;
+	}
+
+	public ArrayList<String> getOpponentNames(int idgame, int playerID) {
+		ArrayList<String> names = new ArrayList<String>();
+		try {
+			String query = "SELECT * FROM player WHERE idplayer != " + playerID + " AND idgame = " + idgame;
+			ResultSet resultset = (st.executeQuery(query));
+			while (resultset.next()) {
+				names.add(resultset.getString("username"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return names;
 	}
 }

@@ -7,14 +7,16 @@ public class PlayerModel {
 	private String username;
 	private int playerID;
 	private boolean isTurn;
+	private boolean isCurrentPlayer;
 
 	private PlayerDB con;
 
-	public PlayerModel(int gameID, String username) {
+	public PlayerModel(int gameID, String username, boolean isCurrentPlayer) {
 		this.con = new PlayerDB();
 		this.gameID = gameID;
 		this.username = username;
 		this.playerID = importPlayerID();
+		this.isCurrentPlayer = isCurrentPlayer;
 		
 		System.out.println("PlayerModel:");
 		System.out.println("Player ID = " + this.playerID);
@@ -36,6 +38,18 @@ public class PlayerModel {
 	
 	public void setTurn (boolean isTurn) {
 		this.isTurn = isTurn;
+	}
+	
+	public boolean patterncardExists () {
+		return con.patterncardExists(playerID);
+	}
+	
+	public int getPatterncardID () {
+		return con.getPatterncardID(playerID);
+	}
+	
+	public boolean getIsCurrentPlayer () {
+		return this.isCurrentPlayer;
 	}
 
 //	private String username = null;

@@ -7,10 +7,10 @@ public class PlayerController {
 	private PatternCardController cardController;
 	private PlayerModel playerModel;
 	
-	public PlayerController (GameController gameController, int gameID, String username) {
+	public PlayerController (GameController gameController, int gameID, String username, boolean isCurrentPlayer) {
 		this.gameController = gameController;
+		this.playerModel = new PlayerModel(gameID, username, isCurrentPlayer);
 		this.cardController = new PatternCardController(this.gameController, this);
-		this.playerModel = new PlayerModel(gameID, username);
 	}
 	
 	public PatternCardController getPatternCard () {
@@ -23,5 +23,9 @@ public class PlayerController {
 	
 	public void updatePlayerFrameField () {
 		this.cardController.updatePlayerFrameField();
+	}
+	
+	public PlayerModel getPlayerModel () {
+		return this.playerModel;
 	}
 }

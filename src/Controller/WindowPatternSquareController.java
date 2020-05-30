@@ -39,6 +39,11 @@ public class WindowPatternSquareController {
 		this.square.removeDice();
 		this.squareView.updateView();
 	}
+	
+	public void removeDiceFromView () {
+		this.dice = null;
+		this.squareView.updateView();
+	}
 
 	public void setDice(GameDiceModel dice) {
 		this.dice = dice;
