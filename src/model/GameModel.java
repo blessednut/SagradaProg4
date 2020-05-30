@@ -72,4 +72,8 @@ public class GameModel {
 	public ArrayList<String> getOpponentNames (int playerID) {
 		return this.con.getOpponentNames(idgame, playerID);
 	}
+	
+	public String getPlayerName (int playerID) {
+		return this.con.getPlayerID(playerID);
+	}
 }

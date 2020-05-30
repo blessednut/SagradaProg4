@@ -27,9 +27,9 @@ public class PatternCardController {
 	public void loadChosenCard() {
 		if (playerController.getPlayerModel().patterncardExists()) {
 			// load patterncard
-			System.out.println("PATTERNCARDCONTROLLER");
-			System.out.println("SET CHOSEN CARD");
-			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
+//			System.out.println("PATTERNCARDCONTROLLER");
+//			System.out.println("SET CHOSEN CARD");
+//			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
 		} else {
 			if (playerController.getPlayerModel().getIsCurrentPlayer()) {

@@ -28,6 +28,9 @@ public class Public_Objective_Card_Model {
 	public void insertPublicObjectiveCards(int gameID) {
 		pocDB.insertPublicOC(gameID, poCardID);
 	}
-
+	
+	public String[] getNames (int idgame) {
+		return pocDB.getNames(idgame);
+	}
 }
 

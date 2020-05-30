@@ -157,4 +157,18 @@ public class InGameDB {
 		}
 		return names;
 	}
+
+	public String getPlayerID(int playerID) {
+		String name = null;
+		try {
+			String query = "SELECT username FROM player WHERE idplayer = " + playerID;
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
+				name = resultset.getString("username");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return name;
+	}
 }

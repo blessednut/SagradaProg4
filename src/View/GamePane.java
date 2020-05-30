@@ -36,17 +36,18 @@ public class GamePane extends BorderPane {
 	private DraftPoolView draftpool;
 	private Button home;
 	private Label isTurn;
-	
+
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
-	
+	private VBox gamePaneRight;
+
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
 		this.setMinSize(900, 900);
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		//createGamePane();
+		// createGamePane();
 	}
 
 	public GamePane() {
@@ -54,7 +55,7 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		//createGamePane();
+		// createGamePane();
 	}
 
 //	public void createGamePane() {
@@ -120,10 +121,10 @@ public class GamePane extends BorderPane {
 	public void createGamePane2() {
 		this.getChildren().clear();
 		HBox gamePaneBottom = new HBox();
-		
+
 		gamePaneCenter = new HBox();
 		VBox gamePaneLeft = new VBox();
-		VBox gamePaneRight = new VBox();
+		gamePaneRight = new VBox();
 		gamePaneTop = new HBox();
 		this.setBottom(gamePaneBottom);
 		this.setCenter(gamePaneCenter);
@@ -135,11 +136,11 @@ public class GamePane extends BorderPane {
 		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
 		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
 		gamePaneTop.setAlignment(Pos.CENTER);
-		
+
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			addOpponentSquare();
 		}
-		
+
 //		windowPatternCard
 		if (ownWindow == null) {
 
@@ -158,6 +159,7 @@ public class GamePane extends BorderPane {
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
 		}
+
 //		Public Objective cards	
 		gameController.makePublicOC();
 
@@ -167,8 +169,7 @@ public class GamePane extends BorderPane {
 //		Chat
 		gameController.makeCC();
 		gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
-		
-		
+
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
 		home = new Button("home");
@@ -178,18 +179,18 @@ public class GamePane extends BorderPane {
 		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		
-		
+
 		Button refresh = new Button("Refresh");
 		refresh.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		
+
 		gamePaneLeft.getChildren().addAll(endTurn, home, refresh);
-		
+
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
-			HomeThreadController home = new HomeThreadController(gameController.getC_login(), gameController.getC_login().getC_home().getC_Invite());
+			HomeThreadController home = new HomeThreadController(gameController.getC_login(),
+					gameController.getC_login().getC_home().getC_Invite());
 			home.start();
 		});
 
@@ -201,7 +202,7 @@ public class GamePane extends BorderPane {
 				}
 			}
 		});
-		
+
 		refresh.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -210,25 +211,36 @@ public class GamePane extends BorderPane {
 		});
 
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
-		
-		//Punten telling 
-		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
-		
-		Label publicScore = new Label("Publieke score:");
-		for (int i = 0; i < gameController.getNumOpponents(); i++) {
-			
-		}
-		
-		isTurn = new Label ("");
+
+		isTurn = new Label("");
 		isTurn.setFont(new Font("Arial", 32));
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
 		gamePaneRight.getChildren().addAll(isTurn);
-		
-		//load Opponents
+
+		// Punten telling
+		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
+
+		Label publicScore = new Label("Publieke score:");
+		publicScore.setFont(new Font("Arial", 32));
+		publicScore.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(publicScore);
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			gamePaneRight.getChildren().add(publicScoreLabel(i));
+		}
+
+		// load Opponents
 	}
 	
-	public void updateIsTurn (boolean isTurn) {
+	public void updatePublicScore () {
+		int index = 3;
+		
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			this.gamePaneRight.getChildren().set(index + i, publicScoreLabel(i));
+		}
+	}
+
+	public void updateIsTurn(boolean isTurn) {
 		if (this.isTurn != null) {
 			if (isTurn) {
 				this.isTurn.setText("Het is jouw beurt!");
@@ -239,8 +251,8 @@ public class GamePane extends BorderPane {
 	}
 
 	private void onClickEndTurn() {
-		System.out.println("GamePane:");
-		System.out.println("End Turn");
+//		System.out.println("GamePane:");
+//		System.out.println("End Turn");
 		this.gameController.endTurn();
 	}
 
@@ -270,33 +282,36 @@ public class GamePane extends BorderPane {
 	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
 	}
-	
-	public void setOpponentWindow (int index, WindowPatternView opponentCard) {
+
+	public void setOpponentWindow(int index, WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().set(index, opponentCard);
 	}
-	
-	public void addOpponentWindow (WindowPatternView opponentCard) {
+
+	public void addOpponentWindow(WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().add(opponentCard);
 	}
-	
+
 	public void addOpponentSquare() {
-		Pane opponentSquare = new Pane ();
+		Pane opponentSquare = new Pane();
 		CornerRadii RADIUS = new CornerRadii(10.00);
 		opponentSquare.setPrefSize(350, 250);
 		opponentSquare.setMaxSize(350, 250);
 		opponentSquare.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
 		gamePaneTop.getChildren().add(opponentSquare);
 	}
-	
-	public Label publicScoreLabel (int seqNR) {
-		String name;
-		int publicScore;
-		return new Label;
+
+	public Label publicScoreLabel(int index) {
+		String name = gameController.getOpponentName(index);
+		int publicScore = gameController.publicScore(index);
+		Label score = new Label(name + ": " + publicScore);
+		score.setFont(new Font("Arial", 32));
+		score.setTextFill(Color.WHITE);
+		return score;
 	}
 
 	public void setDrafpool(DraftPoolView draftpool, boolean replace) {
 		this.draftpool = draftpool;
-		if (replace) { 
+		if (replace) {
 			gamePaneCenter.getChildren().set(0, draftpool);
 		}
 	}
@@ -304,7 +319,5 @@ public class GamePane extends BorderPane {
 	public Button getHome() {
 		return home;
 	}
-
-	
 
 }

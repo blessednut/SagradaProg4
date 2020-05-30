@@ -30,8 +30,8 @@ public class RoundtrackController {
             
             Color color = cc.colorConverter(roundtrackModel.getDice().get(i).colorProperty().getValue());
             int eyes = roundtrackModel.getDice().get(i).valueProperty().getValue();
-            System.out.println("FILL ROUND TRACK: ");
-            System.out.println("Color: " + color + " Eyes = " + eyes);
+//            System.out.println("FILL ROUND TRACK: ");
+//            System.out.println("Color: " + color + " Eyes = " + eyes);
             roundtrackPane.addDice(roundtrack, color, eyes);
             i++;
         }
