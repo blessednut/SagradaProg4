@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
 public class PatternCardModel {
 	private PatternCardController controller;
 	
-	private final int idPatternCard;
+	private int idPatternCard;
 	private String name;
 	private int difficulty;
 	private boolean standard;
@@ -232,5 +232,13 @@ public class PatternCardModel {
 	
 	public void updatePatternCardIDToPlayer(int idplayer, int idpatterncard) {
 		this.con.updatePatternCardIDToPlayer(idplayer, idpatterncard);
+	}
+	
+	public void loadPatterncardFieldModel () {
+		for (int x = 0; x < this.field.length; x++) {
+			for (int y = 0; y < this.field[x].length; y++) {
+				field[x][y].loadDice(controller.getPlayerController().getPlayerID());
+			}
+		}
 	}
 }

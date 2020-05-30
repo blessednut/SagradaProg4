@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import DataBase.GameDB;
 import DataBase.InGameDB;
 
@@ -65,5 +67,9 @@ public class GameModel {
 	
 	public void updateSeqNR (int playerID, int seqnr) {
 		this.con.updateSeqNR(playerID, seqnr);
-	} 
+	}
+	
+	public ArrayList<String> getOpponentNames (int playerID) {
+		return this.con.getOpponentNames(idgame, playerID);
+	}
 }

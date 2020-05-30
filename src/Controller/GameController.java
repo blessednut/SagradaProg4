@@ -26,6 +26,8 @@ public class GameController {
 
 	private DiceModel dice;
 	private DraftpoolController draftpoolController;
+	
+	private ArrayList<PlayerController> opponents;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -48,16 +50,27 @@ public class GameController {
 		this.private_OCC = new Private_Objective_Card_Controller(gameModel.getGameId(), c_login.getUsername());
 		return private_OCC;
 	}
+	
 	public ToolCard_Controller getTCC() {
 		return TCC;
 	}
+	
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername());
-
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+		
+		//gamemodel get usernames
+		opponents = new ArrayList<>();
+		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
+			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false));
+		}
+		
+		//Maak opponents View
+		//addOpponentView();
+		
 		this.draftpoolController = new DraftpoolController(this);
 
 		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
@@ -217,11 +230,23 @@ public class GameController {
 	public void refresh() {
 		System.out.println("GAMECONTROLLER:");
 		System.out.println("REFRESH");
+		if (getIsTurn() == false) {
+			this.draftpoolController.loadDice(gameModel.getGameId());
+			gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
+		}
+		
 		checkPlayerTurn();
 		this.roundtrackController.fillRoundtrack();
 		//this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
-		this.draftpoolController.loadDice(gameModel.getGameId());
-		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
+		
+		for (PlayerController opponent : opponents) {
+			opponent.getPatternCard().loadChosenCard();
+		}
+		
+		loadOpponent();
+		
+		//Laad huidige speler moet nog goed getest worden
+		playerController.getPatternCard().loadPatternCard();
 	}
 	
 	public boolean getIsTurn () {
@@ -242,4 +267,33 @@ public class GameController {
 	}
 	
 
+	
+	public void loadOpponent () {
+		int counter = 0;
+		for (PlayerController opponent : opponents) {
+			
+			if (opponent.getPatternCard().getChosenCard() != null) {
+				gamePane.setOpponentWindow(counter, opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
+				opponent.getPatternCard().loadPatternCard();
+			} else {
+				System.out.println("PANIEK PANIEK PANIEK!");
+			}
+			counter++;
+		}
+	}
+
+	public int getNumOpponents() {
+		return opponents.size();
+	}
+	
+//	public void addOpponentView () {
+//		for (PlayerController opponent : opponents) {
+//			if (opponent.getPatternCard().getChosenCard() != null) {
+//				gamePane.addOpponentWindow(opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
+//			} else {
+//				//add Black rectangle
+//				gamePane.addOpponentSquare();
+//			}
+//		}
+//	}
 }

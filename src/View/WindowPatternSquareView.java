@@ -38,7 +38,7 @@ public class WindowPatternSquareView extends Pane {
 		
 		Color color = new ColorConverter().colorConverter(dice.colorProperty().getValue());
 		DiceView diceView = new DiceView(color, dice.valueProperty().getValue());
-		diceView.drawDice(70, 70);
+		diceView.drawDice(50, 50);
 		this.getChildren().add(diceView);
 		
 		//System.out.println("asdfasdfasdfdsasdfadsafsdfdfssdf");
@@ -54,9 +54,10 @@ public class WindowPatternSquareView extends Pane {
 	public void updateView () {
 		this.getChildren().clear();
 		
-		if (controller.getDice() != null) {
+		//Dit is mischien nodig voor de toolcards
+		//if (controller.getDice() != null) {
 			this.getChildren().add(new DicePattern(controller.getSquare().getValue(), width, height));
-		}
+		//}
 	}
 	
 	private void onClick() {
