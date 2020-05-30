@@ -37,10 +37,9 @@ public class GamePane extends BorderPane {
 	private VBox gamePaneLeft;
 	private VBox gamePaneRight;
 	private Button shuffleToolcards;
+	private Button shufflePublicObjectiveCards;
 	
-	public Button getShuffleToolcards() {
-		return shuffleToolcards;
-	}
+
 
 	HBox gamePaneCenter;
 
@@ -87,10 +86,7 @@ public class GamePane extends BorderPane {
 
 //		Toolcards
 		gameController.makeTCC();
-//		TODO: maken toolcards moet door de inviter gedaan worden met een knoppie.
-//		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
-//			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
-//		}
+
 
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
@@ -99,9 +95,7 @@ public class GamePane extends BorderPane {
 //		Public Objective cards
 		gameController.makePublicOC();
 
-		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-		}
+
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
 		home = new Button("home");
@@ -129,7 +123,18 @@ public class GamePane extends BorderPane {
 			shuffleToolcards.setVisible(false);
 		}
 		
-		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards);
+		shufflePublicObjectiveCards = new Button("pak publieke doelkaarten");
+		shufflePublicObjectiveCards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shufflePublicObjectiveCards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shufflePublicObjectiveCards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+			shufflePublicObjectiveCards.setVisible(true);
+		}
+		else {
+			shufflePublicObjectiveCards.setVisible(false);
+		}
+		
+		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards, shufflePublicObjectiveCards);
 		
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
@@ -160,6 +165,13 @@ public class GamePane extends BorderPane {
 				shuffleToolcards.setVisible(false);
 			}
 		});
+		shufflePublicObjectiveCards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				gameController.getPublic_OCC().getCards();
+				shufflePublicObjectiveCards.setVisible(false);
+			}
+		});
 
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 		
@@ -170,17 +182,7 @@ public class GamePane extends BorderPane {
 		gamePaneRight.getChildren().addAll(isTurn);
 	}
 	
-	public HBox getGamePaneBottom() {
-		return gamePaneBottom;
-	}
 
-	public VBox getGamePaneLeft() {
-		return gamePaneLeft;
-	}
-
-	public VBox getGamePaneRight() {
-		return gamePaneRight;
-	}
 
 	public void updateIsTurn (boolean isTurn) {
 		if (this.isTurn != null) {
@@ -231,9 +233,32 @@ public class GamePane extends BorderPane {
 			gamePaneCenter.getChildren().set(0, draftpool);
 		}
 	}
+	public HBox getGamePaneBottom() {
+		return gamePaneBottom;
+	}
+
+	public VBox getGamePaneLeft() {
+		return gamePaneLeft;
+	}
+
+	public VBox getGamePaneRight() {
+		return gamePaneRight;
+	}
 
 	public Button getHome() {
 		return home;
 	}
+	
+	public HBox getGamePaneCenter() {
+		return gamePaneCenter;
+	}
+	public Button getShuffleToolcards() {
+		return shuffleToolcards;
+	}
+	public Button getShufflePublicObjectivecards() {
+		return shufflePublicObjectiveCards;
+	}
+
+	
 
 }

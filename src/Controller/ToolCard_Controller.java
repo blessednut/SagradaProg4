@@ -41,7 +41,6 @@ public class ToolCard_Controller {
 		while(cards.size() < 3) {
 			boolean toolCardInGame = false;
 			temp = tcm.getToolCard();
-			System.out.println("CardName: " + temp);
 			for(int i = 0; i < cards.size(); i++) {
 				if(cards.get(i).equals(temp)) {
 					toolCardInGame = true;
@@ -66,11 +65,9 @@ public class ToolCard_Controller {
 	public void getCards(int gameID) {
 		cards.clear();
 		tcm.setToolCardsInGame(gameID);
-		System.out.println(tcm.getCardNamesPerGame() + "getCards in de toolcardController");
 		String temp = "";
 		for (int i = 0; i < tcm.getCardNamesPerGame().size(); i++) {
 			temp = tcm.getCardNamesPerGame().get(i);
-			System.out.println(temp + "adbjasdkgajdgiasgd" + tcm.getCardNamesPerGame().size());
 			cards.add(temp);
 			panes.add(new ToolCard(temp, this));
 			

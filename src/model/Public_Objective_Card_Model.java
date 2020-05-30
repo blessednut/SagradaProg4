@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import DataBase.Public_Objective_CardDB;
@@ -7,6 +8,7 @@ import DataBase.Public_Objective_CardDB;
 public class Public_Objective_Card_Model {
 	private Public_Objective_CardDB pocDB;
 	private int poCardID;
+	private ArrayList<String> cardNamesPerGame;
 
 	
 	public Public_Objective_Card_Model() {
@@ -24,9 +26,20 @@ public class Public_Objective_Card_Model {
 		
 		
 	}
+	public void setCardsInGame(int gameID) {
+		ArrayList<Integer> cardIDsPerGame = pocDB.getCardIDsPerGame(gameID);
+		cardNamesPerGame = new ArrayList<String>();
+		for(int i = 0; i < cardIDsPerGame.size(); i++) {
+			cardNamesPerGame.add(pocDB.getCardName(cardIDsPerGame.get(i)));
+			}
+	}
 	
 	public void insertPublicObjectiveCards(int gameID) {
 		pocDB.insertPublicOC(gameID, poCardID);
+	}
+	
+	public ArrayList<String> getCardNamesPerGame(){
+		return cardNamesPerGame;
 	}
 
 }

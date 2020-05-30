@@ -3,6 +3,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Public_Objective_CardDB {
 	private ResultSet PublicObjectiveCardResultSet;
@@ -37,5 +38,24 @@ public class Public_Objective_CardDB {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Integer> getCardIDsPerGame(int gameID){
+		ArrayList<Integer> cardIDsPerGame = new ArrayList<Integer>();
+		int result = 0;
+		try {
+			String query = "select idpublic_objectivecard from gameobjectivecard_public where idgame = "+gameID+";";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				result = resultset.getInt("idpublic_objectivecard");
+				cardIDsPerGame.add(result);
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cardIDsPerGame;
+
 	}
 }
