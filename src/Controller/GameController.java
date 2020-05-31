@@ -66,6 +66,7 @@ public class GameController {
 
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+		
 
 		//gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -90,8 +91,8 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		System.out.println(c_login.getUsername() + "asbdisgaihgsdiufhsaoiughfsdaihafgsiy");
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true);
+		playerController.loadCards();
 
 		//gamemodel get usernames
 		opponents = new ArrayList<>();

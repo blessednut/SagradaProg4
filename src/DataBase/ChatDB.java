@@ -14,7 +14,7 @@ public class ChatDB {
 	
 	 
 	public ChatDB() {
-		DBCon dbcon = new DBCon();
+		dbcon = new DBCon();
 		this.st = dbcon.getSt();
 	}
 	

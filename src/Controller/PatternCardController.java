@@ -21,7 +21,6 @@ public class PatternCardController {
 		this.gameController = c_game;
 		this.playerController = playerController;
 
-		loadChosenCard();
 	}
 
 	public void loadChosenCard() {
