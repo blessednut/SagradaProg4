@@ -41,7 +41,7 @@ public class GamePane extends BorderPane {
 	private HBox gamePaneTop;
 	private VBox gamePaneRight;
 	
-	Label privateScoreLabel;
+	
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -225,11 +225,7 @@ public class GamePane extends BorderPane {
 		myPersonalScoreLabel.setFont(new Font("Arial", 32));
 		myPersonalScoreLabel.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(myPersonalScoreLabel);
-		
-		privateScoreLabel = new Label();
-		privateScoreLabel.setFont(new Font("Arial", 32));
-		privateScoreLabel.setTextFill(Color.WHITE);
-		gamePaneRight.getChildren().add(privateScoreLabel);
+		gamePaneRight.getChildren().add(makePrivateScoreLabel());
 
 		Label publicScore = new Label("Publieke score:");
 		publicScore.setFont(new Font("Arial", 32));
@@ -243,16 +239,22 @@ public class GamePane extends BorderPane {
 	}
 	
 	public void updateScore () {
-		String name = gameController.getCurrentPlayerName();
-		int score = gameController.getPrivateScore();
-		this.privateScoreLabel.setText(name + ": " + score);
-		this.gamePaneRight.getChildren().set(3, privateScoreLabel);
+		this.gamePaneRight.getChildren().set(3, makePrivateScoreLabel());
 		
 		int index = 5;
 		
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			this.gamePaneRight.getChildren().set(index + i, publicScoreLabel(i));
 		}
+	}
+	
+	private Label makePrivateScoreLabel () {
+		String name = gameController.getCurrentPlayerName();
+		int score = gameController.getPrivateScore();
+		Label privateScoreLabel = new Label(name + ": " + score);
+		privateScoreLabel.setFont(new Font("Arial", 32));
+		privateScoreLabel.setTextFill(Color.WHITE);
+		return privateScoreLabel;
 	}
 
 	public void updateIsTurn(boolean isTurn) {

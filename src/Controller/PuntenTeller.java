@@ -37,52 +37,54 @@ public class PuntenTeller {
 	
 	public void privateObjScore(String privateObjColor, WindowPatternSquareController[][] fieldController) {
 		//scorePrivateCard = 0;
-		switch(privateObjColor) {
-		case "purple":
-			for(int x = 0; x < fieldController.length; x++) {
-				for(int y = 0; y < fieldController[x].length; y++) {
-					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-						scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+		if (fieldController != null) {
+			switch(privateObjColor) {
+			case "purple":
+				for(int x = 0; x < fieldController.length; x++) {
+					for(int y = 0; y < fieldController[x].length; y++) {
+						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
+							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+						}
 					}
 				}
-			}
-			break;
-		case "green":
-			for(int x = 0; x < fieldController.length; x++) {
-				for(int y = 0; y < fieldController[x].length; y++) {
-					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-						scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+				break;
+			case "green":
+				for(int x = 0; x < fieldController.length; x++) {
+					for(int y = 0; y < fieldController[x].length; y++) {
+						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
+							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+						}
 					}
 				}
-			}
-			break;
-		case "red":
-			for(int x = 0; x < fieldController.length; x++) {
-				for(int y = 0; y < fieldController[x].length; y++) {
-					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-						scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+				break;
+			case "red":
+				for(int x = 0; x < fieldController.length; x++) {
+					for(int y = 0; y < fieldController[x].length; y++) {
+						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
+							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+						}
 					}
 				}
-			}
-			break;
-		case "yellow":
-			for(int x = 0; x < fieldController.length; x++) {
-				for(int y = 0; y < fieldController[x].length; y++) {
-					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-						scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+				break;
+			case "yellow":
+				for(int x = 0; x < fieldController.length; x++) {
+					for(int y = 0; y < fieldController[x].length; y++) {
+						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
+							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+						}
 					}
 				}
-			}
-			break;
-		case "blue":
-			for(int x = 0; x < fieldController.length; x++) {
-				for(int y = 0; y < fieldController[x].length; y++) {
-					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-						scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+				break;
+			case "blue":
+				for(int x = 0; x < fieldController.length; x++) {
+					for(int y = 0; y < fieldController[x].length; y++) {
+						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
+							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+						}
 					}
 				}
+				break;
 			}
-			break;
 		}
 	}
 
