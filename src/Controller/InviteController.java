@@ -50,6 +50,7 @@ public class InviteController {
 			}
 		});
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
+		
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
 			if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName1().getText()) <= 0) {
 				if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName2().getText()) <=0) {

@@ -27,9 +27,11 @@ public class HomePane extends BorderPane {
 	private final ImageView buttonThree = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonFour = new ImageView(new Image("Resources/button3.png"));
 	private final ImageView buttonFive = new ImageView(new Image("Resources/button3.png"));
+	private final ImageView buttonSix = new ImageView(new Image("Resources/button3.png"));
 
 	private Insets buttonIns = new Insets(30, 0, 30, 0);
 
+	private Button uitloggen;
 	private Button home;
 	private Button games;
 	private Button invite;
@@ -67,62 +69,73 @@ public class HomePane extends BorderPane {
 		layout.setMinSize(200, screenY);
 		Font buttonFont = new Font("Algerian", 24);
 		buttonOne.setFitWidth((screenX / 8));
-		buttonOne.setFitHeight(screenY / 5);
+		buttonOne.setFitHeight(screenY / 6);
 
 		buttonTwo.setFitWidth((screenX / 8));
-		buttonTwo.setFitHeight(screenY / 5);
+		buttonTwo.setFitHeight(screenY / 6);
 
 		buttonThree.setFitWidth((screenX / 8));
-		buttonThree.setFitHeight(screenY / 5);
+		buttonThree.setFitHeight(screenY / 6);
 
 		buttonFour.setFitWidth((screenX / 8));
-		buttonFour.setFitHeight(screenY / 5);
+		buttonFour.setFitHeight(screenY / 6);
 
 		buttonFive.setFitWidth((screenX / 8));
-		buttonFive.setFitHeight(screenY / 5);
+		buttonFive.setFitHeight(screenY / 6);
+		
+		buttonSix.setFitWidth((screenX / 8));
+		buttonSix.setFitHeight(screenY / 6);
 
 		home = new Button("Home", buttonOne);
-		home.setMinSize((screenX / 8), (screenY / 5));
-		home.setPrefSize((screenX / 8), (screenY / 5));
-		home.setMaxSize((screenX / 8), (screenY / 5));
+		home.setMinSize((screenX / 8), (screenY / 6));
+		home.setPrefSize((screenX / 8), (screenY / 6));
+		home.setMaxSize((screenX / 8), (screenY / 6));
 		home.setPadding(buttonIns);
 		home.setFont(buttonFont);
 		home.setContentDisplay(ContentDisplay.CENTER);
 		home.setStyle("-fx-background-color: null");
 
 		games = new Button("Games", buttonTwo);
-		games.setMinSize((screenX / 8), (screenY / 5));
-		games.setPrefSize((screenX / 8), (screenY / 5));
-		games.setMaxSize((screenX / 8), (screenY / 5));
+		games.setMinSize((screenX / 8), (screenY / 6));
+		games.setPrefSize((screenX / 8), (screenY / 6));
+		games.setMaxSize((screenX / 8), (screenY / 6));
 		games.setFont(buttonFont);
 		games.setContentDisplay(ContentDisplay.CENTER);
 		games.setStyle("-fx-background-color: null");
 
 		invite = new Button("uitnodigen", buttonThree);
-		invite.setMinSize((screenX / 8), (screenY / 5));
-		invite.setPrefSize((screenX / 8), (screenY / 5));
-		invite.setMaxSize((screenX / 8), (screenY / 5));
+		invite.setMinSize((screenX / 8), (screenY / 6));
+		invite.setPrefSize((screenX / 8), (screenY / 6));
+		invite.setMaxSize((screenX / 8), (screenY / 6));
 		invite.setFont(buttonFont);
 		invite.setContentDisplay(ContentDisplay.CENTER);
 		invite.setStyle("-fx-background-color: null");
 
 		statistics = new Button("statistieken", buttonFour);
-		statistics.setMinSize((screenX / 8), (screenY / 5));
-		statistics.setPrefSize((screenX / 8), (screenY / 5));
-		statistics.setMaxSize((screenX / 8), (screenY / 5));
+		statistics.setMinSize((screenX / 8), (screenY / 6));
+		statistics.setPrefSize((screenX / 8), (screenY / 6));
+		statistics.setMaxSize((screenX / 8), (screenY / 6));
 		statistics.setFont(buttonFont);
 		statistics.setContentDisplay(ContentDisplay.CENTER);
 		statistics.setStyle("-fx-background-color: null");
 
 		credits = new Button("credits", buttonFive);
-		credits.setMinSize((screenX / 8), (screenY / 5));
-		credits.setPrefSize((screenX / 8), (screenY / 5));
-		credits.setMaxSize((screenX / 8), (screenY / 5));
+		credits.setMinSize((screenX / 8), (screenY / 6));
+		credits.setPrefSize((screenX / 8), (screenY / 6));
+		credits.setMaxSize((screenX / 8), (screenY / 6));
 		credits.setFont(buttonFont);
 		credits.setContentDisplay(ContentDisplay.CENTER);
 		credits.setStyle("-fx-background-color: null");
+		
+		uitloggen = new Button("uitloggen", buttonSix);
+		uitloggen.setMinSize((screenX / 8), (screenY / 6));
+		uitloggen.setPrefSize((screenX / 8), (screenY / 6));
+		uitloggen.setMaxSize((screenX / 8), (screenY / 6));
+		uitloggen.setFont(buttonFont);
+		uitloggen.setContentDisplay(ContentDisplay.CENTER);
+		uitloggen.setStyle("-fx-background-color: null");
 
-		layout.getChildren().addAll(home, games, invite, statistics, credits);
+		layout.getChildren().addAll(uitloggen, home, games, invite, statistics, credits);
 		this.getChildren().addAll(layout);
 
 	}
@@ -161,6 +174,12 @@ public class HomePane extends BorderPane {
 	public HBox getHomePaneBottom() {
 		return HomePaneBottom;
 	}
+
+	public Button getUitloggen() {
+		return uitloggen;
+	}
+	
+	
 	
 	
 }
