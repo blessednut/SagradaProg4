@@ -178,4 +178,19 @@ public class InviteDB {
 		return result;
 	}
 	
+	public int checkInvitation(String challenger, String challengee) {
+		int result = 0;
+		
+		try {
+			String query = "select count(challengee.playstatus) as aantal from player challengee join player challenger on challengee.idgame = challenger.idgame where challengee.playstatus = 'challengee' and challenger.username = '"+challenger+"' and challengee.username = '"+challengee+"' group by challengee.username;";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				result = resultset.getInt("aantal");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

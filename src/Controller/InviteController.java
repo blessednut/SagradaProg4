@@ -51,9 +51,22 @@ public class InviteController {
 		});
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
-			inVitePlayer();
-			acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
-			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
+			if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName1().getText()) <= 0) {
+				if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName2().getText()) <=0) {
+					if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName3().getText()) <= 0) {
+						inVitePlayer();
+						acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
+						createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));				
+					}
+				}
+			} else {
+				Alert error = new Alert(AlertType.ERROR, "je hebt deze persoon al één keer uitgenodigd", ButtonType.OK);
+				error.showAndWait();
+				if(error.getResult() == ButtonType.OK) {
+					error.close();
+				}
+			}
+			
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
