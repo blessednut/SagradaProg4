@@ -238,6 +238,13 @@ public class GamePane extends BorderPane {
 		// load Opponents
 	}
 	
+	public void showWinner (String username) {
+		Label winner = new Label("Winnaar: " + username);
+		winner.setFont(new Font("Arial", 32));
+		winner.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(winner);
+	}
+	
 	public void updateScore () {
 		this.gamePaneRight.getChildren().set(3, makePrivateScoreLabel());
 		
@@ -250,7 +257,7 @@ public class GamePane extends BorderPane {
 	
 	private Label makePrivateScoreLabel () {
 		String name = gameController.getCurrentPlayerName();
-		int score = gameController.getPrivateScore();
+		int score = gameController.getPrivateScore(gameController.getCurrentPlayerName());
 		Label privateScoreLabel = new Label(name + ": " + score);
 		privateScoreLabel.setFont(new Font("Arial", 32));
 		privateScoreLabel.setTextFill(Color.WHITE);
@@ -336,5 +343,4 @@ public class GamePane extends BorderPane {
 	public Button getHome() {
 		return home;
 	}
-
 }
