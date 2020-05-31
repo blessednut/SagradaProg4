@@ -247,7 +247,7 @@ public class GameController {
 		
 		//Laad huidige speler moet nog goed getest worden
 		playerController.getPatternCard().loadPatternCard();
-		gamePane.updatePublicScore();
+		gamePane.updateScore();
 	}
 	
 	public boolean getIsTurn () {
@@ -300,6 +300,22 @@ public class GameController {
 			return score;
 		} else {
 			System.out.println("SCORE IS 0000");
+			return 0;
+		}
+	}
+	
+	public String getCurrentPlayerName () {
+		return this.gameModel.getPlayerName(playerController.getPlayerID());
+	}
+	
+	public int getPrivateScore () {
+		PuntenTeller punt = new PuntenTeller(this);
+		String privateObj = private_OCC.getColor(gameModel.getGameId(), getCurrentPlayerName());
+		String[] publicObj = public_OCC.getNames(gameModel.getGameId());
+		
+		if (this.playerController.getPatternCard().getChosenCard() != null) {
+			return punt.getTotalScore(privateObj, publicObj, playerController);
+		} else {
 			return 0;
 		}
 	}

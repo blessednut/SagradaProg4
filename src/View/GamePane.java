@@ -40,6 +40,8 @@ public class GamePane extends BorderPane {
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
 	private VBox gamePaneRight;
+	
+	Label privateScoreLabel;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
@@ -220,6 +222,14 @@ public class GamePane extends BorderPane {
 
 		// Punten telling
 		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
+		myPersonalScoreLabel.setFont(new Font("Arial", 32));
+		myPersonalScoreLabel.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(myPersonalScoreLabel);
+		
+		privateScoreLabel = new Label();
+		privateScoreLabel.setFont(new Font("Arial", 32));
+		privateScoreLabel.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(privateScoreLabel);
 
 		Label publicScore = new Label("Publieke score:");
 		publicScore.setFont(new Font("Arial", 32));
@@ -232,8 +242,13 @@ public class GamePane extends BorderPane {
 		// load Opponents
 	}
 	
-	public void updatePublicScore () {
-		int index = 3;
+	public void updateScore () {
+		String name = gameController.getCurrentPlayerName();
+		int score = gameController.getPrivateScore();
+		this.privateScoreLabel.setText(name + ": " + score);
+		this.gamePaneRight.getChildren().set(3, privateScoreLabel);
+		
+		int index = 5;
 		
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			this.gamePaneRight.getChildren().set(index + i, publicScoreLabel(i));
