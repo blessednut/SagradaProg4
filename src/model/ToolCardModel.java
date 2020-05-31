@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import DataBase.ToolCardDB;
@@ -7,6 +8,7 @@ import DataBase.ToolCardDB;
 public class ToolCardModel {
 	private ToolCardDB tcDB;
 	private int toolCardID;
+	private ArrayList<String> cardNamesPerGame;
 	
 	public ToolCardModel() {
 		tcDB = new ToolCardDB();
@@ -21,18 +23,29 @@ public class ToolCardModel {
 		cardName=tcDB.getCardName(toolCardID);
 		return cardName;
 	}
+	public void setToolCardsInGame(int gameID) {
+		ArrayList<Integer> cardIDsPerGame = tcDB.getCardIDsPerGame(gameID);
+		cardNamesPerGame = new ArrayList<String>();
+		for (int i = 0; i < cardIDsPerGame.size(); i++) {
+			cardNamesPerGame.add(tcDB.getCardName(cardIDsPerGame.get(i)));
+		}
+		
+	}
 	
 	public void removeDiceFromGameDie(int idgame, int dienumber, String color) {
 		tcDB.removeDiceFromGameDie(idgame, dienumber, color);
 	}
 	
 	public void insertToolCardIntoGameToolCardTable(int idtoolcard, int idgame) {
-		System.out.println("ToolcardModel: dsfhgbsoilbdv");
 		tcDB.insertToolCardIntoGameToolCardTable(idtoolcard, idgame);
 	}	
 
 	public int getToolCardID() {
 		return toolCardID;
+	}
+	
+	public ArrayList<String> getCardNamesPerGame(){
+		return cardNamesPerGame;
 	}
 	
 }

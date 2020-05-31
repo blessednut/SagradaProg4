@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 
 import View.Public_Objective_Card;
+import View.ToolCard;
 import javafx.scene.layout.Pane;
 import model.Public_Objective_Card_Model;
 
@@ -18,18 +19,30 @@ public class Public_Objective_Card_Controller {
 		cards = new ArrayList<>();
 		panes = new ArrayList<>();
 		pocm = new Public_Objective_Card_Model();
-		getCards();
+
 	}
 
-	private void getCards() {
+	public void getCards() {
 		String temp;
-		while (cards.size() <= 2) {
+		while (cards.size() < 3) {
 			temp = pocm.getCard();
 			if (!cards.contains(temp)) {
 				cards.add(temp);
 				pocm.insertPublicObjectiveCards(gamecontroller.getM_game().getGameId());
-				panes.add(new Public_Objective_Card(temp));
 			}
+		}
+	}
+	public void getCards(int gameID) {
+		pocm.setCardsInGame(gameID);
+		String temp = "";
+		cards.clear();
+		for (int i = 0; i < pocm.getCardNamesPerGame().size(); i++) {
+			temp = pocm.getCardNamesPerGame().get(i);
+			cards.add(temp);
+			panes.add(new Public_Objective_Card(temp));
+			
+			
+			
 		}
 	}
 	

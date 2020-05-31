@@ -36,10 +36,15 @@ public class GamePane extends BorderPane {
 	private DraftPoolView draftpool;
 	private Button home;
 	private Label isTurn;
-	
+	private HBox gamePaneBottom;
+	private VBox gamePaneLeft;
+	private VBox gamePaneRight;
+	private Button shuffleToolcards;
+	private Button shufflePublicObjectiveCards;
+
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
-	
+
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
 		this.setMinSize(900, 900);
@@ -57,73 +62,13 @@ public class GamePane extends BorderPane {
 		//createGamePane();
 	}
 
-//	public void createGamePane() {
-//		this.getChildren().clear();
-//		HBox gamePaneBottom = new HBox();
-//		HBox gamePaneCenter = new HBox();
-//		VBox gamePaneLeft = new VBox();
-//		VBox gamePaneRight = new VBox();
-//		this.setBottom(gamePaneBottom);
-//		this.setCenter(gamePaneCenter);
-//		this.setLeft(gamePaneLeft);
-//		this.setRight(gamePaneRight);
-//		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
-//		gamePaneCenter.setAlignment(Pos.CENTER);
-//		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
-//		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
-////		windowPatternCard
-//		if (ownWindow == null) {
-//
-//		} else {
-//			gamePaneBottom.getChildren().add(ownWindow);
-//		}
-////		Private Objective card
-//		gamePaneBottom.getChildren().add(gameController.getPrivate_OCC().getPane());
-//
-////		Public Objective cards
-////		TODO: hier komt het aanbod toevoegen
-////		if (draftpool != null) {
-////			gamePaneCenter.getChildren().add(draftpool);
-////		}
-////
-////
-////		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-////			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-////		}
-////		End turn button
-//		Button endTurn = new Button("Einde beurt");
-//		Button home = new Button("home");
-//		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		endTurn.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-//		
-//		
-//		
-//		gamePaneLeft.getChildren().addAll(endTurn, home);
-//
-//		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				onClickEndTurn();
-//			}
-//		});
-//
-////		roundCounter
-//		Label roundCounter = new Label("Ronde: X");
-//		roundCounter.setFont(new Font("Arial", 16));
-//		gamePaneRight.getChildren().add(roundCounter);
-//	}
 
-	public void createGamePane2() {
+	public void createGamePane() {
 		this.getChildren().clear();
-		HBox gamePaneBottom = new HBox();
-		
+		gamePaneBottom = new HBox();
 		gamePaneCenter = new HBox();
-		VBox gamePaneLeft = new VBox();
-		VBox gamePaneRight = new VBox();
+		gamePaneLeft = new VBox();
+		gamePaneRight = new VBox();
 		gamePaneTop = new HBox();
 		this.setBottom(gamePaneBottom);
 		this.setCenter(gamePaneCenter);
@@ -135,11 +80,11 @@ public class GamePane extends BorderPane {
 		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
 		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
 		gamePaneTop.setAlignment(Pos.CENTER);
-		
+
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			addOpponentSquare();
 		}
-		
+
 //		windowPatternCard
 		if (ownWindow == null) {
 
@@ -151,24 +96,17 @@ public class GamePane extends BorderPane {
 
 //		Toolcards
 		gameController.makeTCC();
-		for (int i = 0; i < gameController.getTCC().getPanes().size(); i++) {
-			gamePaneBottom.getChildren().add(gameController.getTCC().getPanes().get(i));
-		}
+
 
 		if (draftpool != null) {
 			gamePaneCenter.getChildren().add(draftpool);
 		}
-//		Public Objective cards	
+//		Public Objective cards
 		gameController.makePublicOC();
 
-		for (int i = 0; i < gameController.getPublic_OCC().getPanes().size(); i++) {
-			gamePaneCenter.getChildren().add(gameController.getPublic_OCC().getPanes().get(i));
-		}
-//		Chat
-		gameController.makeCC();
-		gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
-		
-		
+		//		Chat
+				gameController.makeCC();
+				gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
 //		End turn button
 		Button endTurn = new Button("Einde beurt");
 		home = new Button("home");
@@ -178,15 +116,37 @@ public class GamePane extends BorderPane {
 		home.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		home.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		
-		
-		Button refresh = new Button("Refresh");
+
+
+		Button refresh = new Button("ververs");
 		refresh.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		
-		gamePaneLeft.getChildren().addAll(endTurn, home, refresh);
-		
+
+		shuffleToolcards = new Button("pak gereedschaps kaarten");
+		shuffleToolcards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shuffleToolcards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shuffleToolcards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+			shuffleToolcards.setVisible(true);
+		}
+		else {
+			shuffleToolcards.setVisible(false);
+		}
+
+		shufflePublicObjectiveCards = new Button("pak publieke doelkaarten");
+		shufflePublicObjectiveCards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shufflePublicObjectiveCards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		shufflePublicObjectiveCards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+			shufflePublicObjectiveCards.setVisible(true);
+		}
+		else {
+			shufflePublicObjectiveCards.setVisible(false);
+		}
+
+		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards, shufflePublicObjectiveCards);
+
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
 			HomeThreadController home = new HomeThreadController(gameController.getC_login(), gameController.getC_login().getC_home().getC_Invite());
@@ -201,7 +161,7 @@ public class GamePane extends BorderPane {
 				}
 			}
 		});
-		
+
 		refresh.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -209,18 +169,35 @@ public class GamePane extends BorderPane {
 			}
 		});
 
+		shuffleToolcards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				gameController.getTCC().getCards();
+				shuffleToolcards.setVisible(false);
+			}
+		});
+		shufflePublicObjectiveCards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				gameController.getPublic_OCC().getCards();
+				shufflePublicObjectiveCards.setVisible(false);
+			}
+		});
+
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
-		
+
 		isTurn = new Label ("");
 		isTurn.setFont(new Font("Arial", 32));
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
 		gamePaneRight.getChildren().addAll(isTurn);
-		
+
 		//load Opponents
-		
+
 	}
-	
+
+
+
 	public void updateIsTurn (boolean isTurn) {
 		if (this.isTurn != null) {
 			if (isTurn) {
@@ -263,15 +240,15 @@ public class GamePane extends BorderPane {
 	public void setOwnWindow(WindowPatternView window) {
 		this.ownWindow = window;
 	}
-	
+
 	public void setOpponentWindow (int index, WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().set(index, opponentCard);
 	}
-	
+
 	public void addOpponentWindow (WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().add(opponentCard);
 	}
-	
+
 	public void addOpponentSquare() {
 		Pane opponentSquare = new Pane ();
 		CornerRadii RADIUS = new CornerRadii(10.00);
@@ -283,15 +260,38 @@ public class GamePane extends BorderPane {
 
 	public void setDrafpool(DraftPoolView draftpool, boolean replace) {
 		this.draftpool = draftpool;
-		if (replace) { 
+		if (replace) {
 			gamePaneCenter.getChildren().set(0, draftpool);
 		}
+	}
+	public HBox getGamePaneBottom() {
+		return gamePaneBottom;
+	}
+
+	public VBox getGamePaneLeft() {
+		return gamePaneLeft;
+	}
+
+	public VBox getGamePaneRight() {
+		return gamePaneRight;
 	}
 
 	public Button getHome() {
 		return home;
 	}
 
-	
+	public HBox getGamePaneCenter() {
+		return gamePaneCenter;
+	}
+	public Button getShuffleToolcards() {
+		return shuffleToolcards;
+	}
+	public Button getShufflePublicObjectivecards() {
+		return shufflePublicObjectiveCards;
+	}
+
+
+
+
 
 }

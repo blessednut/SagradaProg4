@@ -118,7 +118,6 @@ public class PatternCardController {
 		while (true) {
 			int randomNumber = getRandomIntBetweenRange(1, 24);
 			PatternCardModel temp = new PatternCardModel(this, randomNumber);
-			System.out.println(temp.getIdPatternCard() + "adafhvdjhgasdgfa");
 
 			if (optionCard[i] == null && !idpatterncardoptions.contains(temp.getIdPatternCard())) {
 				this.optionCard[i] = temp;
@@ -176,7 +175,7 @@ public class PatternCardController {
 				.getPlayerID(gameController.getM_game().getGameId(), gameController.getC_login().getUsername()),
 				optionCard[index].getIdPatternCard());
 		this.gameController.getGamePane().setOwnWindow(makeView(chosenCard));
-		this.gameController.getGamePane().createGamePane2();
+		this.gameController.getGamePane().createGamePane();
 	}
 
 	public void setSelected(WindowPatternSquareController selectedSquare) {

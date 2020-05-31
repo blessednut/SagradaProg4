@@ -3,6 +3,8 @@ package Controller;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import View.ToolCard;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -31,42 +33,50 @@ public class ToolCard_Controller {
 		cards = new ArrayList<String>();
 		panes = new ArrayList<ToolCard>();
 		tcm = new ToolCardModel();
-		this.gameController = gameController;
-		getCards();
+		this.gameController = gameController;		
+	}
 
+	public void getCards() {
+		String temp;
+		while(cards.size() < 3) {
+			boolean toolCardInGame = false;
+			temp = tcm.getToolCard();
+			for(int i = 0; i < cards.size(); i++) {
+				if(cards.get(i).equals(temp)) {
+					toolCardInGame = true;
+				}
+			}
+			if(!toolCardInGame) {
+				cards.add(temp);
+				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
+			}
+		}
+//		cards.add("Lathekin");
+//		cards.add("Eglomise Brush");
+//		cards.add("Cork-backed Straightedge");
+//		panes.add(new ToolCard("Lathekin", this));
+//		panes.add(new ToolCard("Eglomise Brush", this));
+//		panes.add(new ToolCard("Cork-backed Straightedge", this));
+		
+		
+
+	}
+	
+	public void getCards(int gameID) {
+		cards.clear();
+		tcm.setToolCardsInGame(gameID);
+		String temp = "";
+		for (int i = 0; i < tcm.getCardNamesPerGame().size(); i++) {
+			temp = tcm.getCardNamesPerGame().get(i);
+			cards.add(temp);
+			panes.add(new ToolCard(temp, this));
+			
+		}
 //		Elke toolcard krijgt krijgt nu mee welke methode ze moeten gebruiken als ze aangeklikt worden.
 		panes.get(0).getButton().setOnAction(Event -> useCard(cards.get(0)));
 		panes.get(1).getButton().setOnAction(Event -> useCard(cards.get(1)));
 		panes.get(2).getButton().setOnAction(Event -> useCard(cards.get(2)));
-	}
-
-	private void getCards() {
-//		String temp;
-//		while(cards.size() < 3) {
-//			boolean toolCardInGame = false;
-//			temp = tcm.getToolCard();
-//			System.out.println("CardName: " + temp);
-//			for(int i = 0; i < cards.size(); i++) {
-//				if(cards.get(i).equals(temp)) {
-//					toolCardInGame = true;
-//				}
-//			}
-//			if(!toolCardInGame) {
-//				cards.add(temp);
-//				panes.add(new ToolCard(temp, this));
-//				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
-//			}
-//		}
-		cards.add("Lathekin");
-		cards.add("Eglomise Brush");
-		cards.add("Cork-backed Straightedge");
-		panes.add(new ToolCard("Lathekin", this));
-		panes.add(new ToolCard("Eglomise Brush", this));
-		panes.add(new ToolCard("Cork-backed Straightedge", this));
-	}
-
-	public ArrayList<ToolCard> getPanes() {
-		return panes;
+		
 	}
 
 	public void useCard(String cardName) {
@@ -453,6 +463,9 @@ public class ToolCard_Controller {
 
 	public String getActiveToolCard() {
 		return activeToolCard;
+	}
+	public ArrayList<ToolCard> getPanes() {
+		return panes;
 	}
 
 }
