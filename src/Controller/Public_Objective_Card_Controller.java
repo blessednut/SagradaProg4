@@ -49,5 +49,9 @@ public class Public_Objective_Card_Controller {
 	public ArrayList<Public_Objective_Card> getPanes() {
 		return panes;
 	}
+	
+	public Boolean getEmpty(int gameid) {
+		return pocm.getEmpty(gameid);
+	}
 }
 

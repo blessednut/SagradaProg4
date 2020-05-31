@@ -41,6 +41,7 @@ public class GamePane extends BorderPane {
 	private VBox gamePaneRight;
 	private Button shuffleToolcards;
 	private Button shufflePublicObjectiveCards;
+	private Button endTurn;
 
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
@@ -108,7 +109,7 @@ public class GamePane extends BorderPane {
 				gameController.makeCC();
 				gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
 //		End turn button
-		Button endTurn = new Button("Einde beurt");
+		endTurn = new Button("Einde beurt");
 		home = new Button("home");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -127,7 +128,8 @@ public class GamePane extends BorderPane {
 		shuffleToolcards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		shuffleToolcards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		shuffleToolcards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1 && !gameController.toolCardExists()) {
+			endTurn.setVisible(false);
 			shuffleToolcards.setVisible(true);
 		}
 		else {
@@ -138,7 +140,8 @@ public class GamePane extends BorderPane {
 		shufflePublicObjectiveCards.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		shufflePublicObjectiveCards.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		shufflePublicObjectiveCards.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
-		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1) {
+		if(gameController.getseqNumber() == 1 && gameController.getGameRound() == 1 && !gameController.publicObjectiveCardExists()) {
+			endTurn.setVisible(false);
 			shufflePublicObjectiveCards.setVisible(true);
 		}
 		else {
@@ -148,6 +151,7 @@ public class GamePane extends BorderPane {
 		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards, shufflePublicObjectiveCards);
 
 		home.setOnMouseClicked(e -> {
+			gameController.resetCardBooleans();
 			gameController.switchBackToHome();
 			HomeThreadController home = new HomeThreadController(gameController.getC_login(), gameController.getC_login().getC_home().getC_Invite());
 			home.start();
@@ -288,6 +292,9 @@ public class GamePane extends BorderPane {
 	}
 	public Button getShufflePublicObjectivecards() {
 		return shufflePublicObjectiveCards;
+	}
+	public Button getEndTurn() {
+		return endTurn;
 	}
 
 

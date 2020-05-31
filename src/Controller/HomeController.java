@@ -31,7 +31,7 @@ public class HomeController {
 		c_Invite = new InviteController(c_game,this);
 		
 		//aan maak OpenGamesController.
-		OGC = new OpenGamesController(c_login);
+		OGC = new OpenGamesController(c_login, c_game);
 
 		// aan maak homethreadController.
 		this.c_hometc = new HomeThreadController(c_login, c_Invite);

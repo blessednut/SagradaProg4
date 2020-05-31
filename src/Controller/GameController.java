@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import View.DraftPoolView;
 import View.GamePane;
+import View.WindowPatternView;
 import model.DiceModel;
 import model.GameDiceModel;
 import model.GameModel;
+import model.PatternCardFieldModel;
+import model.PatternCardModel;
 
 public class GameController {
 
@@ -80,6 +83,33 @@ public class GameController {
 
 		this.checkPlayerTurn();
 		System.out.println("isPlayerTurn = " + isTurn);
+	}
+	public void createGamePane(int oldGameID) {
+		this.gameModel.setGameId(oldGameID);
+		this.gamePane = new GamePane(this);
+		myScene.getMyscene().switchPane(gamePane);
+
+		this.dice = new DiceModel(this);
+		System.out.println(c_login.getUsername() + "asbdisgaihgsdiufhsaoiughfsdaihafgsiy");
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+
+		//gamemodel get usernames
+		opponents = new ArrayList<>();
+		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
+			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false));
+		}
+
+		//Maak opponents View
+		//addOpponentView();
+
+		this.draftpoolController = new DraftpoolController(this);
+
+		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
+		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
+
+		this.checkPlayerTurn();
+		System.out.println("isPlayerTurn = " + isTurn);
+		this.gamePane.createGamePane();
 	}
 
 	public GameDiceModel pickDiceFromBag() {
@@ -227,10 +257,27 @@ public class GameController {
 	public PlayerController getPlayerController() {
 		return playerController;
 	}
+	
+	public Boolean toolCardExists() {
+		if(this.getTCC().getEmpty(gameModel.getGameId())) {
+			return false;
+		}
+		else {
+			return true;
+		}
+		
+	}
+	
+	public Boolean publicObjectiveCardExists() {
+		if(this.getPublic_OCC().getEmpty(gameModel.getGameId())) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 	public void refresh() {
-		System.out.println("GAMECONTROLLER:");
-		System.out.println("REFRESH");
+		System.out.println("refreshknop: " + gameModel.getGameId());
 		if (getIsTurn() == false) {
 			this.draftpoolController.loadDice(gameModel.getGameId());
 			gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
@@ -271,7 +318,15 @@ public class GameController {
 			}
 			publicCardsAdded = true;
 		}
+		if(toolCardExists() && publicObjectiveCardExists()) {
+			this.gamePane.getEndTurn().setVisible(true);
+		}
 
+	}
+	
+	public void resetCardBooleans() {
+		toolCardsAdded = false;
+		publicCardsAdded = false;
 	}
 
 	public boolean getIsTurn() {
@@ -287,8 +342,8 @@ public class GameController {
 	}
 
 	public void closeChatThread() {
-		CC.getThread().terminate();
 		CC.getThread().getModel().getDBCOn().closeConnection();
+		CC.getThread().terminate();
 	}
 
 
@@ -328,5 +383,26 @@ public class GameController {
 
 	public int getGameRound() {
 		return gameModel.getRoundNR();
+	}
+
+	public void setOwnWindow(PatternCardModel chosenCard, PatternCardController patternCardController) {
+		gamePane.setOwnWindow(new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(),
+					this.makeSquareView(chosenCard.getField(), patternCardController)));
+		
+	}
+	public WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field, PatternCardController patternCardController ) {
+		WindowPatternSquareController[][] fieldController = new WindowPatternSquareController[5][4];
+
+		for (int x = 0; x < fieldController.length; x++) {
+			for (int y = 0; y < fieldController[x].length; y++) {
+				fieldController[x][y] = new WindowPatternSquareController(this, patternCardController, field[x][y]);
+			}
+		}
+		return fieldController;
+	}
+
+	public int getCurrentPlayerID() {
+		// TODO Auto-generated method stub
+		return playerController.getPlayerID();
 	}
 }

@@ -31,6 +31,15 @@ public class PatternCardController {
 			System.out.println("SET CHOSEN CARD");
 			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
+			
+			if(playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
+				gameController.setOwnWindow(chosenCard, this);
+			}
+			
+				// Magic Number weghalen
+			
+			
+			
 		} else {
 			if (playerController.getPlayerModel().getIsCurrentPlayer()) {
 				generatePatternCardChoice();
@@ -138,7 +147,7 @@ public class PatternCardController {
 		this.gameController.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 
-	private WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
+	public WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
 		fieldController = new WindowPatternSquareController[5][4];
 
 		for (int x = 0; x < fieldController.length; x++) {
