@@ -2,8 +2,11 @@ package Controller;
 
 import View.ColorConverter;
 import View.RoundtrackPane;
-import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import model.GameDiceModel;
 import model.RoundtrackModel;
 
 public class RoundtrackController {
@@ -36,4 +39,23 @@ public class RoundtrackController {
             i++;
         }
     }
+    
+    public void bla() {
+    	for(VBox round : roundtrackPane.getRounds()) {
+    		for(int i=0; round.getChildren().get(i)!=null; i++) {
+    			round.getChildren().get(i).setOnMouseClicked(new EventHandler<MouseEvent> () {
+    				@Override
+    				public void handle(MouseEvent event) {
+    					onClick();
+    				}
+
+					
+    			});
+    		}
+    	}
+    }
+    
+    private void onClick() {
+		
+	}
 }

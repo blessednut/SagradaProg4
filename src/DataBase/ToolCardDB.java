@@ -90,6 +90,38 @@ public class ToolCardDB {
 		return cardIDsPerGame;
 	}
 	
+	public ArrayList<String> getRoundtrackColor(int gameid) {
+		ArrayList<String> colors = new ArrayList<>();
+		String color = null;
+		try {
+			String query = "select * from gamedie where idgame = " + gameid + " and roundtrack = " + getRoundID(gameid);
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				color = resultset.getString("diecolor");
+				colors.add(color);
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return colors;
+	}
+	
+	public int getRoundID (int idgame) {
+		int roundID = 0;
+		try {
+			String query = "SELECT current_roundID FROM game WHERE idgame = " + idgame;
+			ResultSet resultset = (st.executeQuery(query));
+			while (resultset.next()) {
+				roundID = resultset.getInt("current_roundID");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return roundID;
+	}
+	
 
 
 }

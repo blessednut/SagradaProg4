@@ -48,6 +48,10 @@ public class ToolCardModel {
 		return cardNamesPerGame;
 	}
 	
+	public ArrayList<String> getRoundtrackColors(int gameid){
+		return tcDB.getRoundtrackColor(gameid);
+	} 
+	
 }
 	
 	

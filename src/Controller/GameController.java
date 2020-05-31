@@ -31,6 +31,8 @@ public class GameController {
 
 	private Boolean publicCardsAdded = false;
 	private Boolean toolCardsAdded = false;
+	
+	private int amountOfDice = 0;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
@@ -114,7 +116,17 @@ public class GameController {
 	}
 
 	public boolean placeDice(GameDiceModel dice) {
-		return this.playerController.getPatternCard().placeDice(dice);
+		if(this.amountOfDice == 0) {
+			if (this.playerController.getPatternCard().placeDice(dice)) {
+				amountOfDice++;
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+		//return this.playerController.getPatternCard().placeDice(dice);
 //		System.out.println("GameController:");
 //		System.out.println(dice.getDieNumber());
 	}
@@ -124,6 +136,8 @@ public class GameController {
 	}
 
 	public void endTurn() {
+		this.amountOfDice = 0;
+		
 		this.playerController.updatePlayerFrameField();
 
 		int roundID = gameModel.getRoundID();

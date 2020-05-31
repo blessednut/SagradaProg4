@@ -19,7 +19,9 @@ public class RoundtrackPane extends BorderPane{
     private final static CornerRadii RADIUS = new CornerRadii(10.00);
     private ArrayList<VBox> rounds;
 
-    public RoundtrackPane() {
+    
+
+	public RoundtrackPane() {
         createRoundtrack();
     }
 
@@ -45,6 +47,10 @@ public class RoundtrackPane extends BorderPane{
             numbers.getChildren().addAll(label);
         }
     }
+    
+    public ArrayList<VBox> getRounds() {
+		return rounds;
+	}
 
     public void addDice(int roundtrack, Color color, int eyes) { 
         DiceView dv = new DiceView(color, eyes);
