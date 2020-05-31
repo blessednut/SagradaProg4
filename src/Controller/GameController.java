@@ -321,9 +321,6 @@ public class GameController {
 //			}
 //		}
 //	}
-		this.roundtrackController = new RoundtrackController(gameModel.getGameId());
-		return roundtrackController;
-	}
 
 	public int getseqNumber() {
 		return gameModel.getSeqNR(playerController.getPlayerID());
