@@ -8,38 +8,38 @@ import model.LoginModel;
 
 public class LogInController {
 
-	private LoginPane v_login;
-	private LoginModel m_login;
-	private MySceneController c_myscene;
+	private LoginPane logInController;
+	private LoginModel logInModel;
+	private MySceneController mySceneController;
 	private String username;
-	private HomeController c_home;
+	private HomeController homeController;
 	private String password;
 
-	public LogInController(MySceneController c_myscene) {
-		this.c_myscene = c_myscene;
-		m_login = new LoginModel();
-		v_login = new LoginPane();
+	public LogInController(MySceneController mySceneController) {
+		this.mySceneController = mySceneController;
+		logInModel = new LoginModel();
+		logInController = new LoginPane();
 //		c_home = new HomeController(c_myscene, this);
 
-		v_login.getLogin().setOnAction(e -> {
-			username = v_login.getUsername().getText();
-			password = v_login.getPassword().getText();
-			m_login.setUsername(username);
+		logInController.getLogin().setOnAction(e -> {
+			username = logInController.getUsername().getText();
+			password = logInController.getPassword().getText();
+			logInModel.setUsername(username);
 			makeHomecontroller();
 			SetInlogInfo();
 		});
-		v_login.getRegister().setOnAction(
-				e -> m_login.getCon().registerLogin(v_login.getUsername().getText(), v_login.getPassword().getText()));
-		v_login.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
+		logInController.getRegister().setOnAction(
+				e -> logInModel.getCon().registerLogin(logInController.getUsername().getText(), logInController.getPassword().getText()));
+		logInController.addEventHandler(KeyEvent.KEY_PRESSED, new MyEnterHandler());
 	}
 
 	private class MyEnterHandler implements EventHandler<KeyEvent> {
 		@Override
 		public void handle(KeyEvent event) {
 			if (event.getCode() == KeyCode.ENTER) {
-				username = v_login.getUsername().getText();
-				password = v_login.getPassword().getText();
-				m_login.setUsername(username);
+				username = logInController.getUsername().getText();
+				password = logInController.getPassword().getText();
+				logInModel.setUsername(username);
 				makeHomecontroller();
 				SetInlogInfo();
 
@@ -49,27 +49,27 @@ public class LogInController {
 	}
 
 	public LoginPane getLogin() {
-		return v_login;
+		return logInController;
 	}
 
 	public String SetInlogInfo() {
 		try {
 
-			if (m_login.getCon().getPassword(username).equals(password)) {
-				c_myscene.getMyscene().switchPane(c_home.getV_home());
+			if (logInModel.getCon().getPassword(username).equals(password)) {
+				mySceneController.getMyscene().switchPane(homeController.getV_home());
 
 			} else {
-				v_login.errorPassword();
+				logInController.errorPassword();
 			}
 		} catch (Exception ex) {
-//			ex.printStackTrace();
+			ex.printStackTrace();
 		}
 		return username;
 
 	}
 
 	public void makeHomecontroller() {
-		c_home = new HomeController(c_myscene, this);
+		homeController = new HomeController(mySceneController, this);
 	}
 
 	public String getUsername() {
@@ -77,7 +77,7 @@ public class LogInController {
 	}
 
 	public HomeController getC_home() {
-		return c_home;
+		return homeController;
 	}
 
 

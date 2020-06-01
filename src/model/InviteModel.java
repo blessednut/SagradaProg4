@@ -1,13 +1,12 @@
 package model;
 
-import Controller.InviteController;
 import DataBase.InviteDB;
 
 public class InviteModel {
-	private InviteController c_invite;
 
-	public InviteModel(InviteController c_invite) {
-		this.c_invite = c_invite;
+
+	public InviteModel() {
+
 	}
 
 	// checkt of je de persoon al hebt uitgenodigd

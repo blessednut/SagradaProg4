@@ -25,14 +25,13 @@ public class ChatThreadController extends Thread{
 	}
 
 
-	@Override
 	public void run() {
 		while(running) {
 			try {
 				String newMessage = ChatM.getUsername(idgame) + ": " + ChatM.getMessage(idgame);
 
 				Platform.runLater(new Runnable() {
-					@Override
+					
 					public void run() {
 						if(!mostRecentMessage.equals(newMessage)) {
 							mostRecentMessage = newMessage;

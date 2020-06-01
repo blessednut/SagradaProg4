@@ -10,7 +10,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
 public class LoginDB {
-	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 

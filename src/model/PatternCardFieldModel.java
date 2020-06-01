@@ -6,10 +6,9 @@ public class PatternCardFieldModel {
 	private final int idPatternCard;
 	private final int x, y, value;
 	private final String color;
-	private GameDiceModel dice;
+	private GameDiceModel diceModel;
 	
-	//TODO: query verplaatsen naar andere database klasse
-	private DiceDB con;
+	private DiceDB diceDB;
 	
 	public PatternCardFieldModel (int idPatternCard, int x, int y, String color, int value) {
 		this.idPatternCard = idPatternCard;
@@ -18,13 +17,13 @@ public class PatternCardFieldModel {
 		this.color = color;
 		this.value = value;
 		
-		this.con = new DiceDB();
+		this.diceDB = new DiceDB();
 	}
 	
 	public void updatePlayerFrameField (int gameID, int playerID) {
 		//BELANGRIJK wanneer het veld is veranderd naar een leegvak, wordt dit nog niet geupdate.
-		if (dice != null) {
-			con.updatePlayerFrameField(gameID, dice, playerID, x, y);
+		if (diceModel != null) {
+			diceDB.updatePlayerFrameField(gameID, diceModel, playerID, x, y);
 		}
 	}
 	
@@ -49,24 +48,24 @@ public class PatternCardFieldModel {
 	}
 
 	public void setDice(GameDiceModel dice) {
-		this.dice = dice;
+		this.diceModel = dice;
 	}
 	
 	public boolean isEmpty () {
-		return (dice == null) ? true : false;
+		return (diceModel == null) ? true : false;
 	}
 	
 	public GameDiceModel getDice () {
-		return this.dice;
+		return this.diceModel;
 	}
 
 	public void removeDice() {
-		this.dice = null;
+		this.diceModel = null;
 	}
 	
 	//Test
 	public void loadDice (int idplayer) {
 		removeDice();
-		this.dice = con.getDice(idplayer, x, y);
+		this.diceModel = diceDB.getDice(idplayer, x, y);
 	}
 }

@@ -8,7 +8,6 @@ import model.GameDiceModel;
 import model.PatternCardFieldModel;
 
 public class WindowPatternDB {
-	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 

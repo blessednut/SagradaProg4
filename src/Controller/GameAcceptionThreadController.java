@@ -5,23 +5,20 @@ import model.GameAcceptionThreadModel;
 
 public class GameAcceptionThreadController extends Thread {
 
-	private LogInController logInController;
 	private InviteController inViteController;
 	private GameAcceptionThreadModel gameThreadModel;
-	private int amountInGame;
 	private int gameid;
 	private String amountNotAcceptedString;
 	private boolean running = true;
 
 
-	public GameAcceptionThreadController(LogInController logInController, InviteController inViteController, int gameid
+	public GameAcceptionThreadController(InviteController inViteController, int gameid
 			) {
-		//System.out.println("vooran constructor");
-		this.logInController = logInController;
+
 		this.inViteController = inViteController;
 		gameThreadModel = new GameAcceptionThreadModel();
 		this.gameid = gameid;
-		//System.out.println("achteraan constructor");
+
 	}
 
 	public void terminate() {
@@ -35,7 +32,6 @@ public class GameAcceptionThreadController extends Thread {
 	public void run() {
 		int amountRefused = 0;
 		int amountNotAccepted = 1;
-		//System.out.println("gameid: "+gameid);
 
 		while(running) {
 			try {
@@ -47,7 +43,7 @@ public class GameAcceptionThreadController extends Thread {
 				gameThreadModel.setRefused(gameid);
 				Platform.runLater(new Runnable() {
 
-					@Override
+					
 					public void run() {
 
 						removeGameStart();
@@ -64,7 +60,7 @@ public class GameAcceptionThreadController extends Thread {
 			if (amountNotAccepted == 0) {
 				Platform.runLater(new Runnable() {
 
-					@Override
+					
 					public void run() {
 						inViteController.getInviteStart().getNumberRemaining().setText("niet geaccepteed: "+amountNotAcceptedString);
 						inViteController.getInviteStart().getStartGame().setVisible(true);
@@ -75,7 +71,6 @@ public class GameAcceptionThreadController extends Thread {
 			} else {
 				Platform.runLater(new Runnable() {
 
-					@Override
 					public void run() {
 						inViteController.getInviteStart().getNumberRemaining().setText("niet geaccepteed: "+amountNotAcceptedString);
 

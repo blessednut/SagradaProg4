@@ -7,15 +7,15 @@ import DataBase.DiceDB;
 
 public class DiceModel {
 	private ArrayList<GameDiceModel> dice;
-	private GameController controller;
+	private GameController gameController;
 	private DiceDB con;
 	
-	public DiceModel (GameController controller) {
-		this.controller = controller;
+	public DiceModel (GameController gameController) {
+		this.gameController = gameController;
 		this.dice = new ArrayList<GameDiceModel>();
 		this.con = new DiceDB();
 		
-		this.importGameDice(controller.getM_game().getGameId());
+		this.importGameDice(gameController.getM_game().getGameId());
 	}
 	
 	public void addGameDice (GameDiceModel gameDice) {
@@ -23,7 +23,7 @@ public class DiceModel {
 	}
 	
 	public ArrayList<GameDiceModel> getBag () {
-		return this.con.getBag(controller.getM_game().getGameId());
+		return this.con.getBag(gameController.getM_game().getGameId());
 	}
 	
 	public void addDice (GameDiceModel gameDice, int roundID) {

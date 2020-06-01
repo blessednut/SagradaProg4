@@ -6,7 +6,7 @@ import Controller.LogInController;
 import DataBase.LoginDB;
 
 public class LoginModel {
-	private LogInController c_login;
+	private LogInController logInController;
 
 	private LoginDB con;
 	private String username;
@@ -44,6 +44,6 @@ public class LoginModel {
 	}
 
 	public LogInController getC_login() {
-		return c_login;
+		return logInController;
 	}
 }

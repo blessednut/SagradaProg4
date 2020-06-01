@@ -10,7 +10,6 @@ public class HomeController {
 	private InviteController inviteController;
 	private CreditsPane creditsView;
 
-	// private StatisticsPane v_statistics;
 	private StatisticController statisticController;
 
 	private MySceneController mySceneController;

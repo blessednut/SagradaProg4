@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import model.GameDiceModel;
 
 public class DiceDB {
-	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 
@@ -19,10 +18,7 @@ public class DiceDB {
 	// New
 	public void updatePlayerFrameField(int gameID, GameDiceModel dice, int playerID, int x, int y) {
 		try {
-			//System.out.println(dice.colorProperty().getValue());
 			String query = "update playerframefield set idgame = " + gameID + ", dienumber = " + dice.getDieNumber() + ", diecolor = '" + dice.colorProperty().getValue()  + "' where idplayer = " + playerID + " AND position_x = " + x + " AND position_y = " + y + ";";
-//			System.out.println("DiceDB:");
-//			System.out.println("Query = " + query);
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		} catch (Exception e) {
@@ -46,8 +42,6 @@ public class DiceDB {
 
 			String query = " select * from die where (number, color) not in (select dienumber, diecolor from gamedie where idgame = "
 					+ gameID + ") ;";
-			System.out.println("DiceDB:");
-			System.out.println("Query = " + query);
 			
 			ResultSet resultset = st.executeQuery(query);
 
@@ -94,7 +88,6 @@ public class DiceDB {
 
 			if (resultset.next()) {
 				dice = new GameDiceModel(resultset.getInt("idgame"), resultset.getInt("dienumber"), resultset.getString("diecolor"), resultset.getInt("eyes"), resultset.getInt("roundtrack"), resultset.getInt("roundID"));
-				//int idgame, int dieNumber, String dieColor, int eyes, int roundtrack, int roundID)
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

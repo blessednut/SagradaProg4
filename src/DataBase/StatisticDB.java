@@ -14,29 +14,13 @@ public class StatisticDB {
 	}
 	
 	public ArrayList<String> searchNamesWithWins() {
-		//System.out.println("asdfasdfasdf");
 		ArrayList<String> namesWithWins = new ArrayList<>();
 		try {
 			String query = "SELECT player.username FROM player \r\n" + 
 					"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
 					"group by username \r\n" + 
 					"order by count(player.username) desc;";
-//			} 
-//			else {
-//				query = "SELECT \r\n" + 
-//						"    player.username,count(player.username) as numberOfWins\r\n" + 
-//						"FROM\r\n" + 
-//						"    player\r\n" + 
-//						"        JOIN\r\n" + 
-//						"    (SELECT \r\n" + 
-//						"        idgame, max(score) mscore\r\n" + 
-//						"    FROM\r\n" + 
-//						"        player\r\n" + 
-//						"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-//						"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-//						"group by username\r\n" + 
-//						"order by numberOfWins desc;";
-//			}	
+
 			ResultSet resultset = st.executeQuery(query);
 			while (resultset.next()) {
 				namesWithWins.add(resultset.getString("username"));
@@ -53,22 +37,8 @@ public class StatisticDB {
 						"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
 						"group by username \r\n" + 
 						"order by count(player.username) desc";
-//				} 
-//				else {
-//					query = "SELECT \r\n" + 
-//							"    player.username,count(player.username) as numberOfWins\r\n" + 
-//							"FROM\r\n" + 
-//							"    player\r\n" + 
-//							"        JOIN\r\n" + 
-//							"    (SELECT \r\n" + 
-//							"        idgame, max(score) mscore\r\n" + 
-//							"    FROM\r\n" + 
-//							"        player\r\n" + 
-//							"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-//							"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-//							"group by username\r\n" + 
-//							"order by numberOfWins desc;";
-//				}	
+
+
 				ResultSet resultset = st.executeQuery(query);
 				while (resultset.next()) {
 					amountOfWins.add(resultset.getInt("count(player.username)"));

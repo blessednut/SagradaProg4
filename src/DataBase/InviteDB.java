@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class InviteDB {
-	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 

@@ -1,14 +1,10 @@
 package DataBase;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 
 public class ChatDB {
-	private Connection connection;
-	private PreparedStatement ps;
 	private Statement st;
 	private DBCon dbcon;
 	

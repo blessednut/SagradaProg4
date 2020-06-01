@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import DataBase.StatisticDB;
 
@@ -16,9 +15,7 @@ public class StatisticModel {
 		this.SDB = new StatisticDB ();
 	}
 	
-//	public ArrayList<String> getRankList (boolean isASC) {
-//		return SDB.getRankList(isASC);
-//	}
+
 
 	public void setASC(boolean isASC) {
 		this.isASC = isASC;

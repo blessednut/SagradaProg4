@@ -6,7 +6,7 @@ public class GameAcceptionThreadModel {
 	private GameAcceptionThreadDB gameAcceptionThreadDB;
 
 	public GameAcceptionThreadModel() {
-		this.gameAcceptionThreadDB = new GameAcceptionThreadDB(this);
+		this.gameAcceptionThreadDB = new GameAcceptionThreadDB();
 	}
 
 	public int getGameID(int gameID) {

@@ -49,7 +49,6 @@ public class Public_Objective_CardDB {
 			
 			while (resultset.next()) {
 				if (counter <= 2) {
-					//System.out.println(resultset.getString("name"));
 					name[counter] = resultset.getString("name");
 					counter++;
 				}

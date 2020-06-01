@@ -6,47 +6,47 @@ import model.GameDiceModel;
 public class DraftpoolSquareController {
 	private GameController gameController;
 	private DraftpoolController controller;
-	private DraftPoolSquareView view;
-	private GameDiceModel dice;
+	private DraftPoolSquareView draftPoolView;
+	private GameDiceModel diceModel;
 	
-	public DraftpoolSquareController (GameController gameController, DraftpoolController controller, GameDiceModel dice) {
+	public DraftpoolSquareController (GameController gameController, DraftpoolController draftPoolController, GameDiceModel diceModel) {
 		this.gameController = gameController;
-		this.controller = controller;
-		this.dice = dice;
+		this.controller = draftPoolController;
+		this.diceModel = diceModel;
 	}
 	
 	public DraftpoolSquareController () {
-		this.dice = null;
+		this.diceModel = null;
 	}
 	
 	public void onClick () {
 		if (gameController.getIsTurn()) {
-			if (dice != null) {
+			if (diceModel != null) {
 				//System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
-				controller.setSelectedDice(dice, this);
+				controller.setSelectedDice(diceModel, this);
 			}
 		}
 	}
 	
 	public GameDiceModel getDice () {
-		return this.dice;
+		return this.diceModel;
 	}
 	
 	public void removeDice () {
-		this.dice = null;
+		this.diceModel = null;
 		this.updateView();
 	}
 	
 	public void setView (DraftPoolSquareView view) {
-		this.view = view;
+		this.draftPoolView = view;
 	}
 	
 	public void updateView () {
-		this.view.updateView();
+		this.draftPoolView.updateView();
 	}
 
 	public void setDice(GameDiceModel dice) {
-		this.dice = dice;
+		this.diceModel = dice;
 	}
 	
 }

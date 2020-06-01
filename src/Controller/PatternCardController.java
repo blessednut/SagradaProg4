@@ -16,25 +16,23 @@ public class PatternCardController {
 	private PatternCardModel[] optionCard;
 
 	private ArrayList<Integer> idpatterncardoptions;
+	
+	private static final int PATTERNVIEWHEIGHT = 300;
+	private static final int PATTERNVIEWWIDTH = 450;
 
-	public PatternCardController(GameController c_game, PlayerController playerController) {
-		this.gameController = c_game;
+	public PatternCardController(GameController gameController, PlayerController playerController) {
+		this.gameController = gameController;
 		this.playerController = playerController;
 
 	}
 
 	public void loadChosenCard() {
 		if (playerController.getPlayerModel().patterncardExists()) {
-			// load patterncard
-//			System.out.println("PATTERNCARDCONTROLLER");
-//			System.out.println("SET CHOSEN CARD");
-//			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
 			
 			if(playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
 				gameController.setOwnWindow(chosenCard, this);
 			}
-				// Magic Number weghalen
 		} else {
 			if (playerController.getPlayerModel().getIsCurrentPlayer()) {
 				generatePatternCardChoice();
@@ -150,8 +148,7 @@ public class PatternCardController {
 	}
 
 	private WindowPatternView makeView(int index) {
-		// Magic Number weghalen
-		return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
+		return new WindowPatternView(PATTERNVIEWWIDTH, PATTERNVIEWHEIGHT, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
 				makeSquareView(optionCard[index].getField()));
 	}
 

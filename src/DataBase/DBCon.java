@@ -30,7 +30,6 @@ public class DBCon {
 					.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=jbaverma&password=Ab12345");
 			st = con.createStatement();
 		} catch (Exception e) {
-			//System.out.println("Error: " + e);
 			e.printStackTrace();
 		}
 	}
@@ -38,7 +37,6 @@ public class DBCon {
 	public void closeConnection() {
 		try {
 			con.close();
-			//System.out.println("Connection is closed!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

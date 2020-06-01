@@ -7,11 +7,11 @@ import DataBase.DraftpoolDB;
 
 public class DraftpoolModel {
 	private ArrayList<GameDiceModel> draftpool;
-	private DraftpoolDB con;
+	private DraftpoolDB daftPoolDB;
 	
 	public DraftpoolModel () {
 		this.draftpool = new ArrayList<GameDiceModel>();
-		this.con = new DraftpoolDB();
+		this.daftPoolDB = new DraftpoolDB();
 	}
 	
 	public void createDraftPool (int numPlayers) {
@@ -23,7 +23,7 @@ public class DraftpoolModel {
 	}
 	
 	public boolean draftpoolExists (int idgame, int roundID) {
-		return con.draftpoolExists(idgame, roundID);
+		return daftPoolDB.draftpoolExists(idgame, roundID);
 	}
 	
 	//Wordt niet gebruikt?
@@ -48,7 +48,6 @@ public class DraftpoolModel {
 	public void removeDiceFromDraftpool(GameDiceModel dice) {
 		if(draftpool.contains(dice)) {
 			draftpool.remove(dice);
-			//System.out.println("DraftpoolModel: Wordt er iets verwijderd");
 		}
 	}
 
@@ -57,18 +56,16 @@ public class DraftpoolModel {
 	}
 
 	public void moveToRoundtrack(int idgame, int roundtrack) {
-		//System.out.println("MOVE TO ROUNDTRACK DRAFTPOOL LENGTH = " + draftpool.size());
 		for (GameDiceModel dice : draftpool) {
-			//System.out.println("MOVE TO ROUNDTRACK = " + dice.getDieNumber());
-			con.updateRountrack(idgame, dice.getDieNumber(), dice.colorProperty().getValue(), roundtrack);
+			daftPoolDB.updateRountrack(idgame, dice.getDieNumber(), dice.colorProperty().getValue(), roundtrack);
 		}
 		
 		draftpool.clear();
 	}
 
 	public List<GameDiceModel> loadDice(int idgame) {
-		int roundID = con.getHighestRoundID(idgame);
-		ArrayList<GameDiceModel> dice = con.loadDice(idgame, roundID);
+		int roundID = daftPoolDB.getHighestRoundID(idgame);
+		ArrayList<GameDiceModel> dice = daftPoolDB.loadDice(idgame, roundID);
 		draftpool = dice;
 		return dice;
 	}

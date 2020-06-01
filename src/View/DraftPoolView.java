@@ -20,18 +20,18 @@ public class DraftPoolView extends BorderPane {
 		window.setMaxSize(width - 50, height - 50);
 		window.setVgap(3);
 		window.setHgap(3);
-		
+
 		int diceCounter = 0;
 		for (int x = 0; x < SQUAREWIDTH; x++) {
 			for (int y = 0; y < SQUAREWIDTH; y++) {
 				double squareWidth = (width - 56) / 3;
 				double squareHeight = (height - 56) / 3;
-				
+
 				window.add(new DraftPoolSquareView(squareWidth, squareHeight, draftpool[diceCounter]), y, x);
 				diceCounter++;
 			}
 		}
-		
+
 		this.setCenter(window);
 	}
 }

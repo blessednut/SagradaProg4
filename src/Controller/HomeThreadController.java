@@ -68,7 +68,7 @@ public class HomeThreadController extends Thread {
 			// 5 000 miliseconde = 5 sec aan vertraging.
 			try {
 				Thread.sleep(1000);
-				//System.out.println("slaap");
+
 			}
 			catch(InterruptedException e)
 			{

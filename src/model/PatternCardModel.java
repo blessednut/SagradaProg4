@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PatternCardModel {
-	private PatternCardController controller;
+	private PatternCardController patternCardController;
 	
 	private int idPatternCard;
 	private String name;
@@ -19,8 +19,8 @@ public class PatternCardModel {
 	
 	private WindowPatternDB con;
 
-	public PatternCardModel(PatternCardController controller, int idPatternCard) {
-		this.controller = controller;
+	public PatternCardModel(PatternCardController patternCardController, int idPatternCard) {
+		this.patternCardController = patternCardController;
 		this.idPatternCard = idPatternCard;
 		
 		this.con = new WindowPatternDB();
@@ -172,7 +172,7 @@ public class PatternCardModel {
 		return this.standard;
 	}
 
-	//TODO PROPERTIES WEGHALEN
+
 	public final StringProperty nameProperty() {
 		return new SimpleStringProperty(this, "name", name);
 	}
@@ -195,7 +195,7 @@ public class PatternCardModel {
 	}
 	
 	public void makePlayerFrameField () {
-		int playerID = controller.getPlayerController().getPlayerID();
+		int playerID = patternCardController.getPlayerController().getPlayerID();
 		
 		for (int x = 0; x < field.length; x++) {
 			for (int y = 0; y < field[x].length; y++) {
@@ -203,8 +203,7 @@ public class PatternCardModel {
 			}
 		}
 		
-//		System.out.println("PatternCardModel:");
-//		System.out.println("PlayerID = " + playerID);
+
 	}
 	
 	public PatternCardFieldModel[][] getField () {
@@ -216,7 +215,6 @@ public class PatternCardModel {
 			for (int y = 0; y < field[y].length; y++) {
 				if (!field[x][y].isEmpty()) {
 					GameDiceModel fieldDice = field[x][y].getDice();
-					//System.out.println("FieldDice = " + fieldDice.getDieNumber());
 				}
 			}
 		}
@@ -237,7 +235,7 @@ public class PatternCardModel {
 	public void loadPatterncardFieldModel () {
 		for (int x = 0; x < this.field.length; x++) {
 			for (int y = 0; y < this.field[x].length; y++) {
-				field[x][y].loadDice(controller.getPlayerController().getPlayerID());
+				field[x][y].loadDice(patternCardController.getPlayerController().getPlayerID());
 			}
 		}
 	}
