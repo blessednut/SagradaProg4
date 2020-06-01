@@ -259,8 +259,7 @@ public class PuntenTeller {
 							y++;
 							x = -1;
 							if(x == 4) {
-								break;
-								
+								break;	
 							}
 						}
 					}else {
@@ -292,7 +291,6 @@ public class PuntenTeller {
 							x = -1;
 							if(y == 4) {
 								break;
-								
 							}
 						}
 					}
@@ -302,7 +300,6 @@ public class PuntenTeller {
 						x = -1;
 						if(y == 4) {
 							break;
-							
 						}
 					}
 				}
