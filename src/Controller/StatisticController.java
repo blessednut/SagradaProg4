@@ -7,59 +7,72 @@ import View.StatisticsPane;
 import model.StatisticModel;
 
 public class StatisticController {
-	private StatisticsPane view;
-	private StatisticModel model;
-	private boolean isASC;
+	private StatisticsPane STView;
+	private StatisticModel STModel;
+
 	
 	public StatisticController () {
-		this.isASC = false;
-		model = new StatisticModel();
-		view = new StatisticsPane(this);
+		STModel = new StatisticModel();
+		STView = new StatisticsPane(this);
 	}
 	
 	public StatisticsPane getView () {
-		return view;
+		return STView;
 	}
 	
 	public void search (String username) {
-		if (model.usernameExists(username)) {
-			view.update();
+		if (STModel.usernameExists(username)) {
+			STView.update();
 		}
 	}
 	
 	public int getWins () {
-		return model.getWins();
+		return STModel.getWins();
 	}
 	
 	public int getLosses () {
-		return model.getLosses();
+		return STModel.getLosses();
 	}
 
 	public int getHighestScore() {
-		return model.getHighestScore();
+		return STModel.getHighestScore();
 	}
 
 	public String getUsername() {
-		return model.getPlayerName();
+		return STModel.getPlayerName();
 	}
 	
 	public int getNumOpponents () {
-		return model.getNumOpponents();
+		return STModel.getNumOpponents();
 	}
 
 	public int getMostPlacedValue() {
-		return model.getMostPlacedValue();
+		return STModel.getMostPlacedValue();
 	}
 	
 	public String getMostPlacedColor () {
-		return model.getMostPlacedColor();
+		return STModel.getMostPlacedColor();
 	}
 
-	public List<String> getRank() {
-		return model.getRankList(isASC);
-	}
+//	public List<String> getRank() {
+//		return STModel.getRankList(isASC);
+//	}
 	
 	public void setOrder (boolean isASC) {
-		this.isASC = isASC;
+		STModel.setASC(isASC);
 	}
+	
+	public ArrayList<String> getNames(){
+		return STModel.getNames();
+	}
+	
+	public ArrayList<String> searchNamesWithWins(){
+		return STModel.searchNamesWithWins();
+	}
+	
+	public ArrayList<Integer> searchAmountOfWins(){
+		return STModel.searchAmountOfWins();
+	}
+	
+	
 }

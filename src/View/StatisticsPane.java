@@ -59,19 +59,42 @@ public class StatisticsPane extends HBox {
 
 	private Label rankText(String text) {
 		Label myLabel = new Label(text, labelStatsBackground);
-		myLabel.setFont(new Font("Arial", 20));
-		myLabel.setStyle("-fx-font-weight: bold");
+		myLabel.setFont(new Font("Arial", 10));
 		myLabel.setContentDisplay(ContentDisplay.CENTER);
 		return myLabel;
 	}
 	
+	private Label zeroWinText(String text) {
+		Label newLabel = new Label(text, labelStatsBackground);
+		newLabel.setFont(new Font("Arial", 10));
+		newLabel.setContentDisplay(ContentDisplay.CENTER);
+		return newLabel;
+	} 
+	
+	
+	
 	private void getRank () {
 		rankedList.getChildren().clear();
-		controller.getRank();
-		for (String user : controller.getRank()) {
-			rankedList.getChildren().add(rankText(user));
-			rankedList.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		}
+
+			for(int i = 0; i < controller.getNames().size(); i++) {
+				if(controller.searchNamesWithWins().contains(controller.getNames().get(i))) {
+					Label text = new Label();
+					int index = controller.searchNamesWithWins().indexOf(controller.getNames().get(i));
+					text.setText(controller.searchNamesWithWins().get(index) + " - " + controller.searchAmountOfWins().get(index));
+					rankedList.getChildren().add(text);
+				}
+			}
+			for(int i = 0; i < controller.getNames().size(); i++) {
+				if(!controller.searchNamesWithWins().contains(controller.getNames().get(i))) {
+					Label text = new Label();
+					text.setText(controller.getNames().get(i) + " - 0");
+					rankedList.getChildren().add(text);
+				}
+			}
+		
+
+		
+		rankedList.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 	}
 	
 	private void updateRank () {
@@ -96,11 +119,11 @@ public class StatisticsPane extends HBox {
 		OrderRank.setOnAction(e -> {
 			if (OrderRank.getText().equals("ASC")) {
 				OrderRank.setText("DESC");
-				controller.setOrder(false);
+				controller.setOrder(true);
 				this.updateRank();
 			} else {
 				OrderRank.setText("ASC");
-				controller.setOrder(true);
+				controller.setOrder(false);
 				this.updateRank();
 			}
 		});
@@ -173,10 +196,6 @@ public class StatisticsPane extends HBox {
 		this.getChildren().addAll(vbox, vbox2, vbox3);
 	}
 
-	public void showPane() {
-
-	}
-
 	public void update() {
 		this.playerNameLabel.setText("Gebruikersnaam: " + controller.getUsername());
 		this.winsLabel.setText("Gewonnen: " + controller.getWins());
@@ -186,5 +205,9 @@ public class StatisticsPane extends HBox {
 		this.mostPlacedColorLabel.setText("Meest geplaatste kleur: " + controller.getMostPlacedColor());
 		this.mostPlacedValue.setText("Meest geplaatste waarde:" + controller.getMostPlacedValue());
 	}
-
+	
+	public void makebox() {
+		for(int i = 0 ; i < controller.getNames().size(); i++) {
+		}
+	}
 }

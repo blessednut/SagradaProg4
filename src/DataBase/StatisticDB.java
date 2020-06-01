@@ -3,61 +3,86 @@ package DataBase;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StatisticDB {
 	private Statement st;
 
+	
 	public StatisticDB() {
 		this.st = DBCon.getInstance().getSt();
+
 	}
 	
-	public ArrayList<String> getRankList (boolean isASC) {
+	public ArrayList<String> searchNamesWithWins() {
 		//System.out.println("asdfasdfasdf");
-		ArrayList<String> rank = new ArrayList<String>();
+		ArrayList<String> namesWithWins = new ArrayList<>();
 		try {
-			String query;
-			if (isASC) {
-				query = "SELECT \r\n" + 
-						"    player.username,count(player.username) as numberOfWins\r\n" + 
-						"FROM\r\n" + 
-						"    player\r\n" + 
-						"        JOIN\r\n" + 
-						"    (SELECT \r\n" + 
-						"        idgame, max(score) mscore\r\n" + 
-						"    FROM\r\n" + 
-						"        player\r\n" + 
-						"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-						"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-						"group by username\r\n" + 
-						"order by numberOfWins asc;";
-			} else {
-				query = "SELECT \r\n" + 
-						"    player.username,count(player.username) as numberOfWins\r\n" + 
-						"FROM\r\n" + 
-						"    player\r\n" + 
-						"        JOIN\r\n" + 
-						"    (SELECT \r\n" + 
-						"        idgame, max(score) mscore\r\n" + 
-						"    FROM\r\n" + 
-						"        player\r\n" + 
-						"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-						"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-						"group by username\r\n" + 
-						"order by numberOfWins desc;";
-			}
-			
-			ResultSet resultset = (st.executeQuery(query));
+			String query = "SELECT player.username FROM player \r\n" + 
+					"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
+					"group by username \r\n" + 
+					"order by count(player.username) desc;";
+//			} 
+//			else {
+//				query = "SELECT \r\n" + 
+//						"    player.username,count(player.username) as numberOfWins\r\n" + 
+//						"FROM\r\n" + 
+//						"    player\r\n" + 
+//						"        JOIN\r\n" + 
+//						"    (SELECT \r\n" + 
+//						"        idgame, max(score) mscore\r\n" + 
+//						"    FROM\r\n" + 
+//						"        player\r\n" + 
+//						"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
+//						"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
+//						"group by username\r\n" + 
+//						"order by numberOfWins desc;";
+//			}	
+			ResultSet resultset = st.executeQuery(query);
 			while (resultset.next()) {
-				//System.out.println(resultset.getString("username") + " - " + resultset.getInt("numberOfWins"));
-				rank.add(resultset.getString("username") + " - " + resultset.getInt("numberOfWins"));
+				namesWithWins.add(resultset.getString("username"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return rank;
+		return namesWithWins;
 	}
-	
+	public ArrayList<Integer> searchAmountOfWins() {
+			ArrayList<Integer> amountOfWins = new ArrayList<>();
+			try {
+				String query = "SELECT count(player.username)FROM player \r\n" + 
+						"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
+						"group by username \r\n" + 
+						"order by count(player.username) desc";
+//				} 
+//				else {
+//					query = "SELECT \r\n" + 
+//							"    player.username,count(player.username) as numberOfWins\r\n" + 
+//							"FROM\r\n" + 
+//							"    player\r\n" + 
+//							"        JOIN\r\n" + 
+//							"    (SELECT \r\n" + 
+//							"        idgame, max(score) mscore\r\n" + 
+//							"    FROM\r\n" + 
+//							"        player\r\n" + 
+//							"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
+//							"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
+//							"group by username\r\n" + 
+//							"order by numberOfWins desc;";
+//				}	
+				ResultSet resultset = st.executeQuery(query);
+				while (resultset.next()) {
+					amountOfWins.add(resultset.getInt("count(player.username)"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return amountOfWins; 
+		
+		
+		
+		
+		
+	}
 	public int getWins (String username) {
 		int wins = 0;
 		try {
@@ -195,5 +220,19 @@ public class StatisticDB {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public ArrayList<String> getAllUsernames(){
+		ArrayList<String> names = new ArrayList<>();
+		try {
+			String query = "select username from account;";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				names.add(resultset.getString("username"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return names;
 	}
 }

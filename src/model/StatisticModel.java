@@ -7,86 +7,69 @@ import DataBase.StatisticDB;
 
 public class StatisticModel {
 	private String playerName;
-	private int wins;
-	private int losses;
-	private int highestScore;
-	private String mostPlacedColor;
-	private int mostPlacedValue;
-	private int numOpponents;
+	private boolean isASC;
 	
-	private StatisticDB con;
+	private StatisticDB SDB;
 	
 	public StatisticModel () {
-		System.out.println();
-		this.con = new StatisticDB ();
+		this.isASC = false;
+		this.SDB = new StatisticDB ();
 	}
 	
-	public ArrayList<String> getRankList (boolean isASC) {
-		return con.getRankList(isASC);
+//	public ArrayList<String> getRankList (boolean isASC) {
+//		return SDB.getRankList(isASC);
+//	}
+
+	public void setASC(boolean isASC) {
+		this.isASC = isASC;
 	}
 
 	public String getPlayerName() {
 		return playerName;
 	}
 
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
 	public int getWins() {
-		return wins = con.getWins(playerName);
-	}
-
-	public void setWins(int wins) {
-		this.wins = wins;
+		return SDB.getWins(playerName);
 	}
 
 	public int getLosses() {
-		return losses = con.getLosses(playerName);
-	}
-
-	public void setLosses(int losses) {
-		this.losses = losses;
+		return SDB.getLosses(playerName);
 	}
 
 	public int getHighestScore() {
-		return highestScore = con.getHighestScore(playerName);
-	}
-
-	public void setHighestScore(int highestScore) {
-		this.highestScore = highestScore;
+		return SDB.getHighestScore(playerName);
 	}
 
 	public String getMostPlacedColor() {
-		return mostPlacedColor = con.getMostPlacedColor(playerName);
-	}
-
-	public void setMostPlacedColor(String mostPlacedColor) {
-		this.mostPlacedColor = mostPlacedColor;
+		return SDB.getMostPlacedColor(playerName);
 	}
 
 	public int getMostPlacedValue() {
-		return mostPlacedValue = con.getMostPlacedValue(this.playerName);
-	}
-
-	public void setMostPlacedValue(int mostPlacedValue) {
-		this.mostPlacedValue = mostPlacedValue;
+		return SDB.getMostPlacedValue(this.playerName);
 	}
 
 	public int getNumOpponents() {
-		return con.getNumOpponents(this.playerName);
-	}
-
-	public void setNumOpponents(int numOpponents) {
-		this.numOpponents = numOpponents;
+		return SDB.getNumOpponents(this.playerName);
 	}
 	
 	public boolean usernameExists (String username) {
-		if (con.usernameExists(username)) {
+		if (SDB.usernameExists(username)) {
 			this.playerName = username;
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public ArrayList<String> getNames(){
+		return SDB.getAllUsernames();
+	}
+	
+	public ArrayList<String> searchNamesWithWins(){
+		return SDB.searchNamesWithWins();
+	}
+	
+	public ArrayList<Integer> searchAmountOfWins(){
+		return SDB.searchAmountOfWins();
 	}
 }
