@@ -209,11 +209,23 @@ public class GamePane extends BorderPane {
 		publicScore.setFont(new Font("Arial", 32));
 		publicScore.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(publicScore);
-		for (int i = 0; i < gameController.getNumOpponents(); i++) {
-			gamePaneRight.getChildren().add(publicScoreLabel(i));
+		
+//		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+//			gamePaneRight.getChildren().add(publicScoreLabel(i));
+//		}
+		
+		for (int i = 0; i < 4; i++) {
+			gamePaneRight.getChildren().add(getEmptyLabel());
 		}
 
 		// load Opponents
+	}
+	
+	public Label getEmptyLabel () {
+		Label tabLabel = new Label("_");
+		tabLabel.setFont(new Font("Arial", 32));
+		tabLabel.setTextFill(Color.WHITE);
+		return tabLabel;
 	}
 	
 	public void showWinner (String username) {
