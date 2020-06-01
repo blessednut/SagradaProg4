@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.GameDiceModel;
+
 public class ToolCardDB {
 	private ResultSet rs;
 	private Statement st;
@@ -140,5 +142,14 @@ public class ToolCardDB {
 	
 	
 
+	public void setNewEyes(GameDiceModel dice, int eyes) {
+		try {
+			String query = "update gamedie set eyes = " + eyes + " where idgame = " + dice.getIdgame() + " and dienumber = " + dice.getDieNumber() + " and diecolor like '" + dice.getColor()  + "';";
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	} 
 
 }

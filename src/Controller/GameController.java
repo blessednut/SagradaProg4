@@ -178,6 +178,7 @@ public class GameController {
 
 	public void endTurn() {
 		this.amountOfDice = 0;
+		this.TCC.setUseCardInTurn(false);
 		this.playerController.updatePlayerFrameField();
 		int roundID = gameModel.getRoundID();
 		int playerID = gameModel.getTurnPlayerID();
