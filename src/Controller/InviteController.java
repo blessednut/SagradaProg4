@@ -78,7 +78,8 @@ public class InviteController {
 					error.close();
 				}
 			}
-			
+			this.invitePane.getInviteButton().setVisible(false);
+			this.invitePane.getSearch().setVisible(true);
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
