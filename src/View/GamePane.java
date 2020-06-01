@@ -35,7 +35,6 @@ public class GamePane extends BorderPane {
 	private WindowPatternView ownWindow;
 	private DraftPoolView draftpool;
 	private Button home;
-	private Button endTurn;
 	private Label isTurn;
 	private HBox gamePaneBottom;
 	private VBox gamePaneLeft;
