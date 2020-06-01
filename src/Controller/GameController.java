@@ -245,6 +245,7 @@ public class GameController {
 	public void refresh() {
 		System.out.println("GAMECONTROLLER:");
 		System.out.println("REFRESH");
+		this.amountOfDice = 0;
 		if (getIsTurn() == false) {
 			this.draftpoolController.loadDice(gameModel.getGameId());
 			gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
