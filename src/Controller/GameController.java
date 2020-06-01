@@ -116,9 +116,11 @@ public class GameController {
 	}
 
 	public boolean placeDice(GameDiceModel dice) {
+		
 		if(this.amountOfDice == 0) {
 			if (this.playerController.getPatternCard().placeDice(dice)) {
 				amountOfDice++;
+				this.setEndTurnText();
 				return true;
 			}else {
 				return false;
@@ -126,7 +128,9 @@ public class GameController {
 		}else {
 			return false;
 		}
-		//return this.playerController.getPatternCard().placeDice(dice);
+		
+		
+//		return this.playerController.getPatternCard().placeDice(dice);
 //		System.out.println("GameController:");
 //		System.out.println(dice.getDieNumber());
 	}
@@ -137,7 +141,7 @@ public class GameController {
 
 	public void endTurn() {
 		this.amountOfDice = 0;
-
+		
 		this.playerController.updatePlayerFrameField();
 
 		int roundID = gameModel.getRoundID();
@@ -250,6 +254,7 @@ public class GameController {
 			checkPlayerTurn();
 			// System.out.println("isPlayerTurn = " + isTurn);
 		}
+		this.refresh();
 	}
 
 	public void checkPlayerTurn() {
@@ -279,7 +284,7 @@ public class GameController {
 
 	public void refresh() {
 		this.amountOfDice = 0;
-		
+		this.setEndTurnText();
 		if (gameModel.gameEnded()) {
 			this.isTurn = false;
 		}
@@ -430,5 +435,13 @@ public class GameController {
 
 	public int getGameRound() {
 		return gameModel.getRoundNR();
+	}
+	
+	public void setEndTurnText() {
+		if(this.amountOfDice==0) {
+			this.gamePane.setEndTurnText(false);
+		}else {
+			this.gamePane.setEndTurnText(true);
+		}
 	}
 }
