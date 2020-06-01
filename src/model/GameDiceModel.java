@@ -10,6 +10,10 @@ public class GameDiceModel {
 	private int dieNumber;
 	private StringProperty dieColor = new SimpleStringProperty(this, "dieColor", null);
 	private IntegerProperty eyes = new SimpleIntegerProperty(this, "eyes", 0);
+	public IntegerProperty getEyes() {
+		return eyes;
+	}
+
 	private int roundtrack;
 	private int roundID;
 	private String color;
