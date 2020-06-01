@@ -53,4 +53,8 @@ public class InviteModel {
 		System.out.println(result);
 		return Integer.toString(result);
 	}
+	
+	public int checkInvitation(String challenger, String challengee) {
+		return new InviteDB().checkInvitation(challenger, challengee);
+	}
 }

@@ -50,10 +50,24 @@ public class InviteController {
 			}
 		});
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
+		
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
-			inVitePlayer();
-			acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
-			createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
+			if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName1().getText()) <= 0) {
+				if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName2().getText()) <=0) {
+					if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName3().getText()) <= 0) {
+						inVitePlayer();
+						acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
+						createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));				
+					}
+				}
+			} else {
+				Alert error = new Alert(AlertType.ERROR, "je hebt deze persoon al ��n keer uitgenodigd", ButtonType.OK);
+				error.showAndWait();
+				if(error.getResult() == ButtonType.OK) {
+					error.close();
+				}
+			}
+			
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
@@ -154,21 +168,30 @@ public class InviteController {
 
 	public void searchForUsername(String username) {
 		try {
-			if (inviteModel.checkInDatabase(username).equals(username)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username.equals(gameController.getC_login().getUsername())) {
+				if (inviteModel.checkInDatabase(username).equals(username)) {
+					invitePane.getInviteButton().setVisible(true);
+					invitePane.getSearch().setVisible(false);
+				}
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void searchForTwoUsernames(String username1, String username2) {
 		try {
-			if (inviteModel.checkInDatabase(username1).equals(username1)
-					&& inviteModel.checkInDatabase(username2).equals(username2)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username1.equals(username2)) {
+				if (!username1.equals(gameController.getC_login().getUsername())
+						&& !username2.equals(gameController.getC_login().getUsername())) {
+					if (inviteModel.checkInDatabase(username1).equals(username1)
+							&& inviteModel.checkInDatabase(username2).equals(username2)) {
+						invitePane.getInviteButton().setVisible(true);
+						invitePane.getSearch().setVisible(false);
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -177,13 +200,21 @@ public class InviteController {
 
 	public void searchForThreeUsernames(String username1, String username2, String username3) {
 		try {
-			if (inviteModel.checkInDatabase(username1).equals(username1)
-					&& inviteModel.checkInDatabase(username2).equals(username2)
-					&& inviteModel.checkInDatabase(username3).equals(username3)) {
-				invitePane.getInviteButton().setVisible(true);
-				invitePane.getSearch().setVisible(false);
+			if (!username1.equals(username2) && !username1.equals(username3) && !username2.equals(username3)) {
+				if (!username1.equals(gameController.getC_login().getUsername())
+						&& !username2.equals(gameController.getC_login().getUsername())
+						&& !username3.equals(gameController.getC_login().getUsername())) {
+					if (inviteModel.checkInDatabase(username1).equals(username1)
+							&& inviteModel.checkInDatabase(username2).equals(username2)
+							&& inviteModel.checkInDatabase(username3).equals(username3)) {
+						invitePane.getInviteButton().setVisible(true);
+						invitePane.getSearch().setVisible(false);
+					}
+				}
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -197,12 +228,6 @@ public class InviteController {
 			closeGameAcceptionThreadCon();
 			closeHomeThreadCon();
 
-//			try {
-//				home.getC_hometc().wait();
-//			} catch(InterruptedException ex) {
-//				ex.printStackTrace();
-//			}
-
 		});
 
 	}
@@ -215,8 +240,8 @@ public class InviteController {
 
 		String result = "";
 
-		while(!added) {
-			randomColorInt = rand.nextInt((max - min) + 1) + min ;
+		while (!added) {
+			randomColorInt = rand.nextInt((max - min) + 1) + min;
 			switch (randomColorInt) {
 			case 1:
 				result = "blue";
@@ -234,13 +259,13 @@ public class InviteController {
 				result = "yellow";
 				break;
 			}
-			if(!ColorArray.contains(result)) {
+			if (!ColorArray.contains(result)) {
 				ColorArray.add(result);
 				added = true;
 			}
 
 		}
-		//System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
 

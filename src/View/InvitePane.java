@@ -67,16 +67,22 @@ public class InvitePane extends HBox {
 			name1.setVisible(true);
 			name2.setVisible(false);
 			name3.setVisible(false);
+			this.search.setVisible(true);
+			this.inviteButton.setVisible(false);
 		});
 		rb3.setOnAction(e -> {
 			name1.setVisible(true);
 			name2.setVisible(true);
 			name3.setVisible(false);
+			this.search.setVisible(true);
+			this.inviteButton.setVisible(false);
 		});
 		rb4.setOnAction(e -> {
 			name1.setVisible(true);
 			name2.setVisible(true);
 			name3.setVisible(true);
+			this.search.setVisible(true);
+			this.inviteButton.setVisible(false);
 		});
 	}
 

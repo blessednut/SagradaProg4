@@ -46,6 +46,8 @@ public class HomeController {
 		v_statistics = new StatisticsPane();
 
 		// buttons
+		
+		v_home.getUitloggen().setOnAction(e -> myScene.getMyscene().switchPane(c_login.getLogin()));
 		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
 		v_home.getCredits().setOnAction(e -> openCreditsPane());
