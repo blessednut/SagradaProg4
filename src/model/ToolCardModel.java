@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DataBase.DBCon;
 import DataBase.ToolCardDB;
 
 public class ToolCardModel {
@@ -53,7 +54,13 @@ public class ToolCardModel {
 	
 	public ArrayList<String> getRoundtrackColors(int gameid){
 		return tcDB.getRoundtrackColor(gameid);
-	} 
+	}
+
+	public void setNewEyes(GameDiceModel dice, int eyes) {
+		this.tcDB.setNewEyes(dice, eyes);
+	}
+
+	
 	
 }
 	
