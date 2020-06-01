@@ -8,7 +8,6 @@ import View.WindowPatternView;
 import model.DiceModel;
 import model.GameDiceModel;
 import model.GameModel;
-import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class GameController {
