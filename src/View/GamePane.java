@@ -222,7 +222,7 @@ public class GamePane extends BorderPane {
 	}
 	
 	public Label getEmptyLabel () {
-		Label tabLabel = new Label("_");
+		Label tabLabel = new Label(" ");
 		tabLabel.setFont(new Font("Arial", 32));
 		tabLabel.setTextFill(Color.WHITE);
 		return tabLabel;
