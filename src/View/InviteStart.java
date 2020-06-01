@@ -17,18 +17,17 @@ public class InviteStart extends Pane {
 	private Label numberRemaining;
 	private static final int CONTENTWITDH = 150;
 	private static final int CONTENTHEIGHT = 30;
+	private static final int WHIDTH = 100;
+	private static final int HEIGHT = 100;
+	private static final int TEXT = 100;
 	
 	
 	public InviteStart(String gameID) {
-		this.setMaxSize(100, 100);
-		this.setMinSize(100, 100);
-		this.setPrefSize(100, 100);
+		this.setMaxSize(WHIDTH, HEIGHT);
+		this.setMinSize(WHIDTH, HEIGHT);
+		this.setPrefSize(WHIDTH, HEIGHT);
 		addInvite(gameID);
-		//System.out.println("InviteStart: Ik wordt aangemaakt");
 	}
-	
-
-	
 	
 	public void addInvite(String gameID) {
 		VBox vbox = new VBox();
@@ -36,7 +35,7 @@ public class InviteStart extends Pane {
 		this.gameID = new Label();
 		this.gameID.setText("gameID: "+gameID);
 		this.gameID.setTextFill(Color.DARKRED);
-		this.gameID.setFont(new Font("Ariel", 15));
+		this.gameID.setFont(new Font("Ariel", TEXT));
 		this.gameID.setStyle("-fx-font-weight: bold");
 		this.gameID.setMaxSize(CONTENTWITDH, CONTENTHEIGHT);
 		this.gameID.setMinSize(CONTENTWITDH, CONTENTHEIGHT);
@@ -44,7 +43,7 @@ public class InviteStart extends Pane {
 		
 		this.numberRemaining = new Label();
 		this.numberRemaining.setTextFill(Color.DARKRED);
-		this.numberRemaining.setFont(new Font("Ariel", 15));
+		this.numberRemaining.setFont(new Font("Ariel", TEXT));
 		this.numberRemaining.setStyle("-fx-font-weight: bold");
 		this.numberRemaining.setMaxSize(CONTENTWITDH, CONTENTHEIGHT);
 		this.numberRemaining.setMinSize(CONTENTWITDH, CONTENTHEIGHT);
@@ -68,11 +67,9 @@ public class InviteStart extends Pane {
 		return numberRemaining;
 	}
 
-
 	public void setNumberRemaining(Label numberRemaining) {
 		this.numberRemaining = numberRemaining;
 	}
-
 
 	public Button getStartGame() {
 		return startGame;

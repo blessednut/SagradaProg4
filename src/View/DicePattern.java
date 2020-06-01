@@ -12,21 +12,6 @@ public class DicePattern extends GridPane {
 	public DicePattern(int value, double width, double height) {
 		this.setMaxSize(width, height);
 		fillGridPane(value, width, height);
-
-//		final ChangeListener<Number> changeListener = new ChangeListener<Number>() {
-//
-//			@Override
-//			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//				fillGridPane(value, width, height);
-//			}
-//
-//		};
-//		value.addListener(changeListener);
-		//fillGridPane(value, width, height);
-	}
-
-	public DicePattern(Color white, int value) {
-		// TODO Auto-generated constructor stub
 	}
 
 	private void fillGridPane(int value, double width, double height) {

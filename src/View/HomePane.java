@@ -1,6 +1,5 @@
 package View;
 
-import Controller.HomeController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,6 +18,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
 public class HomePane extends BorderPane {
+	
+	private static final int TEXT = 24;
+	
 	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
 	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
 
@@ -40,10 +42,8 @@ public class HomePane extends BorderPane {
 	private HBox HomePaneBottom;
 
 	private HBox reservedSpace = new HBox();
-	private HomeController homeController;
 
-	public HomePane(HomeController homeController) {
-		this.homeController = homeController;
+	public HomePane() {
 		this.setBackground(new Background(new BackgroundImage(new Image("Resources/sagradaTitel.jpg"),
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 				new BackgroundSize(0, 0, false, false, false, true))));
@@ -67,7 +67,7 @@ public class HomePane extends BorderPane {
 		
 		
 		layout.setMinSize(200, screenY);
-		Font buttonFont = new Font("Algerian", 24);
+		Font buttonFont = new Font("Algerian", TEXT);
 		buttonOne.setFitWidth((screenX / 8));
 		buttonOne.setFitHeight(screenY / 6);
 
@@ -141,7 +141,6 @@ public class HomePane extends BorderPane {
 	}
 	public void makeInvites() {
 		HomePaneBottom = new HBox();
-//		HomePaneBottom.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		HomePaneBottom.setPadding(new Insets(0, 0, 100, 0));
 		this.setBottom(HomePaneBottom);
 		HomePaneBottom.setAlignment(Pos.TOP_CENTER);

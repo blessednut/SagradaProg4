@@ -28,11 +28,8 @@ public class WindowPatternView extends BorderPane {
 	private final static int GAP = 3;
 	private final static int TOKENRADIUS = 8;
 	private GridPane window;
-	private int width, height;
 	
 	public WindowPatternView (int width, int height, StringProperty title, IntegerProperty tokenAmount, WindowPatternSquareController[][] fieldView) {
-		this.width = width;
-		this.height = height;
 		this.setPrefSize(width, height);
 		this.setMaxSize(width, height);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
@@ -68,7 +65,6 @@ public class WindowPatternView extends BorderPane {
 		
 		//Luistert wanneer de tokenAmount verandert in het model
 		final ChangeListener<Number> changeListener = new ChangeListener<Number>() {
-			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				drawTokens(tokenAmount.getValue());
 			}
@@ -84,18 +80,6 @@ public class WindowPatternView extends BorderPane {
 		for (int i = 0; i < tokenAmount; i++) {
 			StackPane token;
 			token = drawCircle(Color.GOLD);
-//			if (i >= tokenAmount - tokensUsed) {
-//				token = drawCircle(Color.LIGHTGRAY);
-//			} else {
-//				token = drawCircle(Color.GOLD);
-//			}
-//
-//			if (i == tokenAmount - 1) {
-//				token.setPadding(new Insets(4, BORDERSIZE, 4, 4));
-//			} else {
-//				token.setPadding(new Insets(4));
-//			}
-
 			tokens.getChildren().add(token);
 		}
 		this.setBottom(tokens);

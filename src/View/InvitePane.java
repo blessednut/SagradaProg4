@@ -6,9 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,11 +14,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 public class InvitePane extends HBox {
-
+	
+	private static final int BUTTONWHIDTH = 150;
+	private static final int BUTTONHEIGHT = 30;
+	private static final int TEXTWHIDTH = 300;
+	private static final int TEXTHEIGHT = 100;
+	private static final int COMBOBOXHEIGHT = 50;
+	private static final int TEXT = 20;
+	
 	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
 	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
 
@@ -29,13 +33,10 @@ public class InvitePane extends HBox {
 	private VBox vbox3;
 	private VBox vbox4;
 
-	private Label titel3;
-	private Label titel4;
 	private TextField gameId;
 
 	private Label titel1;
 	private Label titel2;
-	private TextField Username;
 	private TextField name1;
 	private TextField name2;
 	private TextField name3;
@@ -53,7 +54,6 @@ public class InvitePane extends HBox {
 
 	private ImageView labelBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	private ImageView labelNameBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
-	private ImageView labelGameIDBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	
 	private ComboBox<String> invites;
 
@@ -88,10 +88,10 @@ public class InvitePane extends HBox {
 
 	private void createPane() {
 		// title
-		labelBackground.setFitWidth(300);
-		labelBackground.setFitHeight(100);
+		labelBackground.setFitWidth(TEXTWHIDTH);
+		labelBackground.setFitHeight(TEXTHEIGHT);
 		titel1 = new Label("vrienden uitnodigen", labelBackground);
-		titel1.setFont(new Font("Arial", 20));
+		titel1.setFont(new Font("Arial", TEXT));
 		titel1.setStyle("-fx-font-weight: bold");
 		titel1.setContentDisplay(ContentDisplay.CENTER);
 
@@ -116,38 +116,38 @@ public class InvitePane extends HBox {
 		name1.setText("Gebruikersnaam 1");
 		name1.setOnMouseClicked(e -> name1.clear());
 		name1.setVisible(true);
-		name1.setMinSize(300, 100);
-		name1.setPrefSize(300, 100);
-		name1.setMaxSize(300, 100);
+		name1.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+		name1.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+		name1.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
 
 		name2 = new TextField();
 		name2.setText("Gebruikersnaam 2");
 		name2.setOnMouseClicked(e -> name2.clear());
 		name2.setVisible(false);
-		name2.setMinSize(300, 100);
-		name2.setPrefSize(300, 100);
-		name2.setMaxSize(300, 100);
+		name2.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+		name2.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+		name2.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
 
 		name3 = new TextField();
 		name3.setText("Gebruikersnaam 3");
 		name3.setOnMouseClicked(e -> name3.clear());
 		name3.setVisible(false);
-		name3.setMinSize(300, 100);
-		name3.setPrefSize(300, 100);
-		name3.setMaxSize(300, 100);
+		name3.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+		name3.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+		name3.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
 
 		search = new Button();
 		search.setText("zoek");
-		search.setMinSize(150, 30);
-		search.setPrefSize(150, 30);
-		search.setMaxSize(150, 30);
+		search.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		search.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		search.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		inviteButton = new Button();
 		inviteButton.setText("uitnodigen");
 		inviteButton.setVisible(false);
-		inviteButton.setMinSize(15, 30);
-		inviteButton.setPrefSize(150, 30);
-		inviteButton.setMaxSize(150, 30);
+		inviteButton.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		inviteButton.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		inviteButton.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		HBox hbox = new HBox(search, inviteButton);
 		vbox3 = new VBox(rb2, rb3, rb4);
@@ -161,34 +161,34 @@ public class InvitePane extends HBox {
 	public void showInvite() {
 		hbox2 = new HBox();
 		vbox4 = new VBox();
-		labelNameBackground.setFitWidth(300);
-		labelNameBackground.setFitHeight(100);
+		labelNameBackground.setFitWidth(TEXTWHIDTH);
+		labelNameBackground.setFitHeight(TEXTHEIGHT);
 
 		titel2 = new Label("openstaande uitnodigingen", labelNameBackground);
-		titel2.setFont(new Font("Arial", 20));
+		titel2.setFont(new Font("Arial", TEXT));
 		titel2.setStyle("-fx-font-weight: bold");
 		titel2.setContentDisplay(ContentDisplay.CENTER);
 
 
 		invites = new ComboBox<>();
-		invites.setMinSize(300, 50);
-		invites.setPrefSize(300, 50);
-		invites.setMaxSize(300, 50);
+		invites.setMinSize(TEXTWHIDTH, COMBOBOXHEIGHT);
+		invites.setPrefSize(TEXTWHIDTH, COMBOBOXHEIGHT);
+		invites.setMaxSize(TEXTWHIDTH, COMBOBOXHEIGHT);
 		invites.setPromptText("Welke uitnodiging zou je willen accepteren/wijgeren");
 		
 		
 
 		accept = new Button();
 		accept.setText("accepteer");
-		accept.setMinSize(150, 30);
-		accept.setPrefSize(150, 30);
-		accept.setMaxSize(150, 30);
+		accept.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		accept.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		accept.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		refuse = new Button();
 		refuse.setText("afwijzen");
-		refuse.setMinSize(150, 30);
-		refuse.setPrefSize(150, 30);
-		refuse.setMaxSize(150, 30);
+		refuse.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		refuse.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		refuse.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		hbox2.getChildren().addAll(accept, refuse);
 		vbox4.getChildren().addAll(invites);

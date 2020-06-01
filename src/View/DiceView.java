@@ -32,8 +32,4 @@ public class DiceView extends StackPane {
 		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, RADIUS, BORDERWIDTH, INSETS)));
 		this.getChildren().add(new DicePattern(value, width, height));
 	}
-
-//	public void setValue(int value) {
-//		this.value = value;
-//	}
 }

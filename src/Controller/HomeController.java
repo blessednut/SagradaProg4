@@ -23,7 +23,7 @@ public class HomeController {
 		this.mySceneController = mySceneController;
 		this.loginController = loginController;
 		// aan maak homepane.
-		homeView = new HomePane(this);
+		homeView = new HomePane();
 
 		// aan maak gamecontroller.
 		gameController = new GameController(mySceneController, loginController);
