@@ -27,13 +27,10 @@ public class RoundtrackController {
         int i = 0;
         while(i<roundtrackModel.getDice().size()) {
             int roundtrack = roundtrackModel.getDice().get(i).getRoundtrack();
-//            Color color = cc.colorConverter(roundtrackModel.getDice().get(i).getDieColorString());
-//            int eyes = roundtrackModel.getDice().get(i).getEyes().intValue();
-            
+
             Color color = cc.colorConverter(roundtrackModel.getDice().get(i).colorProperty().getValue());
             int eyes = roundtrackModel.getDice().get(i).valueProperty().getValue();
-//            System.out.println("FILL ROUND TRACK: ");
-//            System.out.println("Color: " + color + " Eyes = " + eyes);
+
             roundtrackPane.addDice(roundtrack, color, eyes);
             i++;
         }

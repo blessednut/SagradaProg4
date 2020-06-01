@@ -11,7 +11,7 @@ public class Private_Objective_Card_Controller {
 	
 	public Private_Objective_Card_Controller(int GameId, String username) {
 		pocm = new Private_Objective_Card_Model(GameId, username);
-//		TODO: zorgen dat de cardName aan de hand van de IDPlayer kan worden opgehaald. dus niet in de constructor meegegeven wordt.
+
 		Private_Objective_Card private_oc = new Private_Objective_Card(pocm.getColor(GameId, username));
 		pane = private_oc;
 	}

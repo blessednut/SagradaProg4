@@ -4,49 +4,49 @@ import View.OpenGamesPane;
 import model.OpenGamesModel;
 
 public class OpenGamesController {
-	private OpenGamesPane OGP;
-	private OpenGamesModel OGM;
-	private GameController gameC;
+	private OpenGamesPane openGameView;
+	private OpenGamesModel openGamesModel;
+	private GameController gameController;
 
-	public OpenGamesController(LogInController logInController, GameController gameC) {
-		OGM = new OpenGamesModel();
-		OGP = new OpenGamesPane();
-		OGP.getOpenGame().setOnAction(e -> openGame());
-		this.gameC = gameC;
+	public OpenGamesController(LogInController logInController, GameController gameController) {
+		openGamesModel = new OpenGamesModel();
+		openGameView = new OpenGamesPane();
+		openGameView.getOpenGame().setOnAction(e -> openGame());
+		this.gameController = gameController;
 
 	}
 
 	public OpenGamesPane getOGP() {
-		return OGP;
+		return openGameView;
 	}
 
 	public OpenGamesModel getOGM() {
-		return OGM;
+		return openGamesModel;
 	}
 
 	public void fillGames() {
-		OGP.getOldGamesBox().getItems().clear();
-		for (int i = 0; i < OGM.getOldGamesArray().size(); i++) {
-			if (!OGP.getOldGamesBox().getItems().contains(OGM.getOldGamesArray().get(i))) {
-				OGP.getOldGamesBox().getItems().add("Spel ID: " + OGM.getOldGamesArray().get(i)
-						+ ",		Datum van spelcreatie: " + OGM.getOldGamesDateArray().get(i));
+		openGameView.getOldGamesBox().getItems().clear();
+		for (int i = 0; i < openGamesModel.getOldGamesArray().size(); i++) {
+			if (!openGameView.getOldGamesBox().getItems().contains(openGamesModel.getOldGamesArray().get(i))) {
+				openGameView.getOldGamesBox().getItems().add("Spel ID: " + openGamesModel.getOldGamesArray().get(i)
+						+ ",		Datum van spelcreatie: " + openGamesModel.getOldGamesDateArray().get(i));
 			}
 		}
 
 	}
 
 	public void fillAllGames() {
-		for (int i = 0; i < OGM.getOpenGameID().size(); i++) {
-			if (!OGP.getAllGames().getItems().contains(OGM.getOpenGameID().get(i))) {
-				OGP.getAllGames().getItems().add("Spel ID: " + OGM.getOpenGameID().get(i)
-						+ ",      Datum van spelcreatie: " + OGM.getOpenGameTime().get(i));
+		for (int i = 0; i < openGamesModel.getOpenGameID().size(); i++) {
+			if (!openGameView.getAllGames().getItems().contains(openGamesModel.getOpenGameID().get(i))) {
+				openGameView.getAllGames().getItems().add("Spel ID: " + openGamesModel.getOpenGameID().get(i)
+						+ ",      Datum van spelcreatie: " + openGamesModel.getOpenGameTime().get(i));
 			}
 		}
 	}
 
 	public int getSelectedGameID() {
 		int gameId = 0;
-		String[] parts = OGP.getOldGamesBox().getValue().split(",");
+		String[] parts = openGameView.getOldGamesBox().getValue().split(",");
 		String[] idParts = parts[0].split(": ");
 		String StringGameID = idParts[1];
 		gameId = Integer.parseInt(StringGameID);
@@ -55,9 +55,7 @@ public class OpenGamesController {
 
 	public void openGame() {
 		if (getSelectedGameID() != 0) {
-//			TODO: roept methode aan die alle zooi van t spel opent
-//			geef getSelectedGameID(); mee aan said methode
-			gameC.createGamePane(getSelectedGameID());
+			gameController.createGamePane(getSelectedGameID());
 			
 		}
 

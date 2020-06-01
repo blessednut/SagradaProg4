@@ -12,10 +12,10 @@ import model.PatternCardModel;
 
 public class GameController {
 
-	private MySceneController myScene;
+	private MySceneController mySceneController;
 	private GamePane gamePane;
 	private GameModel gameModel;
-	private LogInController c_login;
+	private LogInController logInController;
 
 	private Public_Objective_Card_Controller public_OCC;
 	private Private_Objective_Card_Controller private_OCC;
@@ -36,14 +36,14 @@ public class GameController {
 
 	private int amountOfDice = 0;
 
-	public GameController(MySceneController myScene, LogInController c_login) {
-		this.myScene = myScene;
-		this.c_login = c_login;
+	public GameController(MySceneController mySceneController, LogInController logInController) {
+		this.mySceneController = mySceneController;
+		this.logInController = logInController;
 		this.gameModel = new GameModel();
 	}
 
 	public void switchBackToHome() {
-		myScene.getMyscene().switchPane(c_login.getC_home().getV_home());
+		mySceneController.getMyscene().switchPane(logInController.getC_home().getV_home());
 		closeChatThread();
 
 	}
@@ -53,7 +53,7 @@ public class GameController {
 	}
 
 	public Private_Objective_Card_Controller getPrivate_OCC() {
-		this.private_OCC = new Private_Objective_Card_Controller(gameModel.getGameId(), c_login.getUsername());
+		this.private_OCC = new Private_Objective_Card_Controller(gameModel.getGameId(), logInController.getUsername());
 		return private_OCC;
 	}
 
@@ -63,10 +63,10 @@ public class GameController {
 
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
-		myScene.getMyscene().switchPane(gamePane);
+		mySceneController.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true);
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -85,19 +85,19 @@ public class GameController {
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
-		System.out.println("isPlayerTurn = " + isTurn);
+
 	}
 
 	public void createGamePane(int oldGameID) {
 		System.out.println("CREATEGAMEPANE MET OLD ID = " + oldGameID);
 		this.gameModel.setGameId(oldGameID);
 		this.gamePane = new GamePane(this);
-		myScene.getMyscene().switchPane(gamePane);
+		mySceneController.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true);
+		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true, true);
 		playerController.loadCards();
-		System.out.println("OUDE SPEL STARTEN SPELER ID = " + playerController.getPlayerID());
+
 		// playerController.loadDice
 
 		// gamemodel get usernames
@@ -137,7 +137,7 @@ public class GameController {
 	}
 
 	public MySceneController getMyscene() {
-		return myScene;
+		return mySceneController;
 	}
 
 	public PatternCardController getC_patternCard() {
@@ -145,7 +145,7 @@ public class GameController {
 	}
 
 	public LogInController getC_login() {
-		return c_login;
+		return logInController;
 	}
 
 	public GameModel getM_game() {
@@ -166,9 +166,6 @@ public class GameController {
 			return false;
 		}
 
-//		return this.playerController.getPatternCard().placeDice(dice);
-//		System.out.println("GameController:");
-//		System.out.println(dice.getDieNumber());
 	}
 
 	private int getRandomInt(int min, int max) {
@@ -249,7 +246,6 @@ public class GameController {
 			}
 		}
 		checkPlayerTurn();
-		// this.refresh();
 	}
 
 	public void checkPlayerTurn() {
@@ -387,7 +383,7 @@ public class GameController {
 						opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
 				opponent.getPatternCard().loadPatternCard();
 			} else {
-				// System.out.println("PANIEK PANIEK PANIEK!");
+
 			}
 			counter++;
 		}
@@ -432,21 +428,6 @@ public class GameController {
 		}
 	}
 
-//	public int getSeqNrFromIndex (int index) {
-//		//opponents.get(index).getPlayerID();
-//		return gameModel.getSeqNR(opponents.get(index).getPlayerID());
-//	}
-
-//	public void addOpponentView () {
-//		for (PlayerController opponent : opponents) {
-//			if (opponent.getPatternCard().getChosenCard() != null) {
-//				gamePane.addOpponentWindow(opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
-//			} else {
-//				//add Black rectangle
-//				gamePane.addOpponentSquare();
-//			}
-//		}
-//	}
 
 	public int getseqNumber() {
 		return gameModel.getSeqNR(playerController.getPlayerID());

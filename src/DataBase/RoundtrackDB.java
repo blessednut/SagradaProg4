@@ -1,6 +1,5 @@
 package DataBase;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ public class RoundtrackDB {
 
     private ResultSet rs;
     private Statement st;
-    private PreparedStatement ps;
 
 
     public RoundtrackDB() {
@@ -28,8 +26,6 @@ public class RoundtrackDB {
             }
             return remainingDice;
         } catch (Exception e) {
-//            System.out.println("RoundtrackDB:");
-//            System.out.println(e);
         	e.printStackTrace();
         }
         return null;

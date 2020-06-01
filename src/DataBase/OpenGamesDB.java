@@ -1,7 +1,5 @@
 package DataBase;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -9,9 +7,8 @@ import java.sql.Timestamp;
 import model.OpenGamesModel;
 
 public class OpenGamesDB {
-	private ResultSet rs;
 	private Statement st;
-	private PreparedStatement ps;
+
 
 	private OpenGamesModel gamesModel;
 

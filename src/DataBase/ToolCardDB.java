@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import model.GameDiceModel;
 
 public class ToolCardDB {
-	private ResultSet rs;
 	private Statement st;
 	private PreparedStatement ps;
 	
@@ -39,7 +38,6 @@ public class ToolCardDB {
 			ps = DBCon.getInstance().getCon().prepareStatement(query);
 			ps.execute();
 		}catch(Exception e) {
-			System.out.println("ToolcardDB: de query doet het niet");
 			e.printStackTrace();
 		}
 	}
@@ -54,10 +52,8 @@ public class ToolCardDB {
 			ResultSet resultset = st.executeQuery(query);
 			if(resultset.next()) {
 				gametoolcardid = (resultset.getInt("maxtoolcardid") + 1);
-				System.out.println("ToolCardDB 51: "+ gametoolcardid);
 			}
 		}catch(Exception e) {
-			System.out.println("Toolcard 58: dit is een foutmelding");
 			e.printStackTrace();
 		}
 		return gametoolcardid;

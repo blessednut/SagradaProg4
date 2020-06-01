@@ -3,11 +3,10 @@ package Controller;
 import java.util.ArrayList;
 
 import View.Public_Objective_Card;
-import javafx.scene.layout.Pane;
 import model.Public_Objective_Card_Model;
 
 public class Public_Objective_Card_Controller {
-	Pane pane;
+
 	private Public_Objective_Card_Model pocm;
 	private ArrayList<String> cards;
 	private ArrayList<Public_Objective_Card> panes;

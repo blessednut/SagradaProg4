@@ -6,23 +6,23 @@ import DataBase.GameDB;
 import DataBase.InGameDB;
 
 public class GameModel {
-	private int idgame;
-	private InGameDB con;
+	private int idGame;
+	private InGameDB inGameDB;
 
 	public GameModel() {
-		con = new InGameDB(this);
+		inGameDB = new InGameDB(this);
 	}
 
 	// haalt max(idgame) op uit de db en verhoogd deze met 1 en insert deze vervolgens.
 	public void createGameRoom() {
-		this.idgame = new GameDB(this).createGameRoom();
+		this.idGame = new GameDB(this).createGameRoom();
 	}
 
 	public int getGameId() {
-		return this.idgame;
+		return this.idGame;
 	}
 	public void setGameId(int GameId) {
-		this.idgame = GameId;
+		this.idGame = GameId;
 	}
 
 	public void updatePlayerTurn(int seqNR) {
@@ -30,66 +30,66 @@ public class GameModel {
 	}
 	
 	public void changeTurnPlayerID (int playerID) {
-		this.con.changeTurnPlayerID(idgame, playerID);
+		this.inGameDB.changeTurnPlayerID(idGame, playerID);
 	}
 	
 	public int getSeqNR (int playerID) {
-		return this.con.getSeqNR(idgame, playerID);
+		return this.inGameDB.getSeqNR(idGame, playerID);
 	}
 	
 	public int getTurnPlayerID () {
-		return this.con.getTurnPlayerID(idgame);
+		return this.inGameDB.getTurnPlayerID(idGame);
 	}
 	
 	public int getRoundID () {
-		return this.con.getRoundID(idgame);
+		return this.inGameDB.getRoundID(idGame);
 	}
 	
 	public boolean getClockwise () {
-		return this.con.getClockwise(idgame);
+		return this.inGameDB.getClockwise(idGame);
 	}
 	
 	public int getRoundNR () {
-		return this.con.getRoundNR(idgame);
+		return this.inGameDB.getRoundNR(idGame);
 	}
 	
 	public int getHighestSeqnr () {
-		return this.con.getHighestSeqnr(idgame);
+		return this.inGameDB.getHighestSeqnr(idGame);
 	}
 	
 	public void setRoundID () {
-		this.con.setRoundID(idgame);
+		this.inGameDB.setRoundID(idGame);
 	}
 	
 	public int getPlayerID (int seqnr) {
-		return this.con.getPlayerID(idgame, seqnr);
+		return this.inGameDB.getPlayerID(idGame, seqnr);
 	}
 	
 	public void updateSeqNR (int playerID, int seqnr) {
-		this.con.updateSeqNR(playerID, seqnr);
+		this.inGameDB.updateSeqNR(playerID, seqnr);
 	}
 	
 	public ArrayList<String> getOpponentNames (int playerID) {
-		return this.con.getOpponentNames(idgame, playerID);
+		return this.inGameDB.getOpponentNames(idGame, playerID);
 	}
 	
 	public String getPlayerName (int playerID) {
-		return this.con.getPlayerID(playerID);
+		return this.inGameDB.getPlayerID(playerID);
 	}
 	
 	public void updateScore (int idplayer, int score) {
-		this.con.updateScore(idplayer, score);
+		this.inGameDB.updateScore(idplayer, score);
 	}
 	
 	public void setPlayStatusFinished (int idplayer) {
-		this.con.setPlayStatusFinished(idplayer);;
+		this.inGameDB.setPlayStatusFinished(idplayer);;
 	}
 	
 	public String getWinner () {
-		return this.con.getWinner(idgame);
+		return this.inGameDB.getWinner(idGame);
 	}
 	
 	public boolean gameEnded () {
-		return this.con.gameEnded(idgame);
+		return this.inGameDB.gameEnded(idGame);
 	}
 }

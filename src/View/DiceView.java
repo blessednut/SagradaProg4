@@ -33,7 +33,4 @@ public class DiceView extends StackPane {
 		this.getChildren().add(new DicePattern(value, width, height));
 	}
 
-//	public void setValue(int value) {
-//		this.value = value;
-//	}
 }

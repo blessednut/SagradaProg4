@@ -1,14 +1,11 @@
 package model;
 
-import Controller.PuntenTeller;
 import DataBase.PuntenTellerDB;
 
 public class PuntenTellerModel {
-	private PuntenTeller pt;
 	private PuntenTellerDB ptDB;
 	
-	public PuntenTellerModel(PuntenTeller pt) {
-		this.pt = pt;
+	public PuntenTellerModel() {
 		this.ptDB = new PuntenTellerDB();
 	}
 	

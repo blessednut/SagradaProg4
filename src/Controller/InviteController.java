@@ -32,7 +32,7 @@ public class InviteController {
 	public InviteController(GameController gameController, HomeController home) {
 		this.gameController = gameController;
 		this.home = home;
-		inviteModel = new InviteModel(this);
+		inviteModel = new InviteModel();
 		invitePane = new InvitePane();
 
 		// de switchcase bepaalt aan de hand van de selected RadioButton welke methode
@@ -95,7 +95,7 @@ public class InviteController {
 		StringGameID = parts[1];
 
 		int Gameid = Integer.parseInt(StringGameID);
-		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, Gameid);
+		gameAcceptionThread = new GameAcceptionThreadController(this, Gameid);
 		gameAcceptionThread.setDaemon(true);
 		gameAcceptionThread.start();
 
@@ -107,7 +107,7 @@ public class InviteController {
 	}
 
 	public void acceptInvitation(String username, int gameID) {
-		gameAcceptionThread = new GameAcceptionThreadController(home.getC_login(), this, gameID);
+		gameAcceptionThread = new GameAcceptionThreadController(this, gameID);
 		gameAcceptionThread.setDaemon(true);
 		gameAcceptionThread.start();
 

@@ -1,22 +1,16 @@
 package DataBase;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import model.GameAcceptionThreadModel;
 
 public class GameAcceptionThreadDB {
 	private ResultSet amountInvited;
 	private ResultSet amountAccepted;
 	private ResultSet amountRefused;
 	private Statement st;
-	private PreparedStatement ps;
-	private GameAcceptionThreadModel gameAcceptionThread;
 	private DBCon conNection;
 
-	public GameAcceptionThreadDB(GameAcceptionThreadModel gameAcceptionThread) {
-		this.gameAcceptionThread = gameAcceptionThread;
+	public GameAcceptionThreadDB() {
 		this.conNection = new DBCon();
 		this.st = conNection.getSt();
 	}

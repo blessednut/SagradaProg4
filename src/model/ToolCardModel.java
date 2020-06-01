@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import DataBase.DBCon;
 import DataBase.ToolCardDB;
 
 public class ToolCardModel {

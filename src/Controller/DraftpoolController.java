@@ -10,9 +10,9 @@ public class DraftpoolController {
 	private DraftpoolSquareController selectedSquare;
 	private GameDiceModel selectedDice;
 
-	public DraftpoolController(GameController controller) {
+	public DraftpoolController(GameController gameController) {
 		this.draftpoolModel = new DraftpoolModel();
-		this.controller = controller;
+		this.controller = gameController;
 	}
 
 	public void createDraftPool(int numPlayers, int roundID) {

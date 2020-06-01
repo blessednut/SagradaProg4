@@ -1,16 +1,13 @@
 package DataBase;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Iterator;
 
 import model.HomeThreadModel;
 
 public class HomeThreadDB {
 
 	private Statement st;
-	private PreparedStatement ps;
 	private String username;
 	private int gameID;
 	private HomeThreadModel home;

@@ -6,7 +6,7 @@ import model.PuntenTellerModel;
 
 public class PuntenTeller {
 	private GameController gamecontroller;
-	//private WindowPatternSquareController[][] fieldController;
+
 	private PuntenTellerModel ptm;
 	
 	private int scorePublicCards;
@@ -16,12 +16,9 @@ public class PuntenTeller {
 	private int totalScore;
 	
 	public PuntenTeller(GameController gamecontroller) {
-		this.ptm = new PuntenTellerModel(this);
+		this.ptm = new PuntenTellerModel();
 		this.gamecontroller = gamecontroller;
-		//this.fieldController = this.gamecontroller.getPlayerController().getPatternCard().getFieldController();
-//		scorePublicCards = 0;
-//		scorePrivateCard = 0;
-//		scoreFavorTokens = 0;
+
 	}
 	
 	private void countEmptySquares(WindowPatternSquareController[][] fieldController) {
@@ -188,12 +185,7 @@ public class PuntenTeller {
 			}
 			System.out.println(scorePublicCards + (2 * lowestAmount));
 			scorePublicCards = scorePublicCards + (2 * lowestAmount);
-//		case "Diagonals":
-// TODO punten berekening voor kaart maken
-//			for(int x = 0; x < raamVenster.length; x++) {
-//				for(int y = 0; y < raamVenster[x].length; y++) {
-//				}
-//			}
+
 		case "Light Shades":
 			System.out.println("Light Shades");
 			int amountOfOne = 0;
@@ -403,21 +395,7 @@ public class PuntenTeller {
 		}
 	}
 
-//	private int getEmptySquares() {
-//		return emptySquares;
-//	}
-//
-//	private int getScorePublicCards() {
-//		return scorePublicCards;
-//	}
-//
-//	private int getScorePrivateCard() {
-//		return scorePrivateCard;
-//	}
-//
-//	private int getScoreFavorTokens() {
-//		return scoreFavorTokens;
-//	}
+
 	
 	public int getPublicScore (String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
 		this.scorePrivateCard = 0;
@@ -426,11 +404,7 @@ public class PuntenTeller {
 	}
 	
 	public int getTotalScore(String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
-		//test
-//		System.out.println("KAART NAMEN");
-//		for (String a : publicObjCardArray) {
-//			System.out.println(a);
-//		}
+
 		if (privateObjColor == null) {
 			return 0;
 		}
@@ -445,7 +419,7 @@ public class PuntenTeller {
 		
 		this.scorePrivateCard = 0;
 		this.privateObjScore(privateObjColor, fieldController);
-		//Moet nog aanpassen
+
 		this.scoreFavorTokens = playerController.getPatternCard().getChosenCard().getDifficulty();
 		this.emptySquares = 0;
 		this.countEmptySquares(fieldController);
