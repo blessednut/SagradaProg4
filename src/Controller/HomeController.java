@@ -1,4 +1,4 @@
-package Controller;
+	package Controller;
 
 import View.CreditsPane;
 import View.HomePane;
@@ -11,7 +11,14 @@ public class HomeController {
 	private HomePane v_home;
 	private InviteController c_Invite;
 	private CreditsPane v_credits;
-	private StatisticsPane v_statistics;
+	
+	
+	
+	//private StatisticsPane v_statistics;
+	private StatisticController statisticController;
+	
+	
+	
 	private MySceneController myScene;
 	private GameController c_game;
 	private LogInController c_login;
@@ -42,11 +49,9 @@ public class HomeController {
 
 		// aan maak credits pane
 		v_credits = new CreditsPane();
-		// aan maak statspane.
-		v_statistics = new StatisticsPane();
-
-		// buttons
 		
+		//v_statistics = new StatisticsPane();
+		statisticController = new StatisticController();
 		v_home.getUitloggen().setOnAction(e -> myScene.getMyscene().switchPane(c_login.getLogin()));
 		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
 		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
@@ -60,7 +65,7 @@ public class HomeController {
 	}
 
 	public void openStatisticsPane() {
-		v_home.makeReservedSpace(v_statistics);
+		v_home.makeReservedSpace(statisticController.getView());
 	}
 
 	public void openCreditsPane() {
@@ -72,10 +77,6 @@ public class HomeController {
 
 	public HomePane getV_home() {
 		return v_home;
-	}
-
-	public StatisticsPane getV_statistics() {
-		return v_statistics;
 	}
 
 	public LogInController getC_login() {
