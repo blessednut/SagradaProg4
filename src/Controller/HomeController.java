@@ -8,92 +8,100 @@ import View.StatisticsPane;
 
 public class HomeController {
 
-	private HomePane v_home;
-	private InviteController c_Invite;
-	private CreditsPane v_credits;
-	private StatisticsPane v_statistics;
-	private MySceneController myScene;
-	private GameController c_game;
-	private LogInController c_login;
-	private HomeThreadController c_hometc;
+	private HomePane homeView;
+	private InviteController inviteController;
+	private CreditsPane creditsView;
+	private StatisticsPane statsView;
+	private MySceneController mySceneController;
+	private GameController gameController;
+	private LogInController loginController;
+	private HomeThreadController homeThreadController;
 	private OpenGamesController OGC;
 
-	public HomeController(MySceneController myScene, LogInController c_login) {
-		this.myScene = myScene;
-		this.c_login = c_login;
+	public HomeController(MySceneController mySceneController, LogInController loginController) {
+		this.mySceneController = mySceneController;
+		this.loginController = loginController;
 		//aan maak homepane.
-		v_home = new HomePane(this);
+		homeView = new HomePane(this);
 
 		//aan maak gamecontroller.
-		c_game = new GameController(myScene, c_login);
+		gameController = new GameController(mySceneController, loginController);
 
 		// aan maak invitecontroller.
-		c_Invite = new InviteController(c_game,this);
+		inviteController = new InviteController(gameController,this);
 		
 		//aan maak OpenGamesController.
-		OGC = new OpenGamesController(c_login);
+		OGC = new OpenGamesController(loginController);
 
 		// aan maak homethreadController.
-		this.c_hometc = new HomeThreadController(c_login, c_Invite);
+		this.homeThreadController = new HomeThreadController(loginController, inviteController);
 
-		c_hometc.setDaemon(true);
-		c_hometc.start();
+		homeThreadController.setDaemon(true);
+		homeThreadController.start();
 
 
 		// aan maak credits pane
-		v_credits = new CreditsPane();
+		creditsView = new CreditsPane();
 		// aan maak statspane.
-		v_statistics = new StatisticsPane();
+		statsView = new StatisticsPane();
 
 		// buttons
 		
-		v_home.getUitloggen().setOnAction(e -> myScene.getMyscene().switchPane(c_login.getLogin()));
-		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
-		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
-		v_home.getCredits().setOnAction(e -> openCreditsPane());
-		v_home.getGames().setOnAction(e -> { openOpenGamesPane();OGC.getOGM().GetOpenGameID(c_login.getUsername());OGC.fillGames();});
+		homeView.getUitloggen().setOnAction(e -> mySceneController.getMyscene().switchPane(loginController.getLogin()));
+		homeView.getVrienden().setOnAction(e -> {openInvitePane();homeView.makeInvites();});
+		homeView.getStatistick().setOnAction(e -> openStatisticsPane());
+		homeView.getCredits().setOnAction(e -> openCreditsPane());
+		homeView.getGames().setOnAction(e -> { openOpenGamesPane(); loadAllGames();});
 
 	}
 
 	public void openInvitePane() {
-		v_home.makeReservedSpace(c_Invite.getV_InvitePane());
+		homeView.makeReservedSpace(inviteController.getV_InvitePane());
 	}
 
 	public void openStatisticsPane() {
-		v_home.makeReservedSpace(v_statistics);
+		homeView.makeReservedSpace(statsView);
 	}
 
 	public void openCreditsPane() {
-		v_home.makeReservedSpace(v_credits);
+		homeView.makeReservedSpace(creditsView);
 	}
 	public void openOpenGamesPane() {
-		v_home.makeReservedSpace(OGC.getOGP());
+		homeView.makeReservedSpace(OGC.getOGP());
+	}
+	
+	public void loadAllGames() {
+		OGC.getOGM().getOwnGamesID(loginController.getUsername());
+		OGC.getOGM().getGamesIDS();
+		OGC.getOGM().GetOpenGameID(loginController.getUsername());
+		OGC.fillGames();  
+		OGC.fillAllGames();
 	}
 
 	public HomePane getV_home() {
-		return v_home;
+		return homeView;
 	}
 
 	public StatisticsPane getV_statistics() {
-		return v_statistics;
+		return statsView;
 	}
 
 	public LogInController getC_login() {
-		return c_login;
+		return loginController;
 	}
 
 	public HomeThreadController getC_hometc() {
-		return c_hometc;
+		return homeThreadController;
 	}
 	
 	public InviteController getC_Invite() {
-		return c_Invite;
+		return inviteController;
 	}
 
 	public void addInviteStartPane(InviteStart inviteStart) {
-		v_home.getHomePaneBottom().getChildren().add(inviteStart);
+		homeView.getHomePaneBottom().getChildren().add(inviteStart);
 	}
 	public void removeInviteStartPane(InviteStart inviteStart) {
-		v_home.getHomePaneBottom().getChildren().remove(inviteStart);
+		homeView.getHomePaneBottom().getChildren().remove(inviteStart);
 	}
 }

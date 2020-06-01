@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -11,10 +10,19 @@ public class OpenGamesModel {
 	private ArrayList<String> oldGamesIDArray;
 	private ArrayList<Timestamp> oldGamesDateArray;
 	
+	private ArrayList<String> openGameID;
+	private ArrayList<Timestamp> openGameTime;
+	private ArrayList<String> ownOpenGameID;
+	
 	public OpenGamesModel() {
 		this.openGamesDB = new OpenGamesDB(this);
 		oldGamesIDArray = new ArrayList<String>();
 		oldGamesDateArray = new ArrayList<Timestamp>();
+		// voor de lijst game
+		openGameID = new ArrayList<String>();
+		ownOpenGameID = new ArrayList<String>();
+		
+		openGameTime = new ArrayList<Timestamp>();
 	}
 	
 	public int GetOpenGameID(String username) {
@@ -28,6 +36,28 @@ public class OpenGamesModel {
 		}
 	}
 	
+	public void getGamesIDS() {
+		this.openGamesDB.getgameIDs();
+	}
+	
+	public void fillArrayOwnGames(String gameIDString) {
+		if(!ownOpenGameID.contains(gameIDString)) {
+			ownOpenGameID.add(gameIDString);
+		}
+	}
+	
+	public void fillArrayForGames(String gameIDString, Timestamp creationdate) {
+		if(!openGameID.contains(gameIDString)) {
+			openGameID.add(gameIDString);
+			openGameTime.add(creationdate);
+		}
+	}
+	
+	
+	public String getOwnGamesID(String username) {
+		return this.openGamesDB.getOwnGamesID(username);
+	}
+	
 	public ArrayList<String> getOldGamesArray(){
 		return oldGamesIDArray;
 	}
@@ -35,5 +65,18 @@ public class OpenGamesModel {
 	public ArrayList<Timestamp> getOldGamesDateArray(){
 		return oldGamesDateArray;
 	}
+
+	public ArrayList<String> getOpenGameID() {
+		return openGameID;
+	}
+
+	public ArrayList<Timestamp> getOpenGameTime() {
+		return openGameTime;
+	}
+
+	public ArrayList<String> getOwnOpenGameID() {
+		return ownOpenGameID;
+	}
+
 
 }

@@ -6,8 +6,10 @@ import model.OpenGamesModel;
 public class OpenGamesController {
 	private OpenGamesPane OGP;
 	private OpenGamesModel OGM;
+	private LogInController logInController;
 
 	public OpenGamesController(LogInController logInController) {
+		this.logInController = logInController;
 		OGM = new OpenGamesModel();
 		OGP = new OpenGamesPane();
 		OGP.getOpenGame().setOnAction(e -> openGame());
@@ -32,6 +34,16 @@ public class OpenGamesController {
 		}
 
 	}
+
+	public void fillAllGames() {
+		for (int i = 0; i < OGM.getOpenGameID().size(); i++) {
+			if (!OGP.getAllGames().getItems().contains(OGM.getOpenGameID().get(i))) {
+				OGP.getAllGames().getItems().add("Spel ID: " + OGM.getOpenGameID().get(i)
+						+ ",      Datum van spelcreatie: " + OGM.getOpenGameTime().get(i));
+			}
+		}
+	}
+
 	public int getSelectedGameID() {
 		int gameId = 0;
 		String[] parts = OGP.getOldGamesBox().getValue().split(",");
@@ -42,12 +54,11 @@ public class OpenGamesController {
 	}
 
 	public void openGame() {
-		if(getSelectedGameID() != 0) {
+		if (getSelectedGameID() != 0) {
 //			TODO: roept methode aan die alle zooi van t spel opent
 //			geef getSelectedGameID(); mee aan said methode
 		}
 
-			
 	}
 
 }
