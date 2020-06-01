@@ -47,6 +47,9 @@ public class ToolCardModel {
 	public ArrayList<String> getCardNamesPerGame(){
 		return cardNamesPerGame;
 	}
+	public Boolean getEmpty(int gameid) {
+		return tcDB.getEmpty(gameid);
+	}
 	
 	public ArrayList<String> getRoundtrackColors(int gameid){
 		return tcDB.getRoundtrackColor(gameid);

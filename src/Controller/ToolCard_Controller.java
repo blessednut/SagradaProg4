@@ -548,5 +548,13 @@ public class ToolCard_Controller {
 	public ArrayList<ToolCard> getPanes() {
 		return panes;
 	}
+	
+	public ToolCardModel getTCM() {
+		return tcm;
+	}
+	public Boolean getEmpty(int gameid) {
+		return tcm.getEmpty(gameid);
+		
+	}
 
 }

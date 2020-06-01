@@ -21,7 +21,6 @@ public class PatternCardController {
 		this.gameController = c_game;
 		this.playerController = playerController;
 
-		loadChosenCard();
 	}
 
 	public void loadChosenCard() {
@@ -31,6 +30,11 @@ public class PatternCardController {
 //			System.out.println("SET CHOSEN CARD");
 //			System.out.println("PATTERNCARD ID = " + playerController.getPlayerModel().getPatterncardID());
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
+			
+			if(playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
+				gameController.setOwnWindow(chosenCard, this);
+			}
+				// Magic Number weghalen
 		} else {
 			if (playerController.getPlayerModel().getIsCurrentPlayer()) {
 				generatePatternCardChoice();
@@ -49,13 +53,9 @@ public class PatternCardController {
 	public boolean placeDice(GameDiceModel dice) {
 		// Check of er een square is geselecteerd en of er geen andere dobbelsteen ligt
 		if (selectedSquare != null && selectedSquare.getSquare().isEmpty()) {
-			System.out.println("PatternCardController");
-//
 			int x = this.selectedSquare.getSquare().getX();
 			int y = this.selectedSquare.getSquare().getY();
-//			System.out.println("x = " + x);
-//			System.out.println("y = " + y);
-			// chosenCard.hasSurroundingDice(x, y);
+
 			if (this.chosenCard.isWindowCardEmpty()) {
 				if (x > 1 && x < 5) {
 					if (y > 1 && y < 4) {
@@ -138,7 +138,7 @@ public class PatternCardController {
 		this.gameController.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 
-	private WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
+	public WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field) {
 		fieldController = new WindowPatternSquareController[5][4];
 
 		for (int x = 0; x < fieldController.length; x++) {
@@ -212,5 +212,33 @@ public class PatternCardController {
 				}
 			}
 		}
+	}
+
+	public void reloadDice() {
+		System.out.println("RELOAD DICE RELOAD DICE RELOAD DICE");
+		System.out.println("FIELDCONTROLLER LENGT = " + fieldController.length);
+		for (int x = 0; x < fieldController.length; x++) {
+			for (int y = 0; y < fieldController[x].length; y++) {
+				fieldController[x][y].removeDice();
+				fieldController[x][y].removeDiceFromView();
+				
+				GameDiceModel dice = chosenCard.loadDice(playerController.getPlayerID(), x + 1, y + 1); 
+				if (dice != null) {
+					fieldController[x][y].setDice(dice);
+				}
+			}
+		}
+	}
+
+	public WindowPatternSquareController[][] getSquareController() {
+		fieldController = new WindowPatternSquareController[5][4];
+		PatternCardFieldModel[][] field = chosenCard.getField();
+		
+		for (int x = 0; x < fieldController.length; x++) {
+			for (int y = 0; y < fieldController[x].length; y++) {
+				fieldController[x][y] = new WindowPatternSquareController(gameController, this, field[x][y]);
+			}
+		}
+		return this.fieldController;
 	}
 }

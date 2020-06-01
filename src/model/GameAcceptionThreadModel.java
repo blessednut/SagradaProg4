@@ -28,6 +28,9 @@ public class GameAcceptionThreadModel {
 	public GameAcceptionThreadDB getGameAcceptionThreadDB() {
 		return gameAcceptionThreadDB;
 	}
+	public void setAccepted(int gameid) {
+		gameAcceptionThreadDB.setAccepted(gameid);
+	}
 
 
 

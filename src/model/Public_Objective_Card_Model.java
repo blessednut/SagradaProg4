@@ -41,6 +41,9 @@ public class Public_Objective_Card_Model {
 	public ArrayList<String> getCardNamesPerGame(){
 		return cardNamesPerGame;
 	}
+	public Boolean getEmpty(int gameid) {
+		return pocDB.getEmpty(gameid);
+	}
 
 	public String[] getNames (int idgame) {
 		return pocDB.getNames(idgame);
