@@ -35,6 +35,7 @@ public class GamePane extends BorderPane {
 	private WindowPatternView ownWindow;
 	private DraftPoolView draftpool;
 	private Button home;
+	private Button endTurn;
 	private Label isTurn;
 	private HBox gamePaneBottom;
 	private VBox gamePaneLeft;
@@ -108,7 +109,7 @@ public class GamePane extends BorderPane {
 				gameController.makeCC();
 				gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
 //		End turn button
-		Button endTurn = new Button("Einde beurt");
+		endTurn = new Button("passen");
 		home = new Button("home");
 		endTurn.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		endTurn.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -337,5 +338,13 @@ public class GamePane extends BorderPane {
 	}
 	public Button getShufflePublicObjectivecards() {
 		return shufflePublicObjectiveCards;
+	}
+	
+	public void setEndTurnText(boolean endturn) {
+		if(endturn) {
+			endTurn.setText("einde beurd");
+		}else {
+			endTurn.setText("passen");
+		}
 	}
 }
