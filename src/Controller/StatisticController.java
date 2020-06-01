@@ -1,7 +1,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import View.StatisticsPane;
 import model.StatisticModel;

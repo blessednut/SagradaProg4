@@ -1,8 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import View.Private_Objective_Card;
 import javafx.scene.layout.Pane;
 import model.Private_Objective_Card_Model;

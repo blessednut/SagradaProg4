@@ -1,9 +1,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.DefaultComboBoxModel;
 
 import model.HomeThreadModel;
 

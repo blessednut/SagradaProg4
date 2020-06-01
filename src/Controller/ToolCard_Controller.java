@@ -3,8 +3,6 @@ package Controller;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import View.ToolCard;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

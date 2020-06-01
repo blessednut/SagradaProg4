@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.GameDiceModel;
 import model.RoundtrackModel;
 
 public class RoundtrackController {
