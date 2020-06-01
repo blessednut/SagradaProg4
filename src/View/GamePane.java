@@ -198,6 +198,7 @@ public class GamePane extends BorderPane {
 		myPersonalScoreLabel.setFont(new Font("Arial", 32));
 		myPersonalScoreLabel.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(myPersonalScoreLabel);
+		//System.out.println(makePrivateScoreLabel());
 		gamePaneRight.getChildren().add(makePrivateScoreLabel());
 
 		Label publicScore = new Label("Publieke score:");
@@ -337,9 +338,4 @@ public class GamePane extends BorderPane {
 	public Button getShufflePublicObjectivecards() {
 		return shufflePublicObjectiveCards;
 	}
-
-
-
-
-
 }

@@ -40,9 +40,12 @@ public class Public_Objective_Card_Controller {
 			temp = pocm.getCardNamesPerGame().get(i);
 			cards.add(temp);
 			panes.add(new Public_Objective_Card(temp));
-			
-			
-			
+		}
+		
+		if (pocm.getCardNamesPerGame().size() != 0) {
+			this.gamecontroller.setPublicCardsAdded(true);
+		} else {
+			this.gamecontroller.setPublicCardsAdded(false);
 		}
 	}
 	

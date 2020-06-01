@@ -278,7 +278,7 @@ public class GameController {
 				gamePane.getGamePaneBottom().getChildren().add(this.getTCC().getPanes().get(i));
 
 			}
-			toolCardsAdded = true;
+			//toolCardsAdded = true;
 		}
 
 //		Public objective cards
@@ -287,9 +287,17 @@ public class GameController {
 			for (int i = 0; i < this.getPublic_OCC().getPanes().size(); i++) {
 				gamePane.getGamePaneCenter().getChildren().add(this.getPublic_OCC().getPanes().get(i));
 			}
-			publicCardsAdded = true;
+			//publicCardsAdded = true;
 		}
 
+	}
+	
+	public void setToolCardsAdded (boolean bool) {
+		this.toolCardsAdded = bool;
+	}
+	
+	public void setPublicCardsAdded (boolean bool) {
+		this.publicCardsAdded = bool;
 	}
 
 	public boolean getIsTurn() {

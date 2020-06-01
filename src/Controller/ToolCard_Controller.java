@@ -67,16 +67,20 @@ public class ToolCard_Controller {
 		tcm.setToolCardsInGame(gameID);
 		String temp = "";
 		for (int i = 0; i < tcm.getCardNamesPerGame().size(); i++) {
+			System.out.println("CARDS PER GAME = " + tcm.getCardNamesPerGame().size());
 			temp = tcm.getCardNamesPerGame().get(i);
 			cards.add(temp);
 			panes.add(new ToolCard(temp, this));
-			
 		}
 //		Elke toolcard krijgt krijgt nu mee welke methode ze moeten gebruiken als ze aangeklikt worden.
-		panes.get(0).getButton().setOnAction(Event -> useCard(cards.get(0)));
-		panes.get(1).getButton().setOnAction(Event -> useCard(cards.get(1)));
-		panes.get(2).getButton().setOnAction(Event -> useCard(cards.get(2)));
-		
+		if (tcm.getCardNamesPerGame().size() != 0) {
+			panes.get(0).getButton().setOnAction(Event -> useCard(cards.get(0)));
+			panes.get(1).getButton().setOnAction(Event -> useCard(cards.get(1)));
+			panes.get(2).getButton().setOnAction(Event -> useCard(cards.get(2)));
+			gameController.setToolCardsAdded(true);
+		} else {
+			gameController.setToolCardsAdded(false);
+		}
 	}
 
 	public void useCard(String cardName) {

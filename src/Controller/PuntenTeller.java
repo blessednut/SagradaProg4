@@ -432,6 +432,15 @@ public class PuntenTeller {
 //		for (String a : publicObjCardArray) {
 //			System.out.println(a);
 //		}
+		if (privateObjColor == null) {
+			return 0;
+		}
+		
+		for (int i = 0; i < publicObjCardArray.length; i++) {
+			if (publicObjCardArray[i] == null) {
+				return 0;
+			}
+		}
 		
 		WindowPatternSquareController[][] fieldController = playerController.getPatternCard().getFieldController();
 		
