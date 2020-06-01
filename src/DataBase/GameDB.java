@@ -63,8 +63,8 @@ public class GameDB {
 	public void updatePlayerTurn(int seqNR) {
 		int gameID = GM.getGameId();
 		int playerID = getPlayerID(gameID, seqNR);
-		System.out.println("gameID = " + gameID);
-		System.out.println("playerID = " + playerID);
+//		System.out.println("gameID = " + gameID);
+//		System.out.println("playerID = " + playerID);
 		try {
 			String query = "update game set turn_idplayer = " + playerID + " WHERE idgame = " + gameID + ";";
 			ps = DBCon.getInstance().getCon().prepareStatement(query);

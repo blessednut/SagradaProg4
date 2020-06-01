@@ -26,10 +26,12 @@ public class PuntenTeller {
 	
 	private void countEmptySquares(WindowPatternSquareController[][] fieldController) {
 		//emptySquares = 0;
-		for(int x = 0; x < fieldController.length; x++) {
-			for(int y = 0; y < fieldController[x].length; y++) {
-				if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getSquare().getDice() == null) {
-					emptySquares++;
+		if (fieldController != null) {
+			for(int x = 0; x < fieldController.length; x++) {
+				for(int y = 0; y < fieldController[x].length; y++) {
+					if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getSquare().getDice() == null) {
+						emptySquares++;
+					}
 				}
 			}
 		}
@@ -257,8 +259,7 @@ public class PuntenTeller {
 							y++;
 							x = -1;
 							if(x == 4) {
-								break;
-								
+								break;	
 							}
 						}
 					}else {
@@ -290,7 +291,6 @@ public class PuntenTeller {
 							x = -1;
 							if(y == 4) {
 								break;
-								
 							}
 						}
 					}
@@ -300,7 +300,6 @@ public class PuntenTeller {
 						x = -1;
 						if(y == 4) {
 							break;
-							
 						}
 					}
 				}

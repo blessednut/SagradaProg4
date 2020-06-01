@@ -68,6 +68,7 @@ public class GameAcceptionThreadController extends Thread {
 					public void run() {
 						inViteController.getInviteStart().getNumberRemaining().setText("niet geaccepteed: "+amountNotAcceptedString);
 						inViteController.getInviteStart().getStartGame().setVisible(true);
+						gameThreadModel.setAccepted(gameid);
 					}
 				});
 				return;

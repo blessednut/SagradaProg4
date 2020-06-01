@@ -1,4 +1,4 @@
-package Controller;
+	package Controller;
 
 import View.CreditsPane;
 import View.HomePane;
@@ -8,14 +8,21 @@ import View.StatisticsPane;
 
 public class HomeController {
 
-	private HomePane homeView;
-	private InviteController inviteController;
-	private CreditsPane creditsView;
-	private StatisticsPane statsView;
-	private MySceneController mySceneController;
-	private GameController gameController;
-	private LogInController loginController;
-	private HomeThreadController homeThreadController;
+	private HomePane v_home;
+	private InviteController c_Invite;
+	private CreditsPane v_credits;
+	
+	
+	
+	//private StatisticsPane v_statistics;
+	private StatisticController statisticController;
+	
+	
+	
+	private MySceneController myScene;
+	private GameController c_game;
+	private LogInController c_login;
+	private HomeThreadController c_hometc;
 	private OpenGamesController OGC;
 
 	public HomeController(MySceneController mySceneController, LogInController loginController) {
@@ -31,7 +38,7 @@ public class HomeController {
 		inviteController = new InviteController(gameController,this);
 		
 		//aan maak OpenGamesController.
-		OGC = new OpenGamesController(loginController);
+		OGC = new OpenGamesController(c_login, c_game);
 
 		// aan maak homethreadController.
 		this.homeThreadController = new HomeThreadController(loginController, inviteController);
@@ -41,17 +48,15 @@ public class HomeController {
 
 
 		// aan maak credits pane
-		creditsView = new CreditsPane();
-		// aan maak statspane.
-		statsView = new StatisticsPane();
-
-		// buttons
+		v_credits = new CreditsPane();
 		
-		homeView.getUitloggen().setOnAction(e -> mySceneController.getMyscene().switchPane(loginController.getLogin()));
-		homeView.getVrienden().setOnAction(e -> {openInvitePane();homeView.makeInvites();});
-		homeView.getStatistick().setOnAction(e -> openStatisticsPane());
-		homeView.getCredits().setOnAction(e -> openCreditsPane());
-		homeView.getGames().setOnAction(e -> { openOpenGamesPane(); loadAllGames();});
+		//v_statistics = new StatisticsPane();
+		statisticController = new StatisticController();
+		v_home.getUitloggen().setOnAction(e -> myScene.getMyscene().switchPane(c_login.getLogin()));
+		v_home.getVrienden().setOnAction(e -> {openInvitePane();v_home.makeInvites();});
+		v_home.getStatistick().setOnAction(e -> openStatisticsPane());
+		v_home.getCredits().setOnAction(e -> openCreditsPane());
+		v_home.getGames().setOnAction(e -> { openOpenGamesPane();OGC.getOGM().GetOpenGameID(c_login.getUsername());OGC.fillGames();});
 
 	}
 
@@ -60,7 +65,7 @@ public class HomeController {
 	}
 
 	public void openStatisticsPane() {
-		homeView.makeReservedSpace(statsView);
+		v_home.makeReservedSpace(statisticController.getView());
 	}
 
 	public void openCreditsPane() {
@@ -80,10 +85,6 @@ public class HomeController {
 
 	public HomePane getV_home() {
 		return homeView;
-	}
-
-	public StatisticsPane getV_statistics() {
-		return statsView;
 	}
 
 	public LogInController getC_login() {

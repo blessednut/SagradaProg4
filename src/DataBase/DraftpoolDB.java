@@ -51,7 +51,7 @@ public class DraftpoolDB {
 					"from gamedie g \r\n" + 
 					"where (g.idgame, g.dienumber, g.diecolor) not in (select p.idgame, p.dienumber, p.diecolor from playerframefield p where idgame = " + idgame + ") and idgame = " + idgame + " and roundID = " + roundID + ";";
 			ResultSet resultset = st.executeQuery(query);
-			System.out.println("DICELOADING");
+			//System.out.println("DICELOADING");
 			while (resultset.next()) {
 //				System.out.println("IDGAME = " + idgame);
 //				System.out.println("RoundID = " + roundID);

@@ -122,6 +122,23 @@ public class ToolCardDB {
 		return roundID;
 	}
 	
+	public Boolean getEmpty(int gameid) {
+		Boolean bl = true;
+		try {
+			String query = "select idtoolcard from gametoolcard where idgame = "+gameid+";";
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				bl = false;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			bl = true;
+		}
+		return bl;
+	}
+	
+	
 
 
 }

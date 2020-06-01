@@ -6,13 +6,13 @@ import model.OpenGamesModel;
 public class OpenGamesController {
 	private OpenGamesPane OGP;
 	private OpenGamesModel OGM;
-	private LogInController logInController;
+	private GameController gameC;
 
-	public OpenGamesController(LogInController logInController) {
-		this.logInController = logInController;
+	public OpenGamesController(LogInController logInController, GameController gameC) {
 		OGM = new OpenGamesModel();
 		OGP = new OpenGamesPane();
 		OGP.getOpenGame().setOnAction(e -> openGame());
+		this.gameC = gameC;
 
 	}
 
@@ -57,6 +57,8 @@ public class OpenGamesController {
 		if (getSelectedGameID() != 0) {
 //			TODO: roept methode aan die alle zooi van t spel opent
 //			geef getSelectedGameID(); mee aan said methode
+			gameC.createGamePane(getSelectedGameID());
+			
 		}
 
 	}

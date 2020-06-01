@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import model.GameDiceModel;
 import model.PatternCardFieldModel;
 
 public class WindowPatternDB {
@@ -116,5 +117,20 @@ public class WindowPatternDB {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public GameDiceModel loadDice(int idplayer, int x, int y) {
+		GameDiceModel dice = null;
+		try {
+			String query = "SELECT * FROM playerframefield AS p JOIN gamedie AS g ON p.idgame = g.idgame AND p.dienumber = g.dienumber AND p.diecolor = g.diecolor WHERE idplayer = " + idplayer + " AND position_x = " + x + " AND position_y = " + y;
+			ResultSet rs = st.executeQuery(query);
+
+			if (rs.next()) {
+				dice = new GameDiceModel(rs.getInt("idgame"), rs.getInt("dienumber"), rs.getString("diecolor"), rs.getInt("eyes"), rs.getInt("roundtrack"), rs.getInt("roundID"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dice;
 	}
 }

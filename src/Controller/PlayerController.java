@@ -11,6 +11,15 @@ public class PlayerController {
 		this.gameController = gameController;
 		this.playerModel = new PlayerModel(gameID, username, isCurrentPlayer);
 		this.cardController = new PatternCardController(this.gameController, this);
+		this.cardController.loadChosenCard();
+	}
+	public PlayerController (GameController gameController, int gameID, String username, boolean isCurrentPlayer, boolean isOldGame) {
+		this.gameController = gameController;
+		this.playerModel = new PlayerModel(gameID, username, isCurrentPlayer);
+		this.cardController = new PatternCardController(this.gameController, this);
+	}
+	public void loadCards() {
+		this.cardController.loadChosenCard();
 	}
 	
 	public PatternCardController getPatternCard () {

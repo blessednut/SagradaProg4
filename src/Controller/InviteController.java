@@ -26,6 +26,8 @@ public class InviteController {
 	private ArrayList<String> ColorArray = new ArrayList<>();
 	private int randomColorInt;
 	private boolean added = true;
+	
+	private boolean userFound = false;
 
 	public InviteController(GameController gameController, HomeController home) {
 		this.gameController = gameController;
@@ -48,6 +50,14 @@ public class InviteController {
 						invitePane.getName3().getText());
 				break;
 			}
+			if(!userFound) {
+				Alert alert = new Alert(AlertType.INFORMATION, "1 of meerdere gebruikersnamen bestaan niet.", ButtonType.OK);
+				alert.showAndWait();
+				if (alert.getResult() == ButtonType.OK) {
+					alert.close();
+				}
+				userFound = false;
+			}
 		});
 		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
 		
@@ -57,17 +67,19 @@ public class InviteController {
 					if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName3().getText()) <= 0) {
 						inVitePlayer();
 						acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
-						createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));				
+						createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
+						this.invitePane.getInviteButton().setVisible(false);
 					}
 				}
 			} else {
-				Alert error = new Alert(AlertType.ERROR, "je hebt deze persoon al ��n keer uitgenodigd", ButtonType.OK);
+				Alert error = new Alert(AlertType.ERROR, "je hebt deze persoon al een keer uitgenodigd", ButtonType.OK);
 				error.showAndWait();
 				if(error.getResult() == ButtonType.OK) {
 					error.close();
 				}
 			}
-			
+			this.invitePane.getInviteButton().setVisible(false);
+			this.invitePane.getSearch().setVisible(true);
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
@@ -172,6 +184,7 @@ public class InviteController {
 				if (inviteModel.checkInDatabase(username).equals(username)) {
 					invitePane.getInviteButton().setVisible(true);
 					invitePane.getSearch().setVisible(false);
+					userFound = true;
 				}
 			}
 		} catch (
@@ -190,6 +203,7 @@ public class InviteController {
 							&& inviteModel.checkInDatabase(username2).equals(username2)) {
 						invitePane.getInviteButton().setVisible(true);
 						invitePane.getSearch().setVisible(false);
+						userFound = true;
 					}
 				}
 			}
@@ -209,6 +223,7 @@ public class InviteController {
 							&& inviteModel.checkInDatabase(username3).equals(username3)) {
 						invitePane.getInviteButton().setVisible(true);
 						invitePane.getSearch().setVisible(false);
+						userFound = true;
 					}
 				}
 			}

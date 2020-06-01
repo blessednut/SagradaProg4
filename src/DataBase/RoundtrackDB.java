@@ -28,8 +28,9 @@ public class RoundtrackDB {
             }
             return remainingDice;
         } catch (Exception e) {
-            System.out.println("RoundtrackDB:");
-            System.out.println(e);
+//            System.out.println("RoundtrackDB:");
+//            System.out.println(e);
+        	e.printStackTrace();
         }
         return null;
     }

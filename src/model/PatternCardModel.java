@@ -216,7 +216,7 @@ public class PatternCardModel {
 			for (int y = 0; y < field[y].length; y++) {
 				if (!field[x][y].isEmpty()) {
 					GameDiceModel fieldDice = field[x][y].getDice();
-					System.out.println("FieldDice = " + fieldDice.getDieNumber());
+					//System.out.println("FieldDice = " + fieldDice.getDieNumber());
 				}
 			}
 		}
@@ -240,5 +240,9 @@ public class PatternCardModel {
 				field[x][y].loadDice(controller.getPlayerController().getPlayerID());
 			}
 		}
+	}
+
+	public GameDiceModel loadDice(int idplayer, int x, int y) {
+		return this.con.loadDice(idplayer, x, y);
 	}
 }

@@ -56,5 +56,9 @@ public class Public_Objective_Card_Controller {
 	public String[] getNames (int idgame) {
 		return this.pocm.getNames(idgame);
 	}
+	
+	public Boolean getEmpty(int gameid) {
+		return pocm.getEmpty(gameid);
+	}
 }
 

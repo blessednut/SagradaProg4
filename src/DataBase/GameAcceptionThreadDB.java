@@ -72,6 +72,15 @@ public class GameAcceptionThreadDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setAccepted(int gameid) {
+		try {
+			String query = "update player set playstatus = 'accepted' where idgame = "+gameid+" and playstatus = 'challenger';";
+			st.execute(query);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public DBCon getConNection() {
 		return conNection;

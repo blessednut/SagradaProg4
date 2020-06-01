@@ -79,4 +79,20 @@ public class Public_Objective_CardDB {
 		return cardIDsPerGame;
 
 	}
+	
+	public Boolean getEmpty(int gameID) {
+		Boolean bl = true;
+		try {
+			String query = "select idpublic_objectivecard from gameobjectivecard_public where idgame = "+gameID+";";
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				bl = false;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			bl = true;
+		}
+		return bl;
+	}
 }

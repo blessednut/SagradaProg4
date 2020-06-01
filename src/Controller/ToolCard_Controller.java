@@ -39,29 +39,29 @@ public class ToolCard_Controller {
 	}
 
 	public void getCards() {
-//		String temp;
-//		while(cards.size() < 3) {
-//			boolean toolCardInGame = false;
-//			temp = tcm.getToolCard();
-//			for(int i = 0; i < cards.size(); i++) {
-//				if(cards.get(i).equals(temp)) {
-//					toolCardInGame = true;
-//				}
-//			}
-//			if(!toolCardInGame) {
-//				cards.add(temp);
-//				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
-//			}
-//		}
-		cards.add("Lathekin");
-		cards.add("Lens Cutter");
-		cards.add("Tap Wheel");
-//		panes.add(new ToolCard("Lathekin", this));
-//		panes.add(new ToolCard("Lens Cutter", this));
-//		panes.add(new ToolCard("Cork-backed Straightedge", this));
-		tcm.insertToolCardIntoGameToolCardTable(4, gameController.getM_game().getGameId());
-		tcm.insertToolCardIntoGameToolCardTable(5, gameController.getM_game().getGameId());
-		tcm.insertToolCardIntoGameToolCardTable(12, gameController.getM_game().getGameId());
+		String temp;
+		while(cards.size() < 3) {
+			boolean toolCardInGame = false;
+			temp = tcm.getToolCard();
+			for(int i = 0; i < cards.size(); i++) {
+				if(cards.get(i).equals(temp)) {
+					toolCardInGame = true;
+				}
+			}
+			if(!toolCardInGame) {
+				cards.add(temp);
+				tcm.insertToolCardIntoGameToolCardTable(tcm.getToolCardID(), gameController.getM_game().getGameId());
+			}
+		}
+//		cards.add("Lathekin");
+//		cards.add("Lens Cutter");
+//		cards.add("Tap Wheel");
+////		panes.add(new ToolCard("Lathekin", this));
+////		panes.add(new ToolCard("Lens Cutter", this));
+////		panes.add(new ToolCard("Cork-backed Straightedge", this));
+//		tcm.insertToolCardIntoGameToolCardTable(4, gameController.getM_game().getGameId());
+//		tcm.insertToolCardIntoGameToolCardTable(5, gameController.getM_game().getGameId());
+//		tcm.insertToolCardIntoGameToolCardTable(12, gameController.getM_game().getGameId());
 		
 		
 
@@ -547,6 +547,14 @@ public class ToolCard_Controller {
 	}
 	public ArrayList<ToolCard> getPanes() {
 		return panes;
+	}
+	
+	public ToolCardModel getTCM() {
+		return tcm;
+	}
+	public Boolean getEmpty(int gameid) {
+		return tcm.getEmpty(gameid);
+		
 	}
 
 }
