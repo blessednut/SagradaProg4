@@ -22,7 +22,7 @@ public class DraftpoolSquareController {
 	public void onClick () {
 		if (gameController.getIsTurn()) {
 			if (dice != null) {
-				System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
+				//System.out.println("Dice color = " + dice.colorProperty().getValue() + " eyes = " + dice.valueProperty().getValue());
 				controller.setSelectedDice(dice, this);
 			}
 		}

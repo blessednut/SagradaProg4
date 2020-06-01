@@ -42,5 +42,8 @@ public class Public_Objective_Card_Model {
 		return cardNamesPerGame;
 	}
 
+	public String[] getNames (int idgame) {
+		return pocDB.getNames(idgame);
+	}
 }
 

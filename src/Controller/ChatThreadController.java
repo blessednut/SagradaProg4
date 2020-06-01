@@ -9,6 +9,7 @@ public class ChatThreadController extends Thread{
 	private ChatView ChatV;
 	private String message;
 	private int idgame;
+	String mostRecentMessage;
 
 	
 	private boolean running;
@@ -20,6 +21,7 @@ public class ChatThreadController extends Thread{
 		this.ChatV = ChatV;
 		running = true;
 		message = "";
+		mostRecentMessage = "";
 	}
 
 
@@ -27,13 +29,14 @@ public class ChatThreadController extends Thread{
 	public void run() {
 		while(running) {
 			try {
-				String newMessage = ChatM.getUsername(idgame) + " :" + ChatM.getMessage(idgame);
+				String newMessage = ChatM.getUsername(idgame) + ": " + ChatM.getMessage(idgame);
 
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						if(!message.equals(newMessage)) {
-							message = newMessage;
+						if(!mostRecentMessage.equals(newMessage)) {
+							mostRecentMessage = newMessage;
+							message = message + "\n" + newMessage;
 							ChatV.setRecentChat(message);
 						}
 

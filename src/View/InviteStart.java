@@ -24,7 +24,7 @@ public class InviteStart extends Pane {
 		this.setMinSize(100, 100);
 		this.setPrefSize(100, 100);
 		addInvite(gameID);
-		System.out.println("InviteStart: Ik wordt aangemaakt");
+		//System.out.println("InviteStart: Ik wordt aangemaakt");
 	}
 	
 

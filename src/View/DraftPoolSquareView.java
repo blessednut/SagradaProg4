@@ -123,7 +123,7 @@ public class DraftPoolSquareView extends StackPane {
 	}
 	
 	private void onClick() {
-		System.out.println("Clicked");
+		//System.out.println("Clicked");
 		this.diceController.onClick();
 	}
 }

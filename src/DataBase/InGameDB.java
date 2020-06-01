@@ -157,4 +157,66 @@ public class InGameDB {
 		}
 		return names;
 	}
+
+	public String getPlayerID(int playerID) {
+		String name = null;
+		try {
+			String query = "SELECT username FROM player WHERE idplayer = " + playerID;
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
+				name = resultset.getString("username");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return name;
+	}
+	
+	public void updateScore (int idplayer, int score) {
+		try {
+			String query = "UPDATE player SET score = " + score + " WHERE idplayer = " + idplayer;
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPlayStatusFinished (int idplayer) {
+		try {
+			String query = "UPDATE player SET playstatus = 'finished' WHERE idplayer = " + idplayer;
+			ps = DBCon.getInstance().getCon().prepareStatement(query);
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getWinner (int idgame) {
+		String winner = null;
+		try {
+			String query = "SELECT username, score FROM player WHERE idgame = " + idgame + " ORDER BY score DESC LIMIT 1;";
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
+				winner = resultset.getString("username");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return winner;
+	}
+	
+	public boolean gameEnded (int idgame) {
+		boolean gameEnded = false;
+		try {
+			String query = "SELECT * FROM player WHERE playstatus = 'finished' AND idgame = " + idgame;
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
+				gameEnded = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gameEnded;
+	}
 }

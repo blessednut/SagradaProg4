@@ -49,5 +49,9 @@ public class Public_Objective_Card_Controller {
 	public ArrayList<Public_Objective_Card> getPanes() {
 		return panes;
 	}
+	
+	public String[] getNames (int idgame) {
+		return this.pocm.getNames(idgame);
+	}
 }
 
