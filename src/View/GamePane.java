@@ -213,8 +213,8 @@ public class GamePane extends BorderPane {
 	}
 
 	private void onClickEndTurn() {
-		System.out.println("GamePane:");
-		System.out.println("End Turn");
+//		System.out.println("GamePane:");
+//		System.out.println("End Turn");
 		this.gameController.endTurn();
 	}
 

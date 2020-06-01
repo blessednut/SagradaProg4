@@ -76,16 +76,20 @@ public class GameController {
 
 		//Maak opponents View
 		//addOpponentView();
-
+		int draftPoolRoundID = gameModel.getRoundID();
+		if (draftPoolRoundID % 2 == 0) {
+			draftPoolRoundID = draftPoolRoundID - 1;
+		}
 		this.draftpoolController = new DraftpoolController(this);
-
-		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
+		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), draftPoolRoundID);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
 		System.out.println("isPlayerTurn = " + isTurn);
 	}
+	
 	public void createGamePane(int oldGameID) {
+		System.out.println("CREATEGAMEPANE MET OLD ID = " + oldGameID);
 		this.gameModel.setGameId(oldGameID);
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
@@ -93,6 +97,9 @@ public class GameController {
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true);
 		playerController.loadCards();
+		System.out.println("OUDE SPEL STARTEN SPELER ID = " + playerController.getPlayerID());
+		//playerController.loadDice
+		
 
 		//gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -101,16 +108,18 @@ public class GameController {
 		}
 
 		//Maak opponents View
-		//addOpponentView();
-
+		int draftPoolRoundID = gameModel.getRoundID();
+		if (draftPoolRoundID % 2 == 0) {
+			draftPoolRoundID = draftPoolRoundID - 1;
+		}
 		this.draftpoolController = new DraftpoolController(this);
-
-		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
+		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), draftPoolRoundID);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
 		System.out.println("isPlayerTurn = " + isTurn);
 		this.gamePane.createGamePane();
+		playerController.getPatternCard().reloadDice();
 	}
 
 	public GameDiceModel pickDiceFromBag() {
@@ -146,8 +155,6 @@ public class GameController {
 
 	public boolean placeDice(GameDiceModel dice) {
 		return this.playerController.getPatternCard().placeDice(dice);
-//		System.out.println("GameController:");
-//		System.out.println(dice.getDieNumber());
 	}
 
 	private int getRandomInt(int min, int max) {
@@ -177,15 +184,8 @@ public class GameController {
 		} else {
 			if (playerSeqnr == 1) {
 				// Dobbelstenen wegschrijven naar rondespoor
-				System.out.println("GAMECONTROLLER MOVE TO ROUND TRACK");
-				System.out.println("ROUND ID = " + gameModel.getRoundID());
-				System.out.println("Round NUMBER = " + gameModel.getRoundNR());
 				this.draftpoolController.moveToRoundtrack(gameModel.getRoundNR());
 				this.roundtrackController.fillRoundtrack();
-
-				// Make new draftpool
-				this.draftpoolController.createDraftPool(highestSeqnr, gameModel.getRoundID());
-				gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 
 				// RoundID + 1 wanneer < 20 veranderen
 				if (roundID == 20) {
@@ -194,7 +194,7 @@ public class GameController {
 					// bepaal winnaar
 				} else {
 					// Nieuwe segNr zetten
-					System.out.println("UPDATE SEQNR");
+					//System.out.println("UPDATE SEQNR");
 					int[] playerIDs = new int[highestSeqnr];
 					for (int i = 0; i < playerIDs.length; i++) {
 						playerIDs[i] = gameModel.getPlayerID(i + 1);
@@ -208,20 +208,15 @@ public class GameController {
 						}
 					}
 
-//					for (int i = 1; i < highestSeqnr; i++) {
-//						int player = gameModel.getPlayerID(i);
-//						if (i == 1) {
-//							gameModel.updateSeqNR(player, highestSeqnr);
-//						} else {
-//							gameModel.updateSeqNR(player, i--);
-//						}
-//					}
-
 					// Nieuwe turn speler met seqnr 1
 					int newPlayerID = gameModel.getPlayerID(1);
 					gameModel.changeTurnPlayerID(newPlayerID);
 					gameModel.setRoundID();
 				}
+				
+				System.out.println("ENDTURN CREATE DRAFTPOOL CHECK CHECK");
+				this.draftpoolController.createDraftPool(highestSeqnr, gameModel.getRoundID());
+				gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 			} else {
 				// Turn player id aanpassen
 				// met playerSeqnr - 1
@@ -231,7 +226,6 @@ public class GameController {
 		}
 
 		checkPlayerTurn();
-		System.out.println("isPlayerTurn = " + isTurn);
 	}
 
 	public void checkPlayerTurn() {
@@ -266,7 +260,6 @@ public class GameController {
 		else {
 			return true;
 		}
-		
 	}
 	
 	public Boolean publicObjectiveCardExists() {
@@ -296,8 +289,6 @@ public class GameController {
 
 		//Laad huidige speler moet nog goed getest worden
 		playerController.getPatternCard().loadPatternCard();
-		// this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(),
-		// gameModel.getRoundID());
 		this.draftpoolController.loadDice(gameModel.getGameId());
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
 
@@ -322,7 +313,6 @@ public class GameController {
 		if(toolCardExists() && publicObjectiveCardExists()) {
 			this.gamePane.getEndTurn().setVisible(true);
 		}
-
 	}
 	
 	public void resetCardBooleans() {
@@ -347,8 +337,6 @@ public class GameController {
 		CC.getThread().terminate();
 	}
 
-
-
 	public void loadOpponent () {
 		int counter = 0;
 		for (PlayerController opponent : opponents) {
@@ -367,17 +355,6 @@ public class GameController {
 		return opponents.size();
 	}
 
-//	public void addOpponentView () {
-//		for (PlayerController opponent : opponents) {
-//			if (opponent.getPatternCard().getChosenCard() != null) {
-//				gamePane.addOpponentWindow(opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
-//			} else {
-//				//add Black rectangle
-//				gamePane.addOpponentSquare();
-//			}
-//		}
-//	}
-
 	public int getseqNumber() {
 		return gameModel.getSeqNR(playerController.getPlayerID());
 	}
@@ -387,23 +364,12 @@ public class GameController {
 	}
 
 	public void setOwnWindow(PatternCardModel chosenCard, PatternCardController patternCardController) {
-		gamePane.setOwnWindow(new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(),
-					this.makeSquareView(chosenCard.getField(), patternCardController)));
-		
-	}
-	public WindowPatternSquareController[][] makeSquareView(PatternCardFieldModel[][] field, PatternCardController patternCardController ) {
-		WindowPatternSquareController[][] fieldController = new WindowPatternSquareController[5][4];
-
-		for (int x = 0; x < fieldController.length; x++) {
-			for (int y = 0; y < fieldController[x].length; y++) {
-				fieldController[x][y] = new WindowPatternSquareController(this, patternCardController, field[x][y]);
-			}
-		}
-		return fieldController;
+		WindowPatternSquareController[][] squareController = null;
+		squareController = playerController.getPatternCard().getSquareController();
+		gamePane.setOwnWindow(new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(), squareController));
 	}
 
 	public int getCurrentPlayerID() {
-		// TODO Auto-generated method stub
 		return playerController.getPlayerID();
 	}
 }

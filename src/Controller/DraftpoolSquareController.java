@@ -33,8 +33,6 @@ public class DraftpoolSquareController {
 	}
 	
 	public void removeDice () {
-//		this.dice.colorProperty().setValue(null);
-//		this.dice.valueProperty().setValue(null);
 		this.dice = null;
 		this.updateView();
 	}

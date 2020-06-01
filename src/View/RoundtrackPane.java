@@ -49,7 +49,7 @@ public class RoundtrackPane extends BorderPane{
     public void addDice(int roundtrack, Color color, int eyes) { 
         DiceView dv = new DiceView(color, eyes);
         dv.drawDice(WIDTH, HEIGHT);
-        System.out.println("ROUNDTRACK = " + (roundtrack - 1));
+        //System.out.println("ROUNDTRACK = " + (roundtrack - 1));
         rounds.get(roundtrack-1).getChildren().add(dv);
     }
     

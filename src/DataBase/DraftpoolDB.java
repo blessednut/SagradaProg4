@@ -17,9 +17,9 @@ public class DraftpoolDB {
 	}
 
 	public void updateRountrack(int idgame, int dienumber, String diecolor, int roundtrack) {
-		System.out.println("UPDATE ROUNDTRACK");
-		System.out.println("idgame = " + idgame + " dienumber = " + dienumber + " diecolor = " + diecolor
-				+ " roundtrack = " + roundtrack);
+//		System.out.println("UPDATE ROUNDTRACK");
+//		System.out.println("idgame = " + idgame + " dienumber = " + dienumber + " diecolor = " + diecolor
+//				+ " roundtrack = " + roundtrack);
 		try {
 			String query = "UPDATE gamedie set roundtrack = " + roundtrack + " WHERE idgame = " + idgame
 					+ " AND dienumber = " + dienumber + " AND diecolor = '" + diecolor + "';";
@@ -51,13 +51,13 @@ public class DraftpoolDB {
 					"from gamedie g \r\n" + 
 					"where (g.idgame, g.dienumber, g.diecolor) not in (select p.idgame, p.dienumber, p.diecolor from playerframefield p where idgame = " + idgame + ") and idgame = " + idgame + " and roundID = " + roundID + ";";
 			ResultSet resultset = st.executeQuery(query);
-			System.out.println("DICELOADING");
+			//System.out.println("DICELOADING");
 			while (resultset.next()) {
-				System.out.println("IDGAME = " + idgame);
-				System.out.println("RoundID = " + roundID);
-				System.out.println("Dienumber = " + resultset.getInt("dienumber"));
-				System.out.println("Diecolor = " + resultset.getString("diecolor"));
-				System.out.println("Eyes = " + resultset.getInt("eyes"));
+//				System.out.println("IDGAME = " + idgame);
+//				System.out.println("RoundID = " + roundID);
+//				System.out.println("Dienumber = " + resultset.getInt("dienumber"));
+//				System.out.println("Diecolor = " + resultset.getString("diecolor"));
+//				System.out.println("Eyes = " + resultset.getInt("eyes"));
 				dice.add(new GameDiceModel(resultset.getInt("idgame"), resultset.getInt("dienumber"), resultset.getString("diecolor"), resultset.getInt("eyes"), resultset.getInt("roundtrack"), resultset.getInt("roundID")));
 			}
 		} catch (Exception e) {

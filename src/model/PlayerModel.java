@@ -18,10 +18,10 @@ public class PlayerModel {
 		this.playerID = importPlayerID();
 		this.isCurrentPlayer = isCurrentPlayer;
 		
-		System.out.println("PlayerModel:");
-		System.out.println("Player ID = " + this.playerID);
-		System.out.println("Game ID = " + this.gameID);
-		System.out.println("Username = " + this.username);
+//		System.out.println("PlayerModel:");
+//		System.out.println("Player ID = " + this.playerID);
+//		System.out.println("Game ID = " + this.gameID);
+//		System.out.println("Username = " + this.username);
 	}
 
 	private int importPlayerID() {
