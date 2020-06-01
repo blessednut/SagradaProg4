@@ -31,7 +31,7 @@ public class GameController {
 
 	private Boolean publicCardsAdded = false;
 	private Boolean toolCardsAdded = false;
-	
+
 	private int amountOfDice = 0;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
@@ -81,7 +81,7 @@ public class GameController {
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
-		System.out.println("isPlayerTurn = " + isTurn);
+		// System.out.println("isPlayerTurn = " + isTurn);
 	}
 
 	public GameDiceModel pickDiceFromBag() {
@@ -137,7 +137,7 @@ public class GameController {
 
 	public void endTurn() {
 		this.amountOfDice = 0;
-		
+
 		this.playerController.updatePlayerFrameField();
 
 		int roundID = gameModel.getRoundID();
@@ -176,45 +176,80 @@ public class GameController {
 					// Tel punten
 					// bepaal winnaar
 				} else {
-					// Nieuwe segNr zetten
-					System.out.println("UPDATE SEQNR");
-					int[] playerIDs = new int[highestSeqnr];
-					for (int i = 0; i < playerIDs.length; i++) {
-						playerIDs[i] = gameModel.getPlayerID(i + 1);
-					}
-
-					for (int j = 0; j < playerIDs.length; j++) {
-						if (j == 0) {
-							gameModel.updateSeqNR(playerIDs[j], highestSeqnr);
-						} else {
-							gameModel.updateSeqNR(playerIDs[j], j);
-						}
-					}
-
-//					for (int i = 1; i < highestSeqnr; i++) {
-//						int player = gameModel.getPlayerID(i);
-//						if (i == 1) {
-//							gameModel.updateSeqNR(player, highestSeqnr);
-//						} else {
-//							gameModel.updateSeqNR(player, i--);
-//						}
-//					}
-
-					// Nieuwe turn speler met seqnr 1
-					int newPlayerID = gameModel.getPlayerID(1);
+					// Turn player id aanpassen
+					// met playerSeqnr + 1
+					int newPlayerID = gameModel.getPlayerID(playerSeqnr + 1);
 					gameModel.changeTurnPlayerID(newPlayerID);
-					gameModel.setRoundID();
 				}
 			} else {
-				// Turn player id aanpassen
-				// met playerSeqnr - 1
-				int newPlayerID = gameModel.getPlayerID(playerSeqnr - 1);
-				gameModel.changeTurnPlayerID(newPlayerID);
-			}
-		}
+				if (playerSeqnr == 1) {
+					// Dobbelstenen wegschrijven naar rondespoor
+					// System.out.println("GAMECONTROLLER MOVE TO ROUND TRACK");
+					// System.out.println("ROUND ID = " + gameModel.getRoundID());
+					// System.out.println("Round NUMBER = " + gameModel.getRoundNR());
+					this.draftpoolController.moveToRoundtrack(gameModel.getRoundNR());
+					this.roundtrackController.fillRoundtrack();
 
-		checkPlayerTurn();
-		System.out.println("isPlayerTurn = " + isTurn);
+					// Make new draftpool
+					this.draftpoolController.createDraftPool(highestSeqnr, gameModel.getRoundID());
+					gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
+
+					// RoundID + 1 wanneer < 20 veranderen
+					if (roundID == 20) {
+						// Set playerstatus = finished
+						gameModel.setPlayStatusFinished(playerController.getPlayerID());
+
+						for (PlayerController opponent : this.opponents) {
+							gameModel.setPlayStatusFinished(opponent.getPlayerID());
+						}
+
+						// Count Score
+						// Current player
+						gameModel.updateScore(playerController.getPlayerID(),
+								this.getPrivateScore(this.getCurrentPlayerName()));
+						;
+						// Opponents
+						for (PlayerController opponent : this.opponents) {
+							int id = opponent.getPlayerID();
+							String name = gameModel.getPlayerName(id);
+							int score = this.getPrivateScore(name);
+							gameModel.updateScore(id, score);
+						}
+
+						// Bepaal winnaar
+						gamePane.showWinner(gameModel.getWinner());
+					} else {
+						// Nieuwe segNr zetten
+						// System.out.println("UPDATE SEQNR");
+						int[] playerIDs = new int[highestSeqnr];
+						for (int i = 0; i < playerIDs.length; i++) {
+							playerIDs[i] = gameModel.getPlayerID(i + 1);
+						}
+
+						for (int j = 0; j < playerIDs.length; j++) {
+							if (j == 0) {
+								gameModel.updateSeqNR(playerIDs[j], highestSeqnr);
+							} else {
+								gameModel.updateSeqNR(playerIDs[j], j);
+							}
+						}
+
+						// Nieuwe turn speler met seqnr 1
+						int newPlayerID = gameModel.getPlayerID(1);
+						gameModel.changeTurnPlayerID(newPlayerID);
+						gameModel.setRoundID();
+					}
+				} else {
+					// Turn player id aanpassen
+					// met playerSeqnr - 1
+					int newPlayerID = gameModel.getPlayerID(playerSeqnr - 1);
+					gameModel.changeTurnPlayerID(newPlayerID);
+				}
+			}
+
+			checkPlayerTurn();
+			// System.out.println("isPlayerTurn = " + isTurn);
+		}
 	}
 
 	public void checkPlayerTurn() {
@@ -243,9 +278,12 @@ public class GameController {
 	}
 
 	public void refresh() {
-		System.out.println("GAMECONTROLLER:");
-		System.out.println("REFRESH");
 		this.amountOfDice = 0;
+		
+		if (gameModel.gameEnded()) {
+			this.isTurn = false;
+		}
+
 		if (getIsTurn() == false) {
 			this.draftpoolController.loadDice(gameModel.getGameId());
 			gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), true);
@@ -253,7 +291,8 @@ public class GameController {
 
 		checkPlayerTurn();
 		this.roundtrackController.fillRoundtrack();
-		//this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), gameModel.getRoundID());
+		// this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(),
+		// gameModel.getRoundID());
 
 		for (PlayerController opponent : opponents) {
 			opponent.getPatternCard().loadChosenCard();
@@ -263,6 +302,7 @@ public class GameController {
 
 		//Laad huidige speler moet nog goed getest worden
 		playerController.getPatternCard().loadPatternCard();
+		gamePane.updateScore();
 		// this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(),
 		// gameModel.getRoundID());
 		this.draftpoolController.loadDice(gameModel.getGameId());
@@ -275,7 +315,7 @@ public class GameController {
 				gamePane.getGamePaneBottom().getChildren().add(this.getTCC().getPanes().get(i));
 
 			}
-			toolCardsAdded = true;
+			//toolCardsAdded = true;
 		}
 
 //		Public objective cards
@@ -284,9 +324,17 @@ public class GameController {
 			for (int i = 0; i < this.getPublic_OCC().getPanes().size(); i++) {
 				gamePane.getGamePaneCenter().getChildren().add(this.getPublic_OCC().getPanes().get(i));
 			}
-			publicCardsAdded = true;
+			//publicCardsAdded = true;
 		}
 
+	}
+
+	public void setToolCardsAdded (boolean bool) {
+		this.toolCardsAdded = bool;
+	}
+
+	public void setPublicCardsAdded (boolean bool) {
+		this.publicCardsAdded = bool;
 	}
 
 	public boolean getIsTurn() {
@@ -306,17 +354,16 @@ public class GameController {
 		CC.getThread().getModel().getDBCOn().closeConnection();
 	}
 
-
-
-	public void loadOpponent () {
+	public void loadOpponent() {
 		int counter = 0;
 		for (PlayerController opponent : opponents) {
 
 			if (opponent.getPatternCard().getChosenCard() != null) {
-				gamePane.setOpponentWindow(counter, opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
+				gamePane.setOpponentWindow(counter,
+						opponent.getPatternCard().makeView(opponent.getPatternCard().getChosenCard()));
 				opponent.getPatternCard().loadPatternCard();
 			} else {
-				System.out.println("PANIEK PANIEK PANIEK!");
+				// System.out.println("PANIEK PANIEK PANIEK!");
 			}
 			counter++;
 		}
@@ -325,6 +372,46 @@ public class GameController {
 	public int getNumOpponents() {
 		return opponents.size();
 	}
+
+	public String getOpponentName(int index) {
+		return gameModel.getPlayerName(opponents.get(index).getPlayerID());
+	}
+
+	public int publicScore(int index) {
+		String privateObj = private_OCC.getColor(gameModel.getGameId(), this.getOpponentName(index));
+		String[] publicObj = public_OCC.getNames(gameModel.getGameId());
+		PuntenTeller punt = new PuntenTeller(this);
+
+		if (this.opponents.get(index) != null && this.opponents.get(index).getPatternCard().getChosenCard() != null) {
+			int score = punt.getPublicScore(privateObj, publicObj, this.opponents.get(index));
+			System.out.println("PUBLIC SCORE = " + score);
+			return score;
+		} else {
+			System.out.println("SCORE IS 0000");
+			return 0;
+		}
+	}
+
+	public String getCurrentPlayerName() {
+		return this.gameModel.getPlayerName(playerController.getPlayerID());
+	}
+
+	public int getPrivateScore(String name) {
+		PuntenTeller punt = new PuntenTeller(this);
+		String privateObj = private_OCC.getColor(gameModel.getGameId(), getCurrentPlayerName());
+		String[] publicObj = public_OCC.getNames(gameModel.getGameId());
+
+		if (this.playerController.getPatternCard().getChosenCard() != null) {
+			return punt.getTotalScore(privateObj, publicObj, playerController);
+		} else {
+			return 0;
+		}
+	}
+
+//	public int getSeqNrFromIndex (int index) {
+//		//opponents.get(index).getPlayerID();
+//		return gameModel.getSeqNR(opponents.get(index).getPlayerID());
+//	}
 
 //	public void addOpponentView () {
 //		for (PlayerController opponent : opponents) {

@@ -16,10 +16,9 @@ public class Private_Objective_Card_Model {
 		try {
 		color = POCDB.getColor(GameId, username);
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
-
 		return color;
 	}
 

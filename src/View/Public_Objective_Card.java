@@ -9,11 +9,11 @@ public class Public_Objective_Card extends CardPane {
 		super();
 		createPublic_Objective_Card(cardName);
 	}
-	
-public void createPublic_Objective_Card(String cardName) {
-	Image cardimage = new Image("Resources/" + cardName + ".PNG");
-	ImageView objevtiveCard = new ImageView(cardimage);
-	getChildren().add(objevtiveCard);
+
+	public void createPublic_Objective_Card(String cardName) {
+		Image cardimage = new Image("Resources/" + cardName + ".PNG");
+		ImageView objevtiveCard = new ImageView(cardimage);
+		getChildren().add(objevtiveCard);
 	}
 
 }

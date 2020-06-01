@@ -16,12 +16,12 @@ public class GameAcceptionThreadController extends Thread {
 
 	public GameAcceptionThreadController(LogInController logInController, InviteController inViteController, int gameid
 			) {
-		System.out.println("vooran constructor");
+		//System.out.println("vooran constructor");
 		this.logInController = logInController;
 		this.inViteController = inViteController;
 		gameThreadModel = new GameAcceptionThreadModel();
 		this.gameid = gameid;
-		System.out.println("achteraan constructor");
+		//System.out.println("achteraan constructor");
 	}
 
 	public void terminate() {
@@ -35,7 +35,7 @@ public class GameAcceptionThreadController extends Thread {
 	public void run() {
 		int amountRefused = 0;
 		int amountNotAccepted = 1;
-		System.out.println("gameid: "+gameid);
+		//System.out.println("gameid: "+gameid);
 
 		while(running) {
 			try {

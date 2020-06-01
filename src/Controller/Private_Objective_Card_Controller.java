@@ -22,6 +22,8 @@ public class Private_Objective_Card_Controller {
 	public Pane getPane() {
 		return pane;
 	}
-
 	
+	public String getColor (int GameID, String username) {
+		return pocm.getColor(GameID, username);
+	}
 }

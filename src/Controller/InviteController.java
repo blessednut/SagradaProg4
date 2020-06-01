@@ -159,7 +159,7 @@ public class InviteController {
 				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -171,7 +171,7 @@ public class InviteController {
 				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -184,7 +184,7 @@ public class InviteController {
 				invitePane.getSearch().setVisible(false);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -240,7 +240,7 @@ public class InviteController {
 			}
 
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 

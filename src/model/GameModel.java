@@ -72,4 +72,24 @@ public class GameModel {
 	public ArrayList<String> getOpponentNames (int playerID) {
 		return this.con.getOpponentNames(idgame, playerID);
 	}
+	
+	public String getPlayerName (int playerID) {
+		return this.con.getPlayerID(playerID);
+	}
+	
+	public void updateScore (int idplayer, int score) {
+		this.con.updateScore(idplayer, score);
+	}
+	
+	public void setPlayStatusFinished (int idplayer) {
+		this.con.setPlayStatusFinished(idplayer);;
+	}
+	
+	public String getWinner () {
+		return this.con.getWinner(idgame);
+	}
+	
+	public boolean gameEnded () {
+		return this.con.gameEnded(idgame);
+	}
 }

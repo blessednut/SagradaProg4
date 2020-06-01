@@ -51,7 +51,7 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		//createGamePane();
+		// createGamePane();
 	}
 
 	public GamePane() {
@@ -59,7 +59,7 @@ public class GamePane extends BorderPane {
 		this.setPrefSize(900, 900);
 		this.setMaxSize(900, 900);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
-		//createGamePane();
+		// createGamePane();
 	}
 
 
@@ -118,7 +118,7 @@ public class GamePane extends BorderPane {
 		home.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 
 
-		Button refresh = new Button("ververs");
+		Button refresh = new Button("Ververs");
 		refresh.setMaxSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setMinSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
 		refresh.setPrefSize(WIDTHENDTURNBUTTON, HEIGHTENDTURNBUTTON);
@@ -149,7 +149,8 @@ public class GamePane extends BorderPane {
 
 		home.setOnMouseClicked(e -> {
 			gameController.switchBackToHome();
-			HomeThreadController home = new HomeThreadController(gameController.getC_login(), gameController.getC_login().getC_home().getC_Invite());
+			HomeThreadController home = new HomeThreadController(gameController.getC_login(),
+					gameController.getC_login().getC_home().getC_Invite());
 			home.start();
 		});
 
@@ -186,19 +187,58 @@ public class GamePane extends BorderPane {
 
 		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 
-		isTurn = new Label ("");
+		isTurn = new Label("");
 		isTurn.setFont(new Font("Arial", 32));
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
 		gamePaneRight.getChildren().addAll(isTurn);
 
-		//load Opponents
+		// Punten telling
+		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
+		myPersonalScoreLabel.setFont(new Font("Arial", 32));
+		myPersonalScoreLabel.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(myPersonalScoreLabel);
+		//System.out.println(makePrivateScoreLabel());
+		gamePaneRight.getChildren().add(makePrivateScoreLabel());
 
+		Label publicScore = new Label("Publieke score:");
+		publicScore.setFont(new Font("Arial", 32));
+		publicScore.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(publicScore);
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			gamePaneRight.getChildren().add(publicScoreLabel(i));
+		}
+
+		// load Opponents
+	}
+	
+	public void showWinner (String username) {
+		Label winner = new Label("Winnaar: " + username);
+		winner.setFont(new Font("Arial", 32));
+		winner.setTextFill(Color.WHITE);
+		gamePaneRight.getChildren().add(winner);
+	}
+	
+	public void updateScore () {
+		this.gamePaneRight.getChildren().set(3, makePrivateScoreLabel());
+		
+		int index = 5;
+		
+		for (int i = 0; i < gameController.getNumOpponents(); i++) {
+			this.gamePaneRight.getChildren().set(index + i, publicScoreLabel(i));
+		}
+	}
+	
+	private Label makePrivateScoreLabel () {
+		String name = gameController.getCurrentPlayerName();
+		int score = gameController.getPrivateScore(gameController.getCurrentPlayerName());
+		Label privateScoreLabel = new Label(name + ": " + score);
+		privateScoreLabel.setFont(new Font("Arial", 32));
+		privateScoreLabel.setTextFill(Color.WHITE);
+		return privateScoreLabel;
 	}
 
-
-
-	public void updateIsTurn (boolean isTurn) {
+	public void updateIsTurn(boolean isTurn) {
 		if (this.isTurn != null) {
 			if (isTurn) {
 				this.isTurn.setText("Het is jouw beurt!");
@@ -209,8 +249,8 @@ public class GamePane extends BorderPane {
 	}
 
 	private void onClickEndTurn() {
-		System.out.println("GamePane:");
-		System.out.println("End Turn");
+//		System.out.println("GamePane:");
+//		System.out.println("End Turn");
 		this.gameController.endTurn();
 	}
 
@@ -241,21 +281,30 @@ public class GamePane extends BorderPane {
 		this.ownWindow = window;
 	}
 
-	public void setOpponentWindow (int index, WindowPatternView opponentCard) {
+	public void setOpponentWindow(int index, WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().set(index, opponentCard);
 	}
 
-	public void addOpponentWindow (WindowPatternView opponentCard) {
+	public void addOpponentWindow(WindowPatternView opponentCard) {
 		gamePaneTop.getChildren().add(opponentCard);
 	}
 
 	public void addOpponentSquare() {
-		Pane opponentSquare = new Pane ();
+		Pane opponentSquare = new Pane();
 		CornerRadii RADIUS = new CornerRadii(10.00);
 		opponentSquare.setPrefSize(350, 250);
 		opponentSquare.setMaxSize(350, 250);
 		opponentSquare.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
 		gamePaneTop.getChildren().add(opponentSquare);
+	}
+
+	public Label publicScoreLabel(int index) {
+		String name = gameController.getOpponentName(index);
+		int publicScore = gameController.publicScore(index);
+		Label score = new Label(name + ": " + publicScore);
+		score.setFont(new Font("Arial", 32));
+		score.setTextFill(Color.WHITE);
+		return score;
 	}
 
 	public void setDrafpool(DraftPoolView draftpool, boolean replace) {
@@ -289,9 +338,4 @@ public class GamePane extends BorderPane {
 	public Button getShufflePublicObjectivecards() {
 		return shufflePublicObjectiveCards;
 	}
-
-
-
-
-
 }
