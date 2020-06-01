@@ -342,7 +342,7 @@ public class GamePane extends BorderPane {
 	
 	public void setEndTurnText(boolean endturn) {
 		if(endturn) {
-			endTurn.setText("einde beurd");
+			endTurn.setText("einde beurt");
 		}else {
 			endTurn.setText("passen");
 		}
