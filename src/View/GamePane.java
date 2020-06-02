@@ -250,7 +250,7 @@ public class GamePane extends BorderPane {
 			if (isTurn) {
 				this.isTurn.setText("Het is jouw beurt!");
 			} else {
-				this.isTurn.setText("Het is niet jouw beurt :,(!");
+				this.isTurn.setText("Het is de beurt van " + gameController.getCurrentPlayerName() + "!");
 			}
 		}
 	}
