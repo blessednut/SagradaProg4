@@ -16,7 +16,7 @@ public class PatternCardController {
 	private PatternCardModel[] optionCard;
 
 	private ArrayList<Integer> idpatterncardoptions;
-	
+
 	private static final int PATTERNVIEWHEIGHT = 300;
 	private static final int PATTERNVIEWWIDTH = 450;
 
@@ -29,7 +29,7 @@ public class PatternCardController {
 	public void loadChosenCard() {
 		if (playerController.getPlayerModel().patterncardExists()) {
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
-			
+
 			if(playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
 				gameController.setOwnWindow(chosenCard, this);
 			}
@@ -148,17 +148,20 @@ public class PatternCardController {
 	}
 
 	private WindowPatternView makeView(int index) {
-		return new WindowPatternView(PATTERNVIEWWIDTH, PATTERNVIEWHEIGHT, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
-				makeSquareView(optionCard[index].getField()));
-	}
+        // Magic Number weghalen
+    return new WindowPatternView(PATTERNVIEWWIDTH, PATTERNVIEWHEIGHT, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
+        makeSquareView(optionCard[index].getField()));
+    }
 
-	public WindowPatternView makeView(PatternCardModel card) {
-		if (card == null) {
-			System.out.println("PANIEK DE CARD IS NULL PANIEK");
-		}
-		return new WindowPatternView(350, 250, card.nameProperty(), card.tokenAmount(),
-				makeSquareView(card.getField()));
-	}
+	 public WindowPatternView makeView(PatternCardModel card) {
+	        if (card == null) {
+	            System.out.println("PANIEK DE CARD IS NULL PANIEK");
+	        }
+	        WindowPatternView windowPaternView = new WindowPatternView(350, 250, card.nameProperty(), card.tokenAmount(),
+	                makeSquareView(card.getField()), playerController.getPlayerColor(), this.gameController.getM_game().getPlayerName(playerController.getPlayerID()));
+	        TokenController tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), gameController.getM_game().getTurnPlayerID(), gameController, windowPaternView);
+	        return windowPaternView;
+	    }
 
 	public int getRandomIntBetweenRange(int min, int max) {
 		return (int) ((Math.random() * ((max - min) + 1)) + min);
@@ -218,8 +221,8 @@ public class PatternCardController {
 			for (int y = 0; y < fieldController[x].length; y++) {
 				fieldController[x][y].removeDice();
 				fieldController[x][y].removeDiceFromView();
-				
-				GameDiceModel dice = chosenCard.loadDice(playerController.getPlayerID(), x + 1, y + 1); 
+
+				GameDiceModel dice = chosenCard.loadDice(playerController.getPlayerID(), x + 1, y + 1);
 				if (dice != null) {
 					fieldController[x][y].setDice(dice);
 				}
@@ -230,7 +233,7 @@ public class PatternCardController {
 	public WindowPatternSquareController[][] getSquareController() {
 		fieldController = new WindowPatternSquareController[5][4];
 		PatternCardFieldModel[][] field = chosenCard.getField();
-		
+
 		for (int x = 0; x < fieldController.length; x++) {
 			for (int y = 0; y < fieldController[x].length; y++) {
 				fieldController[x][y] = new WindowPatternSquareController(gameController, this, field[x][y]);
