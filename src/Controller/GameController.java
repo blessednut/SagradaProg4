@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import View.DraftPoolView;
 import View.GamePane;
@@ -37,17 +38,13 @@ public class GameController {
 
 	private int amountOfDice = 0;
 	private TokenController tokenController;
-	private ArrayList <Color> playerColor = new ArrayList <Color> ();
+	private ArrayList<Integer> playerColors;
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
 		this.gameModel = new GameModel();
-		
-		playerColor.add(Color.HOTPINK);
-        playerColor.add(Color.DARKORANGE);
-        playerColor.add(Color.MEDIUMPURPLE);
-        playerColor.add(Color.LIGHTGREEN);
+
 	}
 
 	public void switchBackToHome() {
@@ -72,20 +69,18 @@ public class GameController {
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
-		
-		for (Color a : playerColor) {
-			System.out.println(a.toString());
-		}
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, playerColor.get(0));
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true,
+				generateRandomColor());
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
-		int counter = 1;
+
 		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
-			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, playerColor.get(counter)));
-			counter++;
+			opponents
+					.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, generateRandomColor()));
+
 		}
 
 		// Maak opponents View
@@ -109,17 +104,19 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true, playerColor.get(0));
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true,
+				generateRandomColor());
 		playerController.loadCards();
 		System.out.println("OUDE SPEL STARTEN SPELER ID = " + playerController.getPlayerID());
 		// playerController.loadDice
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
-		int counter = 1;
+
 		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
-			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, playerColor.get(counter)));
-			counter++;
+			opponents
+					.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, generateRandomColor()));
+
 		}
 
 		// Maak opponents View
@@ -308,6 +305,38 @@ public class GameController {
 		}
 	}
 
+	public Color generateRandomColor() {
+		playerColors = new ArrayList<Integer>();
+		Color playerColor = null;
+		Random rand = new Random();
+		int max = 5;
+		int min = 1;
+		while (true) {
+			int playerColorNumber = rand.nextInt((max - min) + 1) + min;
+			if (!playerColors.contains(playerColorNumber)) {
+				if (playerColorNumber == 1) {
+					playerColors.add(playerColorNumber);
+					playerColor = Color.GREEN;
+				} else if (playerColorNumber == 2) {
+					playerColors.add(playerColorNumber);
+					playerColor = Color.BLUE;
+				} else if (playerColorNumber == 3) {
+					playerColors.add(playerColorNumber);
+					playerColor = Color.YELLOW;
+				} else if (playerColorNumber == 4) {
+					playerColors.add(playerColorNumber);
+					playerColor = Color.HOTPINK;
+				} else if (playerColorNumber == 5) {
+					playerColors.add(playerColorNumber);
+					playerColor = Color.DARKRED;
+				}
+				break;
+			}
+		}
+		return playerColor;
+
+	}
+
 	public void refresh() {
 		this.amountOfDice = 0;
 		this.setEndTurnText();
@@ -482,8 +511,9 @@ public class GameController {
 	public void setOwnWindow(PatternCardModel chosenCard, PatternCardController patternCardController) {
 		WindowPatternSquareController[][] squareController = null;
 		squareController = playerController.getPatternCard().getSquareController();
-		gamePane.setOwnWindow(
-				new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(), squareController, playerController.getPlayerColor(), this.gameModel.getPlayerName(playerController.getPlayerID())));
+		gamePane.setOwnWindow(new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(),
+				squareController, playerController.getPlayerColor(),
+				this.gameModel.getPlayerName(playerController.getPlayerID())));
 	}
 
 	public int getCurrentPlayerID() {
@@ -493,8 +523,8 @@ public class GameController {
 	public void setTokenController(TokenController tokenController) {
 		this.tokenController = tokenController;
 	}
-	
+
 	public TokenController getTokenController() {
-        return this.tokenController;
-    }
+		return this.tokenController;
+	}
 }
