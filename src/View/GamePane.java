@@ -367,6 +367,10 @@ public class GamePane extends BorderPane {
 		return endTurn;
 	}
 
+	public WindowPatternView getOwnWindow() {
+		return this.getOwnWindow();
+	}
+
 
 
 

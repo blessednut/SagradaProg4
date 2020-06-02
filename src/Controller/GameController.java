@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import View.DraftPoolView;
 import View.GamePane;
 import View.WindowPatternView;
+import javafx.scene.paint.Color;
 import model.DiceModel;
 import model.GameDiceModel;
 import model.GameModel;
-import model.PatternCardFieldModel;
 import model.PatternCardModel;
 
 public class GameController {
@@ -36,11 +36,18 @@ public class GameController {
 	private Boolean toolCardsAdded = false;
 
 	private int amountOfDice = 0;
+	private TokenController tokenController;
+	private ArrayList <Color> playerColor = new ArrayList <Color> ();
 
 	public GameController(MySceneController myScene, LogInController c_login) {
 		this.myScene = myScene;
 		this.c_login = c_login;
 		this.gameModel = new GameModel();
+		
+		playerColor.add(Color.HOTPINK);
+        playerColor.add(Color.DARKORANGE);
+        playerColor.add(Color.MEDIUMPURPLE);
+        playerColor.add(Color.LIGHTGREEN);
 	}
 
 	public void switchBackToHome() {
@@ -65,14 +72,20 @@ public class GameController {
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		myScene.getMyscene().switchPane(gamePane);
+		
+		for (Color a : playerColor) {
+			System.out.println(a.toString());
+		}
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true);
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, playerColor.get(0));
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
+		int counter = 1;
 		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
-			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false));
+			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, playerColor.get(counter)));
+			counter++;
 		}
 
 		// Maak opponents View
@@ -96,15 +109,17 @@ public class GameController {
 		myScene.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true);
+		this.playerController = new PlayerController(this, gameModel.getGameId(), c_login.getUsername(), true, true, playerColor.get(0));
 		playerController.loadCards();
 		System.out.println("OUDE SPEL STARTEN SPELER ID = " + playerController.getPlayerID());
 		// playerController.loadDice
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
+		int counter = 1;
 		for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
-			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false));
+			opponents.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, playerColor.get(counter)));
+			counter++;
 		}
 
 		// Maak opponents View
@@ -468,10 +483,18 @@ public class GameController {
 		WindowPatternSquareController[][] squareController = null;
 		squareController = playerController.getPatternCard().getSquareController();
 		gamePane.setOwnWindow(
-				new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(), squareController));
+				new WindowPatternView(450, 300, chosenCard.nameProperty(), chosenCard.tokenAmount(), squareController, playerController.getPlayerColor(), this.gameModel.getPlayerName(playerController.getPlayerID())));
 	}
 
 	public int getCurrentPlayerID() {
 		return playerController.getPlayerID();
 	}
+
+	public void setTokenController(TokenController tokenController) {
+		this.tokenController = tokenController;
+	}
+	
+	public TokenController getTokenController() {
+        return this.tokenController;
+    }
 }

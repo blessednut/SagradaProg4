@@ -150,18 +150,20 @@ public class PatternCardController {
 	}
 
 	private WindowPatternView makeView(int index) {
-		// Magic Number weghalen
-		return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
-				makeSquareView(optionCard[index].getField()));
-	}
-
-	public WindowPatternView makeView(PatternCardModel card) {
-		if (card == null) {
-			System.out.println("PANIEK DE CARD IS NULL PANIEK");
-		}
-		return new WindowPatternView(350, 250, card.nameProperty(), card.tokenAmount(),
-				makeSquareView(card.getField()));
-	}
+        // Magic Number weghalen
+        return new WindowPatternView(450, 300, optionCard[index].nameProperty(), optionCard[index].tokenAmount(),
+                makeSquareView(optionCard[index].getField()));
+    }
+	
+	 public WindowPatternView makeView(PatternCardModel card) {
+	        if (card == null) {
+	            System.out.println("PANIEK DE CARD IS NULL PANIEK");
+	        }
+	        WindowPatternView windowPaternView = new WindowPatternView(350, 250, card.nameProperty(), card.tokenAmount(),
+	                makeSquareView(card.getField()), playerController.getPlayerColor(), this.gameController.getM_game().getPlayerName(playerController.getPlayerID()));
+	        TokenController tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), gameController.getM_game().getTurnPlayerID(), gameController, windowPaternView);
+	        return windowPaternView;
+	    }
 
 	public int getRandomIntBetweenRange(int min, int max) {
 		return (int) ((Math.random() * ((max - min) + 1)) + min);

@@ -183,7 +183,7 @@ public class PatternCardModel {
 	
 	public void importValues() {
 		this.name = con.getName(this.idPatternCard);
-		this.difficulty = con.getDifficulty(this.getDifficulty());
+		this.difficulty = con.getDifficulty(this.idPatternCard);
 		
 		//Check uit database
 		this.standard = true;

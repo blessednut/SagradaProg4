@@ -53,12 +53,12 @@ public class WindowPatternDB {
 	}
 
 	public int getDifficulty(int idPatternCard) {
+		int difficulty = 0;
 		try {
 			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard
 					+ ";";
 			ResultSet resultset = st.executeQuery(query);
 
-			int difficulty = 0;
 			while (resultset.next()) {
 				difficulty = resultset.getInt("difficulty");
 			}
@@ -66,7 +66,7 @@ public class WindowPatternDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return difficulty;
 	}
 
 	public void makePlayerFrameField(int playerID, int x, int y) {
