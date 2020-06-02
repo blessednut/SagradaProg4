@@ -98,29 +98,17 @@ public class PuntenTeller {
 						if(!ColorColomn.contains(fieldController[x][y].getDice().getColor())) {
 							ColorColomn.add(fieldController[x][y].getDice().getColor());
 							if(y == 3) {
-								System.out.println(scorePublicCards + 5);
 								scorePublicCards = scorePublicCards + 5;
-								ColorColomn.clear();
-								if(x > 4) {
-									break;
-								}
+								break;
 							}
 						}
 						else {
 							ColorColomn.clear();
-							x++;
-							y = -1;
-							if(x > 4) {
-								break;
-							}
+							break;
 						}
 					}else {
 						ColorColomn.clear();
-						x++;
-						y = -1;
-						if(x > 4) {
-							break;
-						}
+						break;
 					}
 
 						
@@ -145,20 +133,12 @@ public class PuntenTeller {
 						}
 						else {
 							IntColomn.clear();
-							x++;
-							y = -1;
-							if(x > 4) {
-								break;
-							}
+							break;
 						}
 					}
 					else {
 						IntColomn.clear();
-						x++;
-						y = -1;
-						if(x > 4) {
-							break;
-						}
+						break;
 					}
 				}
 			}
@@ -244,20 +224,15 @@ public class PuntenTeller {
 								System.out.println(scorePublicCards + 5);
 								scorePublicCards = scorePublicCards + 5;
 								ColorRow.clear();
+								break;
 							}
 						}
 						else {
 							ColorRow.clear();
-							y++;
-							x = -1;
-							if(x == 4) {
-								break;	
-							}
+							break;
 						}
 					}else {
 						ColorRow.clear();
-						y++;
-						x = -1;
 						break;
 					}
 				}
@@ -279,20 +254,12 @@ public class PuntenTeller {
 						}
 						else {
 							ValueRow.clear();
-							y++;
-							x = -1;
-							if(y == 4) {
-								break;
-							}
+							break;
 						}
 					}
 					else {
 						ValueRow.clear();
-						y++;
-						x = -1;
-						if(y == 4) {
-							break;
-						}
+						break;
 					}
 				}
 			}
