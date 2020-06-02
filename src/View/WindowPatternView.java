@@ -145,17 +145,7 @@ public class WindowPatternView extends BorderPane {
 		drawTokens(tokenAmount.getValue());
 	}
 
-	private void drawTokens (int tokenAmount) {
-		HBox tokens = new HBox();
-		tokens.setAlignment(Pos.CENTER_RIGHT);
 
-		for (int i = 0; i < tokenAmount; i++) {
-			StackPane token;
-			token = drawCircle(Color.GOLD);
-			tokens.getChildren().add(token);
-		}
-		this.setBottom(tokens);
-	}
 
 	private StackPane drawCircle(Color color) {
 		StackPane pane = new StackPane();
@@ -195,6 +185,7 @@ public class WindowPatternView extends BorderPane {
         }
         this.setBottom(tokens);
     }
+
 
     public void setTokens(int num, Color color) {
         tokens = new HBox();

@@ -19,7 +19,7 @@ public class InviteStart extends Pane {
 	private static final int CONTENTHEIGHT = 30;
 	private static final int WHIDTH = 100;
 	private static final int HEIGHT = 100;
-	private static final int TEXT = 100;
+	private static final int TEXT = 15;
 	
 	
 	public InviteStart(String gameID) {
@@ -31,7 +31,7 @@ public class InviteStart extends Pane {
 	
 	public void addInvite(String gameID) {
 		VBox vbox = new VBox();
-		vbox.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+		
 		this.gameID = new Label();
 		this.gameID.setText("gameID: "+gameID);
 		this.gameID.setTextFill(Color.DARKRED);
@@ -54,6 +54,8 @@ public class InviteStart extends Pane {
 		this.startGame.setMinSize(CONTENTWITDH, CONTENTHEIGHT);
 		this.startGame.setPrefSize(CONTENTWITDH, CONTENTHEIGHT);
 		this.startGame.setVisible(false);
+		
+		vbox.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 		
 		vbox.getChildren().addAll(this.gameID,this.numberRemaining, this.startGame);
 		this.getChildren().add(vbox);
