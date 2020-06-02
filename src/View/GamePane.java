@@ -37,6 +37,9 @@ public class GamePane extends BorderPane {
 	private Button shuffleToolcards;
 	private Button shufflePublicObjectiveCards;
 	private Button endTurn;
+	private Label disclaimer = new Label("selecteer eerst de dobbelsteen als de toolcard \n met het aanbod te maken heeft \n "
+			+ "bij toolcards met veranderingen op je patroonkaard, \n klik je op de toolcard dan selecteer je de te verplaatsen \n dobbelsteen en dan de plek waar deze heen moet \n"
+			+ "toolcard 5 en 8 doen het niet");
 
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
@@ -203,6 +206,9 @@ public class GamePane extends BorderPane {
 		for (int i = 0; i < 4; i++) {
 			gamePaneRight.getChildren().add(getEmptyLabel());
 		}
+		
+		gamePaneLeft.getChildren().add(disclaimer);
+		disclaimer.setTextFill(Color.WHITE);
 
 	}
 	
