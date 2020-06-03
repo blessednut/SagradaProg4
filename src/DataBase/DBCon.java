@@ -27,7 +27,7 @@ public class DBCon {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager
-					.getConnection("jdbc:mysql://databases.aii.avans.nl/hjasmeet_db2?user=jbaverma&password=Ab12345");
+					.getConnection("jdbc:mysql://databases.aii.avans.nl/2020_soprj4_sagrada_ef?user=2020_soprj4_e&password=Ab12345");
 			st = con.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
