@@ -4,7 +4,6 @@ import Controller.StatisticController;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,22 +55,6 @@ public class StatisticsPane extends HBox {
 		createPane();
 		naam.setOnMouseClicked(e -> naam.clear());
 	}
-
-	private Label rankText(String text) {
-		Label myLabel = new Label(text, labelStatsBackground);
-		myLabel.setFont(new Font("Arial", 10));
-		myLabel.setContentDisplay(ContentDisplay.CENTER);
-		return myLabel;
-	}
-	
-	private Label zeroWinText(String text) {
-		Label newLabel = new Label(text, labelStatsBackground);
-		newLabel.setFont(new Font("Arial", 10));
-		newLabel.setContentDisplay(ContentDisplay.CENTER);
-		return newLabel;
-	} 
-	
-	
 	
 	private void getRank () {
 		rankedList.getChildren().clear();

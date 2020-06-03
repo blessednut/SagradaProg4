@@ -16,7 +16,9 @@ import javafx.stage.Screen;
 
 public class LoginPane extends BorderPane {
 
-	private Color red = Color.RED;
+	private static final int WHIDTH = 300;
+	private static final int HEIGHT = 100;
+	
 	// layout items
 	private VBox layout;
 	// textfield items
@@ -31,7 +33,6 @@ public class LoginPane extends BorderPane {
 	private double screenBoundsY = Screen.getPrimary().getBounds().getHeight();
 
 	public LoginPane() {
-		//System.out.println(screenBoundsY + screenBoundsX);
 		this.setMinSize(screenBoundsX, screenBoundsY);
 		this.setPrefSize(screenBoundsX, screenBoundsY);
 		this.setMaxSize(screenBoundsX, screenBoundsY);
@@ -43,41 +44,41 @@ public class LoginPane extends BorderPane {
 	public void CreateLoginPane() {
 		// layout items
 		layout = new VBox();
-		layout.setMinSize(300, 100);
-		layout.setPrefSize(300, 100);
-		layout.setMaxSize(300, 100);
+		layout.setMinSize(WHIDTH, HEIGHT);
+		layout.setPrefSize(WHIDTH, HEIGHT);
+		layout.setMaxSize(WHIDTH, HEIGHT);
 		this.setCenter(layout);
 
 		buttonBox = new HBox();
-		buttonBox.setMinSize(300, 100);
-		buttonBox.setPrefSize(300, 100);
-		buttonBox.setMaxSize(300, 100);
+		buttonBox.setMinSize(WHIDTH, HEIGHT);
+		buttonBox.setPrefSize(WHIDTH, HEIGHT);
+		buttonBox.setMaxSize(WHIDTH, HEIGHT);
 
 		// textfield items
 		username = new TextField();
 		username.setText("Username");
-		username.setMinSize(300, 100);
-		username.setPrefSize(300, 100);
-		username.setMaxSize(300, 100);
+		username.setMinSize(WHIDTH, HEIGHT);
+		username.setPrefSize(WHIDTH, HEIGHT);
+		username.setMaxSize(WHIDTH, HEIGHT);
 		username.setOnMouseClicked(e -> username.clear());
 
 		password = new TextField();
 		password.setText("Password");
-		password.setMinSize(300, 100);
-		password.setPrefSize(300, 100);
-		password.setMaxSize(300, 100);
+		password.setMinSize(WHIDTH, HEIGHT);
+		password.setPrefSize(WHIDTH, HEIGHT);
+		password.setMaxSize(WHIDTH, HEIGHT);
 		password.setOnMouseClicked(e -> password.clear());
 
 		// button items
 		login = new Button("Log in");
-		login.setMinSize(150, 100);
-		login.setPrefSize(150, 100);
-		login.setMaxSize(150, 100);
+		login.setMinSize(WHIDTH/2, HEIGHT);
+		login.setPrefSize(WHIDTH/2, HEIGHT);
+		login.setMaxSize(WHIDTH/2, HEIGHT);
 
 		register = new Button("Registreer");
-		register.setMinSize(150, 100);
-		register.setPrefSize(150, 100);
-		register.setMaxSize(150, 100);
+		register.setMinSize(WHIDTH/2, HEIGHT);
+		register.setPrefSize(WHIDTH/2, HEIGHT);
+		register.setMaxSize(WHIDTH/2, HEIGHT);
 
 		// buttons toevoegen aan layout
 		buttonBox.getChildren().addAll(login, register);

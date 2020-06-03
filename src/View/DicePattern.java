@@ -12,8 +12,6 @@ public class DicePattern extends GridPane {
 	public DicePattern(int value, double width, double height) {
 		this.setMaxSize(width, height);
 		fillGridPane(value, width, height);
-
-
 	}
 
 	private void fillGridPane(int value, double width, double height) {

@@ -27,36 +27,6 @@ public class DraftPoolSquareView extends StackPane {
 		this.setOnMouseExited(event -> fieldUnhover());
 		
 		this.drawView();
-		
-//		if (diceController.getDice() != null) {
-//			GameDiceModel dice = diceController.getDice();
-//			
-//			dice.colorProperty().addListener(new ChangeListener<String>() {
-//				@Override
-//				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
-//					setDiceView(color, dice.valueProperty().getValue());
-//				}
-//				
-//			});
-//			
-//			dice.valueProperty().addListener(new ChangeListener<Number>() {
-//				@Override
-//				public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-//					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
-//					setDiceView(color, dice.valueProperty().getValue());
-//				}
-//			});
-//			
-//			setDiceView(new ColorConverter().colorConverter((dice.colorProperty().getValue())), dice.valueProperty().getValue());
-//			
-//			this.setOnMouseClicked(new EventHandler<MouseEvent> () {
-//				@Override
-//				public void handle(MouseEvent event) {
-//					onClick();
-//				}
-//			});
-//		}
 	}
 	
 	public void updateView () {
@@ -69,7 +39,6 @@ public class DraftPoolSquareView extends StackPane {
 			GameDiceModel dice = diceController.getDice();
 			
 			dice.colorProperty().addListener(new ChangeListener<String>() {
-				@Override
 				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
 					setDiceView(color, dice.valueProperty().getValue());
@@ -78,7 +47,6 @@ public class DraftPoolSquareView extends StackPane {
 			});
 			
 			dice.valueProperty().addListener(new ChangeListener<Number>() {
-				@Override
 				public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
 					Color color = new ColorConverter().colorConverter((dice.colorProperty().getValue()));
 					setDiceView(color, dice.valueProperty().getValue());
@@ -88,7 +56,6 @@ public class DraftPoolSquareView extends StackPane {
 			setDiceView(new ColorConverter().colorConverter((dice.colorProperty().getValue())), dice.valueProperty().getValue());
 			
 			this.setOnMouseClicked(new EventHandler<MouseEvent> () {
-				@Override
 				public void handle(MouseEvent event) {
 					onClick();
 				}
@@ -123,7 +90,6 @@ public class DraftPoolSquareView extends StackPane {
 	}
 	
 	private void onClick() {
-		//System.out.println("Clicked");
 		this.diceController.onClick();
 	}
 }

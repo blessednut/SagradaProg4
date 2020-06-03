@@ -46,7 +46,6 @@ public class ChatView extends Pane{
 		sendChat.setText("Chat");
 		//chatcontroller krijgt de chat message als er op de knop wordt gedrukt
 		
-		//sendChat.setOnAction(e -> recentchat.setText(ChatC.getRecentChat()));
 		sendChat.setOnAction(e ->  getTextFromField());
 
 		//plaatsen van de textarea en chat button in een Hbox

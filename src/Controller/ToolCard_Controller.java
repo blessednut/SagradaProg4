@@ -76,7 +76,7 @@ public class ToolCard_Controller {
 			System.out.println("CARDS PER GAME = " + tcm.getCardNamesPerGame().size());
 			temp = tcm.getCardNamesPerGame().get(i);
 			cards.add(temp);
-			panes.add(new ToolCard(temp, this));
+			panes.add(new ToolCard(temp));
 		}
 
 		if (tcm.getCardNamesPerGame().size() != 0) {

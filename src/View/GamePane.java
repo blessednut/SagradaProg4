@@ -17,20 +17,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class GamePane extends BorderPane {
-	private static final int HEIGHTODDPLAYER = 150;
-	private static final int WIDTHODDPLAYER = 200;
-	private static final int HEIGHTEVENPLAYER = 200;
-	private static final int WIDTHEVENPLAYER = 150;
+	
+	private static final int WHIDTH = 900;
+	private static final int HEIGHT = 900;
 	private static final int HEIGHTENDTURNBUTTON = 50;
 	private static final int WIDTHENDTURNBUTTON = 200;
-	private static final int WIDTHSCOREBOARD = 150;
-	private static final int HEIGHTSCOREBOARD = 100;
-	private static final int DICESIZE = 200;
-	private static final int PUBOBJCARDSIZE = 150;
+	
 	private GameController gameController;
 	private WindowPatternView ownWindow;
 	private DraftPoolView draftpool;
@@ -42,23 +37,26 @@ public class GamePane extends BorderPane {
 	private Button shuffleToolcards;
 	private Button shufflePublicObjectiveCards;
 	private Button endTurn;
+	private Label disclaimer = new Label("selecteer eerst de dobbelsteen als de toolcard \n met het aanbod te maken heeft \n "
+			+ "bij toolcards met veranderingen op je patroonkaard, \n klik je op de toolcard dan selecteer je de te verplaatsen \n dobbelsteen en dan de plek waar deze heen moet \n"
+			+ "toolcard 5 en 8 doen het niet");
 
 	private HBox gamePaneCenter;
 	private HBox gamePaneTop;
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
-		this.setMinSize(900, 900);
-		this.setPrefSize(900, 900);
-		this.setMaxSize(900, 900);
+		this.setMinSize(WHIDTH, HEIGHT);
+		this.setPrefSize(WHIDTH, HEIGHT);
+		this.setMaxSize(WHIDTH, HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
 		// createGamePane();
 	}
 
 	public GamePane() {
-		this.setMinSize(900, 900);
-		this.setPrefSize(900, 900);
-		this.setMaxSize(900, 900);
+		this.setMinSize(WHIDTH, HEIGHT);
+		this.setPrefSize(WHIDTH, HEIGHT);
+		this.setMaxSize(WHIDTH, HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
 		// createGamePane();
 	}
@@ -159,7 +157,6 @@ public class GamePane extends BorderPane {
 		});
 
 		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event) {
 				if (gameController.getIsTurn()) {
 					onClickEndTurn();
@@ -168,21 +165,18 @@ public class GamePane extends BorderPane {
 		});
 
 		refresh.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event) {
 				gameController.refresh();
 			}
 		});
 
 		shuffleToolcards.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event) {
 				gameController.getTCC().getCards();
 				shuffleToolcards.setVisible(false);
 			}
 		});
 		shufflePublicObjectiveCards.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event) {
 				gameController.getPublic_OCC().getCards();
 				shufflePublicObjectiveCards.setVisible(false);
@@ -202,7 +196,6 @@ public class GamePane extends BorderPane {
 		myPersonalScoreLabel.setFont(new Font("Arial", 32));
 		myPersonalScoreLabel.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(myPersonalScoreLabel);
-		//System.out.println(makePrivateScoreLabel());
 		gamePaneRight.getChildren().add(makePrivateScoreLabel());
 
 		Label publicScore = new Label("Publieke score:");
@@ -210,15 +203,13 @@ public class GamePane extends BorderPane {
 		publicScore.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(publicScore);
 		
-//		for (int i = 0; i < gameController.getNumOpponents(); i++) {
-//			gamePaneRight.getChildren().add(publicScoreLabel(i));
-//		}
-		
 		for (int i = 0; i < 4; i++) {
 			gamePaneRight.getChildren().add(getEmptyLabel());
 		}
+		
+		gamePaneLeft.getChildren().add(disclaimer);
+		disclaimer.setTextFill(Color.WHITE);
 
-		// load Opponents
 	}
 	
 	public Label getEmptyLabel () {
@@ -259,14 +250,12 @@ public class GamePane extends BorderPane {
 			if (isTurn) {
 				this.isTurn.setText("Het is jouw beurt!");
 			} else {
-				this.isTurn.setText("Het is niet jouw beurt :,(!");
+				this.isTurn.setText("Het is de beurt van " + gameController.getCurrentPlayerName() + "!");
 			}
 		}
 	}
 
 	private void onClickEndTurn() {
-//		System.out.println("GamePane:");
-//		System.out.println("End Turn");
 		this.gameController.endTurn();
 	}
 
@@ -274,7 +263,6 @@ public class GamePane extends BorderPane {
 			WindowPatternView card4) {
 		this.getChildren().clear();
 
-		// TODO: Magic numbers vervangen
 		card1.setOnMouseClicked(e -> chooseCardEvent(0));
 		card2.setOnMouseClicked(e -> chooseCardEvent(1));
 		card3.setOnMouseClicked(e -> chooseCardEvent(2));
@@ -365,6 +353,10 @@ public class GamePane extends BorderPane {
 	
 	public Button getEndTurn() {
 		return endTurn;
+	}
+
+	public WindowPatternView getOwnWindow() {
+		return this.getOwnWindow();
 	}
 
 

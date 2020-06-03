@@ -6,18 +6,18 @@ import javafx.scene.layout.Pane;
 
 public class MyScene extends Scene {
 
-	private MySceneController c_myScene;
+	private MySceneController mySceneController;
 
-	public MyScene(MySceneController c_myScene) {
+	public MyScene(MySceneController mySceneController) {
 		super(new Pane());
-		this.c_myScene = c_myScene;
+		this.mySceneController = mySceneController;
 
 		setInlogPane();
 
 	}
 
 	private void setInlogPane() {
-		this.setRoot(c_myScene.getLoginCon().getLogin());
+		this.setRoot(mySceneController.getLoginCon().getLogin());
 	}
 
 	public void switchPane(Pane pane) {
