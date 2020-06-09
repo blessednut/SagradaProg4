@@ -39,6 +39,8 @@ public class GameController {
 	private int amountOfDice = 0;
 	private TokenController tokenController;
 	private ArrayList<Integer> playerColors;
+	
+	private InGameThread inGameThread;
 
 	public GameController(MySceneController mySceneController, LogInController logInController) {
 		this.mySceneController = mySceneController;
@@ -69,7 +71,7 @@ public class GameController {
 	public void createGamePane() {
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
-
+		
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true, generateRandomColor());
 
@@ -92,6 +94,9 @@ public class GameController {
 		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), draftPoolRoundID);
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
+		inGameThread = new InGameThread(this);
+		inGameThread.start();
+		inGameThread.setDaemon(true);
 		this.checkPlayerTurn();
 
 	}
