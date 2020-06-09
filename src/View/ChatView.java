@@ -11,12 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class ChatView extends Pane{
-	private static final int PANEWIDTH = 300;
-	private static final int PANEHEIGHT = 275;
-	private static final int CHATAREAWIDTH = 250;
-	private static final int CHATAREAHEIGHT = 25;
+	private static final int PANEWIDTH = 200;
+	private static final int PANEHEIGHT = 200;
 	private static final int BUTTONWIDTH = 50;
 	private static final int BUTTONHEIGHT = 25;
+	private static final int CHATAREAWIDTH = (PANEWIDTH - BUTTONWIDTH);
+	private static final int CHATAREAHEIGHT = 25;
 	
 	private TextField chatArea;
 	private TextArea recentchat;
@@ -51,13 +51,13 @@ public class ChatView extends Pane{
 		//plaatsen van de textarea en chat button in een Hbox
 		HBox CABox = new HBox(chatArea, sendChat);
 		CABox.setLayoutX(0);
-		CABox.setLayoutY(250);
+		CABox.setLayoutY(200);
 
 		// aanmaken van het recent chat label met afmetening
 		recentchat = new TextArea();
-		recentchat.setMinSize(600, 250);
-		recentchat.setPrefSize(600, 250);
-		recentchat.setMaxSize(600, 250);
+		recentchat.setMinSize(PANEWIDTH, PANEHEIGHT);
+		recentchat.setPrefSize(PANEWIDTH, PANEHEIGHT);
+		recentchat.setMaxSize(PANEWIDTH, PANEHEIGHT);
 		
 		
 		

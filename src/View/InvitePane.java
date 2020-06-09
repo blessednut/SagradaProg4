@@ -25,8 +25,8 @@ public class InvitePane extends HBox {
 	private static final int COMBOBOXHEIGHT = 50;
 	private static final int TEXT = 20;
 	
-	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
-	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
+	private static final int SAGRADAWIDTH = 1280;
+	private static final int SAGRADAHEIGHT = 689;
 
 	private VBox vbox;
 	private VBox vbox2;
@@ -58,9 +58,9 @@ public class InvitePane extends HBox {
 	private ComboBox<String> invites;
 
 	public InvitePane() {
-		this.setMinSize((screenX / 8 * 7), screenY);
-		this.setMaxSize((screenX / 8 * 7), screenY);
-		this.setPrefSize((screenX / 8 * 7), screenY);
+		this.setMinSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setMaxSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setPrefSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		createPane();
 		showInvite();
 		rb2.setOnAction(e -> {

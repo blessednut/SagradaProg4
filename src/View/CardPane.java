@@ -7,8 +7,8 @@ public abstract class CardPane extends Pane {
 	private int cardWidth;
 
 	public CardPane() {
-		cardHeight = 350;
-		cardWidth = 250;
+		cardHeight = 220;
+		cardWidth = 160;
 		this.setMinSize(cardWidth, cardHeight);
 		this.setMaxSize(cardWidth, cardHeight);
 		this.setPrefSize(cardWidth, cardHeight);

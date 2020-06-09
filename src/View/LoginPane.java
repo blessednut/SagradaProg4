@@ -29,13 +29,13 @@ public class LoginPane extends BorderPane {
 	private Button login;
 	private Button register;
 
-	private double screenBoundsX = Screen.getPrimary().getBounds().getWidth();
-	private double screenBoundsY = Screen.getPrimary().getBounds().getHeight();
+	private static final int SAGRADAWIDTH = 1280;
+	private static final int SAGRADAHEIGHT = 689;
 
 	public LoginPane() {
-		this.setMinSize(screenBoundsX, screenBoundsY);
-		this.setPrefSize(screenBoundsX, screenBoundsY);
-		this.setMaxSize(screenBoundsX, screenBoundsY);
+		this.setMinSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setPrefSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setMaxSize(SAGRADAWIDTH, SAGRADAHEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 		CreateLoginPane();
 
