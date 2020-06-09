@@ -100,9 +100,6 @@ public class StatisticsPane extends HBox {
 		rankedList.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 	}
 	
-//	private void updateRank (boolean orderASC) {
-//		getRank(orderASC);
-//	}
 
 	private void createPane() {
 		getRank(false);
