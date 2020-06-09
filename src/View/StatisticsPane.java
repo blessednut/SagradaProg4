@@ -56,9 +56,9 @@ public class StatisticsPane extends HBox {
 		naam.setOnMouseClicked(e -> naam.clear());
 	}
 	
-	private void getRank () {
+	private void getRank (boolean orderASC) {
 		rankedList.getChildren().clear();
-
+		if(orderASC == false) {
 			for(int i = 0; i < controller.getNames().size(); i++) {
 				if(controller.searchNamesWithWins().contains(controller.getNames().get(i))) {
 					Label text = new Label();
@@ -74,18 +74,38 @@ public class StatisticsPane extends HBox {
 					rankedList.getChildren().add(text);
 				}
 			}
+		}
+		else {
+			for(int i = controller.getNames().size() - 1; i > -1 ; i--) {
+				if(!controller.searchNamesWithWins().contains(controller.getNames().get(i))) {
+					Label text = new Label();
+					text.setText(controller.getNames().get(i) + " - 0");
+					rankedList.getChildren().add(text);
+				}
+			}
+			for(int i = controller.getNames().size() - 1; i > -1 ; i--) {
+				if(controller.searchNamesWithWins().contains(controller.getNames().get(i))) {
+					Label text = new Label();
+					int index = controller.searchNamesWithWins().indexOf(controller.getNames().get(i));
+					text.setText(controller.searchNamesWithWins().get(index) + " - " + controller.searchAmountOfWins().get(index));
+					rankedList.getChildren().add(text);
+				}
+			}
+			
+		}
+
 		
 
 		
 		rankedList.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 	}
 	
-	private void updateRank () {
-		getRank();
-	}
+//	private void updateRank (boolean orderASC) {
+//		getRank(orderASC);
+//	}
 
 	private void createPane() {
-		updateRank();
+		getRank(false);
 		// vbox
 		labelBackground.setFitWidth(150);
 		labelBackground.setFitHeight(100);
@@ -102,12 +122,10 @@ public class StatisticsPane extends HBox {
 		OrderRank.setOnAction(e -> {
 			if (OrderRank.getText().equals("ASC")) {
 				OrderRank.setText("DESC");
-				controller.setOrder(true);
-				this.updateRank();
+				this.getRank(true);
 			} else {
 				OrderRank.setText("ASC");
-				controller.setOrder(false);
-				this.updateRank();
+				this.getRank(false);
 			}
 		});
 

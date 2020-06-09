@@ -6,19 +6,11 @@ import DataBase.StatisticDB;
 
 public class StatisticModel {
 	private String playerName;
-	private boolean isASC;
-	
+
 	private StatisticDB SDB;
-	
-	public StatisticModel () {
-		this.isASC = false;
-		this.SDB = new StatisticDB ();
-	}
-	
 
-
-	public void setASC(boolean isASC) {
-		this.isASC = isASC;
+	public StatisticModel() {
+		this.SDB = new StatisticDB();
 	}
 
 	public String getPlayerName() {
@@ -48,8 +40,8 @@ public class StatisticModel {
 	public int getNumOpponents() {
 		return SDB.getNumOpponents(this.playerName);
 	}
-	
-	public boolean usernameExists (String username) {
+
+	public boolean usernameExists(String username) {
 		if (SDB.usernameExists(username)) {
 			this.playerName = username;
 			return true;
@@ -57,16 +49,16 @@ public class StatisticModel {
 			return false;
 		}
 	}
-	
-	public ArrayList<String> getNames(){
+
+	public ArrayList<String> getNames() {
 		return SDB.getAllUsernames();
 	}
-	
-	public ArrayList<String> searchNamesWithWins(){
+
+	public ArrayList<String> searchNamesWithWins() {
 		return SDB.searchNamesWithWins();
 	}
-	
-	public ArrayList<Integer> searchAmountOfWins(){
+
+	public ArrayList<Integer> searchAmountOfWins() {
 		return SDB.searchAmountOfWins();
 	}
 }

@@ -52,10 +52,6 @@ public class StatisticController {
 		return STModel.getMostPlacedColor();
 	}
 
-	public void setOrder(boolean isASC) {
-		STModel.setASC(isASC);
-	}
-
 	public ArrayList<String> getNames() {
 		return STModel.getNames();
 	}

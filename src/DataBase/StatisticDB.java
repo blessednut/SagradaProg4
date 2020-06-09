@@ -7,19 +7,17 @@ import java.util.ArrayList;
 public class StatisticDB {
 	private Statement st;
 
-	
 	public StatisticDB() {
 		this.st = DBCon.getInstance().getSt();
 
 	}
-	
+
 	public ArrayList<String> searchNamesWithWins() {
 		ArrayList<String> namesWithWins = new ArrayList<>();
 		try {
-			String query = "SELECT player.username FROM player \r\n" + 
-					"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
-					"group by username \r\n" + 
-					"order by count(player.username) desc;";
+			String query = "SELECT player.username FROM player \r\n"
+					+ "JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n"
+					+ "group by username \r\n" + "order by count(player.username) desc;";
 
 			ResultSet resultset = st.executeQuery(query);
 			while (resultset.next()) {
@@ -30,45 +28,34 @@ public class StatisticDB {
 		}
 		return namesWithWins;
 	}
+
 	public ArrayList<Integer> searchAmountOfWins() {
-			ArrayList<Integer> amountOfWins = new ArrayList<>();
-			try {
-				String query = "SELECT count(player.username)FROM player \r\n" + 
-						"JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n" + 
-						"group by username \r\n" + 
-						"order by count(player.username) desc";
+		ArrayList<Integer> amountOfWins = new ArrayList<>();
+		try {
+			String query = "SELECT count(player.username)FROM player \r\n"
+					+ "JOIN (SELECT idgame, max(score) mscore FROM player GROUP BY idgame) T ON player.idgame = T.idgame AND player.score = T.mscore and player.playstatus = 'finished'\r\n"
+					+ "group by username \r\n" + "order by count(player.username) desc";
 
-
-				ResultSet resultset = st.executeQuery(query);
-				while (resultset.next()) {
-					amountOfWins.add(resultset.getInt("count(player.username)"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			ResultSet resultset = st.executeQuery(query);
+			while (resultset.next()) {
+				amountOfWins.add(resultset.getInt("count(player.username)"));
 			}
-			return amountOfWins; 
-		
-		
-		
-		
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return amountOfWins;
+
 	}
-	public int getWins (String username) {
+
+	public int getWins(String username) {
 		int wins = 0;
 		try {
-			String query = "SELECT \r\n" + 
-					"    player.username,count(player.username) as numberOfWins\r\n" + 
-					"FROM\r\n" + 
-					"    player\r\n" + 
-					"        JOIN\r\n" + 
-					"    (SELECT \r\n" + 
-					"        idgame, max(score) mscore\r\n" + 
-					"    FROM\r\n" + 
-					"        player\r\n" + 
-					"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-					"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-					"where username = '" + username + "'\r\n" + 
-					"group by username;";
+			String query = "SELECT \r\n" + "    player.username,count(player.username) as numberOfWins\r\n" + "FROM\r\n"
+					+ "    player\r\n" + "        JOIN\r\n" + "    (SELECT \r\n"
+					+ "        idgame, max(score) mscore\r\n" + "    FROM\r\n" + "        player\r\n"
+					+ "    GROUP BY idgame) T ON player.idgame = T.idgame\r\n"
+					+ "        AND player.score = T.mscore and player.playstatus = 'finished' \r\n"
+					+ "where username = '" + username + "'\r\n" + "group by username;";
 			ResultSet resultset = (st.executeQuery(query));
 			if (resultset.next()) {
 				wins = resultset.getInt("numberOfWins");
@@ -78,23 +65,16 @@ public class StatisticDB {
 		}
 		return wins;
 	}
-	
-	public int getLosses (String username) {
+
+	public int getLosses(String username) {
 		int wins = 0;
 		try {
-			String query = "SELECT \r\n" + 
-					"    player.username,count(player.username) as numberOfWins\r\n" + 
-					"FROM\r\n" + 
-					"    player\r\n" + 
-					"        JOIN\r\n" + 
-					"    (SELECT \r\n" + 
-					"        idgame, MIN(score) mscore\r\n" + 
-					"    FROM\r\n" + 
-					"        player\r\n" + 
-					"    GROUP BY idgame) T ON player.idgame = T.idgame\r\n" + 
-					"        AND player.score = T.mscore and player.playstatus = 'finished' \r\n" + 
-					"where username = '" + username + "'\r\n" + 
-					"group by username;";
+			String query = "SELECT \r\n" + "    player.username,count(player.username) as numberOfWins\r\n" + "FROM\r\n"
+					+ "    player\r\n" + "        JOIN\r\n" + "    (SELECT \r\n"
+					+ "        idgame, MIN(score) mscore\r\n" + "    FROM\r\n" + "        player\r\n"
+					+ "    GROUP BY idgame) T ON player.idgame = T.idgame\r\n"
+					+ "        AND player.score = T.mscore and player.playstatus = 'finished' \r\n"
+					+ "where username = '" + username + "'\r\n" + "group by username;";
 			ResultSet resultset = (st.executeQuery(query));
 			if (resultset.next()) {
 				wins = resultset.getInt("numberOfWins");
@@ -120,17 +100,12 @@ public class StatisticDB {
 		return score;
 	}
 
-	public String getMostPlacedColor (String username) {
+	public String getMostPlacedColor(String username) {
 		String MostPlacedColor = null;
 		try {
-			String query = "select diecolor\r\n" + 
-					"from playerframefield as pf\r\n" + 
-					"join player as p\r\n" + 
-					"on pf.idplayer = p.idplayer\r\n" + 
-					"where p.username = '" + username + "'\r\n" + 
-					"group by diecolor \r\n" + 
-					"order by count(diecolor) desc\r\n" + 
-					"limit 1;";
+			String query = "select diecolor\r\n" + "from playerframefield as pf\r\n" + "join player as p\r\n"
+					+ "on pf.idplayer = p.idplayer\r\n" + "where p.username = '" + username + "'\r\n"
+					+ "group by diecolor \r\n" + "order by count(diecolor) desc\r\n" + "limit 1;";
 			ResultSet resultset = (st.executeQuery(query));
 			if (resultset.next()) {
 				MostPlacedColor = resultset.getString(1);
@@ -146,8 +121,8 @@ public class StatisticDB {
 		try {
 			String query = "select eyes\r\n" + "from playerframefield pf \r\n" + "join gamedie gd\r\n"
 					+ "on pf.idgame = gd.idgame and pf.dienumber = gd.dienumber and pf.diecolor = gd.diecolor\r\n"
-					+ "join player as p\r\n" + "on pf.idplayer = p.idplayer\r\n" + "where p.username = '" + username + "'\r\n"
-					+ "group by eyes \r\n" + "order by count(eyes) desc\r\n" + "limit 1;";
+					+ "join player as p\r\n" + "on pf.idplayer = p.idplayer\r\n" + "where p.username = '" + username
+					+ "'\r\n" + "group by eyes \r\n" + "order by count(eyes) desc\r\n" + "limit 1;";
 			ResultSet resultset = (st.executeQuery(query));
 			if (resultset.next()) {
 				MostPlacedValue = resultset.getInt(1);
@@ -191,16 +166,16 @@ public class StatisticDB {
 		}
 		return result;
 	}
-	
-	public ArrayList<String> getAllUsernames(){
+
+	public ArrayList<String> getAllUsernames() {
 		ArrayList<String> names = new ArrayList<>();
 		try {
 			String query = "select username from account;";
 			ResultSet resultset = st.executeQuery(query);
-			while(resultset.next()) {
+			while (resultset.next()) {
 				names.add(resultset.getString("username"));
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return names;
