@@ -14,7 +14,6 @@ public class MyScene extends Scene {
 	public MyScene(MySceneController mySceneController) {
 		super(new Pane(),SAGRADAWIDTH, SAGRADAHEIGHT, null);
 		this.mySceneController = mySceneController;
-
 		setInlogPane();
 
 	}

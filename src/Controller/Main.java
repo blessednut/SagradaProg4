@@ -18,6 +18,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		MySceneController myscene = new MySceneController();
 		stage.setTitle("Sagrada 2020");
+		stage.setResizable(false);
 		stage.setScene(myscene.getMyscene());
 		stage.show();
 
