@@ -41,6 +41,7 @@ public class GameController {
 	private ArrayList<Integer> playerColors;
 
 	public GameController(MySceneController mySceneController, LogInController logInController) {
+		playerColors = new ArrayList<Integer>();
 		this.mySceneController = mySceneController;
 		this.logInController = logInController;
 		this.gameModel = new GameModel();
@@ -67,6 +68,7 @@ public class GameController {
 	}
 
 	public void createGamePane() {
+		playerColors.clear();
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
 
@@ -83,7 +85,6 @@ public class GameController {
 		}
 
 		// Maak opponents View
-		// addOpponentView();
 		int draftPoolRoundID = gameModel.getRoundID();
 		if (draftPoolRoundID % 2 == 0) {
 			draftPoolRoundID = draftPoolRoundID - 1;
@@ -97,7 +98,7 @@ public class GameController {
 	}
 
 	public void createGamePane(int oldGameID) {
-		//System.out.println("CREATEGAMEPANE MET OLD ID = " + oldGameID);
+		playerColors.clear();
 		this.gameModel.setGameId(oldGameID);
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
@@ -106,7 +107,6 @@ public class GameController {
 		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true, true, generateRandomColor());
 		playerController.loadCards();
 
-		// playerController.loadDice
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -301,7 +301,6 @@ public class GameController {
 	}
 
 	public Color generateRandomColor() {
-		playerColors = new ArrayList<Integer>();
 		Color playerColor = null;
 		Random rand = new Random();
 		int max = 5;
