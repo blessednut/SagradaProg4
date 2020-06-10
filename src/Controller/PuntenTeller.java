@@ -90,7 +90,7 @@ public class PuntenTeller {
 	public void publicObjScore(String publicObjCard, WindowPatternSquareController[][] fieldController) {
 		switch(publicObjCard) {
 		case "Colomn Color Variety":
-			//system.out.println("Colomn Color Variety");
+			System.out.println("Colomn Color Variety");
 			ArrayList<String> ColorColomn = new ArrayList<>();
 			for(int x = 0; x < fieldController.length; x++) {
 				for(int y = 0; y < fieldController[x].length; y++) {
@@ -115,7 +115,7 @@ public class PuntenTeller {
 				}
 			}
 		case "Colomn Shade Variety":
-			//system.out.println("Colomn Shade Variety");
+			System.out.println("Colomn Shade Variety");
 			ArrayList<Integer> IntColomn = new ArrayList<>();
 			for(int x = 4; x < fieldController.length; x++) {
 				for(int y = 0; y < fieldController[x].length; y++) {
@@ -123,7 +123,7 @@ public class PuntenTeller {
 						if(!IntColomn.contains(fieldController[x][y].getDice().valueProperty().getValue())) {
 							IntColomn.add(fieldController[x][y].getDice().valueProperty().getValue());
 							if(y == 3) {
-								//system.out.println(scorePublicCards = scorePublicCards + 4);
+								System.out.println(scorePublicCards = scorePublicCards + 4);
 								scorePublicCards = scorePublicCards + 4;
 								IntColomn.clear();
 								if(x > 4) {
@@ -143,7 +143,7 @@ public class PuntenTeller {
 				}
 			}
 		case "Dark Shades":
-			//system.out.println("Dark Shades");
+			System.out.println("Dark Shades");
 			int amountOfFive = 0;
 			int amountOfSix = 0;
 			for(int x = 0; x < fieldController.length; x++) {
@@ -163,11 +163,11 @@ public class PuntenTeller {
 			if(amountOfSix < lowestAmount) {
 				lowestAmount = amountOfSix;
 			}
-			//system.out.println(scorePublicCards + (2 * lowestAmount));
+			System.out.println(scorePublicCards + (2 * lowestAmount));
 			scorePublicCards = scorePublicCards + (2 * lowestAmount);
 
 		case "Light Shades":
-			//system.out.println("Light Shades");
+			System.out.println("Light Shades");
 			int amountOfOne = 0;
 			int amountOfTwo = 0;
 			for(int x = 0; x < fieldController.length; x++) {
@@ -187,10 +187,10 @@ public class PuntenTeller {
 			if(amountOfTwo < SetAmount) {
 				SetAmount = amountOfTwo;
 			}
-			//system.out.println(scorePublicCards + (2 * SetAmount));
+			System.out.println(scorePublicCards + (2 * SetAmount));
 			scorePublicCards = scorePublicCards + (2 * SetAmount);	
 		case "Medium Shades":
-			//system.out.println("Medium Shades");
+			System.out.println("Medium Shades");
 			int amountOfThree = 0;
 			int amountOfFour = 0;
 			for(int x = 0; x < fieldController.length; x++) {
@@ -210,10 +210,10 @@ public class PuntenTeller {
 			if(amountOfFour < SetsAmount) {
 				SetsAmount = amountOfFour;
 			}
-			//system.out.println(scorePublicCards + (2 * SetsAmount));
+			System.out.println(scorePublicCards + (2 * SetsAmount));
 			scorePublicCards = scorePublicCards + (2 * SetsAmount);
 		case "Row Color Variety":
-			//system.out.println("Row Color Variety");
+			System.out.println("Row Color Variety");
 			ArrayList<String> ColorRow = new ArrayList<>();
 			for(int y = 0; y < fieldController.length -1; y++) {
 				for(int x = 0; x < fieldController.length; x++) {
@@ -221,7 +221,7 @@ public class PuntenTeller {
 						if(!ColorRow.contains(fieldController[x][y].getDice().colorProperty().getValue())) {
 							ColorRow.add(fieldController[x][y].getDice().colorProperty().getValue());
 							if(x == 4) {
-								//system.out.println(scorePublicCards + 5);
+								System.out.println(scorePublicCards + 5);
 								scorePublicCards = scorePublicCards + 5;
 								ColorRow.clear();
 								break;
@@ -238,7 +238,7 @@ public class PuntenTeller {
 				}
 			}
 		case "Row Shade Variety":
-			//system.out.println("Row Shade Variety");
+			System.out.println("Row Shade Variety");
 			ArrayList<Integer> ValueRow = new ArrayList<>();
 			for(int y = 3; y < fieldController.length -1; y++) {
 				for(int x = 0; x < fieldController.length; x++) {
@@ -246,7 +246,7 @@ public class PuntenTeller {
 						if(!ValueRow.contains(fieldController[x][y].getSquare().getDice().valueProperty().getValue())) {
 							ValueRow.add(fieldController[x][y].getSquare().getDice().valueProperty().getValue());
 							if(x == 4) {
-								//system.out.println(scorePublicCards + 5);
+								System.out.println(scorePublicCards + 5);
 								scorePublicCards = scorePublicCards + 5;
 								ValueRow.clear();
 								break;
@@ -264,7 +264,7 @@ public class PuntenTeller {
 				}
 			}
 		case "Shade Variety":
-			//system.out.println("Shade Variety");
+			System.out.println("Shade Variety");
 			int amountOfOnes = 0;
 			int amountOfTwos = 0;
 			int amountOfThrees = 0;
@@ -312,10 +312,10 @@ public class PuntenTeller {
 			if(amountOfSixs < LeastOf) {
 				LeastOf = amountOfSixs;
 			}
-			//system.out.println(scorePublicCards + (5 * LeastOf));
+			System.out.println(scorePublicCards + (5 * LeastOf));
 			scorePublicCards = scorePublicCards + (5 * LeastOf);
 		case "Color Variety":
-			//system.out.println("Color Variety");
+			System.out.println("Color Variety");
 			int amountOfYellow = 0;
 			int amountOfGreen = 0;
 			int amountOfBlue = 0;
@@ -357,7 +357,7 @@ public class PuntenTeller {
 				amountOfSets = amountOfRed;
 			}
 			
-			//system.out.println(scorePublicCards + (4* amountOfSets));
+			System.out.println(scorePublicCards + (4* amountOfSets));
 			scorePublicCards = scorePublicCards + (4* amountOfSets);
 		}
 	}
@@ -396,7 +396,7 @@ public class PuntenTeller {
 		for (int i = 0; i < publicObjCardArray.length; i++) {
 			this.publicObjScore(publicObjCardArray[i], fieldController);
 		}
-		//system.out.println("SCORE PUBLIC CARDS: " + scorePublicCards);
+		System.out.println("SCORE PUBLIC CARDS: " + scorePublicCards);
 		
 		this.totalScore = 0;
 		totalScore = (scorePublicCards + scorePrivateCard +  scoreFavorTokens - emptySquares);

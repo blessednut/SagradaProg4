@@ -37,7 +37,7 @@ public class Main extends Application {
 
 	@Override
 	public void stop(){
-	    //system.out.println("Stage is closing");
+	    System.out.println("Stage is closing");
 	    DBCon.getInstance().closeConnection();
 	    Platform.exit();
 	    System.exit(0);

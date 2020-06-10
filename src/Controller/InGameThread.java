@@ -26,7 +26,7 @@ public class InGameThread extends Thread {
 				e.printStackTrace();
 			}
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

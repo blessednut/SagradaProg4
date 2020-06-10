@@ -96,13 +96,13 @@ public class GameController {
 
 		inGameThread = new InGameThread(this);
 		inGameThread.start();
-		//inGameThread.setDaemon(true);
+		inGameThread.setDaemon(true);
 		this.checkPlayerTurn();
 
 	}
 
 	public void createGamePane(int oldGameID) {
-		////system.out.println("CREATEGAMEPANE MET OLD ID = " + oldGameID);
+		System.out.println("CREATEGAMEPANE MET OLD ID = " + oldGameID);
 		this.gameModel.setGameId(oldGameID);
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
@@ -132,7 +132,7 @@ public class GameController {
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
-		////system.out.println("isPlayerTurn = " + isTurn);
+		System.out.println("isPlayerTurn = " + isTurn);
 		this.gamePane.createGamePane();
 		playerController.getPatternCard().reloadDice();
 	}
@@ -452,10 +452,10 @@ public class GameController {
 
 		if (this.opponents.get(index) != null && this.opponents.get(index).getPatternCard().getChosenCard() != null) {
 			int score = punt.getPublicScore(privateObj, publicObj, this.opponents.get(index));
-			////system.out.println("PUBLIC SCORE = " + score);
+			System.out.println("PUBLIC SCORE = " + score);
 			return score;
 		} else {
-			////system.out.println("SCORE IS 0000");
+			System.out.println("SCORE IS 0000");
 			return 0;
 		}
 	}

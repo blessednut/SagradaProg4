@@ -16,9 +16,9 @@ public class DraftpoolController {
 	}
 
 	public void createDraftPool(int numPlayers, int roundID) {
-		////system.out.println("CREATEDRAFTPOOL CREATEDRAFTPOOL CREATEDRAFTPOOL");
-		////system.out.println("ROUND ID = " + roundID);
-		////system.out.println("ROUND ID = " + roundID);
+		System.out.println("CREATEDRAFTPOOL CREATEDRAFTPOOL CREATEDRAFTPOOL");
+		System.out.println("ROUND ID = " + roundID);
+		System.out.println("ROUND ID = " + roundID);
 		if (!draftpoolModel.draftpoolExists(controller.getM_game().getGameId(), roundID)) {
 			// Calculate number of dice
 			int numDice = ((numPlayers * 2) + 1);
@@ -32,7 +32,7 @@ public class DraftpoolController {
 			}
 		} else {
 			//add dice to gamedice
-			////system.out.println("LAAD DICE LAAD DICE LAAD DICE");
+			System.out.println("LAAD DICE LAAD DICE LAAD DICE");
 			loadDice(controller.getM_game().getGameId());
 		}
 	}
