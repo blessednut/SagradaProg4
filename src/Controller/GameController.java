@@ -25,6 +25,7 @@ public class GameController {
 	private ChatController CC;
 
 	private PlayerController playerController;
+	//TODO gebruik deze boolean voor de ingamethread.
 	private boolean isTurn;
 	private RoundtrackController roundtrackController;
 
@@ -514,6 +515,9 @@ public class GameController {
 	public InGameThread getInGameThread() {
 		return inGameThread;
 	}
+
+	
+	
 	
 	
 }

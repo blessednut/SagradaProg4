@@ -7,8 +7,11 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
+	
+	private MySceneController myscene;
 
 	public static void main(String[] args) {
 		launch();
@@ -16,8 +19,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		MySceneController myscene = new MySceneController();
+		myscene = new MySceneController();
 		stage.setTitle("Sagrada 2020");
+		stage.initStyle(StageStyle.UNDECORATED);
 		stage.setScene(myscene.getMyscene());
 		stage.show();
 
@@ -29,6 +33,7 @@ public class Main extends Application {
 		@Override
 		public void handle(KeyEvent event) {
 			if (event.getCode() == KeyCode.ESCAPE) {
+				myscene.getLoginCon().getC_home().getC_Invite().getC_game().getInGameThread().terminateThread();
 				Platform.exit();
 			}
 		}
@@ -39,6 +44,7 @@ public class Main extends Application {
 	public void stop(){
 	    //System.out.println("Stage is closing");
 	    DBCon.getInstance().closeConnection();
+	    myscene.getLoginCon().getC_home().getC_Invite().getC_game().getInGameThread().terminateThread();
 	    Platform.exit();
 	    System.exit(0);
 	}
