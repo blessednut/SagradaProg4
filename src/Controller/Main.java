@@ -42,7 +42,7 @@ public class Main extends Application {
 
 	@Override
 	public void stop(){
-	    //System.out.println("Stage is closing");
+	    System.out.println("Stage is closing");
 	    DBCon.getInstance().closeConnection();
 	    myscene.getLoginCon().getC_home().getC_Invite().getC_game().getInGameThread().terminateThread();
 	    Platform.exit();

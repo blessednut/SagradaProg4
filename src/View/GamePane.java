@@ -265,10 +265,11 @@ public class GamePane extends BorderPane {
 	public void createChoicePane(WindowPatternView card1, WindowPatternView card2, WindowPatternView card3,
 			WindowPatternView card4) {
 		this.getChildren().clear();
-		card1.setOnMouseClicked(e -> {chooseCardEvent(0); gameController.getInGameThread().start();});
-		card2.setOnMouseClicked(e -> {chooseCardEvent(1); gameController.getInGameThread().start();});
-		card3.setOnMouseClicked(e -> {chooseCardEvent(2); gameController.getInGameThread().start();});
-		card4.setOnMouseClicked(e -> {chooseCardEvent(3); gameController.getInGameThread().start();});
+
+		card1.setOnMouseClicked(e -> chooseCardEvent(0));
+		card2.setOnMouseClicked(e -> chooseCardEvent(1));
+		card3.setOnMouseClicked(e -> chooseCardEvent(2));
+		card4.setOnMouseClicked(e -> chooseCardEvent(3));
 
 		card1.setPadding(new Insets(10));
 		card2.setPadding(new Insets(10));
@@ -349,7 +350,7 @@ public class GamePane extends BorderPane {
 		if(endturn) {
 			endTurn.setText("einde beurt");
 		}else {
-//			endTurn.setText("passen");
+			endTurn.setText("passen");
 		}
 	}
 	

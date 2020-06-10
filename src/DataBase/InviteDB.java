@@ -91,7 +91,7 @@ public class InviteDB {
 				newSeqNR = resultset.getInt("seqNR");
 			}
 		} catch (Exception e) {
-			//System.out.println("e");
+			System.out.println("e");
 		}
 		return newSeqNR;
 	}
@@ -105,7 +105,7 @@ public class InviteDB {
 				result = resultset.getString("color");
 			}
 		} catch (Exception e) {
-			//System.out.println("e");
+			System.out.println("e");
 		}
 		return result;
 	}
