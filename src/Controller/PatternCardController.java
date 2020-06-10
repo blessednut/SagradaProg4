@@ -18,7 +18,7 @@ public class PatternCardController {
 	private ArrayList<Integer> idpatterncardoptions;
 
 	private static final int PATTERNVIEWHEIGHT = 250;
-	private static final int PATTERNVIEWWIDTH = 200;
+	private static final int PATTERNVIEWWIDTH = 1280/4;
 
 	public PatternCardController(GameController gameController, PlayerController playerController) {
 		this.gameController = gameController;
