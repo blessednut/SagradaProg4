@@ -65,6 +65,10 @@ public class GameModel {
 		return this.inGameDB.getPlayerID(idGame, seqnr);
 	}
 	
+	public int getPlayerID (String username, int idgame) {
+		return this.inGameDB.getPlayerID(username, idgame);
+	}
+	
 	public void updateSeqNR (int playerID, int seqnr) {
 		this.inGameDB.updateSeqNR(playerID, seqnr);
 	}
@@ -91,5 +95,9 @@ public class GameModel {
 	
 	public boolean gameEnded () {
 		return this.inGameDB.gameEnded(idGame);
+	}
+	
+	public boolean isPatternCardChosen (int idplayer) {
+		return this.inGameDB.isPatternCardChosen(idplayer);
 	}
 }

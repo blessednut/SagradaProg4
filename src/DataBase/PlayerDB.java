@@ -2,6 +2,7 @@ package DataBase;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class PlayerDB {
 	private Statement st;
@@ -54,5 +55,35 @@ public class PlayerDB {
 			e.printStackTrace();
 		}
 		return idpatterncard;
+	}
+
+	public boolean getPatterncardChoiceExists(int idplayer) {
+		boolean exists = false;
+		try {
+			String query = "SELECT * FROM patterncardoption WHERE idplayer =" + idplayer;
+			ResultSet resultset = st.executeQuery(query);
+
+			if (resultset.next()) {
+				exists = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exists;
+	}
+
+	public ArrayList<Integer> getPatterncardOptions(int idplayer) {
+		ArrayList<Integer> options = new ArrayList<Integer>();
+		try {
+			String query = "SELECT * FROM patterncardoption WHERE idplayer =" + idplayer;
+			ResultSet resultset = st.executeQuery(query);
+
+			while (resultset.next()) {
+				options.add(resultset.getInt("idpatterncard"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return options;
 	}
 }
