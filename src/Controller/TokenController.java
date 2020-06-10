@@ -31,7 +31,7 @@ public class TokenController {
 		gameController.setTokenController(this);
 	}
 
-	public void updateToken(int toolCardID, int roundID, int gameID, int playerID, int cost, int toolCardIndex,  int tokenAmount) {
+	public void updateToken(int toolCardID, int roundID, int gameID, int playerID, int cost, int toolCardIndex) {
 		tokenModel.updateToken(toolCardID, roundID, gameID, playerID, cost);
 		WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
 		cardView.getTokens().getChildren().clear();
