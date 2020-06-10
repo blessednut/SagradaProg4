@@ -69,7 +69,7 @@ public class OpenGamesDB {
 				result = resultSet.getInt("idgame");
 				resultString = Integer.toString(result);
 				gamesModel.fillArrayOwnGames(resultString);
-				System.out.println(resultString);
+				//system.out.println(resultString);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

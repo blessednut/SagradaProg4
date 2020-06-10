@@ -138,12 +138,12 @@ public class PatternCardModel {
 		int tempY;
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
-				//System.out.println("i = " + i + "  j = " + j);
+				////system.out.println("i = " + i + "  j = " + j);
 				tempX = x + i - 1;
 				tempY = y + j - 1;
-				//System.out.println("x = " + tempX + "  y = " + tempY);
+				////system.out.println("x = " + tempX + "  y = " + tempY);
 				if (isFieldPos(tempX, tempY) && !field[tempX][tempY].isEmpty()) {
-					//System.out.println("ER IS EEN SURROUNDING DICE!");
+					////system.out.println("ER IS EEN SURROUNDING DICE!");
 					return true;
 				}
 			}

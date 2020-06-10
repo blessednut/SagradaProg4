@@ -73,7 +73,7 @@ public class ToolCard_Controller {
 		tcm.setToolCardsInGame(gameID);
 		String temp = "";
 		for (int i = 0; i < tcm.getCardNamesPerGame().size(); i++) {
-			System.out.println("CARDS PER GAME = " + tcm.getCardNamesPerGame().size());
+			////system.out.println("CARDS PER GAME = " + tcm.getCardNamesPerGame().size());
 			temp = tcm.getCardNamesPerGame().get(i);
 			cards.add(temp);
 			panes.add(new ToolCard(temp));
@@ -124,7 +124,7 @@ public class ToolCard_Controller {
 						gameController.getDraftpoolController().getSelectedDice().setEyes(newEyesOfDice);
 						this.tcm.setNewEyes(gameController.getDraftpoolController().getSelectedDice(), gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue());
 					} else {
-						System.out.println("ToolCard_Controller: Dit werkt dus nie");
+						//system.out.println("ToolCard_Controller: Dit werkt dus nie");
 					}
 
 				} else if (cardName.equals("Flux Remover")) {
@@ -175,7 +175,7 @@ public class ToolCard_Controller {
 						this.tcm.setNewEyes(gameController.getDraftpoolController().getSelectedDice(), gameController.getDraftpoolController().getSelectedDice().valueProperty().getValue());
 					}
 				}else {
-					System.out.println("ToolCard_Controller: Er is iets mis gegaan");
+					//system.out.println("ToolCard_Controller: Er is iets mis gegaan");
 				}
 
 			} else if (gameController.getPlayerController().getPatternCard().getSelectedSquare() != null) {
@@ -238,7 +238,7 @@ public class ToolCard_Controller {
 				}
 
 			} else {
-				System.out.println("ToolCardController: dit vakje is leeg bosmongool");
+				//system.out.println("ToolCardController: dit vakje is leeg bosmongool");
 			}
 			}
 		}

@@ -280,7 +280,7 @@ public class InviteController {
 			}
 
 		}
-		System.out.println(result);
+		//system.out.println(result);
 		return result;
 	}
 

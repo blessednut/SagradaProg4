@@ -49,7 +49,7 @@ public class InviteModel {
 	}
 	public String getInviteGameID() {
 		int result = new InviteDB().getInviteGameID();
-		//System.out.println(result);
+		////system.out.println(result);
 		return Integer.toString(result);
 	}
 	
