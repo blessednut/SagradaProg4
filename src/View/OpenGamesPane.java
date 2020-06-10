@@ -9,8 +9,8 @@ import javafx.stage.Screen;
 
 public class OpenGamesPane extends HBox {
 	
-	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
-	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
+	private static final int SAGRADAWIDTH = 1280;
+	private static final int SAGRADAHEIGHT = 689;
 	private static final int COMBOBOXWITDH = 500;
 	private static final int COMBOBOXHEIGHT = 50;
 	private static final int OPENGAMEBUTTONWITDH = 150;
@@ -24,9 +24,9 @@ public class OpenGamesPane extends HBox {
 	private static final int AREAHEIGHT = 50;
 	
 	public OpenGamesPane() {
-		this.setMinSize((screenX / 8 * 7), screenY);
-		this.setMaxSize((screenX / 8 * 7), screenY);
-		this.setPrefSize((screenX / 8 * 7), screenY);
+		this.setMinSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setMaxSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setPrefSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		this.setPadding(PADDING);
 		showGames();
 	}

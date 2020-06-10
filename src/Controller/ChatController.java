@@ -16,6 +16,7 @@ public class ChatController {
 		this.gamecontroller = gamecontroller;
 		this.ChatM = new ChatModel();
 		this.ChatV = new ChatView(this);
+		ChatV.resize(100, 100);
 		CTC = new ChatThreadController(ChatM, this.ChatV, gamecontroller.getM_game().getGameId());
 		CTC.start();
 		pane = this.ChatV;

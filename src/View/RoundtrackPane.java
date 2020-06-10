@@ -14,8 +14,8 @@ import javafx.scene.text.Font;
 
 public class RoundtrackPane extends BorderPane{
 
-    private static final int WIDTH = 70;
-    private static final int HEIGHT = 70;
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 50;
     private final static CornerRadii RADIUS = new CornerRadii(10.00);
     private ArrayList<VBox> rounds;
 

@@ -13,6 +13,8 @@ public class Public_Objective_Card extends CardPane {
 	public void createPublic_Objective_Card(String cardName) {
 		Image cardimage = new Image("Resources/" + cardName + ".PNG");
 		ImageView objevtiveCard = new ImageView(cardimage);
+		objevtiveCard.setFitHeight(200);
+		objevtiveCard.setPreserveRatio(true);
 		getChildren().add(objevtiveCard);
 	}
 

@@ -9,7 +9,6 @@ public class MySceneController {
 
 	public MySceneController() {
 		mySceneView = new MyScene(this);
-
 	}
 
 	public MyScene getMyscene() {

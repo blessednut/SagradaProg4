@@ -14,6 +14,8 @@ public class Private_Objective_Card extends CardPane {
 		try {
 			Image cardimage = new Image("Resources/" + cardName + ".PNG");
 			ImageView objevtiveCard = new ImageView(cardimage);
+			objevtiveCard.setFitHeight(200);
+			objevtiveCard.setPreserveRatio(true);
 			getChildren().add(objevtiveCard);
 		} catch (Exception e) {
 			e.printStackTrace();

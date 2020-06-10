@@ -17,8 +17,8 @@ import javafx.stage.Screen;
 
 public class StatisticsPane extends HBox {
 
-	private double screenX = Screen.getPrimary().getVisualBounds().getWidth();
-	private double screenY = Screen.getPrimary().getVisualBounds().getHeight();
+	private static final int SAGRADAWIDTH = 1280;
+	private static final int SAGRADAHEIGHT = 689;
 
 	private VBox vbox;
 	private VBox vbox2;
@@ -49,9 +49,9 @@ public class StatisticsPane extends HBox {
 		this.controller = controller;
 		this.rankedList = new VBox();
 		
-		this.setMinSize((screenX / 8 * 7), screenY);
-		this.setMaxSize((screenX / 8 * 7), screenY);
-		this.setPrefSize((screenX / 8 * 7), screenY);
+		this.setMinSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setMaxSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
+		this.setPrefSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		createPane();
 		naam.setOnMouseClicked(e -> naam.clear());
 	}

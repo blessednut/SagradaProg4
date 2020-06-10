@@ -18,11 +18,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 
 public class GamePane extends BorderPane {
 	
-	private static final int WHIDTH = 900;
-	private static final int HEIGHT = 900;
+	private static final int SAGRADAWIDTH = 1280;
+	private static final int SAGRADAHEIGHT = 689;
+	private static final int TEXT = 28;
 	private static final int HEIGHTENDTURNBUTTON = 50;
 	private static final int WIDTHENDTURNBUTTON = 200;
 	
@@ -46,17 +48,17 @@ public class GamePane extends BorderPane {
 
 	public GamePane(GameController gameController) {
 		this.gameController = gameController;
-		this.setMinSize(WHIDTH, HEIGHT);
-		this.setPrefSize(WHIDTH, HEIGHT);
-		this.setMaxSize(WHIDTH, HEIGHT);
+		this.setMinSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setPrefSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setMaxSize(SAGRADAWIDTH, SAGRADAHEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
 		// createGamePane();
 	}
 
 	public GamePane() {
-		this.setMinSize(WHIDTH, HEIGHT);
-		this.setPrefSize(WHIDTH, HEIGHT);
-		this.setMaxSize(WHIDTH, HEIGHT);
+		this.setMinSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setPrefSize(SAGRADAWIDTH, SAGRADAHEIGHT);
+		this.setMaxSize(SAGRADAWIDTH, SAGRADAHEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
 		// createGamePane();
 	}
@@ -74,11 +76,11 @@ public class GamePane extends BorderPane {
 		this.setLeft(gamePaneLeft);
 		this.setRight(gamePaneRight);
 		this.setTop(gamePaneTop);
-		gamePaneBottom.setAlignment(Pos.BOTTOM_CENTER);
+		gamePaneBottom.setAlignment(Pos.BOTTOM_RIGHT);
 		gamePaneCenter.setAlignment(Pos.CENTER);
 		gamePaneLeft.setAlignment(Pos.TOP_LEFT);
 		gamePaneRight.setAlignment(Pos.TOP_RIGHT);
-		gamePaneTop.setAlignment(Pos.CENTER);
+		gamePaneTop.setAlignment(Pos.TOP_RIGHT);
 
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			addOpponentSquare();
@@ -103,9 +105,7 @@ public class GamePane extends BorderPane {
 //		Public Objective cards
 		gameController.makePublicOC();
 
-		//		Chat
-				gameController.makeCC();
-				gamePaneBottom.getChildren().add(gameController.makeCC().getPane());
+		
 //		End turn button
 		endTurn = new Button("passen");
 		home = new Button("home");
@@ -148,6 +148,10 @@ public class GamePane extends BorderPane {
 
 		gamePaneLeft.getChildren().addAll(endTurn, home, refresh, shuffleToolcards, shufflePublicObjectiveCards);
 
+//		Chat
+		gameController.makeCC();
+		gamePaneLeft.getChildren().add(gameController.makeCC().getPane());
+		
 		home.setOnMouseClicked(e -> {
 			gameController.resetCardBooleans();
 			gameController.switchBackToHome();
@@ -183,23 +187,23 @@ public class GamePane extends BorderPane {
 			}
 		});
 
-		gamePaneRight.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
+		gamePaneTop.getChildren().add(gameController.getRoundtrackController().getRoundtrackPane());
 
 		isTurn = new Label("");
-		isTurn.setFont(new Font("Arial", 32));
+		isTurn.setFont(new Font("Arial", TEXT));
 		isTurn.setTextFill(Color.WHITE);
 		updateIsTurn(gameController.getIsTurn());
 		gamePaneRight.getChildren().addAll(isTurn);
 
 		// Punten telling
 		Label myPersonalScoreLabel = new Label("Mijn persoonlijke score:");
-		myPersonalScoreLabel.setFont(new Font("Arial", 32));
+		myPersonalScoreLabel.setFont(new Font("Arial", TEXT));
 		myPersonalScoreLabel.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(myPersonalScoreLabel);
 		gamePaneRight.getChildren().add(makePrivateScoreLabel());
 
 		Label publicScore = new Label("Publieke score:");
-		publicScore.setFont(new Font("Arial", 32));
+		publicScore.setFont(new Font("Arial", TEXT));
 		publicScore.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(publicScore);
 		
@@ -207,29 +211,29 @@ public class GamePane extends BorderPane {
 			gamePaneRight.getChildren().add(getEmptyLabel());
 		}
 		
-		gamePaneLeft.getChildren().add(disclaimer);
+		//gamePaneLeft.getChildren().add(disclaimer);
 		disclaimer.setTextFill(Color.WHITE);
 
 	}
 	
 	public Label getEmptyLabel () {
 		Label tabLabel = new Label(" ");
-		tabLabel.setFont(new Font("Arial", 32));
+		tabLabel.setFont(new Font("Arial", TEXT));
 		tabLabel.setTextFill(Color.WHITE);
 		return tabLabel;
 	}
 	
 	public void showWinner (String username) {
 		Label winner = new Label("Winnaar: " + username);
-		winner.setFont(new Font("Arial", 32));
+		winner.setFont(new Font("Arial", TEXT));
 		winner.setTextFill(Color.WHITE);
 		gamePaneRight.getChildren().add(winner);
 	}
 	
 	public void updateScore () {
-		this.gamePaneRight.getChildren().set(3, makePrivateScoreLabel());
+		this.gamePaneRight.getChildren().set(2, makePrivateScoreLabel());
 		
-		int index = 5;
+		int index = 4;
 		
 		for (int i = 0; i < gameController.getNumOpponents(); i++) {
 			this.gamePaneRight.getChildren().set(index + i, publicScoreLabel(i));
@@ -240,7 +244,7 @@ public class GamePane extends BorderPane {
 		String name = gameController.getCurrentPlayerName();
 		int score = gameController.getPrivateScore(gameController.getCurrentPlayerName());
 		Label privateScoreLabel = new Label(name + ": " + score);
-		privateScoreLabel.setFont(new Font("Arial", 32));
+		privateScoreLabel.setFont(new Font("Arial", TEXT));
 		privateScoreLabel.setTextFill(Color.WHITE);
 		return privateScoreLabel;
 	}
@@ -296,8 +300,8 @@ public class GamePane extends BorderPane {
 	public void addOpponentSquare() {
 		Pane opponentSquare = new Pane();
 		CornerRadii RADIUS = new CornerRadii(10.00);
-		opponentSquare.setPrefSize(350, 250);
-		opponentSquare.setMaxSize(350, 250);
+		opponentSquare.setPrefSize(250, 200);
+		opponentSquare.setMaxSize(250, 200);
 		opponentSquare.setBackground(new Background(new BackgroundFill(Color.BLACK, RADIUS, null)));
 		gamePaneTop.getChildren().add(opponentSquare);
 	}
@@ -306,7 +310,7 @@ public class GamePane extends BorderPane {
 		String name = gameController.getOpponentName(index);
 		int publicScore = gameController.publicScore(index);
 		Label score = new Label(name + ": " + publicScore);
-		score.setFont(new Font("Arial", 32));
+		score.setFont(new Font("Arial", TEXT));
 		score.setTextFill(Color.WHITE);
 		return score;
 	}

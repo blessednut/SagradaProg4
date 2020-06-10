@@ -17,8 +17,8 @@ public class PatternCardController {
 
 	private ArrayList<Integer> idpatterncardoptions;
 
-	private static final int PATTERNVIEWHEIGHT = 300;
-	private static final int PATTERNVIEWWIDTH = 450;
+	private static final int PATTERNVIEWHEIGHT = 250;
+	private static final int PATTERNVIEWWIDTH = 200;
 
 	public PatternCardController(GameController gameController, PlayerController playerController) {
 		this.gameController = gameController;
@@ -119,8 +119,8 @@ public class PatternCardController {
 
 			if (optionCard[i] == null && !idpatterncardoptions.contains(temp.getIdPatternCard())) {
 				this.optionCard[i] = temp;
-				System.out.println(gameController.getM_game().getGameId() + ": gameid");
-				System.out.println(gameController.getC_login().getUsername() + ":username");
+				//System.out.println(gameController.getM_game().getGameId() + ": gameid");
+				//System.out.println(gameController.getC_login().getUsername() + ":username");
 				this.optionCard[i].addToPatternCardOption(optionCard[i]
 						.getPlayerID(gameController.getM_game().getGameId(), gameController.getC_login().getUsername()),
 						randomNumber);
@@ -155,9 +155,9 @@ public class PatternCardController {
 
 	 public WindowPatternView makeView(PatternCardModel card) {
 	        if (card == null) {
-	            System.out.println("PANIEK DE CARD IS NULL PANIEK");
+	            //System.out.println("PANIEK DE CARD IS NULL PANIEK");
 	        }
-	        WindowPatternView windowPaternView = new WindowPatternView(350, 250, card.nameProperty(), card.tokenAmount(),
+	        WindowPatternView windowPaternView = new WindowPatternView(250, 200, card.nameProperty(), card.tokenAmount(),
 	                makeSquareView(card.getField()), playerController.getPlayerColor(), this.gameController.getM_game().getPlayerName(playerController.getPlayerID()));
 	        TokenController tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), gameController.getM_game().getTurnPlayerID(), gameController, windowPaternView);
 	        return windowPaternView;
@@ -215,8 +215,8 @@ public class PatternCardController {
 	}
 
 	public void reloadDice() {
-		System.out.println("RELOAD DICE RELOAD DICE RELOAD DICE");
-		System.out.println("FIELDCONTROLLER LENGT = " + fieldController.length);
+		//System.out.println("RELOAD DICE RELOAD DICE RELOAD DICE");
+		//System.out.println("FIELDCONTROLLER LENGT = " + fieldController.length);
 		for (int x = 0; x < fieldController.length; x++) {
 			for (int y = 0; y < fieldController[x].length; y++) {
 				fieldController[x][y].removeDice();
