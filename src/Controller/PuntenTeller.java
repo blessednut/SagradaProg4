@@ -380,7 +380,7 @@ public class PuntenTeller {
 		
 		//berekenen publieke score
 		int publicScore = 0;
-		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree));
+		publicScore = (favorTokenScore(playerController) + ((publicCardOne+publicCardTwo+publicCardThree)/2));
 		return publicScore;
 	}
 	
