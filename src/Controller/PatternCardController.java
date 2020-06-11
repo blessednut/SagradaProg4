@@ -23,19 +23,23 @@ public class PatternCardController {
 	public PatternCardController(GameController gameController, PlayerController playerController) {
 		this.gameController = gameController;
 		this.playerController = playerController;
-
 	}
 
 	public void loadChosenCard() {
 		if (playerController.getPlayerModel().patterncardExists()) {
 			chosenCard = new PatternCardModel(this, playerController.getPlayerModel().getPatterncardID());
 
-			if(playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
+			if (playerController.getPlayerID() == gameController.getCurrentPlayerID()) {
 				gameController.setOwnWindow(chosenCard, this);
 			}
 		} else {
 			if (playerController.getPlayerModel().getIsCurrentPlayer()) {
-				generatePatternCardChoice();
+				//Extra check
+				if (playerController.getPlayerModel().patterncardChoiceExists()) {
+					loadPatternCardChoice();
+				} else {
+					generatePatternCardChoice();
+				}
 			}
 		}
 	}
@@ -133,6 +137,19 @@ public class PatternCardController {
 
 			}
 		}
+		this.gameController.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
+	}
+	
+	private void loadPatternCardChoice() {
+		this.optionCard = new PatternCardModel[4];
+		idpatterncardoptions = new ArrayList<Integer>();
+		//laad patterncard id
+		idpatterncardoptions = playerController.getPlayerModel().getPatterncardOptions();
+		
+		for (int i = 0; i < optionCard.length; i++) {
+			optionCard[i] = new PatternCardModel(this, idpatterncardoptions.get(i));
+		}
+		
 		this.gameController.getGamePane().createChoicePane(makeView(0), makeView(1), makeView(2), makeView(3));
 	}
 

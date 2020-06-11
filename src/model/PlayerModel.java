@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import DataBase.PlayerDB;
 
 public class PlayerModel {
@@ -46,6 +48,14 @@ public class PlayerModel {
 	
 	public boolean getIsCurrentPlayer () {
 		return this.isCurrentPlayer;
+	}
+
+	public boolean patterncardChoiceExists() {
+		return con.getPatterncardChoiceExists(playerID);
+	}
+
+	public ArrayList<Integer> getPatterncardOptions() {
+		return con.getPatterncardOptions(playerID);
 	}
 
 }

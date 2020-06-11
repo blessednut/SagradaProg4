@@ -172,6 +172,20 @@ public class InGameDB {
 		return name;
 	}
 	
+	public int getPlayerID(String username, int idgame) {
+		int playerid = 0;
+		try {
+			String query = "SELECT * FROM player WHERE idgame = " + idgame + " AND username = '" + username + "';";
+			ResultSet resultset = (st.executeQuery(query));
+			if (resultset.next()) {
+				playerid = resultset.getInt("idplayer");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return playerid;
+	}
+	
 	public void updateScore (int idplayer, int score) {
 		try {
 			String query = "UPDATE player SET score = " + score + " WHERE idplayer = " + idplayer;
@@ -219,4 +233,27 @@ public class InGameDB {
 		}
 		return gameEnded;
 	}
+
+	public boolean isPatternCardChosen(int idplayer) {
+		boolean chosen = false;
+		try {
+			String query = "SELECT idpatterncard FROM player WHERE idplayer = " + idplayer;
+			ResultSet rs = (st.executeQuery(query));
+			if (rs.next()) {
+				System.out.println("IDPATTERNCARD == " + rs.getInt("idpatterncard"));
+				System.out.println("IDPATTERNCARD == " + rs.getInt("idpatterncard"));
+				System.out.println("IDPATTERNCARD == " + rs.getInt("idpatterncard"));
+				System.out.println("IDPATTERNCARD == " + rs.getInt("idpatterncard"));
+				System.out.println("IDPATTERNCARD == " + rs.getInt("idpatterncard"));
+				if (rs.getInt("idpatterncard") != 0) {
+					chosen = true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return chosen;
+	}
+
+
 }
