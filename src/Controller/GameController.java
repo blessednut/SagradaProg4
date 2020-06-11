@@ -128,7 +128,6 @@ public class GameController {
 			for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
 				opponents
 						.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, generateRandomColor()));
-
 			}
 
 			// Maak opponents View
