@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-	
+
 	private MySceneController myscene;
 
 	public static void main(String[] args) {
@@ -33,19 +33,19 @@ public class Main extends Application {
 		@Override
 		public void handle(KeyEvent event) {
 			if (event.getCode() == KeyCode.ESCAPE) {
-				myscene.getLoginCon().getC_home().getC_Invite().getC_game().getInGameThread().terminateThread();
 				Platform.exit();
+
 			}
 		}
 
 	}
 
 	@Override
-	public void stop(){
-	    System.out.println("Stage is closing");
-	    DBCon.getInstance().closeConnection();
-	    myscene.getLoginCon().getC_home().getC_Invite().getC_game().getInGameThread().terminateThread();
-	    Platform.exit();
-	    System.exit(0);
+	public void stop() {
+		System.out.println("Stage is closing");
+		DBCon.getInstance().closeConnection();
+		Platform.exit();
+		System.exit(0);
+
 	}
 }

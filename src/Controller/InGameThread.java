@@ -15,10 +15,15 @@ public class InGameThread extends Thread {
 	public void run() {
 		running = true;
 
+		try {
+			Thread.sleep(5000);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		while (running) {
 			//TODO: isTurn bepaald of je aan de beurt bent
 			//TODO: aan de beurt alle tijd krijgen om je dingen te doen.
-			//TODO: als je niet aan de beurt bent refresh elke 5 sec.
+			//TODO: als je niet aan de beurt bent refresh elke 5 sec.			
 			if(gameController.getIsTurn()) {
 				try {
 					Thread.sleep(2000);
