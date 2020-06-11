@@ -24,7 +24,7 @@ public class Public_Objective_CardDB {
 				cardName.toString();
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return cardName;
 	}
