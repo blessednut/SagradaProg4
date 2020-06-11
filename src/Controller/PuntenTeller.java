@@ -382,7 +382,7 @@ public class PuntenTeller {
 		
 		//berekenen publieke score
 		int publicScore = 0;
-		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree) - privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController()));
+		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree));
 		return publicScore;
 	}
 	
