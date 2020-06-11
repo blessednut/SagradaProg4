@@ -116,7 +116,7 @@ public class PuntenTeller {
 		case "Colomn Shade Variety":
 			//System.out.println("Colomn Shade Variety");
 			ArrayList<Integer> IntColomn = new ArrayList<>();
-			for(int x = 4; x < fieldController.length; x++) {
+			for(int x = 0; x < fieldController.length; x++) {
 				for(int y = 0; y < fieldController[x].length; y++) {
 					if(fieldController[x][y].getSquare().getDice() != null && (fieldController[x][y].getDice().valueProperty().getValue() != 0)) {
 						if(!IntColomn.contains(fieldController[x][y].getDice().valueProperty().getValue())) {
@@ -236,7 +236,7 @@ public class PuntenTeller {
 		case "Row Shade Variety":
 			//System.out.println("Row Shade Variety");
 			ArrayList<Integer> ValueRow = new ArrayList<>();
-			for(int y = 3; y < fieldController.length -1; y++) {
+			for(int y = 0; y < fieldController.length -1; y++) {
 				for(int x = 0; x < fieldController.length; x++) {
 					if(fieldController[x][y].getSquare().getDice() != null) {
 						if(!ValueRow.contains(fieldController[x][y].getSquare().getDice().valueProperty().getValue())) {
