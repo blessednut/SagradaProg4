@@ -7,11 +7,16 @@ public class OpenGamesController {
 	private OpenGamesPane openGameView;
 	private OpenGamesModel openGamesModel;
 	private GameController gameController;
+	private InGameThread inGameThread;
 
 	public OpenGamesController(LogInController logInController, GameController gameController) {
 		openGamesModel = new OpenGamesModel();
 		openGameView = new OpenGamesPane();
-		openGameView.getOpenGame().setOnAction(e -> {openGame(); });
+		openGameView.getOpenGame().setOnAction(e -> {
+			openGame();
+			inGameThread = new InGameThread(gameController);
+			inGameThread.start();
+		});
 		this.gameController = gameController;
 
 	}
@@ -56,9 +61,15 @@ public class OpenGamesController {
 	public void openGame() {
 		if (getSelectedGameID() != 0) {
 			gameController.createGamePane(getSelectedGameID());
-			
+
 		}
 
 	}
+
+	public InGameThread getInGameThread() {
+		return inGameThread;
+	}
+	
+	
 
 }

@@ -106,4 +106,10 @@ public class HomeController {
 	public void removeInviteStartPane(InviteStart inviteStart) {
 		homeView.getHomePaneBottom().getChildren().remove(inviteStart);
 	}
+
+	public OpenGamesController getOGC() {
+		return OGC;
+	}
+	
+	
 }

@@ -159,6 +159,7 @@ public class GamePane extends BorderPane {
 					gameController.getC_login().getC_home().getC_Invite());
 			home.start();
 			this.gameController.getInGameThread().terminateThread();
+			this.gameController.getC_login().getC_home().getOGC().getInGameThread().terminateThread();
 		});
 
 		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {

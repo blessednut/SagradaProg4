@@ -51,6 +51,7 @@ public class GameController {
 		playerColors = new ArrayList<Integer>();
 		this.mySceneController = mySceneController;
 		this.logInController = logInController;
+		inGameThread = new InGameThread(this);
 		this.gameModel = new GameModel();
 		mySceneController.getMyscene().addEventHandler(KeyEvent.KEY_PRESSED, new MyKeyHandler());
 		
@@ -115,7 +116,6 @@ public class GameController {
 		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), draftPoolRoundID);
 		gamePane.setDrafpool(new DraftPoolView(200, 200, draftpoolController.getDraftPool()), false);
 
-		inGameThread = new InGameThread(this);
 		inGameThread.start();
 //		inGameThread.setDaemon(true);
 		this.checkPlayerTurn();

@@ -10,12 +10,11 @@ public class InGameThread extends Thread {
 
 	public InGameThread(GameController gameController) {
 		this.gameController = gameController;
+		running = true;
 		
 	}
 
 	public void run() {
-		running = true;
-
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e) {
@@ -28,7 +27,7 @@ public class InGameThread extends Thread {
 			if (gameController.getIsTurn()) {
 				try {
 					Thread.sleep(2000);
-//					System.out.println("nu slaap ik");
+					System.out.println("nu slaap ik");
 				}
 				catch(InterruptedException e) {
 					e.printStackTrace();
@@ -39,7 +38,7 @@ public class InGameThread extends Thread {
 
 						public void run() {
 							gameController.refresh();
-//							System.out.println("refresh");
+							System.out.println("refresh");
 
 						}
 					});
@@ -58,6 +57,10 @@ public class InGameThread extends Thread {
 
 	public void terminateThread() {
 		this.running = false;
+	}
+	
+	public void Restart () {
+		this.running = true;
 	}
 
 }
