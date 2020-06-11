@@ -376,13 +376,13 @@ public class PuntenTeller {
 			}
 		}
 		//berekenen punten van publieke kaarten
-		int publicCardOne = this.publicObjScore(publicObjCardArray[1], playerController.getPatternCard().getFieldController());
-		int publicCardTwo = this.publicObjScore(publicObjCardArray[2], playerController.getPatternCard().getFieldController());
-		int publicCardThree = this.publicObjScore(publicObjCardArray[3], playerController.getPatternCard().getFieldController());
+		int publicCardOne = this.publicObjScore(publicObjCardArray[0], playerController.getPatternCard().getFieldController());
+		int publicCardTwo = this.publicObjScore(publicObjCardArray[1], playerController.getPatternCard().getFieldController());
+		int publicCardThree = this.publicObjScore(publicObjCardArray[2], playerController.getPatternCard().getFieldController());
 		
 		//berekenen publieke score
 		int publicScore = 0;
-		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree) - privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController()));
+		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree));
 		return publicScore;
 	}
 	
