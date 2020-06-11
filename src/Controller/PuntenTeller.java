@@ -124,9 +124,7 @@ public class PuntenTeller {
 							if(y == 3) {
 								scorePublicCards += 4;
 								IntColomn.clear();
-								if(x > 4) {
-									break;
-								}
+								break;
 							}
 						}
 						else {
@@ -406,12 +404,12 @@ public class PuntenTeller {
 		//berekenen individuele score componenten
 		favorScore = favorTokenScore(playerController);
 		privateScore = privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController());
-		for (int i = 0; i < publicObjCardArray.length; i++) {
-			publicScore += publicObjScore(publicObjCardArray[i], playerController.getPatternCard().getFieldController());
-		}
+		int publicCardOne = this.publicObjScore(publicObjCardArray[0], playerController.getPatternCard().getFieldController());
+		int publicCardTwo = this.publicObjScore(publicObjCardArray[1], playerController.getPatternCard().getFieldController());
+		int publicCardThree = this.publicObjScore(publicObjCardArray[2], playerController.getPatternCard().getFieldController());
 		
 		//berekenen totaalscore
-		totalScore = favorScore + privateScore + publicScore;
+		totalScore = favorScore + privateScore + ((publicCardOne+publicCardTwo+publicCardThree)/2);
 		return totalScore;
 		
 	}
