@@ -8,12 +8,7 @@ public class PuntenTeller {
 	private GameController gamecontroller;
 
 	private PuntenTellerModel ptm;
-	
-//	private int scorePublicCards;
-//	private int scorePrivateCard;
-//	private int scoreFavorTokens;
-//	private int emptySquares;
-//	private int totalScore;
+
 	
 	public PuntenTeller(GameController gamecontroller) {
 		this.ptm = new PuntenTellerModel();
@@ -428,7 +423,6 @@ public class PuntenTeller {
 		int favorScore = 0;
 		int emptySquares = 0;
 
-		
 		//Null check
 		if (privateObjColor == null) {
 			return 0;
@@ -450,11 +444,12 @@ public class PuntenTeller {
 		
 		//berekenen eindscore
 		endScore = favorScore + privateScore + publicScore - emptySquares;
+		
 		return endScore;
 	}
 	
 	
 	public void updateScoreInDataBase(String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
-		ptm.updateScore(this.getEndScore(privateObjColor, publicObjCardArray,playerController), gamecontroller.getPlayerController().getPlayerID());
+		ptm.updateScore(getEndScore(privateObjColor, publicObjCardArray,playerController), gamecontroller.getPlayerController().getPlayerID());
 	}
 }
