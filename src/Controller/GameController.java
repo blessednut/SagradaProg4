@@ -115,6 +115,7 @@ public class GameController {
 
 		inGameThread = new InGameThread(this);
 		inGameThread.start();
+//		inGameThread.setDaemon(true);
 		this.checkPlayerTurn();
 
 	}
@@ -150,7 +151,6 @@ public class GameController {
 		gamePane.setDrafpool(new DraftPoolView(366, 366, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
-//		//System.out.println("isPlayerTurn = " + isTurn);
 		this.gamePane.createGamePane();
 		playerController.getPatternCard().reloadDice();
 	}
@@ -375,6 +375,7 @@ public class GameController {
 		for (PlayerController opponent : opponents) {
 			opponent.getPatternCard().loadChosenCard();
 		}
+		//System.out.println();
 
 		loadOpponent();
 
@@ -470,10 +471,10 @@ public class GameController {
 
 		if (this.opponents.get(index) != null && this.opponents.get(index).getPatternCard().getChosenCard() != null) {
 			int score = punt.getPublicScore(privateObj, publicObj, this.opponents.get(index));
-//			//System.out.println("PUBLIC SCORE = " + score);
+			//System.out.println("PUBLIC SCORE = " + score);
 			return score;
 		} else {
-//			//System.out.println("SCORE IS 0000");
+			//System.out.println("SCORE IS 0000");
 			return 0;
 		}
 	}
