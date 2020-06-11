@@ -9,11 +9,11 @@ public class PuntenTeller {
 
 	private PuntenTellerModel ptm;
 	
-	private int scorePublicCards;
-	private int scorePrivateCard;
-	private int scoreFavorTokens;
-	private int emptySquares;
-	private int totalScore;
+//	private int scorePublicCards;
+//	private int scorePrivateCard;
+//	private int scoreFavorTokens;
+//	private int emptySquares;
+//	private int totalScore;
 	
 	public PuntenTeller(GameController gamecontroller) {
 		this.ptm = new PuntenTellerModel();
@@ -21,8 +21,8 @@ public class PuntenTeller {
 
 	}
 	
-	private void countEmptySquares(WindowPatternSquareController[][] fieldController) {
-		//emptySquares = 0;
+	private int countEmptySquares(WindowPatternSquareController[][] fieldController) {
+		int emptySquares = 0;
 		if (fieldController != null) {
 			for(int x = 0; x < fieldController.length; x++) {
 				for(int y = 0; y < fieldController[x].length; y++) {
@@ -32,17 +32,18 @@ public class PuntenTeller {
 				}
 			}
 		}
+		return emptySquares;
 	}
 	
-	public void privateObjScore(String privateObjColor, WindowPatternSquareController[][] fieldController) {
-		//scorePrivateCard = 0;
+	public int privateObjScore(String privateObjColor, WindowPatternSquareController[][] fieldController) {
+		int scorePrivateCard = 0;
 		if (fieldController != null) {
 			switch(privateObjColor) {
 			case "purple":
 				for(int x = 0; x < fieldController.length; x++) {
 					for(int y = 0; y < fieldController[x].length; y++) {
 						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+							scorePrivateCard += fieldController[x][y].getDice().valueProperty().getValue();
 						}
 					}
 				}
@@ -51,7 +52,7 @@ public class PuntenTeller {
 				for(int x = 0; x < fieldController.length; x++) {
 					for(int y = 0; y < fieldController[x].length; y++) {
 						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+							scorePrivateCard += fieldController[x][y].getDice().valueProperty().getValue();
 						}
 					}
 				}
@@ -60,7 +61,7 @@ public class PuntenTeller {
 				for(int x = 0; x < fieldController.length; x++) {
 					for(int y = 0; y < fieldController[x].length; y++) {
 						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+							scorePrivateCard += fieldController[x][y].getDice().valueProperty().getValue();
 						}
 					}
 				}
@@ -69,7 +70,7 @@ public class PuntenTeller {
 				for(int x = 0; x < fieldController.length; x++) {
 					for(int y = 0; y < fieldController[x].length; y++) {
 						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+							scorePrivateCard += fieldController[x][y].getDice().valueProperty().getValue();
 						}
 					}
 				}
@@ -78,16 +79,18 @@ public class PuntenTeller {
 				for(int x = 0; x < fieldController.length; x++) {
 					for(int y = 0; y < fieldController[x].length; y++) {
 						if(fieldController[x][y].getSquare().getDice() != null && fieldController[x][y].getDice().getColor().equals(privateObjColor)) {
-							scorePrivateCard = scorePrivateCard + fieldController[x][y].getDice().valueProperty().getValue();
+							scorePrivateCard += fieldController[x][y].getDice().valueProperty().getValue();
 						}
 					}
 				}
 				break;
 			}
 		}
+		return scorePrivateCard;
 	}
 
-	public void publicObjScore(String publicObjCard, WindowPatternSquareController[][] fieldController) {
+	public int publicObjScore(String publicObjCard, WindowPatternSquareController[][] fieldController) {
+		int scorePublicCards = 0;
 		switch(publicObjCard) {
 		case "Colomn Color Variety":
 			//System.out.println("Colomn Color Variety");
@@ -98,7 +101,8 @@ public class PuntenTeller {
 						if(!ColorColomn.contains(fieldController[x][y].getDice().getColor())) {
 							ColorColomn.add(fieldController[x][y].getDice().getColor());
 							if(y == 3) {
-								scorePublicCards = scorePublicCards + 5;
+								scorePublicCards += 5;
+								ColorColomn.clear();
 								break;
 							}
 						}
@@ -123,8 +127,7 @@ public class PuntenTeller {
 						if(!IntColomn.contains(fieldController[x][y].getDice().valueProperty().getValue())) {
 							IntColomn.add(fieldController[x][y].getDice().valueProperty().getValue());
 							if(y == 3) {
-								//System.out.println(scorePublicCards = scorePublicCards + 4);
-								scorePublicCards = scorePublicCards + 4;
+								scorePublicCards += 4;
 								IntColomn.clear();
 								if(x > 4) {
 									break;
@@ -163,8 +166,7 @@ public class PuntenTeller {
 			if(amountOfSix < lowestAmount) {
 				lowestAmount = amountOfSix;
 			}
-			//System.out.println(scorePublicCards + (2 * lowestAmount));
-			scorePublicCards = scorePublicCards + (2 * lowestAmount);
+			scorePublicCards += (2 * lowestAmount);
 
 		case "Light Shades":
 			//System.out.println("Light Shades");
@@ -187,8 +189,8 @@ public class PuntenTeller {
 			if(amountOfTwo < SetAmount) {
 				SetAmount = amountOfTwo;
 			}
-			//System.out.println(scorePublicCards + (2 * SetAmount));
-			scorePublicCards = scorePublicCards + (2 * SetAmount);	
+			scorePublicCards += (2 * SetAmount);
+			
 		case "Medium Shades":
 			//System.out.println("Medium Shades");
 			int amountOfThree = 0;
@@ -210,8 +212,7 @@ public class PuntenTeller {
 			if(amountOfFour < SetsAmount) {
 				SetsAmount = amountOfFour;
 			}
-			//System.out.println(scorePublicCards + (2 * SetsAmount));
-			scorePublicCards = scorePublicCards + (2 * SetsAmount);
+			scorePublicCards +=(2 * SetsAmount);
 		case "Row Color Variety":
 			//System.out.println("Row Color Variety");
 			ArrayList<String> ColorRow = new ArrayList<>();
@@ -222,7 +223,7 @@ public class PuntenTeller {
 							ColorRow.add(fieldController[x][y].getDice().colorProperty().getValue());
 							if(x == 4) {
 								//System.out.println(scorePublicCards + 5);
-								scorePublicCards = scorePublicCards + 5;
+								scorePublicCards +=5;
 								ColorRow.clear();
 								break;
 							}
@@ -247,7 +248,7 @@ public class PuntenTeller {
 							ValueRow.add(fieldController[x][y].getSquare().getDice().valueProperty().getValue());
 							if(x == 4) {
 								//System.out.println(scorePublicCards + 5);
-								scorePublicCards = scorePublicCards + 5;
+								scorePublicCards +=5;
 								ValueRow.clear();
 								break;
 							}
@@ -313,7 +314,7 @@ public class PuntenTeller {
 				LeastOf = amountOfSixs;
 			}
 			//System.out.println(scorePublicCards + (5 * LeastOf));
-			scorePublicCards = scorePublicCards + (5 * LeastOf);
+			scorePublicCards += (5 * LeastOf);
 		case "Color Variety":
 			//System.out.println("Color Variety");
 			int amountOfYellow = 0;
@@ -358,20 +359,45 @@ public class PuntenTeller {
 			}
 			
 			//System.out.println(scorePublicCards + (4* amountOfSets));
-			scorePublicCards = scorePublicCards + (4* amountOfSets);
+			scorePublicCards +=(4* amountOfSets);
 		}
+		return scorePublicCards;
 	}
 
-
+	public int favorTokenScore(PlayerController playercontroller) {
+		int scoreFavorTokens = playercontroller.getPatternCard().getChosenCard().getDifficulty();
+		return scoreFavorTokens;
+	}
 	
 	public int getPublicScore (String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
-		this.scorePrivateCard = 0;
-		this.privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController());
-		return getTotalScore(privateObjColor, publicObjCardArray, playerController) - scorePrivateCard;
+		//Null check
+		if (privateObjColor == null) {
+			return 0;
+		}
+		
+		for (int i = 0; i < publicObjCardArray.length; i++) {
+			if (publicObjCardArray[i] == null) {
+				return 0;
+			}
+		}
+		//berekenen punten van publieke kaarten
+		int publicCardOne = this.publicObjScore(publicObjCardArray[1], playerController.getPatternCard().getFieldController());
+		int publicCardTwo = this.publicObjScore(publicObjCardArray[2], playerController.getPatternCard().getFieldController());
+		int publicCardThree = this.publicObjScore(publicObjCardArray[3], playerController.getPatternCard().getFieldController());
+		
+		//berekenen publieke score
+		int publicScore = 0;
+		publicScore = (favorTokenScore(playerController) + (publicCardOne+publicCardTwo+publicCardThree) - privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController()));
+		return publicScore;
 	}
 	
 	public int getTotalScore(String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
+		int totalScore = 0;
+		int privateScore = 0;
+		int publicScore = 0;
+		int favorScore = 0;
 
+		//nullcheck
 		if (privateObjColor == null) {
 			return 0;
 		}
@@ -382,29 +408,53 @@ public class PuntenTeller {
 			}
 		}
 		
-		WindowPatternSquareController[][] fieldController = playerController.getPatternCard().getFieldController();
-		
-		this.scorePrivateCard = 0;
-		this.privateObjScore(privateObjColor, fieldController);
-
-		this.scoreFavorTokens = playerController.getPatternCard().getChosenCard().getDifficulty();
-		this.emptySquares = 0;
-		this.countEmptySquares(fieldController);
-		
-		
-		this.scorePublicCards = 0;
+		//berekenen individuele score componenten
+		favorScore = favorTokenScore(playerController);
+		privateScore = privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController());
 		for (int i = 0; i < publicObjCardArray.length; i++) {
-			this.publicObjScore(publicObjCardArray[i], fieldController);
+			publicScore += publicObjScore(publicObjCardArray[i], playerController.getPatternCard().getFieldController());
 		}
-		//System.out.println("SCORE PUBLIC CARDS: " + scorePublicCards);
 		
-		this.totalScore = 0;
-		totalScore = (scorePublicCards + scorePrivateCard +  scoreFavorTokens - emptySquares);
+		//berekenen totaalscore
+		totalScore = favorScore + privateScore + publicScore;
 		return totalScore;
+		
 	}
 	
-	public void updateScoreInDataBase() {
-		totalScore = (scorePublicCards + scorePrivateCard +  scoreFavorTokens - emptySquares);
-		ptm.updateScore(totalScore, gamecontroller.getPlayerController().getPlayerID());
+	public int getEndScore(String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
+		int endScore = 0;
+		int privateScore = 0;
+		int publicScore = 0;
+		int favorScore = 0;
+		int emptySquares = 0;
+
+		
+		//Null check
+		if (privateObjColor == null) {
+			return 0;
+		}
+		
+		for (int i = 0; i < publicObjCardArray.length; i++) {
+			if (publicObjCardArray[i] == null) {
+				return 0;
+			}
+		}
+		
+		//berekenen individuele score componenten
+		emptySquares = countEmptySquares(playerController.getPatternCard().getFieldController());
+		favorScore = favorTokenScore(playerController);
+		privateScore = privateObjScore(privateObjColor, playerController.getPatternCard().getFieldController());
+		for (int i = 0; i < publicObjCardArray.length; i++) {
+			publicScore += publicObjScore(publicObjCardArray[i], playerController.getPatternCard().getFieldController());
+		}
+		
+		//berekenen eindscore
+		endScore = favorScore + privateScore + publicScore - emptySquares;
+		return endScore;
+	}
+	
+	
+	public void updateScoreInDataBase(String privateObjColor, String[] publicObjCardArray, PlayerController playerController) {
+		ptm.updateScore(this.getEndScore(privateObjColor, publicObjCardArray,playerController), gamecontroller.getPlayerController().getPlayerID());
 	}
 }
