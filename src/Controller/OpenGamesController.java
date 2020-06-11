@@ -11,7 +11,7 @@ public class OpenGamesController {
 	public OpenGamesController(LogInController logInController, GameController gameController) {
 		openGamesModel = new OpenGamesModel();
 		openGameView = new OpenGamesPane();
-		openGameView.getOpenGame().setOnAction(e -> openGame());
+		openGameView.getOpenGame().setOnAction(e -> {openGame(); });
 		this.gameController = gameController;
 
 	}

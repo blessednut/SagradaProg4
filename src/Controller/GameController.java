@@ -6,6 +6,10 @@ import java.util.Random;
 import View.DraftPoolView;
 import View.GamePane;
 import View.WindowPatternView;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import model.DiceModel;
 import model.GameDiceModel;
@@ -25,6 +29,7 @@ public class GameController {
 	private ChatController CC;
 
 	private PlayerController playerController;
+	//TODO gebruik deze boolean voor de ingamethread.
 	private boolean isTurn;
 	private RoundtrackController roundtrackController;
 
@@ -39,12 +44,28 @@ public class GameController {
 	private int amountOfDice = 0;
 	private TokenController tokenController;
 	private ArrayList<Integer> playerColors;
+	
+	private InGameThread inGameThread;
 
 	public GameController(MySceneController mySceneController, LogInController logInController) {
 		playerColors = new ArrayList<Integer>();
 		this.mySceneController = mySceneController;
 		this.logInController = logInController;
 		this.gameModel = new GameModel();
+		mySceneController.getMyscene().addEventHandler(KeyEvent.KEY_PRESSED, new MyKeyHandler());
+		
+
+	}
+	private class MyKeyHandler implements EventHandler<KeyEvent> {
+
+		@Override
+		public void handle(KeyEvent event) {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				inGameThread.terminateThread();
+				Platform.exit();
+
+			}
+		}
 
 	}
 
@@ -71,7 +92,7 @@ public class GameController {
 		playerColors.clear();
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
-
+		
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
 				generateRandomColor());
@@ -94,6 +115,9 @@ public class GameController {
 		this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(), draftPoolRoundID);
 		gamePane.setDrafpool(new DraftPoolView(200, 200, draftpoolController.getDraftPool()), false);
 
+		inGameThread = new InGameThread(this);
+		inGameThread.start();
+//		inGameThread.setDaemon(true);
 		this.checkPlayerTurn();
 	}
 
@@ -368,6 +392,7 @@ public class GameController {
 		for (PlayerController opponent : opponents) {
 			opponent.getPatternCard().loadChosenCard();
 		}
+		//System.out.println();
 
 		loadOpponent();
 
@@ -522,4 +547,13 @@ public class GameController {
 	public TokenController getTokenController() {
 		return this.tokenController;
 	}
+
+	public InGameThread getInGameThread() {
+		return inGameThread;
+	}
+
+	
+	
+	
+	
 }

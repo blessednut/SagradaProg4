@@ -158,6 +158,7 @@ public class GamePane extends BorderPane {
 			HomeThreadController home = new HomeThreadController(gameController.getC_login(),
 					gameController.getC_login().getC_home().getC_Invite());
 			home.start();
+			this.gameController.getInGameThread().terminateThread();
 		});
 
 		endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -178,12 +179,14 @@ public class GamePane extends BorderPane {
 			public void handle(MouseEvent event) {
 				gameController.getTCC().getCards();
 				shuffleToolcards.setVisible(false);
+				gameController.refresh();
 			}
 		});
 		shufflePublicObjectiveCards.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				gameController.getPublic_OCC().getCards();
 				shufflePublicObjectiveCards.setVisible(false);
+				gameController.refresh();
 			}
 		});
 
@@ -351,7 +354,7 @@ public class GamePane extends BorderPane {
 		if(endturn) {
 			endTurn.setText("einde beurt");
 		}else {
-			endTurn.setText("passen");
+//			endTurn.setText("passen");
 		}
 	}
 	
