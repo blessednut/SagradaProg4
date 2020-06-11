@@ -44,7 +44,7 @@ public class HomeThreadController extends Thread {
 		// door deze loop blijft het programma oneindig keer draaien.
 		while(running) {
 			int i = 0;
-			//System.out.println("ik run weer ");
+			////System.out.println("ik run weer ");
 			//try vanwege de mysql code.
 			try {
 				// vraagt je gamid op aan de hand van je username. username komt uit de login controller

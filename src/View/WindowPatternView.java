@@ -162,7 +162,7 @@ public class WindowPatternView extends BorderPane {
 
 	private void drawTokens(int tokenAmount, boolean isAfterChoice) {
         tokens = new HBox();
-        System.out.println(tokenAmount);
+        //System.out.println(tokenAmount);
         for (int i = 0; i < tokenAmount; i++) {
             TokenPane token;
             token = new TokenPane(playerColor);
