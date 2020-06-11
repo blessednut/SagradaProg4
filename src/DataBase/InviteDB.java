@@ -3,6 +3,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class InviteDB {
 	private Statement st;
@@ -12,11 +13,12 @@ public class InviteDB {
 		this.st = DBCon.getInstance().getSt();
 	}
 
-	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {
+	public boolean checkForDoubleInvite(String ownUsername, String opponendUsername) {
 		boolean invited = false;
 		try {
-			String query = "select '" + username + "' from player where idgame = " + idgame + " and playstatus = '"
-					+ playstatus + "' ;";
+//			String query = "select '" + username + "' from player where idgame = " + idgame + " and playstatus = '"
+//					+ playstatus + "' ;";
+			String query = "select * from player where idgame = any(select idgame from player where username = '"+ ownUsername +"' and playstatus = 'challenger') and username = '"+ opponendUsername +"' and playstatus = 'challengee';";
 			ResultSet resultset = (st.executeQuery(query));
 			if (resultset.next()) {
 				invited = true;
@@ -206,6 +208,20 @@ public class InviteDB {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public ArrayList<String> getUsernames() {
+		ArrayList<String> usernames = new ArrayList<>();
+		try {
+			String query = "select * from account";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				usernames.add(resultset.getString("username"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return usernames;
 	}
 	
 }

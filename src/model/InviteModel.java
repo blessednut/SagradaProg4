@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import DataBase.InviteDB;
 
 public class InviteModel {
@@ -10,8 +12,8 @@ public class InviteModel {
 	}
 
 	// checkt of je de persoon al hebt uitgenodigd
-	public boolean checkForDoubleInvite(String username, int idgame, String playstatus) {
-		return new InviteDB().checkForDoubleInvite(username, idgame, playstatus);
+	public boolean checkForDoubleInvite(String ownUsername, String opponendUsername) {
+		return new InviteDB().checkForDoubleInvite(ownUsername, opponendUsername);
 	}
 
 	// haalt username op uit db.
@@ -55,5 +57,9 @@ public class InviteModel {
 	
 	public int checkInvitation(String challenger, String challengee) {
 		return new InviteDB().checkInvitation(challenger, challengee);
+	}
+
+	public ArrayList<String> getUsernames() {
+		return new InviteDB().getUsernames();
 	}
 }

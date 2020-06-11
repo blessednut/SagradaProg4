@@ -16,9 +16,9 @@ public class ToolCard extends CardPane{
 	public void createToolCard(String cardName) {
 		Image cardimage = new Image("Resources/" + cardName + ".PNG");
 		useCard = new Button("");
-		useCard.setMaxSize(100, 200);
-		useCard.setMinSize(100, 200);
-		useCard.setPrefSize(100, 200);
+		useCard.setMaxSize(150, 200);
+		useCard.setMinSize(150, 200);
+		useCard.setPrefSize(150, 200);
 		ImageView toolCard = new ImageView(cardimage);
 		toolCard.setFitHeight(200);
 		toolCard.setPreserveRatio(true);

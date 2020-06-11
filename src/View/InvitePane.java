@@ -1,5 +1,6 @@
 package View;
 
+import Controller.InviteController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 
 public class InvitePane extends HBox {
 	
@@ -37,16 +37,20 @@ public class InvitePane extends HBox {
 
 	private Label titel1;
 	private Label titel2;
-	private TextField name1;
-	private TextField name2;
-	private TextField name3;
-	private Button search;
+//	private TextField name1;
+//	private TextField name2;
+//	private TextField name3;
+//	private Button search;
 	private Button inviteButton;
 
 	private RadioButton rb2;
 	private RadioButton rb3;
 	private RadioButton rb4;
 	private ToggleGroup buttons;
+	
+	private ComboBox<String> players1;
+	private ComboBox<String> players2;
+	private ComboBox<String> players3;
 
 	private Button accept;
 	private Button refuse;
@@ -56,33 +60,35 @@ public class InvitePane extends HBox {
 	private ImageView labelNameBackground = new ImageView(new Image("Resources/Label_uitnodigen.png"));
 	
 	private ComboBox<String> invites;
+	private InviteController inviteController;
 
-	public InvitePane() {
+	public InvitePane(InviteController con) {
+		this.inviteController = con;
 		this.setMinSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		this.setMaxSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		this.setPrefSize((SAGRADAWIDTH / 8 * 7), SAGRADAHEIGHT);
 		createPane();
 		showInvite();
 		rb2.setOnAction(e -> {
-			name1.setVisible(true);
-			name2.setVisible(false);
-			name3.setVisible(false);
-			this.search.setVisible(true);
-			this.inviteButton.setVisible(false);
+			players1.setVisible(true);
+			players2.setVisible(false);
+			players3.setVisible(false);
+//			this.search.setVisible(true);
+//			this.inviteButton.setVisible(false);
 		});
 		rb3.setOnAction(e -> {
-			name1.setVisible(true);
-			name2.setVisible(true);
-			name3.setVisible(false);
-			this.search.setVisible(true);
-			this.inviteButton.setVisible(false);
+			players1.setVisible(true);
+			players2.setVisible(true);
+			players3.setVisible(false);
+//			this.search.setVisible(true);
+//			this.inviteButton.setVisible(false);
 		});
 		rb4.setOnAction(e -> {
-			name1.setVisible(true);
-			name2.setVisible(true);
-			name3.setVisible(true);
-			this.search.setVisible(true);
-			this.inviteButton.setVisible(false);
+			players1.setVisible(true);
+			players2.setVisible(true);
+			players3.setVisible(true);
+//			this.search.setVisible(true);
+//			this.inviteButton.setVisible(false);
 		});
 	}
 
@@ -112,48 +118,67 @@ public class InvitePane extends HBox {
 		rb4.setToggleGroup(buttons);
 		rb4.setUserData("vier");
 
-		name1 = new TextField();
-		name1.setText("Gebruikersnaam 1");
-		name1.setOnMouseClicked(e -> name1.clear());
-		name1.setVisible(true);
-		name1.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-		name1.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-		name1.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-
-		name2 = new TextField();
-		name2.setText("Gebruikersnaam 2");
-		name2.setOnMouseClicked(e -> name2.clear());
-		name2.setVisible(false);
-		name2.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-		name2.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-		name2.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-
-		name3 = new TextField();
-		name3.setText("Gebruikersnaam 3");
-		name3.setOnMouseClicked(e -> name3.clear());
-		name3.setVisible(false);
-		name3.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-		name3.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-		name3.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-
-		search = new Button();
-		search.setText("zoek");
-		search.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
-		search.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
-		search.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players1 = new ComboBox<String>();
+		players1.setVisible(true);
+		players1.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players1.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players1.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		
+		players2 = new ComboBox<String>();
+		players2.setVisible(false);
+		players2.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players2.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players2.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		
+		players3 = new ComboBox<String>();
+		players3.setVisible(false);
+		players3.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players3.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		players3.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
+		
+//		name1 = new TextField();
+//		name1.setText("Gebruikersnaam 1");
+//		name1.setOnMouseClicked(e -> name1.clear());
+//		name1.setVisible(true);
+//		name1.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name1.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name1.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
+//
+//		name2 = new TextField();
+//		name2.setText("Gebruikersnaam 2");
+//		name2.setOnMouseClicked(e -> name2.clear());
+//		name2.setVisible(false);
+//		name2.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name2.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name2.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
+//
+//		name3 = new TextField();
+//		name3.setText("Gebruikersnaam 3");
+//		name3.setOnMouseClicked(e -> name3.clear());
+//		name3.setVisible(false);
+//		name3.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name3.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
+//		name3.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
+//
+//		search = new Button();
+//		search.setText("zoek");
+//		search.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
+//		search.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
+//		search.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		inviteButton = new Button();
 		inviteButton.setText("uitnodigen");
-		inviteButton.setVisible(false);
+//		inviteButton.setVisible(false);
 		inviteButton.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		inviteButton.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		inviteButton.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
-		HBox hbox = new HBox(search, inviteButton);
+//		HBox hbox = new HBox(search, inviteButton);
 		vbox3 = new VBox(rb2, rb3, rb4);
 		vbox3.setAlignment(Pos.CENTER);
-		vbox = new VBox(titel1, vbox3, name1, name2, name3, hbox);
-
+//		vbox = new VBox(titel1, vbox3, name1, name2, name3, hbox);
+		
+		vbox = new VBox(titel1, vbox3, players1, players2, players3, inviteButton);
 		vbox2 = new VBox();
 		this.getChildren().addAll(vbox, vbox2);
 	}
@@ -195,9 +220,9 @@ public class InvitePane extends HBox {
 		vbox2.getChildren().addAll(titel2, vbox4, hbox2);
 	}
 
-	public Button getSearch() {
-		return search;
-	}
+//	public Button getSearch() {
+//		return search;
+//	}
 
 	public ComboBox<String> getInvites() {
 		return invites;
@@ -219,20 +244,32 @@ public class InvitePane extends HBox {
 		this.invites = invites;
 	}
 
-	public TextField getName1() {
-		return name1;
-	}
-
-	public TextField getName2() {
-		return name2;
-	}
-
-	public TextField getName3() {
-		return name3;
-	}
+//	public TextField getName1() {
+//		return name1;
+//	}
+//
+//	public TextField getName2() {
+//		return name2;
+//	}
+//
+//	public TextField getName3() {
+//		return name3;
+//	}
 
 	public ToggleGroup getButtons() {
 		return buttons;
+	}
+
+	public ComboBox<String> getPlayers1() {
+		return players1;
+	}
+
+	public ComboBox<String> getPlayers2() {
+		return players2;
+	}
+
+	public ComboBox<String> getPlayers3() {
+		return players3;
 	}
 
 	public TextField getGameId() {
