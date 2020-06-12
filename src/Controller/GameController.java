@@ -73,7 +73,8 @@ public class GameController {
 		mySceneController.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true, generateRandomColor());
+		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
+				generateRandomColor());
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -104,9 +105,9 @@ public class GameController {
 		mySceneController.getMyscene().switchPane(gamePane);
 
 		this.dice = new DiceModel(this);
-		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true, true, generateRandomColor());
+		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
+				true, generateRandomColor());
 		playerController.loadCards();
-
 
 		// gamemodel get usernames
 		opponents = new ArrayList<>();
@@ -127,7 +128,7 @@ public class GameController {
 		gamePane.setDrafpool(new DraftPoolView(200, 200, draftpoolController.getDraftPool()), false);
 
 		this.checkPlayerTurn();
-		//System.out.println("isPlayerTurn = " + isTurn);
+		// System.out.println("isPlayerTurn = " + isTurn);
 		this.gamePane.createGamePane();
 		playerController.getPatternCard().reloadDice();
 	}
@@ -383,6 +384,13 @@ public class GameController {
 		if (toolCardExists() && publicObjectiveCardExists()) {
 			this.gamePane.getEndTurn().setVisible(true);
 		}
+
+//	tokens
+		loadTokens();
+	}
+	
+	public void loadTokens() {
+		
 	}
 
 	public void resetCardBooleans() {
@@ -446,10 +454,10 @@ public class GameController {
 
 		if (this.opponents.get(index) != null && this.opponents.get(index).getPatternCard().getChosenCard() != null) {
 			int score = punt.getPublicScore(privateObj, publicObj, this.opponents.get(index));
-			//System.out.println("PUBLIC SCORE = " + score);
+			// System.out.println("PUBLIC SCORE = " + score);
 			return score;
 		} else {
-			//System.out.println("SCORE IS 0000");
+			// System.out.println("SCORE IS 0000");
 			return 0;
 		}
 	}
@@ -469,7 +477,6 @@ public class GameController {
 			return 0;
 		}
 	}
-
 
 	public int getseqNumber() {
 		return gameModel.getSeqNR(playerController.getPlayerID());

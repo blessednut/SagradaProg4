@@ -3,6 +3,7 @@ package Controller;
 import View.TokenPane;
 import View.ToolCard;
 import View.WindowPatternView;
+import javafx.scene.layout.HBox;
 import model.TokenModel;
 
 public class TokenController {
@@ -41,8 +42,9 @@ public class TokenController {
 //		}
 		ToolCard toolCard = (ToolCard) gameController.getGamePane().getGamePaneBottom().getChildren()
 				.get(toolCardIndex);
+		HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
 		for (int i = 0; i < cost; i++) {
-			toolCard.getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+			toolCardHBox.getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
 		}
 
 	}
