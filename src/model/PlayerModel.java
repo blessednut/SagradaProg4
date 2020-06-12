@@ -14,9 +14,13 @@ public class PlayerModel {
 	public PlayerModel(int gameID, String username, boolean isCurrentPlayer) {
 		this.con = new PlayerDB();
 		this.gameID = gameID;
-		this.username = username;
+//		if(isCurrentPlayer == true) {
+			setUsername(username);
+//		}
 		this.playerID = importPlayerID();
 		this.isCurrentPlayer = isCurrentPlayer;
+		
+			
 		
 	}
 
@@ -46,6 +50,14 @@ public class PlayerModel {
 	
 	public boolean getIsCurrentPlayer () {
 		return this.isCurrentPlayer;
+	}
+	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
