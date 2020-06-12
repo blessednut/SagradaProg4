@@ -7,9 +7,11 @@ import javafx.scene.layout.HBox;
 
 public class ToolCard extends CardPane{
 	private Button useCard;
+	private String cardName;
 
 	public ToolCard(String cardName) {
 		super();
+		this.cardName = cardName;
 		createToolCard(cardName);
 		
 	}
@@ -32,6 +34,9 @@ public class ToolCard extends CardPane{
 	
 	public Button getButton() {
 		return useCard;
+	}
+	public String getCardName() {
+		return cardName;
 	}
 
 }

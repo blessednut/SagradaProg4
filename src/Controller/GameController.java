@@ -5,7 +5,10 @@ import java.util.Random;
 
 import View.DraftPoolView;
 import View.GamePane;
+import View.TokenPane;
+import View.ToolCard;
 import View.WindowPatternView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import model.DiceModel;
 import model.GameDiceModel;
@@ -388,9 +391,27 @@ public class GameController {
 //	tokens
 		loadTokens();
 	}
-	
+
 	public void loadTokens() {
-		
+		for (int i = 2; i < 5; i++) {
+			ToolCard toolCard = (ToolCard) this.getGamePane().getGamePaneBottom().getChildren().get(i);
+			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
+			for (int j = 0; j < numberOfUses(toolCard); j++) {
+				Color colorToAdd = null;
+				toolCardHBox.getChildren().add(new TokenPane(this.getPlayerController().getPlayerColor()));
+
+			}
+		}
+
+	}
+
+	public int numberOfUses(ToolCard toolCard) {
+		int numberUsed = this.getTokenController().getUsedPerCard(this.getTokenController().getToolCardID(this.getM_game().getGameId(), toolCard.getCardName()),this.getM_game().getGameId());
+		if (numberUsed != 0) {
+			return numberUsed;
+		} else {
+			return 0;
+		}
 	}
 
 	public void resetCardBooleans() {

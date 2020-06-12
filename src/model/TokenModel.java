@@ -32,4 +32,7 @@ public class TokenModel {
 	public int getTokenAmount(int playerID) {
 		return tokenDB.getTokenAmount(playerID);
 	}
+	public int getUsedPerCard(int toolCardID, int gameID) {
+		return tokenDB.getUsedPerCard(toolCardID, gameID);
+	}
 }

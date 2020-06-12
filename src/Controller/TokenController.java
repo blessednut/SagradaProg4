@@ -3,6 +3,9 @@ package Controller;
 import View.TokenPane;
 import View.ToolCard;
 import View.WindowPatternView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import model.TokenModel;
 
@@ -33,19 +36,29 @@ public class TokenController {
 	}
 
 	public void updateToken(int toolCardID, int roundID, int gameID, int playerID, int cost, int toolCardIndex) {
-		tokenModel.updateToken(toolCardID, roundID, gameID, playerID, cost);
-		WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
-		cardView.getTokens().getChildren().clear();
-//		cardView.setTokens(this.getAddedTokenAmount(playerID), gameController.getPlayerController().getPlayerColor());
-		for (int i = 0; i < this.getAddedTokenAmount(playerID); i++) {
-			cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+		if(this.getAddedTokenAmount(playerID) > cost) {
+			tokenModel.updateToken(toolCardID, roundID, gameID, playerID, cost);
+			WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
+			cardView.getTokens().getChildren().clear();
+//			cardView.setTokens(this.getAddedTokenAmount(playerID), gameController.getPlayerController().getPlayerColor());
+			for (int i = 0; i < this.getAddedTokenAmount(playerID); i++) {
+				cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+			}
+			ToolCard toolCard = (ToolCard) gameController.getGamePane().getGamePaneBottom().getChildren()
+					.get(toolCardIndex);
+			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
+			for (int i = 0; i < cost; i++) {
+				toolCardHBox.getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+			}
 		}
-		ToolCard toolCard = (ToolCard) gameController.getGamePane().getGamePaneBottom().getChildren()
-				.get(toolCardIndex);
-		HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
-		for (int i = 0; i < cost; i++) {
-			toolCardHBox.getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+		else {
+			Alert notEnoughTokens = new Alert(AlertType.INFORMATION, "je hebt niet genoeg betaal stenen voor deze actie", ButtonType.OK);
+			notEnoughTokens.showAndWait();
+			if (notEnoughTokens.getResult() == ButtonType.OK) {
+				notEnoughTokens.close();
+			}
 		}
+
 
 	}
 
@@ -61,6 +74,9 @@ public class TokenController {
 	}
 	public int getAddedTokenAmount(int playerID) {
 		return tokenModel.getTokenAmount(playerID);
+	}
+	public int getUsedPerCard(int toolCardID, int gameID) {
+		return tokenModel.getUsedPerCard(toolCardID, gameID);
 	}
 
 }
