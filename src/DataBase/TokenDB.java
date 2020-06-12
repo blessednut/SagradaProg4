@@ -95,7 +95,7 @@ public class TokenDB {
 		int tokens = 0;
 		try {
 			String query = "select count(idplayer) as tokens from gamefavortoken where idplayer = " + playerID
-					+ " group by idgame;";
+					+ " and gametoolcard is null group by idgame;";
 			ResultSet resultset = st.executeQuery(query);
 			if (resultset.next()) {
 

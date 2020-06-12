@@ -159,6 +159,7 @@ public class PatternCardController {
 	        }
 	        WindowPatternView windowPaternView = new WindowPatternView(250, 200, card.nameProperty(), card.tokenAmount(),
 	                makeSquareView(card.getField()), playerController.getPlayerColor(), this.gameController.getM_game().getPlayerName(playerController.getPlayerID()));
+	        System.out.println(gameController.getM_game().getTurnPlayerID());
 	        TokenController tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), gameController.getM_game().getTurnPlayerID(), gameController, windowPaternView);
 	        return windowPaternView;
 	    }
