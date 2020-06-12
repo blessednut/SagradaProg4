@@ -14,14 +14,9 @@ public class PlayerModel {
 	public PlayerModel(int gameID, String username, boolean isCurrentPlayer) {
 		this.con = new PlayerDB();
 		this.gameID = gameID;
-//		if(isCurrentPlayer == true) {
-			setUsername(username);
-//		}
+		setUsername(username);
 		this.playerID = importPlayerID();
-		this.isCurrentPlayer = isCurrentPlayer;
-		
-			
-		
+		this.isCurrentPlayer = isCurrentPlayer;	
 	}
 
 	private int importPlayerID() {

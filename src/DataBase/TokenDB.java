@@ -56,7 +56,7 @@ public class TokenDB {
 
 	public int getToolCardCost(int toolCardID, int gameID) {
 
-		int cost = 1;
+		int cost = 0;
 		try {
 			String query = "select count(gametoolcard) as cost from gamefavortoken where gametoolcard = " + toolCardID
 					+ " and idgame = " + gameID + ";";

@@ -36,10 +36,10 @@ public class TokenController {
 		tokenModel.updateToken(toolCardID, roundID, gameID, playerID, cost);
 		WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
 		cardView.getTokens().getChildren().clear();
-		cardView.setTokens(this.getAddedTokenAmount(playerID) - cost, gameController.getPlayerController().getPlayerColor());
-//		for (int i = 0; i < tokenAmount - cost; i++) {
-//			cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
-//		}
+//		cardView.setTokens(this.getAddedTokenAmount(playerID), gameController.getPlayerController().getPlayerColor());
+		for (int i = 0; i < this.getAddedTokenAmount(playerID); i++) {
+			cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+		}
 		ToolCard toolCard = (ToolCard) gameController.getGamePane().getGamePaneBottom().getChildren()
 				.get(toolCardIndex);
 		HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
