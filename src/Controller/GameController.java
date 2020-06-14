@@ -393,7 +393,10 @@ public class GameController {
 	}
 
 	public void loadTokens() {
-		this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID());
+		this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID(), false, this.getPlayerController().getPlayerColor());
+		for(int i = 0; i < opponents.size(); i++) {
+			opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(), true, opponents.get(i).getPlayerColor());
+		}
 		for (int i = 2; i < 5; i++) {
 			ToolCard toolCard = (ToolCard) this.getGamePane().getGamePaneBottom().getChildren().get(i);
 			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
