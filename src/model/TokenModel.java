@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import DataBase.TokenDB;
 
 public class TokenModel {
@@ -34,5 +36,8 @@ public class TokenModel {
 	}
 	public int getUsedPerCard(int toolCardID, int gameID) {
 		return tokenDB.getUsedPerCard(toolCardID, gameID);
+	}
+	public ArrayList<Integer> getPlayerIDPerUsedToken(int toolCardID, int gameID){
+		return tokenDB.getPlayerIDPerUsedToken(toolCardID, gameID);
 	}
 }

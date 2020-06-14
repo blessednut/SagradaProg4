@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import View.TokenPane;
 import View.ToolCard;
 import View.WindowPatternView;
@@ -40,7 +42,6 @@ public class TokenController {
 			tokenModel.updateToken(toolCardID, roundID, gameID, playerID, cost);
 			WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
 			cardView.getTokens().getChildren().clear();
-//			cardView.setTokens(this.getAddedTokenAmount(playerID), gameController.getPlayerController().getPlayerColor());
 			for (int i = 0; i < this.getAddedTokenAmount(playerID); i++) {
 				cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
 			}
@@ -61,6 +62,13 @@ public class TokenController {
 
 
 	}
+	public void reloadRemainingDice(int playerID) {
+		WindowPatternView cardView = gameController.getGamePane().getOwnWindow();
+		cardView.getTokens().getChildren().clear();
+		for (int i = 0; i < this.getAddedTokenAmount(playerID); i++) {
+			cardView.getTokens().getChildren().add(new TokenPane(gameController.getPlayerController().getPlayerColor()));
+		}
+	}
 
 	
 	public int getToolCardCost(int toolCardID, int gameID) {
@@ -77,6 +85,9 @@ public class TokenController {
 	}
 	public int getUsedPerCard(int toolCardID, int gameID) {
 		return tokenModel.getUsedPerCard(toolCardID, gameID);
+	}
+	public ArrayList<Integer> getPlayerIDPerUsedToken(int toolCardID, int gameID){
+		return tokenModel.getPlayerIDPerUsedToken(toolCardID, gameID);
 	}
 
 }

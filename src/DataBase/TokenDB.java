@@ -125,9 +125,18 @@ public class TokenDB {
 		return usedPerCard;
 	}
 	
-	public ArrayList<Integer> getPlayerIDPerUsedToken(){
+	public ArrayList<Integer> getPlayerIDPerUsedToken(int toolCardID, int gameID){
 		ArrayList<Integer> PlayerIDPerUsedToken = new ArrayList<Integer>();
-		
+		try {
+			String query = "select idplayer from gamefavortoken where idgame = "+gameID+" and gametoolcard = "+toolCardID+" and gametoolcard is not null group by idfavortoken;";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				int playerid = resultset.getInt("idplayer");
+				PlayerIDPerUsedToken.add(playerid);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return PlayerIDPerUsedToken;
 	}
 

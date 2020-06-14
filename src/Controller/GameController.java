@@ -393,12 +393,14 @@ public class GameController {
 	}
 
 	public void loadTokens() {
+		this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID());
 		for (int i = 2; i < 5; i++) {
 			ToolCard toolCard = (ToolCard) this.getGamePane().getGamePaneBottom().getChildren().get(i);
 			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
+			toolCardHBox.getChildren().clear();
 			for (int j = 0; j < numberOfUses(toolCard); j++) {
-				Color colorToAdd = null;
-				toolCardHBox.getChildren().add(new TokenPane(this.getPlayerController().getPlayerColor()));
+				Color colorToAdd = this.getTokenColor(toolCard, j);
+				toolCardHBox.getChildren().add(new TokenPane(colorToAdd));
 
 			}
 		}
@@ -412,6 +414,23 @@ public class GameController {
 		} else {
 			return 0;
 		}
+	}
+	public Color getTokenColor(ToolCard toolCard, int index) {
+		Color colorToAdd = null;
+		int gameID = this.getM_game().getGameId();
+		int toolCardID = this.getTokenController().getToolCardID(gameID, toolCard.getCardName()); 
+		int playerID = this.getTokenController().getPlayerIDPerUsedToken(toolCardID, gameID).get(index);
+		if(playerID == this.getPlayerController().getPlayerID()) {
+			colorToAdd =  this.getPlayerController().getPlayerColor();
+		}
+		else {
+			for (int i = 0; i < opponents.size(); i++) {
+				if(playerID == opponents.get(i).getPlayerID()) {
+					colorToAdd = opponents.get(i).getPlayerColor();
+				}
+			}
+		}
+		return colorToAdd;
 	}
 
 	public void resetCardBooleans() {
