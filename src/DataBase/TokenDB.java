@@ -63,7 +63,13 @@ public class TokenDB {
 					+ " and idgame = " + gameID + ";";
 			ResultSet resultset = st.executeQuery(query);
 			if (resultset.next()) {
-				cost = resultset.getInt("cost") + 1;
+				int numberOfTokensUsed = resultset.getInt("cost");
+				if(numberOfTokensUsed > 1) {
+					cost = 2;
+				}
+				else {
+					cost = 1;
+				}
 
 			}
 
