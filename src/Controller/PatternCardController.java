@@ -16,6 +16,8 @@ public class PatternCardController {
 	private PatternCardModel[] optionCard;
 
 	private ArrayList<Integer> idpatterncardoptions;
+	
+	private TokenController tokenController;
 
 	private static final int PATTERNVIEWHEIGHT = 250;
 	private static final int PATTERNVIEWWIDTH = 1280/4;
@@ -176,7 +178,7 @@ public class PatternCardController {
 	        }
 	        WindowPatternView windowPaternView = new WindowPatternView(250, 200, card.nameProperty(), card.tokenAmount(),
 	                makeSquareView(card.getField()), playerController.getPlayerColor(), this.gameController.getM_game().getPlayerName(playerController.getPlayerID()));
-	        TokenController tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), gameController.getM_game().getTurnPlayerID(), gameController, windowPaternView);
+	        tokenController = new TokenController(card.tokenAmount().getValue(), gameController.getM_game().getGameId(), playerController.getPlayerID(), gameController, windowPaternView);
 	        return windowPaternView;
 	    }
 
@@ -257,5 +259,9 @@ public class PatternCardController {
 			}
 		}
 		return this.fieldController;
+	}
+	
+	public TokenController getTokenController() {
+		return tokenController;
 	}
 }

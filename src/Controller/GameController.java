@@ -5,11 +5,14 @@ import java.util.Random;
 
 import View.DraftPoolView;
 import View.GamePane;
+import View.TokenPane;
+import View.ToolCard;
 import View.WindowPatternView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import model.DiceModel;
 import model.GameDiceModel;
@@ -44,7 +47,7 @@ public class GameController {
 	private int amountOfDice = 0;
 	private TokenController tokenController;
 	private ArrayList<Integer> playerColors;
-	
+
 	private InGameThread inGameThread;
 
 	public GameController(MySceneController mySceneController, LogInController logInController) {
@@ -54,7 +57,7 @@ public class GameController {
 		inGameThread = new InGameThread(this);
 		this.gameModel = new GameModel();
 		mySceneController.getMyscene().addEventHandler(KeyEvent.KEY_PRESSED, new MyKeyHandler());
-		
+
 
 	}
 	private class MyKeyHandler implements EventHandler<KeyEvent> {
@@ -93,7 +96,7 @@ public class GameController {
 		playerColors.clear();
 		this.gamePane = new GamePane(this);
 		mySceneController.getMyscene().switchPane(gamePane);
-		
+
 		this.dice = new DiceModel(this);
 		this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
 				generateRandomColor());
@@ -130,15 +133,15 @@ public class GameController {
 //		//Maak opties
 //	}
 //}
-	
+
 	public void createGamePane(int oldGameID) {
 		playerColors.clear();
 		this.gameModel.setGameId(oldGameID);
-		
+
 		//Check moet er nog keuzes worden weergegeven
 		if (gameModel.isPatternCardChosen(gameModel.getPlayerID(logInController.getUsername(), oldGameID))) {
 			this.gamePane = new GamePane(this);
-			mySceneController.getMyscene().switchPane(gamePane); 
+			mySceneController.getMyscene().switchPane(gamePane);
 
 			this.dice = new DiceModel(this);
 			this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
@@ -425,6 +428,53 @@ public class GameController {
 		if (toolCardExists() && publicObjectiveCardExists()) {
 			this.gamePane.getEndTurn().setVisible(true);
 		}
+
+//	tokens
+		loadTokens();
+	}
+
+	public void loadTokens() {
+		this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID(), false, this.getPlayerController().getPlayerColor());
+		for(int i = 0; i < opponents.size(); i++) {
+			opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(), true, opponents.get(i).getPlayerColor());
+		}
+		for (int i = 2; i < 5; i++) {
+			ToolCard toolCard = (ToolCard) this.getGamePane().getGamePaneBottom().getChildren().get(i);
+			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
+			toolCardHBox.getChildren().clear();
+			for (int j = 0; j < numberOfUses(toolCard); j++) {
+				Color colorToAdd = this.getTokenColor(toolCard, j);
+				toolCardHBox.getChildren().add(new TokenPane(colorToAdd));
+
+			}
+		}
+
+	}
+
+	public int numberOfUses(ToolCard toolCard) {
+		int numberUsed = this.getTokenController().getUsedPerCard(this.getTokenController().getToolCardID(this.getM_game().getGameId(), toolCard.getCardName()),this.getM_game().getGameId());
+		if (numberUsed != 0) {
+			return numberUsed;
+		} else {
+			return 0;
+		}
+	}
+	public Color getTokenColor(ToolCard toolCard, int index) {
+		Color colorToAdd = null;
+		int gameID = this.getM_game().getGameId();
+		int toolCardID = this.getTokenController().getToolCardID(gameID, toolCard.getCardName());
+		int playerID = this.getTokenController().getPlayerIDPerUsedToken(toolCardID, gameID).get(index);
+		if(playerID == this.getPlayerController().getPlayerID()) {
+			colorToAdd =  this.getPlayerController().getPlayerColor();
+		}
+		else {
+			for (int i = 0; i < opponents.size(); i++) {
+				if(playerID == opponents.get(i).getPlayerID()) {
+					colorToAdd = opponents.get(i).getPlayerColor();
+				}
+			}
+		}
+		return colorToAdd;
 	}
 
 	public void resetCardBooleans() {
@@ -488,10 +538,10 @@ public class GameController {
 
 		if (this.opponents.get(index) != null && this.opponents.get(index).getPatternCard().getChosenCard() != null) {
 			int score = punt.getPublicScore(privateObj, publicObj, this.opponents.get(index));
-			//System.out.println("PUBLIC SCORE = " + score);
+			// System.out.println("PUBLIC SCORE = " + score);
 			return score;
 		} else {
-			//System.out.println("SCORE IS 0000");
+			// System.out.println("SCORE IS 0000");
 			return 0;
 		}
 	}
@@ -552,8 +602,8 @@ public class GameController {
 		return inGameThread;
 	}
 
-	
-	
-	
-	
+
+
+
+
 }
