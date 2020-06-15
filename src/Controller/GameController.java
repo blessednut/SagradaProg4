@@ -427,10 +427,10 @@ public class GameController {
 		}
 		if (toolCardExists() && publicObjectiveCardExists()) {
 			this.gamePane.getEndTurn().setVisible(true);
+			loadTokens();
 		}
 
-//	tokens
-		loadTokens();
+
 	}
 
 	public void loadTokens() {
