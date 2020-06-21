@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import model.HomeThreadModel;
 
 public class HomeThreadController extends Thread {
@@ -38,7 +39,14 @@ public class HomeThreadController extends Thread {
 	}
 	// de run methode is de methode die continue blijft draaien.
 	public void run() {
-		inviteController.getV_InvitePane().getInvites().getItems().clear();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				inviteController.getV_InvitePane().getInvites().getItems().clear();
+				
+			}
+		});
 		nameOfChallenger = "";
 		IDOFChallenger = "";
 		// door deze loop blijft het programma oneindig keer draaien.
