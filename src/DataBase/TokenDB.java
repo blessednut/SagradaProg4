@@ -3,6 +3,7 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class TokenDB {
 	private Statement st;
@@ -56,13 +57,19 @@ public class TokenDB {
 
 	public int getToolCardCost(int toolCardID, int gameID) {
 
-		int cost = 1;
+		int cost = 0;
 		try {
 			String query = "select count(gametoolcard) as cost from gamefavortoken where gametoolcard = " + toolCardID
 					+ " and idgame = " + gameID + ";";
 			ResultSet resultset = st.executeQuery(query);
 			if (resultset.next()) {
-				cost = resultset.getInt("cost") + 1;
+				int numberOfTokensUsed = resultset.getInt("cost");
+				if(numberOfTokensUsed > 1) {
+					cost = 2;
+				}
+				else {
+					cost = 1;
+				}
 
 			}
 
@@ -95,7 +102,7 @@ public class TokenDB {
 		int tokens = 0;
 		try {
 			String query = "select count(idplayer) as tokens from gamefavortoken where idplayer = " + playerID
-					+ " group by idgame;";
+					+ " and gametoolcard is null group by idgame;";
 			ResultSet resultset = st.executeQuery(query);
 			if (resultset.next()) {
 
@@ -108,6 +115,35 @@ public class TokenDB {
 			tokens = 0;
 		}
 		return tokens;
+	}
+	
+	public int getUsedPerCard(int toolCardID, int gameID) {
+		int usedPerCard = 0;
+		try {
+			String query = "select count(gametoolcard) as numberUsed from gamefavortoken where gametoolcard = "+toolCardID+" and idgame = "+gameID+";";
+			ResultSet resultset = st.executeQuery(query);
+			if(resultset.next()) {
+				usedPerCard = resultset.getInt("numberUsed");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usedPerCard;
+	}
+	
+	public ArrayList<Integer> getPlayerIDPerUsedToken(int toolCardID, int gameID){
+		ArrayList<Integer> PlayerIDPerUsedToken = new ArrayList<Integer>();
+		try {
+			String query = "select idplayer from gamefavortoken where idgame = "+gameID+" and gametoolcard = "+toolCardID+" and gametoolcard is not null group by idfavortoken;";
+			ResultSet resultset = st.executeQuery(query);
+			while(resultset.next()) {
+				int playerid = resultset.getInt("idplayer");
+				PlayerIDPerUsedToken.add(playerid);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return PlayerIDPerUsedToken;
 	}
 
 }
