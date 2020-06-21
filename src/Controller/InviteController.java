@@ -128,10 +128,17 @@ public class InviteController {
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
-			acceptInvitation(home.getC_login().getUsername());
-			createInviteStartPane(StringGameID);
+			if(invitePane.getInvites().getValue()!=null) {
+				acceptInvitation(home.getC_login().getUsername());
+				createInviteStartPane(StringGameID);
+			}
+			
 		});
-		invitePane.getRefuse().setOnMouseClicked(e -> refuseInvitation(home.getC_login().getUsername()));
+		invitePane.getRefuse().setOnMouseClicked(e -> {
+			if(invitePane.getInvites().getValue()!=null) {
+				refuseInvitation(home.getC_login().getUsername());
+			}
+		});
 
 	}
 	
