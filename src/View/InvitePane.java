@@ -39,10 +39,6 @@ public class InvitePane extends HBox {
 
 	private Label titel1;
 	private Label titel2;
-//	private TextField name1;
-//	private TextField name2;
-//	private TextField name3;
-//	private Button search;
 	private Button inviteButton;
 
 	private RadioButton rb2;
@@ -214,18 +210,6 @@ public class InvitePane extends HBox {
 		this.invites = invites;
 	}
 
-//	public TextField getName1() {
-//		return name1;
-//	}
-//
-//	public TextField getName2() {
-//		return name2;
-//	}
-//
-//	public TextField getName3() {
-//		return name3;
-//	}
-
 	public ToggleGroup getButtons() {
 		return buttons;
 	}
@@ -245,5 +229,4 @@ public class InvitePane extends HBox {
 	public TextField getGameId() {
 		return gameId;
 	}
-
 }

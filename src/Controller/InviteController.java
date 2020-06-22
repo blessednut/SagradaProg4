@@ -26,7 +26,7 @@ public class InviteController {
 	private ArrayList<String> ColorArray = new ArrayList<>();
 	private int randomColorInt;
 	private boolean added = true;
-	
+
 //	private boolean userFound = false;
 
 	public InviteController(GameController gameController, HomeController home) {
@@ -35,8 +35,7 @@ public class InviteController {
 		inviteModel = new InviteModel();
 		invitePane = new InvitePane(this);
 		fillPlayerList();
-		
-		
+
 		// de switchcase bepaalt aan de hand van de selected RadioButton welke methode
 		// er gekozen moet worden.
 //		invitePane.getSearch().setOnMouseClicked(e -> {
@@ -62,7 +61,7 @@ public class InviteController {
 //			}
 //		});
 //		invitePane.getName1().setOnMouseClicked(e -> setSearchButton());
-		
+
 //		invitePane.getInviteButton().setOnMouseClicked(e -> {
 //			if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName1().getText()) <= 0) {
 //				if(inviteModel.checkInvitation(gameController.getC_login().getUsername(), invitePane.getName2().getText()) <=0) {
@@ -83,65 +82,88 @@ public class InviteController {
 //			this.invitePane.getInviteButton().setVisible(false);
 //			this.invitePane.getSearch().setVisible(true);
 //		});
-		
+
 		invitePane.getInviteButton().setOnMouseClicked(e -> {
 			boolean firstInvite = false;
 			switch (invitePane.getButtons().getSelectedToggle().getUserData().toString()) {
 			case "twee":
-				if(this.invitePane.getPlayers1().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers1().getValue())) {
+				if (this.invitePane.getPlayers1().getValue() != null
+						&& !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername(),
+								this.invitePane.getPlayers1().getValue())) {
 					firstInvite = true;
 				}
 				break;
 			case "drie":
 				System.out.println("drie");
-				if(this.invitePane.getPlayers1().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers1().getValue())) {
-					if(this.invitePane.getPlayers2().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers2().getValue())) {
+				if (this.invitePane.getPlayers1().getValue() != null
+						&& !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername(),
+								this.invitePane.getPlayers1().getValue())) {
+					if (this.invitePane.getPlayers2().getValue() != null
+							&& !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername(),
+									this.invitePane.getPlayers2().getValue())) {
 						firstInvite = true;
 					}
 				}
 				break;
 			case "vier":
 				System.out.println("vier");
-				if(this.invitePane.getPlayers1().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers1().getValue())) {
-					if(this.invitePane.getPlayers2().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers2().getValue())) {
-						if(this.invitePane.getPlayers3().getValue() != null && !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername() , this.invitePane.getPlayers3().getValue())) {
+				if (this.invitePane.getPlayers1().getValue() != null
+						&& !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername(),
+								this.invitePane.getPlayers1().getValue())) {
+					if (this.invitePane.getPlayers2().getValue() != null
+							&& !this.inviteModel.checkForDoubleInvite(this.gameController.getC_login().getUsername(),
+									this.invitePane.getPlayers2().getValue())) {
+						if (this.invitePane.getPlayers3().getValue() != null && !this.inviteModel.checkForDoubleInvite(
+								this.gameController.getC_login().getUsername(),
+								this.invitePane.getPlayers3().getValue())) {
 							firstInvite = true;
 						}
 					}
 				}
 				break;
 			}
-			if (firstInvite){
-				inVitePlayer();
-				acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
-				createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
-				firstInvite = false;
+			if (firstInvite) {
+				boolean playersInvited = inVitePlayer();
+				
+				if (playersInvited) {
+					acceptInvitation(home.getC_login().getUsername(), gameController.getM_game().getGameId());
+					createInviteStartPane(Integer.toString(gameController.getM_game().getGameId()));
+					firstInvite = false;
+				} else {
+					Alert alert = new Alert(AlertType.INFORMATION,
+							"Je propeert een speler meerdere keren uit te nodigen!",
+							ButtonType.OK);
+					alert.showAndWait();
+					if (alert.getResult() == ButtonType.OK) {
+						alert.close();
+					}
+				}
 			} else {
-				Alert alert = new Alert(AlertType.INFORMATION, "niet alle tegenstanders zijn geslelecteerd of een/meerdere tegenstander(s) hebben al een uitnodiging van u openstaan.", ButtonType.OK);
+				Alert alert = new Alert(AlertType.INFORMATION,
+						"niet alle tegenstanders zijn geslelecteerd of een/meerdere tegenstander(s) hebben al een uitnodiging van u openstaan.",
+						ButtonType.OK);
 				alert.showAndWait();
 				if (alert.getResult() == ButtonType.OK) {
 					alert.close();
 				}
 			}
-				
-			
 		});
 
 		invitePane.getAccept().setOnMouseClicked(e -> {
-			if(invitePane.getInvites().getValue()!=null) {
+			if (invitePane.getInvites().getValue() != null) {
 				acceptInvitation(home.getC_login().getUsername());
 				createInviteStartPane(StringGameID);
 			}
-			
+
 		});
 		invitePane.getRefuse().setOnMouseClicked(e -> {
-			if(invitePane.getInvites().getValue()!=null) {
+			if (invitePane.getInvites().getValue() != null) {
 				refuseInvitation(home.getC_login().getUsername());
 			}
 		});
 
 	}
-	
+
 	public void fillPlayerList() {
 		String currentPlayer = this.home.getC_login().getUsername();
 		System.out.println("CurrentPlayer = " + currentPlayer);
@@ -192,7 +214,8 @@ public class InviteController {
 		exception.showAndWait();
 	}
 
-	public void inVitePlayer() {
+	public Boolean inVitePlayer() {
+		boolean playersInvited = false;
 		switch (invitePane.getButtons().getSelectedToggle().getUserData().toString()) {
 		case "twee":
 			gameController.getM_game().createGameRoom();
@@ -203,42 +226,58 @@ public class InviteController {
 			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers1().getValue(),
 					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
 					inviteModel.getColor(createRandomPrivatObjColor()));
+			gameController.getM_game().updatePlayerTurn(1);
+			playersInvited = true;
 			break;
 		case "drie":
-			gameController.getM_game().createGameRoom();
-			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
-			// eerste uitgedaagde
-			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers1().getValue(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
-			// tweede uigedaagde
-			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers2().getValue(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
+			if (this.invitePane.getPlayers1().getValue().equals(this.invitePane.getPlayers2().getValue()) == false) {
+				gameController.getM_game().createGameRoom();
+				inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				// eerste uitgedaagde
+				inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers1().getValue(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				// tweede uigedaagde
+				inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers2().getValue(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				gameController.getM_game().updatePlayerTurn(1);
+				playersInvited = true;
+			}
 			break;
 		case "vier":
-			gameController.getM_game().createGameRoom();
-			inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
-			// eerste uitgedaagde
-			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers1().getValue(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
-			// tweede uitgedaagde
-			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers2().getValue(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
-			// derde uitgedaagde.
-			inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers3().getValue(),
-					gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
-					inviteModel.getColor(createRandomPrivatObjColor()));
+			String player1 = this.invitePane.getPlayers1().getValue();
+			System.out.println("Player 1 " + player1);
+			String player2 = this.invitePane.getPlayers2().getValue();
+			System.out.println("Player 2 " + player2);
+			String player3 = this.invitePane.getPlayers3().getValue();
+			System.out.println("Player 3 " + player3);
+			if (player1.equals(player2) == false && player2.equals(player3) == false
+					&& player3.equals(player1) == false) {
+				gameController.getM_game().createGameRoom();
+				inviteModel.challengeeSelf(inviteModel.maxPlayerId(), home.getC_login().getUsername(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challenger"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				// eerste uitgedaagde
+				inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers1().getValue(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				// tweede uitgedaagde
+				inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers2().getValue(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				// derde uitgedaagde.
+				inviteModel.challengeeOther(inviteModel.maxPlayerId(), invitePane.getPlayers3().getValue(),
+						gameController.getM_game().getGameId(), inviteModel.getPlayerStatus("challengee"),
+						inviteModel.getColor(createRandomPrivatObjColor()));
+				gameController.getM_game().updatePlayerTurn(1);
+				playersInvited = true;
+			}
 			break;
-
 		}
-		gameController.getM_game().updatePlayerTurn(1);
+		return playersInvited;
 	}
 
 //	public void searchForUsername(String username) {
@@ -343,7 +382,7 @@ public class InviteController {
 			}
 
 		}
-		//System.out.println(result);
+		// System.out.println(result);
 		return result;
 	}
 
