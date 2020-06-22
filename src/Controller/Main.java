@@ -22,7 +22,7 @@ public class Main extends Application {
 		myscene = new MySceneController();
 		stage.setTitle("Sagrada 2020");
 		stage.setResizable(false);
-		stage.initStyle(StageStyle.UNDECORATED);
+		//stage.initStyle(StageStyle.UNDECORATED);
 		stage.setScene(myscene.getMyscene());
 		stage.show();
 
