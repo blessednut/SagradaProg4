@@ -42,7 +42,13 @@ public class HomeThreadDB {
 			String query = "select username from player where idgame = " + gameid + " and playstatus = 'challenger';";
 			ResultSet resultset = st.executeQuery(query);
 			if (resultset.next()) {
-				username = resultset.getString("username");
+				if(resultset.getString("username") == null) {
+					username = "<naam>";
+				}
+				else {
+					username = resultset.getString("username");
+				}
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
