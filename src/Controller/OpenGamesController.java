@@ -16,8 +16,8 @@ public class OpenGamesController {
 			openGame();
 			inGameThread = new InGameThread(gameController);
 			inGameThread.start();
-			gameController.refresh();
-			gameController.refresh();
+//			gameController.refresh();
+//			gameController.refresh();
 		});
 		this.gameController = gameController;
 

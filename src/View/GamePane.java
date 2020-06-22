@@ -237,7 +237,11 @@ public class GamePane extends BorderPane {
 	}
 	
 	public void updateScore () {
-		this.gamePaneRight.getChildren().set(2, makePrivateScoreLabel());
+		if (this.gamePaneRight.getChildren().get(2) != null) {
+			this.gamePaneRight.getChildren().set(2, makePrivateScoreLabel());
+		} else {
+			this.gamePaneRight.getChildren().add(makePrivateScoreLabel());
+		}
 		
 		int index = 4;
 		
@@ -260,7 +264,7 @@ public class GamePane extends BorderPane {
 			if (isTurn) {
 				this.isTurn.setText("Het is jouw beurt!");
 			} else {
-				this.isTurn.setText("Het is de beurt van " + gameController.getCurrentPlayerName() + "!");
+				this.isTurn.setText("Het is de beurt van " + gameController.getNamePlayerInTurn() + "!");
 			}
 		}
 	}

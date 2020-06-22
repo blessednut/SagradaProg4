@@ -32,16 +32,16 @@ public class TokenDB {
 		return isadded;
 	}
 
-	public void insertTokenInDB(int gameID, int playerID) {
-		try {
-			String query = "insert into gamefavortoken (idfavortoken, idgame, idplayer) values ((select max(t.idfavortoken) from gamefavortoken t) + 1,"
-					+ gameID + "," + playerID + ");";
-			ps = DBCon.getInstance().getCon().prepareStatement(query);
-			ps.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	 public void insertTokenInDB(int gameID, int playerID) {
+	        try {
+	            String query = "insert into gamefavortoken (idfavortoken, idgame, idplayer) values (" + getMaxTokenID() + " + 1,"
+	                    + gameID + "," + playerID + ");";
+	            ps = DBCon.getInstance().getCon().prepareStatement(query);
+	            ps.execute();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	public void updateToken(int toolCardID, int roundID, int gameID, int playerID, int cost) {
 		try {
@@ -146,4 +146,19 @@ public class TokenDB {
 		return PlayerIDPerUsedToken;
 	}
 
+	public int getMaxTokenID() {
+        int maxID = 0;
+        try {
+            String query = "select max(t.idfavortoken) as maxID from gamefavortoken t;";
+            ResultSet resultset = st.executeQuery(query);
+            if (resultset.next()) {
+                if (resultset.getInt("maxID") > 0) {
+                    maxID = resultset.getInt("maxID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return maxID;
+    }
 }
