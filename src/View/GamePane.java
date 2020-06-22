@@ -237,7 +237,7 @@ public class GamePane extends BorderPane {
 	}
 	
 	public void updateScore () {
-		if (this.gamePaneRight.getChildren().get(2) != null) {
+		if (this.gamePaneRight.getChildren().size() >= 3) {
 			this.gamePaneRight.getChildren().set(2, makePrivateScoreLabel());
 		} else {
 			this.gamePaneRight.getChildren().add(makePrivateScoreLabel());
