@@ -143,12 +143,14 @@ public class InviteController {
 	}
 	
 	public void fillPlayerList() {
+		String currentPlayer = this.home.getC_login().getUsername();
+		System.out.println("CurrentPlayer = " + currentPlayer);
 		this.invitePane.getPlayers1().getItems().clear();
-		this.invitePane.getPlayers1().getItems().addAll(this.inviteModel.getUsernames());
+		this.invitePane.getPlayers1().getItems().addAll(this.inviteModel.getUsernames(currentPlayer));
 		this.invitePane.getPlayers2().getItems().clear();
-		this.invitePane.getPlayers2().getItems().addAll(this.inviteModel.getUsernames());
+		this.invitePane.getPlayers2().getItems().addAll(this.inviteModel.getUsernames(currentPlayer));
 		this.invitePane.getPlayers3().getItems().clear();
-		this.invitePane.getPlayers3().getItems().addAll(this.inviteModel.getUsernames());
+		this.invitePane.getPlayers3().getItems().addAll(this.inviteModel.getUsernames(currentPlayer));
 	}
 
 	public void acceptInvitation(String username) {

@@ -54,18 +54,23 @@ public class LogInController {
 
 	public String SetInlogInfo() {
 		try {
+			String tempPassword = logInModel.getCon().getPassword(username);
+			
+			if (tempPassword != null) {
+				if (tempPassword.equals(password)) {
+					mySceneController.getMyscene().switchPane(homeController.getV_home());
 
-			if (logInModel.getCon().getPassword(username).equals(password)) {
-				mySceneController.getMyscene().switchPane(homeController.getV_home());
-
+				} else {
+					logInController.errorPassword();
+				}
 			} else {
-				logInController.errorPassword();
+				logInController.errorUsername();
 			}
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return username;
-
 	}
 
 	public void makeHomecontroller() {

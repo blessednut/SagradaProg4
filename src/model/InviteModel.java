@@ -59,7 +59,7 @@ public class InviteModel {
 		return new InviteDB().checkInvitation(challenger, challengee);
 	}
 
-	public ArrayList<String> getUsernames() {
-		return new InviteDB().getUsernames();
+	public ArrayList<String> getUsernames(String currentPlayer) {
+		return new InviteDB().getUsernames(currentPlayer);
 	}
 }

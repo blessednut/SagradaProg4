@@ -43,8 +43,8 @@ public class HomeThreadController extends Thread {
 			
 			@Override
 			public void run() {
-				inviteController.getV_InvitePane().getInvites().getItems().clear();
-				
+				//Dit uitgecomment is mogelijk de fout, verder testen vereist.
+				//inviteController.getV_InvitePane().getInvites().getItems().clear();
 			}
 		});
 		nameOfChallenger = "";
@@ -76,7 +76,6 @@ public class HomeThreadController extends Thread {
 			// 5 000 miliseconde = 5 sec aan vertraging.
 			try {
 				Thread.sleep(1000);
-
 			}
 			catch(InterruptedException e)
 			{
