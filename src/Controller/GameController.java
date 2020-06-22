@@ -32,7 +32,7 @@ public class GameController {
 	private ChatController CC;
 
 	private PlayerController playerController;
-	//TODO gebruik deze boolean voor de ingamethread.
+	// TODO gebruik deze boolean voor de ingamethread.
 	private boolean isTurn;
 	private RoundtrackController roundtrackController;
 
@@ -58,8 +58,8 @@ public class GameController {
 		this.gameModel = new GameModel();
 		mySceneController.getMyscene().addEventHandler(KeyEvent.KEY_PRESSED, new MyKeyHandler());
 
-
 	}
+
 	private class MyKeyHandler implements EventHandler<KeyEvent> {
 
 		@Override
@@ -123,8 +123,8 @@ public class GameController {
 		this.checkPlayerTurn();
 	}
 
-	//if (PatternCard Al gekozen?) {
-	//Laad alles normaal
+	// if (PatternCard Al gekozen?) {
+	// Laad alles normaal
 //} else {
 //	if (Zijn er opties gegenereerd?) {
 //		//Laad opties
@@ -137,14 +137,14 @@ public class GameController {
 		playerColors.clear();
 		this.gameModel.setGameId(oldGameID);
 
-		//Check moet er nog keuzes worden weergegeven
+		// Check moet er nog keuzes worden weergegeven
 		if (gameModel.isPatternCardChosen(gameModel.getPlayerID(logInController.getUsername(), oldGameID))) {
 			this.gamePane = new GamePane(this);
 			mySceneController.getMyscene().switchPane(gamePane);
 
 			this.dice = new DiceModel(this);
-			this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(), true,
-					true, generateRandomColor());
+			this.playerController = new PlayerController(this, gameModel.getGameId(), logInController.getUsername(),
+					true, true, generateRandomColor());
 			playerController.loadCards();
 
 			// playerController.loadDice
@@ -153,8 +153,8 @@ public class GameController {
 			opponents = new ArrayList<>();
 
 			for (String opponentName : gameModel.getOpponentNames(playerController.getPlayerID())) {
-				opponents
-						.add(new PlayerController(this, gameModel.getGameId(), opponentName, false, generateRandomColor()));
+				opponents.add(
+						new PlayerController(this, gameModel.getGameId(), opponentName, false, generateRandomColor()));
 			}
 
 			// Maak opponents View
@@ -390,14 +390,17 @@ public class GameController {
 		}
 
 		checkPlayerTurn();
-		this.roundtrackController.fillRoundtrack();
+		if (this.roundtrackController != null) {
+			this.roundtrackController.fillRoundtrack();
+		}
+		
 		// this.draftpoolController.createDraftPool(gameModel.getHighestSeqnr(),
 		// gameModel.getRoundID());
 
 		for (PlayerController opponent : opponents) {
 			opponent.getPatternCard().loadChosenCard();
 		}
-		//System.out.println();
+		// System.out.println();
 
 		loadOpponent();
 
@@ -429,17 +432,27 @@ public class GameController {
 		}
 		if (toolCardExists() && publicObjectiveCardExists()) {
 			this.gamePane.getEndTurn().setVisible(true);
-			loadTokens();
+			loadToolTokens();
 		}
-
-
+		loadTokens();
 	}
 
 	public void loadTokens() {
-		this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID(), false, this.getPlayerController().getPlayerColor());
-		for(int i = 0; i < opponents.size(); i++) {
-			opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(), true, opponents.get(i).getPlayerColor());
+		try {
+			if (this.getTokenController() != null) {
+				this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID(), false,
+						this.getPlayerController().getPlayerColor());
+				for (int i = 0; i < opponents.size(); i++) {
+					opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(),
+							true, opponents.get(i).getPlayerColor());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public void loadToolTokens () {
 		for (int i = 2; i < 5; i++) {
 			ToolCard toolCard = (ToolCard) this.getGamePane().getGamePaneBottom().getChildren().get(i);
 			HBox toolCardHBox = (HBox) toolCard.getChildren().get(1);
@@ -449,28 +462,33 @@ public class GameController {
 				toolCardHBox.getChildren().add(new TokenPane(colorToAdd));
 			}
 		}
-
 	}
 
 	public int numberOfUses(ToolCard toolCard) {
-		int numberUsed = this.getTokenController().getUsedPerCard(this.getTokenController().getToolCardID(this.getM_game().getGameId(), toolCard.getCardName()),this.getM_game().getGameId());
-		if (numberUsed != 0) {
-			return numberUsed;
+		if (this.getTokenController() != null) {
+			int numberUsed = this.getTokenController().getUsedPerCard(
+					this.getTokenController().getToolCardID(this.getM_game().getGameId(), toolCard.getCardName()),
+					this.getM_game().getGameId());
+			if (numberUsed != 0) {
+				return numberUsed;
+			} else {
+				return 0;
+			}
 		} else {
 			return 0;
 		}
 	}
+
 	public Color getTokenColor(ToolCard toolCard, int index) {
 		Color colorToAdd = null;
 		int gameID = this.getM_game().getGameId();
 		int toolCardID = this.getTokenController().getToolCardID(gameID, toolCard.getCardName());
 		int playerID = this.getTokenController().getPlayerIDPerUsedToken(toolCardID, gameID).get(index);
-		if(playerID == this.getPlayerController().getPlayerID()) {
-			colorToAdd =  this.getPlayerController().getPlayerColor();
-		}
-		else {
+		if (playerID == this.getPlayerController().getPlayerID()) {
+			colorToAdd = this.getPlayerController().getPlayerColor();
+		} else {
 			for (int i = 0; i < opponents.size(); i++) {
-				if(playerID == opponents.get(i).getPlayerID()) {
+				if (playerID == opponents.get(i).getPlayerID()) {
 					colorToAdd = opponents.get(i).getPlayerColor();
 				}
 			}
@@ -602,9 +620,5 @@ public class GameController {
 	public InGameThread getInGameThread() {
 		return inGameThread;
 	}
-
-
-
-
 
 }
