@@ -131,7 +131,7 @@ public class InviteController {
 					firstInvite = false;
 				} else {
 					Alert alert = new Alert(AlertType.INFORMATION,
-							"Je propeert een speler meerdere keren uit te nodigen!",
+							"Je probeert een speler meerdere keren uit te nodigen!",
 							ButtonType.OK);
 					alert.showAndWait();
 					if (alert.getResult() == ButtonType.OK) {

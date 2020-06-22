@@ -40,7 +40,9 @@ public class DisclaimerPane extends HBox {
 				"	- klik eerst op de gereedschapkaart, vervolgens de dobbelsteen en tenslotte de positie waar de dobbelsteen heen moet.\r\n" + 
 				"\r\n" + 
 				"// puntentelling:\r\n" + 
-				"* bij gebruik van de publieke doelkaart, kleurdiagonaal, wijkt de puntentelling af.");
+				"* bij gebruik van de publieke doelkaart, kleurdiagonaal, wijkt de puntentelling af.\r\n" +
+				"// invite:\r\n" + 
+				"* Lijst met spelers wordt niet meer gerefresht na het inloggen.");
 		disclaimerFont = new Font("Arial", 18);
 		label.setFont(disclaimerFont);
 		label.setStyle("-fx-font-wight: bold");
