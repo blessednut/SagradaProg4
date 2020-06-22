@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -73,27 +75,24 @@ public class InvitePane extends HBox {
 			players1.setVisible(true);
 			players2.setVisible(false);
 			players3.setVisible(false);
-//			this.search.setVisible(true);
-//			this.inviteButton.setVisible(false);
+
 		});
 		rb3.setOnAction(e -> {
 			players1.setVisible(true);
 			players2.setVisible(true);
 			players3.setVisible(false);
-//			this.search.setVisible(true);
-//			this.inviteButton.setVisible(false);
+;
 		});
 		rb4.setOnAction(e -> {
 			players1.setVisible(true);
 			players2.setVisible(true);
 			players3.setVisible(true);
-//			this.search.setVisible(true);
-//			this.inviteButton.setVisible(false);
+
 		});
 	}
 
 	private void createPane() {
-		// title
+
 		labelBackground.setFitWidth(TEXTWHIDTH);
 		labelBackground.setFitHeight(TEXTHEIGHT);
 		titel1 = new Label("vrienden uitnodigen", labelBackground);
@@ -103,18 +102,18 @@ public class InvitePane extends HBox {
 
 		buttons = new ToggleGroup();
 		rb2 = new RadioButton("twee");
-		rb2.setTextFill(Color.MAROON);
+		rb2.setTextFill(Color.BLACK);
 		rb2.setToggleGroup(buttons);
 		rb2.setSelected(true);
 		rb2.setUserData("twee");
 
 		rb3 = new RadioButton("drie");
-		rb3.setTextFill(Color.MAROON);
+		rb3.setTextFill(Color.BLACK);
 		rb3.setToggleGroup(buttons);
 		rb3.setUserData("drie");
 
 		rb4 = new RadioButton("vier");
-		rb4.setTextFill(Color.MAROON);
+		rb4.setTextFill(Color.BLACK);
 		rb4.setToggleGroup(buttons);
 		rb4.setUserData("vier");
 
@@ -136,47 +135,18 @@ public class InvitePane extends HBox {
 		players3.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		players3.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		
-//		name1 = new TextField();
-//		name1.setText("Gebruikersnaam 1");
-//		name1.setOnMouseClicked(e -> name1.clear());
-//		name1.setVisible(true);
-//		name1.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name1.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name1.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-//
-//		name2 = new TextField();
-//		name2.setText("Gebruikersnaam 2");
-//		name2.setOnMouseClicked(e -> name2.clear());
-//		name2.setVisible(false);
-//		name2.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name2.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name2.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-//
-//		name3 = new TextField();
-//		name3.setText("Gebruikersnaam 3");
-//		name3.setOnMouseClicked(e -> name3.clear());
-//		name3.setVisible(false);
-//		name3.setMinSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name3.setPrefSize(TEXTWHIDTH, TEXTHEIGHT);
-//		name3.setMaxSize(TEXTWHIDTH, TEXTHEIGHT);
-//
-//		search = new Button();
-//		search.setText("zoek");
-//		search.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
-//		search.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
-//		search.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
 		inviteButton = new Button();
 		inviteButton.setText("uitnodigen");
-//		inviteButton.setVisible(false);
 		inviteButton.setMinSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		inviteButton.setPrefSize(BUTTONWHIDTH, BUTTONHEIGHT);
 		inviteButton.setMaxSize(BUTTONWHIDTH, BUTTONHEIGHT);
 
-//		HBox hbox = new HBox(search, inviteButton);
+
 		vbox3 = new VBox(rb2, rb3, rb4);
+		vbox3.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		vbox3.setAlignment(Pos.CENTER);
-//		vbox = new VBox(titel1, vbox3, name1, name2, name3, hbox);
+
 		
 		vbox = new VBox(titel1, vbox3, players1, players2, players3, inviteButton);
 		vbox2 = new VBox();

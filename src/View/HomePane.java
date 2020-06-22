@@ -39,7 +39,7 @@ public class HomePane extends BorderPane {
 	private Button games;
 	private Button invite;
 	private Button statistics;
-	private Button credits;
+	private Button disclaimer;
 	private HBox HomePaneBottom;
 
 	private HBox reservedSpace = new HBox();
@@ -70,73 +70,64 @@ public class HomePane extends BorderPane {
 		layout.setMinSize(200, SAGRADAHEIGHT);
 		Font buttonFont = new Font("Algerian", TEXT);
 		buttonOne.setFitWidth((SAGRADAWIDTH / 8));
-		buttonOne.setFitHeight(SAGRADAHEIGHT / 6);
+		buttonOne.setFitHeight(SAGRADAHEIGHT / 5);
 
 		buttonTwo.setFitWidth((SAGRADAWIDTH / 8));
-		buttonTwo.setFitHeight(SAGRADAHEIGHT / 6);
+		buttonTwo.setFitHeight(SAGRADAHEIGHT / 5);
 
 		buttonThree.setFitWidth((SAGRADAWIDTH / 8));
-		buttonThree.setFitHeight(SAGRADAHEIGHT / 6);
+		buttonThree.setFitHeight(SAGRADAHEIGHT / 5);
 
 		buttonFour.setFitWidth((SAGRADAWIDTH / 8));
-		buttonFour.setFitHeight(SAGRADAHEIGHT / 6);
+		buttonFour.setFitHeight(SAGRADAHEIGHT / 5);
 
 		buttonFive.setFitWidth((SAGRADAWIDTH / 8));
-		buttonFive.setFitHeight(SAGRADAHEIGHT / 6);
+		buttonFive.setFitHeight(SAGRADAHEIGHT / 5);
 		
 		buttonSix.setFitWidth((SAGRADAWIDTH / 8));
-		buttonSix.setFitHeight(SAGRADAHEIGHT / 6);
-
-		home = new Button("Home", buttonOne);
-		home.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		home.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		home.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		home.setPadding(buttonIns);
-		home.setFont(buttonFont);
-		home.setContentDisplay(ContentDisplay.CENTER);
-		home.setStyle("-fx-background-color: null");
+		buttonSix.setFitHeight(SAGRADAHEIGHT / 5);
 
 		games = new Button("Games", buttonTwo);
-		games.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		games.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		games.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
+		games.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		games.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		games.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
 		games.setFont(buttonFont);
 		games.setContentDisplay(ContentDisplay.CENTER);
 		games.setStyle("-fx-background-color: null");
 
 		invite = new Button("uitnodigen", buttonThree);
-		invite.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		invite.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		invite.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
+		invite.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		invite.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		invite.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
 		invite.setFont(buttonFont);
 		invite.setContentDisplay(ContentDisplay.CENTER);
 		invite.setStyle("-fx-background-color: null");
 
 		statistics = new Button("statistieken", buttonFour);
-		statistics.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		statistics.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		statistics.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
+		statistics.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		statistics.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		statistics.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
 		statistics.setFont(buttonFont);
 		statistics.setContentDisplay(ContentDisplay.CENTER);
 		statistics.setStyle("-fx-background-color: null");
 
-		credits = new Button("credits", buttonFive);
-		credits.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		credits.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		credits.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		credits.setFont(buttonFont);
-		credits.setContentDisplay(ContentDisplay.CENTER);
-		credits.setStyle("-fx-background-color: null");
+		disclaimer = new Button("disclaimer", buttonFive);
+		disclaimer.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		disclaimer.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		disclaimer.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		disclaimer.setFont(buttonFont);
+		disclaimer.setContentDisplay(ContentDisplay.CENTER);
+		disclaimer.setStyle("-fx-background-color: null");
 		
 		uitloggen = new Button("uitloggen", buttonSix);
-		uitloggen.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		uitloggen.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
-		uitloggen.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 6));
+		uitloggen.setMinSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		uitloggen.setPrefSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
+		uitloggen.setMaxSize((SAGRADAWIDTH / 8), (SAGRADAHEIGHT / 5));
 		uitloggen.setFont(buttonFont);
 		uitloggen.setContentDisplay(ContentDisplay.CENTER);
 		uitloggen.setStyle("-fx-background-color: null");
 
-		layout.getChildren().addAll(uitloggen, home, games, invite, statistics, credits);
+		layout.getChildren().addAll(uitloggen, games, invite, statistics, disclaimer);
 		this.getChildren().addAll(layout);
 
 	}
@@ -167,8 +158,8 @@ public class HomePane extends BorderPane {
 		return statistics;
 	}
 
-	public Button getCredits() {
-		return credits;
+	public Button getDisclaimer() {
+		return disclaimer;
 	}
 
 	public HBox getHomePaneBottom() {

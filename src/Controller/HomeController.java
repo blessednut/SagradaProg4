@@ -1,6 +1,6 @@
 package Controller;
 
-import View.CreditsPane;
+import View.DisclaimerPane;
 import View.HomePane;
 import View.InviteStart;
 
@@ -8,7 +8,7 @@ public class HomeController {
 
 	private HomePane homeView;
 	private InviteController inviteController;
-	private CreditsPane creditsView;
+	private DisclaimerPane disclaimerPane;
 
 	private StatisticController statisticController;
 
@@ -40,7 +40,7 @@ public class HomeController {
 		homeThreadController.start();
 
 		// aan maak credits pane
-		creditsView = new CreditsPane();
+		disclaimerPane = new DisclaimerPane();
 
 		// v_statistics = new StatisticsPane();
 		statisticController = new StatisticController();
@@ -50,7 +50,7 @@ public class HomeController {
 			homeView.makeInvites();
 		});
 		homeView.getStatistick().setOnAction(e -> openStatisticsPane());
-		homeView.getCredits().setOnAction(e -> openCreditsPane());
+		homeView.getDisclaimer().setOnAction(e -> openCreditsPane());
 		homeView.getGames().setOnAction(e -> {
 			openOpenGamesPane();
 			OGC.getOGM().GetOpenGameID(loginController.getUsername());
@@ -68,7 +68,7 @@ public class HomeController {
 	}
 
 	public void openCreditsPane() {
-		homeView.makeReservedSpace(creditsView);
+		homeView.makeReservedSpace(disclaimerPane);
 	}
 
 	public void openOpenGamesPane() {
