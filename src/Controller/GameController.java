@@ -76,7 +76,6 @@ public class GameController {
 	public void switchBackToHome() {
 		mySceneController.getMyscene().switchPane(logInController.getC_home().getV_home());
 		closeChatThread();
-
 	}
 
 	public void makePublicOC() {
@@ -174,6 +173,9 @@ public class GameController {
 		} else {
 			this.createGamePane();
 		}
+		this.refresh();
+		this.refresh();
+		this.refresh();
 	}
 
 	public GameDiceModel pickDiceFromBag() {
@@ -445,7 +447,6 @@ public class GameController {
 			for (int j = 0; j < numberOfUses(toolCard); j++) {
 				Color colorToAdd = this.getTokenColor(toolCard, j);
 				toolCardHBox.getChildren().add(new TokenPane(colorToAdd));
-
 			}
 		}
 
