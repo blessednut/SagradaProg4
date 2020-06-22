@@ -34,10 +34,12 @@ public class DisclaimerPane extends HBox {
 				"\r\n" + 
 				"\r\n" + 
 				"// gebruik van gereedschapkaarten.\r\n" + 
+				
 				"* bij gereedschapkaarten die gebruik maken van het aanbod.\r\n" + 
 				"	- klik eerst op de gewenste dobbelsteen en vervolgens op de gereedschapskaart.\r\n" + 
 				"* bij gereedschapkaarten die dobbelstenen herplaatsen op de patroonkaart.\r\n" + 
 				"	- klik eerst op de gereedschapkaart, vervolgens de dobbelsteen en tenslotte de positie waar de dobbelsteen heen moet.\r\n" + 
+				"* word het niet in bovenstaande volgorde uitgevoerd maar er is wel op de gereedschapkaart geklikt,\r\n" + "dan is je mogelijkheid om een kaart te gebruiken verkeken " +
 				"\r\n" + 
 				"// puntentelling:\r\n" + 
 				"* bij gebruik van de publieke doelkaart, kleurdiagonaal, wijkt de puntentelling af.\r\n" +
