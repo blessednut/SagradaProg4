@@ -133,7 +133,6 @@ public class HomePane extends BorderPane {
 	}
 	public void makeInvites() {
 		HomePaneBottom = new HBox();
-		HomePaneBottom.setPadding(new Insets(0, 0, 100, 0));
 		this.setBottom(HomePaneBottom);
 		HomePaneBottom.setAlignment(Pos.TOP_CENTER);
 	}
