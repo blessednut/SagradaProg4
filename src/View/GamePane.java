@@ -300,10 +300,9 @@ public class GamePane extends BorderPane {
 	}
 
 	public void setOpponentWindow(int index, WindowPatternView opponentCard) {
-		if (this.gamePaneTop.getChildren().size() >= index+1) {
+		System.out.println(opponentCard);
+		if (opponentCard!=null) {
 			gamePaneTop.getChildren().set(index, opponentCard);
-		} else {
-			gamePaneTop.getChildren().add(opponentCard);
 		}
 		
 	}
