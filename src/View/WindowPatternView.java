@@ -33,7 +33,7 @@ public class WindowPatternView extends BorderPane {
 	private final static int TOKENRADIUS = 8;
 	private GridPane window;
 	private int width, height;
-	HBox tokens;
+	private HBox tokens;
 	private Color playerColor;
 
 	public WindowPatternView(int width, int height, StringProperty title, IntegerProperty tokenAmount, WindowPatternSquareController[][] fieldView, Color playerColor, String username) {
