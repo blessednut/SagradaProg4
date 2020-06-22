@@ -443,8 +443,10 @@ public class GameController {
 				this.getTokenController().reloadRemainingDice(this.getPlayerController().getPlayerID(), false,
 						this.getPlayerController().getPlayerColor());
 				for (int i = 0; i < opponents.size(); i++) {
-					opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(),
+					if (opponents.get(i).getPatternCard() != null && opponents.get(i).getPatternCard().getTokenController() != null) {
+						opponents.get(i).getPatternCard().getTokenController().reloadRemainingDice(opponents.get(i).getPlayerID(),
 							true, opponents.get(i).getPlayerColor());
+					}
 				}
 			}
 		} catch (Exception e) {
