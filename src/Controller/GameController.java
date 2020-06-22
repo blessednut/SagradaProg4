@@ -621,4 +621,7 @@ public class GameController {
 		return inGameThread;
 	}
 
+	public String getNamePlayerInTurn () {
+		return this.gameModel.getPlayerName(gameModel.getTurnPlayerID());
+	}
 }
