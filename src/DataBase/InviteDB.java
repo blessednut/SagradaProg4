@@ -210,13 +210,16 @@ public class InviteDB {
 		return result;
 	}
 
-	public ArrayList<String> getUsernames() {
+	public ArrayList<String> getUsernames(String currentPlayer) {
 		ArrayList<String> usernames = new ArrayList<>();
 		try {
 			String query = "select * from account";
 			ResultSet resultset = st.executeQuery(query);
 			while(resultset.next()) {
-				usernames.add(resultset.getString("username"));
+				String username = resultset.getString("username");
+				if (!username.equals(currentPlayer)) {
+					usernames.add(username);
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
