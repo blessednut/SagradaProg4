@@ -37,7 +37,7 @@ public class WindowPatternDB {
 
 	public String getName(int idPatternCard) {
 		try {
-			String query = "SELECT name FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard + ";";
+			String query = "SELECT name FROM patterncard where idpatterncard = " + idPatternCard + ";";
 			ResultSet resultset = st.executeQuery(query);
 
 			String name = "";
@@ -54,7 +54,7 @@ public class WindowPatternDB {
 	public int getDifficulty(int idPatternCard) {
 		int difficulty = 0;
 		try {
-			String query = "SELECT difficulty FROM hjasmeet_db2.patterncard where idpatterncard = " + idPatternCard
+			String query = "SELECT difficulty FROM patterncard where idpatterncard = " + idPatternCard
 					+ ";";
 			ResultSet resultset = st.executeQuery(query);
 
